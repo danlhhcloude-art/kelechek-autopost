@@ -5,6 +5,7 @@ on:
   workflow_dispatch: {}
 permissions:
   contents: write
+concurrency: posts-json
 jobs:
   post:
     runs-on: ubuntu-latest
@@ -33,4 +34,5 @@ jobs:
           git add posts.json
           if [ -f stats.json ]; then git add stats.json; fi
           git diff --cached --quiet || git commit -m "autopost: отметка публикации"
+          git pull --rebase origin main
           git push
