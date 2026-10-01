@@ -225,7 +225,14 @@ def need(name):
 
 
 def publish(video, text):
-    user_id, token = need("IG_USER_ID"), need("IG_ACCESS_TOKEN")
+    token = need("IG_ACCESS_TOKEN")
+    user_id = os.environ.get("IG_USER_ID")
+    if not user_id:
+        me = requests.get(f"{IG_API}/me", timeout=30, params={"fields": "user_id,username", "access_token": token})
+        if not me.ok:
+            sys.exit(f"Токен Instagram не работает: {me.status_code} {me.text}")
+        user_id = str(me.json().get("user_id") or me.json()["id"])
+        print(f"Аккаунт Instagram: {me.json().get('username')} ({user_id})")
     r = requests.post(f"{API_URL(user_id)}/media", timeout=60, data={
         "media_type": "REELS", "upload_type": "resumable", "caption": caption(text),
         "share_to_feed": "true", "access_token": token})
