@@ -6,6 +6,7 @@
   python autopost.py --dry-run  # показать пост, ничего не публикуя
   python autopost.py --generate 10  # дописать в очередь 10 новых постов от Claude
   python autopost.py --refresh-token  # продлить токен Threads ещё на 60 дней
+  python autopost.py --stats    # собрать статистику постов и аккаунта в stats.json
 """
 import argparse
 import json
@@ -20,6 +21,8 @@ import requests
 API = "https://graph.threads.net/v1.0"
 HERE = Path(__file__).parent
 POSTS_FILE = HERE / "posts.json"
+STATS_FILE = HERE / "stats.json"
+POST_METRICS = ["views", "likes", "replies", "reposts", "quotes"]
 MAX_LEN = 500  # лимит символов Threads
 
 OFFER = """Аудитория: малый и средний бизнес Бишкека и Кыргызстана (позже вся Центральная Азия). Языки клиентов: русский и кыргызский.
@@ -114,16 +117,55 @@ def refresh_token():
     print(f"Действует ещё {data.get('expires_in', 0) // 86400} дней")
 
 
+def metric_values(items):
+    out = {}
+    for m in items:
+        if "total_value" in m:
+            out[m["name"]] = m["total_value"].get("value", 0)
+        else:
+            out[m["name"]] = sum(v.get("value", 0) for v in m.get("values", []))
+    return out
+
+
+def collect_stats():
+    user_id = need("THREADS_USER_ID")
+    token = need("THREADS_ACCESS_TOKEN")
+    stats = {"updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "account": {}, "posts": []}
+    r = requests.get(f"{API}/{user_id}/threads_insights", timeout=30, params={
+        "metric": ",".join(POST_METRICS + ["followers_count"]), "access_token": token})
+    if r.ok:
+        stats["account"] = metric_values(r.json().get("data", []))
+    else:
+        print(f"Статистика аккаунта недоступна: {r.status_code} {r.text[:200]}")
+    for p in load_posts():
+        if not p.get("threads_id"):
+            continue
+        row = {"threads_id": p["threads_id"], "posted_at": p["posted_at"], "topic": p.get("topic"),
+               "text": p["text"].split("\n")[0][:90]}
+        r = requests.get(f"{API}/{p['threads_id']}/insights", timeout=30, params={
+            "metric": ",".join(POST_METRICS), "access_token": token})
+        if r.ok:
+            row.update(metric_values(r.json().get("data", [])))
+        else:
+            print(f"Нет статистики для {p['threads_id']}: {r.status_code}")
+        stats["posts"].append(row)
+    STATS_FILE.write_text(json.dumps(stats, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"Статистика сохранена: {len(stats['posts'])} постов, аккаунт: {stats['account']}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--generate", type=int, metavar="N")
     ap.add_argument("--refresh-token", action="store_true")
+    ap.add_argument("--stats", action="store_true")
     args = ap.parse_args()
     load_env()
 
     if args.refresh_token:
         return refresh_token()
+    if args.stats:
+        return collect_stats()
 
     posts = load_posts()
     if args.generate:
