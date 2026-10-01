@@ -66,7 +66,7 @@ def generate(n, existing):
 
     client = anthropic.Anthropic(api_key=need("ANTHROPIC_API_KEY"))
     recent = "\n---\n".join(p["text"] for p in existing[-15:])
-    contact = os.environ.get("CONTACT_LINE", "Пиши в WhatsApp: wa.me/996502091443")
+    contact = os.environ.get("CONTACT_LINE", "Пиши в WhatsApp: wa.me/996502091443?text=Threads")
     prompt = f"""{OFFER}
 
 Напиши {n} разных постов для Threads на русском от первого лица.

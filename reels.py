@@ -29,7 +29,7 @@ W, H, FPS = 1080, 1920, 30
 IG_VERSION = "v22.0"
 IG_API = f"https://graph.instagram.com/{IG_VERSION}"
 CONTACT = "+996 502 091 443"
-HASHTAGS = "#бишкек #кыргызстан #ииvideo #нейросети #автоматизациябизнеса #reels"
+HASHTAGS = "#бишкек #кыргызстан #ии #нейросети #иивидео #автоматизациябизнеса #reels"
 
 # фирменный стиль
 BG_IN, BG_OUT = (26, 31, 58), (10, 13, 28)
@@ -213,8 +213,10 @@ def build_reel(text):
 
 
 def caption(text):
-    footer = "\n\n🤖 Ролик смонтирован и опубликован автоматически. Так же можем и для вашего бизнеса."
-    return f"{text.strip()}{footer}\n\n{HASHTAGS}"[:2200]
+    body = re.sub(r"(Пиши|Пишите)?[^\n]*wa\.me/\S+", "", text).strip()
+    footer = ("\n\n👉 Пиши в WhatsApp, ссылка в профиле, или на номер " + CONTACT +
+              "\n\n🤖 Ролик смонтирован и опубликован автоматически. Так же можем и для вашего бизнеса.")
+    return f"{body}{footer}\n\n{HASHTAGS}"[:2200]
 
 
 def need(name):
