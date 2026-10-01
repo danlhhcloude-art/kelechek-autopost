@@ -24,6 +24,7 @@ POSTS_FILE = HERE / "posts.json"
 STATS_FILE = HERE / "stats.json"
 POST_METRICS = ["views", "likes", "replies", "reposts", "quotes"]
 MAX_LEN = 500  # лимит символов Threads
+AUTO_FOOTER = "\n\n🤖 Пост опубликован автоматически. Так же можем и для вашего бизнеса."
 
 OFFER = """Аудитория: малый и средний бизнес Бишкека и Кыргызстана (позже вся Центральная Азия). Языки клиентов: русский и кыргызский.
 Аккаунт новый, портфолио собирается публично: по мере появления проектов показываю процесс и результаты.
@@ -70,7 +71,7 @@ def generate(n, existing):
 
 Напиши {n} разных постов для Threads на русском от первого лица.
 Требования:
-- каждый пост не длиннее 450 символов, живой разговорный тон, без канцелярита и без хэштегов-простыней (максимум 1 хэштег);
+- каждый пост не длиннее 400 символов (к нему автоматически добавится подпись об автопубликации), живой разговорный тон, без канцелярита и без хэштегов-простыней (максимум 1 хэштег);
 - первая строка — провокационный крючок: смелое мнение, неудобный вопрос или вызов («Непопулярное мнение:», «Вы платите зарплату за копипаст»), чтобы пост попадал в рекомендации;
 - большинство постов заканчивай вопросом или призывом поспорить в комментариях;
 - провокация без оскорблений, без выдуманной статистики и без нападок на конкретные компании или людей;
@@ -90,6 +91,12 @@ def generate(n, existing):
     raw = raw[raw.find("["): raw.rfind("]") + 1]
     texts = [t.strip() for t in json.loads(raw) if t.strip()]
     return [{"text": t[:MAX_LEN], "topic": "generated", "posted_at": None} for t in texts]
+
+
+def with_footer(text):
+    if AUTO_FOOTER.strip() in text:
+        return text
+    return text[:MAX_LEN - len(AUTO_FOOTER)].rstrip() + AUTO_FOOTER
 
 
 def publish(text):
@@ -181,10 +188,11 @@ def main():
         queue = [p for p in posts if not p.get("posted_at")]
 
     post = queue[0]
+    text = with_footer(post["text"])
     if args.dry_run:
-        print(f"[dry-run] {len(post['text'])} симв.:\n{post['text']}")
+        print(f"[dry-run] {len(text)} симв.:\n{text}")
         return
-    post_id = publish(post["text"][:MAX_LEN])
+    post_id = publish(text)
     post["posted_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     post["threads_id"] = post_id
     save_posts(posts)
