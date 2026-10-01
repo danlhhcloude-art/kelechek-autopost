@@ -235,17 +235,13 @@ def publish(video, text):
             sys.exit(f"Токен Instagram не работает: {me.status_code} {me.text}")
         user_id = str(me.json().get("user_id") or me.json()["id"])
         print(f"Аккаунт Instagram: {me.json().get('username')} ({user_id})")
+    video_url = host_on_github(video)
     r = requests.post(f"{API_URL(user_id)}/media", timeout=60, data={
-        "media_type": "REELS", "upload_type": "resumable", "caption": caption(text),
+        "media_type": "REELS", "video_url": video_url, "caption": caption(text),
         "share_to_feed": "true", "access_token": token})
     if not r.ok:
         sys.exit(f"Не удалось создать контейнер: {r.status_code} {r.text}")
     container = r.json()["id"]
-    data = video.read_bytes()
-    r = requests.post(f"https://rupload.facebook.com/ig-api-upload/{IG_VERSION}/{container}", timeout=300,
-                      headers={"Authorization": f"OAuth {token}", "offset": "0", "file_size": str(len(data))}, data=data)
-    if not r.ok:
-        sys.exit(f"Не удалось загрузить видео: {r.status_code} {r.text}")
     for _ in range(40):
         time.sleep(10)
         s = requests.get(f"{IG_API}/{container}", timeout=30,
@@ -261,6 +257,25 @@ def publish(video, text):
     if not r.ok:
         sys.exit(f"Не удалось опубликовать: {r.status_code} {r.text}")
     return r.json()["id"]
+
+
+def host_on_github(video):
+    """Instagram с входом через Instagram берёт Reels только по публичной ссылке.
+    Кладём ролик в media/ этого репозитория (он должен быть открытым) и отдаём ссылку на GitHub."""
+    repo = need("GITHUB_REPOSITORY")
+    name = f"media/reel-{datetime.now(timezone.utc):%Y%m%d-%H%M%S}.mp4"
+    (HERE / "media").mkdir(exist_ok=True)
+    (HERE / name).write_bytes(video.read_bytes())
+    git = lambda *a: subprocess.run(["git", *a], cwd=HERE, check=True, capture_output=True, text=True).stdout.strip()
+    git("add", name)
+    git("commit", "-m", f"reels: ролик {name}")
+    git("pull", "--rebase", "origin", "main")
+    git("push", "origin", "HEAD:main")
+    url = f"https://raw.githubusercontent.com/{repo}/{git('rev-parse', 'HEAD')}/{name}"
+    if requests.head(url, timeout=30, allow_redirects=True).status_code != 200:
+        sys.exit("Ролик не открывается по ссылке GitHub: репозиторий должен быть открытым (public)")
+    print(f"Ролик выложен: {url}")
+    return url
 
 
 def API_URL(user_id):
