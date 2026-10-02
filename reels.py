@@ -20,6 +20,7 @@ from pathlib import Path
 
 import requests
 
+import media
 import motion
 
 HERE = Path(__file__).parent
@@ -62,10 +63,10 @@ def pick_music(n):
     return tracks[n % len(tracks)]
 
 
-def build_reel(text, music=None):
+def build_reel(text, music=None, query=None):
     OUT.mkdir(exist_ok=True)
     out = OUT / "reel.mp4"
-    total, n = motion.render(split_slides(text) + [("cta", "")], music or pick_music(0), out)
+    total, n = motion.render(split_slides(text) + [("cta", "")], music or pick_music(0), out, query=query)
     print(f"Ролик собран: {out} ({total:.1f} сек, слайдов: {n})")
     return out
 
@@ -145,9 +146,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--render-only", action="store_true")
     ap.add_argument("--text", help="собрать ролик из этого текста вместо очереди")
+    ap.add_argument("--query", help="что искать на стоке для фона (по умолчанию по теме поста)")
+    ap.add_argument("--test", action="store_true", help="собрать следующий ролик и выложить в media/ для просмотра, без публикации")
     args = ap.parse_args()
 
-    if not (args.render_only or args.text) and not os.environ.get("IG_ACCESS_TOKEN"):
+    if not (args.render_only or args.text or args.test) and not os.environ.get("IG_ACCESS_TOKEN"):
         print("Instagram ещё не подключён (нет секрета IG_ACCESS_TOKEN), пропускаю.")
         return
     posts = json.loads(POSTS_FILE.read_text(encoding="utf-8"))
@@ -158,7 +161,11 @@ def main():
         if not queue:
             sys.exit("Очередь для Instagram пуста: добавь посты в posts.json")
         post = queue[0]
-    video = build_reel(post["text"], pick_music(sum(1 for p in posts if p.get("ig_posted_at"))))
+    query = args.query or post.get("query") or media.TOPIC_QUERIES.get(post.get("topic"), media.DEFAULT_QUERY)
+    video = build_reel(post["text"], pick_music(sum(1 for p in posts if p.get("ig_posted_at"))), query)
+    if args.test:
+        host_on_github(video)
+        return
     if args.render_only or args.text:
         return
     media_id = publish(video, post["text"])

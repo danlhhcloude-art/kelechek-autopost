@@ -2,7 +2,12 @@ name: Instagram reels
 on:
   schedule:
     - cron: "0 13 * * *"   # каждый день в 19:00 по Бишкеку (13:00 UTC)
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      test:
+        description: "Только собрать ролик и выложить в media/ для просмотра"
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency: posts-json
@@ -15,11 +20,19 @@ jobs:
         with: { python-version: "3.12" }
       - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: pip install -r requirements.txt
+      - name: Голос для озвучки (Piper, ru_RU-dmitri, CC0)
+        continue-on-error: true
+        run: |
+          mkdir -p assets/voice && cd assets/voice
+          base=https://huggingface.co/rhasspy/piper-voices/resolve/main/ru/ru_RU/dmitri/medium
+          curl -sSfL -o ru_RU-dmitri-medium.onnx $base/ru_RU-dmitri-medium.onnx
+          curl -sSfL -o ru_RU-dmitri-medium.onnx.json $base/ru_RU-dmitri-medium.onnx.json
       - run: |
           git config user.name "autopost-bot"
           git config user.email "autopost-bot@users.noreply.github.com"
-          python reels.py
+          python reels.py ${{ inputs.test && '--test' || '' }}
         env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
       - name: Сохранить отметку о публикации

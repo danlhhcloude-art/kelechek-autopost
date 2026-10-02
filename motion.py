@@ -157,7 +157,7 @@ def marker_sprite(w, h):
 
 
 class TextSlide:
-    def __init__(self, kind, text, duration):
+    def __init__(self, kind, text, duration, speech=None):
         self.kind, self.duration = kind, duration
         if kind == "hook":
             self.font, self.size, words, bh = layout(text, F_DISPLAY, 88, 52, 1.3, BOTTOM - TOP - 160)
@@ -166,6 +166,9 @@ class TextSlide:
             self.font, self.size, words, bh = layout(text, F_BODY, 62, 38, 1.4, BOTTOM - TOP)
             # всё тело должно проявиться за первые ~45% времени слайда
             self.stagger = min(0.09, duration * 0.45 / max(len(words), 1))
+        if speech:
+            # слова появляются вслед за голосом, как караоке
+            self.stagger = speech * 0.9 / max(len(words), 1)
         self.y0 = TOP + (BOTTOM - TOP - bh) / 2 - (40 if kind == "hook" else 0)
         marks = 0
         self.words = []
@@ -218,10 +221,14 @@ def paste_alpha(img, spr, x, y, alpha):
     img.alpha_composite(spr, (max(x, 0), max(y, 0)), (sx, sy))
 
 
+CTA_TITLE = "15 дней работаем бесплатно"
+CTA_SPEECH = "Пятнадцать дней работаем бесплатно. Пишите в ватсап, номер на экране."
+
+
 class CtaSlide:
-    def __init__(self, duration):
+    def __init__(self, duration, speech=None):
         self.kind, self.duration = "cta", duration
-        self.title = TextSlide("hook", "15 дней работаем бесплатно", duration)
+        self.title = TextSlide("hook", CTA_TITLE, duration)
         self.title.y0 = 600
         self.sub_font = ImageFont.truetype(F_BODY, 44)
         self.phone_font = ImageFont.truetype(F_DISPLAY, 56)
@@ -270,21 +277,55 @@ def slide_duration(kind, text):
     return min(7.0, max(3.5, 2.0 + len(text) / 24))
 
 
-def render(slides, music, out):
-    """slides: [(kind, text)], последний должен быть ("cta", "")."""
-    scenes = [CtaSlide(slide_duration(k, b)) if k == "cta" else TextSlide(k, b, slide_duration(k, b)) for k, b in slides]
+def render(slides, music, out, query=None, workdir=None):
+    """slides: [(kind, text)], последний должен быть ("cta", "").
+    query: что искать на стоке для фона; без ключа Pexels фон остаётся фирменным анимированным."""
+    import media
+    workdir = Path(workdir or Path(out).parent)
+    workdir.mkdir(parents=True, exist_ok=True)
+    # 1. озвучка: длительность сцен подстраивается под голос
+    voices, scenes = [], []
+    for i, (kind, text) in enumerate(slides):
+        wav = workdir / f"voice{i}.wav"
+        speech = media.synthesize(CTA_SPEECH if kind == "cta" else text.replace("\n", " "), wav)
+        voices.append(wav if speech else None)
+        base = slide_duration(kind, text)
+        dur = max(base, speech + 0.8) if speech else base
+        scenes.append(CtaSlide(dur, speech) if kind == "cta" else TextSlide(kind, text, dur, speech))
     total = sum(s.duration for s in scenes)
-    backdrop, head = Backdrop(), header()
+    # 2. фон: стоковое видео или анимированный фирменный
+    clips = media.pexels_clips(query or media.DEFAULT_QUERY, len(scenes), workdir / "stock") if query is not False else []
+    if clips:
+        backdrop = media.VideoFrames(media.background_video(clips, [s.duration for s in scenes], workdir / "bg.mp4"))
+    else:
+        backdrop = Backdrop()
+    head = header()
+    # 3. звук: голос по своим местам, музыка тише, если есть голос
+    inputs, parts, labels, start = ["-stream_loop", "-1", "-i", str(music)], [], [], 0.0
+    for scene, wav in zip(scenes, voices):
+        if wav:
+            k = 2 + len(labels)  # 0: кадры из Python, 1: музыка, дальше голоса
+            inputs += ["-i", str(wav)]
+            ms = int((start + 0.25) * 1000)
+            parts.append(f"[{k}:a]aresample=44100,adelay={ms}|{ms},apad[v{k}]")
+            labels.append(f"[v{k}]")
+        start += scene.duration
+    music_vol = 0.22 if labels else 1.0
+    parts.append(f"[1:a]atrim=0:{total:.2f},volume={music_vol},afade=t=in:d=0.4,afade=t=out:st={total - 1.5:.2f}:d=1.5[m]")
+    if labels:
+        parts.append("".join(labels) + f"amix=inputs={len(labels)}:normalize=0,highpass=f=80,acompressor[vo]")
+        parts.append("[m][vo]amix=inputs=2:normalize=0,alimiter=limit=0.9[a]")
+    else:
+        parts.append("[m]anull[a]")
     ff = subprocess.Popen([
         "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
-        "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
-        "-stream_loop", "-1", "-i", str(music),
-        "-filter_complex", f"[1:a]atrim=0:{total:.2f},afade=t=in:d=0.4,afade=t=out:st={total - 1.5:.2f}:d=1.5[a]",
+        "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", *inputs,
+        "-filter_complex", ";".join(parts),
         "-map", "0:v", "-map", "[a]", "-t", f"{total:.2f}",
         "-c:v", "libx264", "-profile:v", "high", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "128k", "-ar", "44100", "-movflags", "+faststart", str(out)], stdin=subprocess.PIPE)
     start = 0.0
-    for i, scene in enumerate(scenes):
+    for scene in scenes:
         for f in range(int(round(scene.duration * FPS))):
             t = f / FPS
             g = start + t
@@ -298,6 +339,8 @@ def render(slides, music, out):
             ff.stdin.write(img.convert("RGB").tobytes())
         start += scene.duration
     ff.stdin.close()
+    if hasattr(backdrop, "close"):
+        backdrop.close()
     if ff.wait():
         raise RuntimeError("ffmpeg не смог собрать ролик")
     return total, len(scenes)
