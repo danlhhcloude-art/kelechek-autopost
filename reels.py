@@ -179,7 +179,13 @@ def render_slide(kind, text, index, total, path):
     img.convert("RGB").save(path, quality=95)
 
 
-def build_reel(text):
+def pick_music(n):
+    """Треки из assets/music (бесплатные, Pixabay) идут по кругу: каждый следующий ролик со следующим треком."""
+    tracks = sorted((ASSETS / "music").glob("*.mp3"))
+    return tracks[n % len(tracks)]
+
+
+def build_reel(text, music=None):
     OUT.mkdir(exist_ok=True)
     slides = split_slides(text) + [("cta", "")]
     durations = []
@@ -200,8 +206,8 @@ def build_reel(text):
         last = f"x{i}"
     total = sum(durations) + fade
     n = len(durations)
-    inputs += ["-stream_loop", "-1", "-i", str(ASSETS / "music.mp3")]
-    parts.append(f"[{n}:a]atrim=0:{total:.2f},afade=t=out:st={total - 1.5:.2f}:d=1.5,volume=2.0[a]")
+    inputs += ["-stream_loop", "-1", "-i", str(music or pick_music(0))]
+    parts.append(f"[{n}:a]atrim=0:{total:.2f},afade=t=out:st={total - 1.5:.2f}:d=1.5[a]")
     out = OUT / "reel.mp4"
     subprocess.run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", *inputs,
                     "-filter_complex", ";".join(parts), "-map", f"[{last}]", "-map", "[a]",
@@ -300,7 +306,7 @@ def main():
         if not queue:
             sys.exit("Очередь для Instagram пуста: добавь посты в posts.json")
         post = queue[0]
-    video = build_reel(post["text"])
+    video = build_reel(post["text"], pick_music(sum(1 for p in posts if p.get("ig_posted_at"))))
     if args.render_only or args.text:
         return
     media_id = publish(video, post["text"])
