@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-01T12:23:59+00:00",
+  "updated_at": "2026-10-02T03:15:14+00:00",
   "account": {
-    "views": 0,
+    "views": 15,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -14,6 +14,17 @@
       "posted_at": "2026-10-01T12:23:59+00:00",
       "topic": "intro-offer",
       "text": "Бишкек, вы до сих пор платите за рекламный ролик как за съёмку фильма?",
+      "views": 15,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18117105628955732",
+      "posted_at": "2026-10-02T03:15:14+00:00",
+      "topic": "automation-proof",
+      "text": "Признание: этот пост написал и опубликовал не человек.",
       "views": 0,
       "likes": 0,
       "replies": 0,
