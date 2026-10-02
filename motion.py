@@ -314,7 +314,7 @@ def render(slides, music, out, query=None, workdir=None):
     parts.append(f"[1:a]atrim=0:{total:.2f},volume={music_vol},afade=t=in:d=0.4,afade=t=out:st={total - 1.5:.2f}:d=1.5[m]")
     if labels:
         parts.append("".join(labels) + f"amix=inputs={len(labels)}:normalize=0,highpass=f=80,acompressor[vo]")
-        parts.append("[m][vo]amix=inputs=2:normalize=0,alimiter=limit=0.9[a]")
+        parts.append("[m][vo]amix=inputs=2:normalize=0,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=44100[a]")
     else:
         parts.append("[m]anull[a]")
     ff = subprocess.Popen([
