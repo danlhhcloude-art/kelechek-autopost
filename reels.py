@@ -19,24 +19,17 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+
+import motion
 
 HERE = Path(__file__).parent
 ASSETS = HERE / "assets"
 OUT = HERE / "out"
 POSTS_FILE = HERE / "posts.json"
-W, H, FPS = 1080, 1920, 30
 IG_VERSION = "v22.0"
 IG_API = f"https://graph.instagram.com/{IG_VERSION}"
-CONTACT = "+996 502 091 443"
+CONTACT = motion.CONTACT
 HASHTAGS = "#бишкек #кыргызстан #ии #нейросети #иивидео #автоматизациябизнеса #reels"
-
-# фирменный стиль
-BG_IN, BG_OUT = (26, 31, 58), (10, 13, 28)
-TEAL, VIOLET, WHITE, MUTED = (46, 230, 201), (123, 92, 255), (255, 255, 255), (170, 178, 205)
-F_DISPLAY = str(ASSETS / "fonts" / "Unbounded-Bold.ttf")
-F_BODY = str(ASSETS / "fonts" / "GolosText-Medium.ttf")
-LEFT, RIGHT, TOP, BOTTOM = 96, 930, 300, 1450  # безопасная зона: низ и правый край закрывает интерфейс Reels
 
 EMOJI = re.compile("[\U0001F000-\U0001FAFF☀-➿️]")
 
@@ -63,122 +56,6 @@ def split_slides(text):
     return slides[:5]
 
 
-def wrap(draw, text, font, width):
-    lines = []
-    for para in text.split("\n"):
-        if not para.strip():
-            lines.append("")
-            continue
-        line = ""
-        for word in para.split():
-            test = f"{line} {word}".strip()
-            if draw.textlength(test, font=font) <= width:
-                line = test
-            else:
-                if line:
-                    lines.append(line)
-                line = word
-        lines.append(line)
-    return lines
-
-
-def fit(draw, text, path, start, minimum, width, height, spacing):
-    size = start
-    while size >= minimum:
-        font = ImageFont.truetype(path, size)
-        lines = wrap(draw, text, font, width)
-        h = len(lines) * size * spacing
-        if h <= height:
-            return font, lines, size
-        size -= 4
-    font = ImageFont.truetype(path, minimum)
-    return font, wrap(draw, text, font, width), minimum
-
-
-def background():
-    img = Image.new("RGB", (W, H), BG_OUT)
-    glow = Image.new("RGB", (W, H), BG_OUT)
-    d = ImageDraw.Draw(glow)
-    for r in range(900, 0, -30):
-        t = r / 900
-        c = tuple(int(BG_IN[i] * (1 - t) + BG_OUT[i] * t) for i in range(3))
-        d.ellipse([W / 2 - r, H * 0.42 - r, W / 2 + r, H * 0.42 + r], fill=c)
-    img.paste(glow.filter(ImageFilter.GaussianBlur(60)))
-    accent = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    a = ImageDraw.Draw(accent)
-    a.ellipse([W - 420, -260, W + 260, 420], fill=VIOLET + (70,))
-    a.ellipse([-300, H - 520, 380, H + 160], fill=TEAL + (45,))
-    img = Image.alpha_composite(img.convert("RGBA"), accent.filter(ImageFilter.GaussianBlur(140)))
-    return img
-
-
-def header(img):
-    logo = Image.open(ASSETS / "logo.png").convert("RGBA").resize((88, 88))
-    mask = Image.new("L", (88, 88), 0)
-    ImageDraw.Draw(mask).ellipse([0, 0, 87, 87], fill=255)
-    img.paste(logo, (LEFT, 150), mask)
-    d = ImageDraw.Draw(img)
-    d.text((LEFT + 112, 172), "KELECHEK AI", font=ImageFont.truetype(F_DISPLAY, 34), fill=WHITE)
-    d.text((LEFT + 112, 214), "ИИ-видео и автоматизация · Бишкек", font=ImageFont.truetype(F_BODY, 26), fill=MUTED)
-
-
-def gradient_bar(img, x, y, w, h):
-    bar = Image.new("RGBA", (w, h))
-    bd = ImageDraw.Draw(bar)
-    for i in range(w):
-        t = i / max(w - 1, 1)
-        bd.line([(i, 0), (i, h)], fill=tuple(int(TEAL[k] * (1 - t) + VIOLET[k] * t) for k in range(3)) + (255,))
-    mask = Image.new("L", (w, h), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([0, 0, w - 1, h - 1], radius=h // 2, fill=255)
-    img.paste(bar, (x, y), mask)
-
-
-def dots(img, index, total):
-    d = ImageDraw.Draw(img)
-    x = LEFT
-    for i in range(total):
-        w = 56 if i == index else 16
-        d.rounded_rectangle([x, 1530, x + w, 1546], radius=8, fill=TEAL if i == index else (70, 78, 110))
-        x += w + 12
-
-
-def render_slide(kind, text, index, total, path):
-    img = background()
-    header(img)
-    d = ImageDraw.Draw(img)
-    width, height = RIGHT - LEFT, BOTTOM - TOP
-    if kind == "cta":
-        f1 = ImageFont.truetype(F_DISPLAY, 64)
-        y = 640
-        for line in wrap(d, "15 дней работаем бесплатно", f1, width):
-            d.text((LEFT, y), line, font=f1, fill=WHITE)
-            y += 84
-        gradient_bar(img, LEFT, y + 30, 220, 14)
-        f2 = ImageFont.truetype(F_BODY, 44)
-        y += 90
-        for line in wrap(d, "Вы платите только за подписку на ИИ-сервис. Пишите в WhatsApp:", f2, width):
-            d.text((LEFT, y), line, font=f2, fill=MUTED)
-            y += 60
-        d.text((LEFT, y + 30), CONTACT, font=ImageFont.truetype(F_DISPLAY, 58), fill=TEAL)
-    elif kind == "hook":
-        font, lines, size = fit(d, text, F_DISPLAY, 84, 52, width, height - 120, 1.28)
-        block = len(lines) * size * 1.28
-        y = TOP + (height - block) / 2 - 40
-        for line in lines:
-            d.text((LEFT, y), line, font=font, fill=WHITE)
-            y += size * 1.28
-        gradient_bar(img, LEFT, int(y + 36), 220, 14)
-    else:
-        font, lines, size = fit(d, text, F_BODY, 60, 38, width, height, 1.38)
-        block = len(lines) * size * 1.38
-        y = TOP + (height - block) / 2
-        for line in lines:
-            d.text((LEFT, y), line, font=font, fill=WHITE if line else WHITE)
-            y += size * 1.38 if line else size * 0.6
-    dots(img, index, total)
-    img.convert("RGB").save(path, quality=95)
-
-
 def pick_music(n):
     """Треки из assets/music (бесплатные, Pixabay) идут по кругу: каждый следующий ролик со следующим треком."""
     tracks = sorted((ASSETS / "music").glob("*.mp3"))
@@ -187,33 +64,8 @@ def pick_music(n):
 
 def build_reel(text, music=None):
     OUT.mkdir(exist_ok=True)
-    slides = split_slides(text) + [("cta", "")]
-    durations = []
-    for i, (kind, body) in enumerate(slides):
-        render_slide(kind, body, i, len(slides), OUT / f"slide{i}.png")
-        durations.append(4.0 if kind == "cta" else min(6.5, max(3.0, 1.8 + len(body) / 22)))
-    fade = 0.5
-    inputs, parts = [], []
-    for i, dur in enumerate(durations):
-        frames = int((dur + fade) * FPS)
-        inputs += ["-loop", "1", "-t", f"{dur + fade:.2f}", "-i", str(OUT / f"slide{i}.png")]
-        parts.append(f"[{i}:v]scale=1188:2112,zoompan=z='min(zoom+0.0006,1.06)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"
-                     f":d={frames}:s={W}x{H}:fps={FPS},setsar=1,format=yuv420p[v{i}]")
-    last, offset = "v0", 0.0
-    for i in range(1, len(durations)):
-        offset += durations[i - 1]
-        parts.append(f"[{last}][v{i}]xfade=transition=fade:duration={fade}:offset={offset:.2f}[x{i}]")
-        last = f"x{i}"
-    total = sum(durations) + fade
-    n = len(durations)
-    inputs += ["-stream_loop", "-1", "-i", str(music or pick_music(0))]
-    parts.append(f"[{n}:a]atrim=0:{total:.2f},afade=t=out:st={total - 1.5:.2f}:d=1.5[a]")
     out = OUT / "reel.mp4"
-    subprocess.run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", *inputs,
-                    "-filter_complex", ";".join(parts), "-map", f"[{last}]", "-map", "[a]",
-                    "-t", f"{total:.2f}", "-c:v", "libx264", "-profile:v", "high", "-preset", "medium", "-crf", "21",
-                    "-pix_fmt", "yuv420p", "-r", str(FPS), "-c:a", "aac", "-b:a", "128k", "-ar", "44100",
-                    "-movflags", "+faststart", str(out)], check=True)
+    total, n = motion.render(split_slides(text) + [("cta", "")], music or pick_music(0), out)
     print(f"Ролик собран: {out} ({total:.1f} сек, слайдов: {n})")
     return out
 
