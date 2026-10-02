@@ -215,6 +215,7 @@ def build_reel(text):
 def caption(text):
     body = re.sub(r"(Пиши|Пишите)?[^\n]*wa\.me/\S+", "", text).strip()
     footer = ("\n\n👉 Пиши в WhatsApp, ссылка в профиле, или на номер " + CONTACT +
+              "\n📍 В Бишкеке встречаемся лично и показываем всё вживую" +
               "\n\n🤖 Ролик смонтирован и опубликован автоматически. Так же можем и для вашего бизнеса.")
     return f"{body}{footer}\n\n{HASHTAGS}"[:2200]
 
