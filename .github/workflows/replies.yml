@@ -1,0 +1,45 @@
+name: Threads replies
+on:
+  schedule:
+    - cron: "30 */2 * * *"   # каждые 2 часа собирать новые комментарии
+  workflow_dispatch:
+    inputs:
+      replies:
+        description: 'Ответы: JSON [{"to": "<id комментария>", "text": "..."}]'
+        default: "[]"
+      skip:
+        description: 'Комментарии без ответа (спам): JSON ["<id>"]'
+        default: "[]"
+permissions:
+  contents: write
+concurrency: posts-json
+jobs:
+  replies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - name: Отправить ответы
+        if: github.event_name == 'workflow_dispatch'
+        run: python replies.py --answer
+        env:
+          THREADS_USER_ID: "28058715777164226"
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          REPLIES: ${{ inputs.replies }}
+          SKIP: ${{ inputs.skip }}
+      - name: Собрать новые комментарии
+        if: always()
+        run: python replies.py --collect
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+      - name: Сохранить
+        if: always()
+        run: |
+          git config user.name "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          if [ -f comments.json ]; then git add comments.json; fi
+          git diff --cached --quiet || git commit -m "replies: комментарии и ответы"
+          git pull --rebase origin main
+          git push
