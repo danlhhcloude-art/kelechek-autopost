@@ -25,6 +25,14 @@ STATS_FILE = HERE / "stats.json"
 POST_METRICS = ["views", "likes", "replies", "reposts", "quotes"]
 MAX_LEN = 500  # лимит символов Threads
 AUTO_FOOTER = "\n\n🤖 Пост опубликован автоматически. Так же можем и для вашего бизнеса."
+# тема поста в Threads (одна на пост): по ней пост попадает в ленты тех, кто следит за темой
+TOPIC_TAGS = {
+    "ai-video": "ИИ видео", "automation": "Автоматизация бизнеса", "automation-proof": "Нейросети",
+    "mini-whatsapp": "Автоматизация бизнеса", "mini-reel": "Reels", "lead-magnet": "Малый бизнес",
+    "region": "Бишкек", "meeting": "Бишкек", "offer": "Бизнес Бишкек", "honest": "Предприниматели",
+    "question": "Бизнес Бишкек", "tip": "Маркетинг",
+}
+DEFAULT_TAG = "Бизнес Бишкек"
 
 OFFER = """Аудитория: малый и средний бизнес Бишкека и Кыргызстана (позже вся Центральная Азия). Языки клиентов: русский и кыргызский.
 Аккаунт новый, портфолио собирается публично: по мере появления проектов показываю процесс и результаты.
@@ -100,11 +108,17 @@ def with_footer(text):
     return text[:MAX_LEN - len(AUTO_FOOTER)].rstrip() + AUTO_FOOTER
 
 
-def publish(text):
+def publish(text, tag=None):
     user_id = need("THREADS_USER_ID")
     token = need("THREADS_ACCESS_TOKEN")
-    r = requests.post(f"{API}/{user_id}/threads",
-                      data={"media_type": "TEXT", "text": text, "access_token": token}, timeout=30)
+    data = {"media_type": "TEXT", "text": text, "access_token": token}
+    if tag:
+        data["topic_tag"] = tag
+    r = requests.post(f"{API}/{user_id}/threads", data=data, timeout=30)
+    if not r.ok and tag:
+        print(f"Тема «{tag}» не принята ({r.status_code} {r.text[:200]}), публикую без темы")
+        data.pop("topic_tag")
+        r = requests.post(f"{API}/{user_id}/threads", data=data, timeout=30)
     r.raise_for_status()
     creation_id = r.json()["id"]
     time.sleep(5)  # Meta советует подождать перед публикацией контейнера
@@ -191,9 +205,11 @@ def main():
     post = queue[0]
     text = with_footer(post["text"])
     if args.dry_run:
-        print(f"[dry-run] {len(text)} симв.:\n{text}")
+        print(f"[dry-run] тема: {post.get('tag') or TOPIC_TAGS.get(post.get('topic'), DEFAULT_TAG)}, {len(text)} симв.:\n{text}")
         return
-    post_id = publish(text)
+    tag = post.get("tag") or TOPIC_TAGS.get(post.get("topic"), DEFAULT_TAG)
+    post_id = publish(text, tag)
+    post["tag"] = tag
     post["posted_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     post["threads_id"] = post_id
     save_posts(posts)
