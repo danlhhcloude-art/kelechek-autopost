@@ -1,0 +1,27 @@
+name: Voice test Chatterbox
+on: workflow_dispatch
+permissions:
+  contents: write
+concurrency: posts-json
+jobs:
+  voices:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - run: |
+          pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install chatterbox-tts
+      - run: curl -sSfL -o ref-ru.flac https://storage.googleapis.com/chatterbox-demo-samples/mtl_prompts/ru_m.flac
+      - run: python tools/voice_chatterbox.py
+      - name: Сохранить образцы
+        run: |
+          git config user.name "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          git add media/voice-tests
+          git diff --cached --quiet || git commit -m "voice: образцы Chatterbox"
+          git pull --rebase origin main
+          git push
