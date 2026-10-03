@@ -1,0 +1,30 @@
+name: Voice test
+on: workflow_dispatch
+permissions:
+  contents: write
+concurrency: posts-json
+jobs:
+  voices:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - run: pip install -r requirements.txt vosk-tts
+      - name: Piper (для сравнения)
+        continue-on-error: true
+        run: |
+          mkdir -p assets/voice && cd assets/voice
+          base=https://huggingface.co/rhasspy/piper-voices/resolve/main/ru/ru_RU/dmitri/medium
+          curl -sSfL -o ru_RU-dmitri-medium.onnx $base/ru_RU-dmitri-medium.onnx
+          curl -sSfL -o ru_RU-dmitri-medium.onnx.json $base/ru_RU-dmitri-medium.onnx.json
+      - run: python tools/voice_test.py
+      - name: Сохранить образцы
+        run: |
+          git config user.name "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          git add media/voice-tests
+          git diff --cached --quiet || git commit -m "voice: образцы голосов"
+          git pull --rebase origin main
+          git push
