@@ -8,6 +8,11 @@ on:
         description: "Только собрать ролик и выложить в media/ для просмотра"
         type: boolean
         default: false
+      voice:
+        description: "Голос: piper или chatterbox (живее, синтез медленнее)"
+        type: choice
+        options: [piper, chatterbox]
+        default: piper
 permissions:
   contents: write
 concurrency: posts-json
@@ -17,9 +22,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: "3.12" }
+        with: { python-version: "3.11" }
       - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: pip install -r requirements.txt
+      - name: Голос Chatterbox (MIT)
+        if: inputs.voice == 'chatterbox'
+        run: |
+          pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install chatterbox-tts
+          mkdir -p assets/voice
+          # образец голоса из демо Resemble, пока владелец не записал свой
+          curl -sSfL -o assets/voice/ref.flac https://storage.googleapis.com/chatterbox-demo-samples/mtl_prompts/ru_m.flac
       - name: Голос для озвучки (Piper, ru_RU-dmitri, CC0)
         continue-on-error: true
         run: |
@@ -32,6 +45,7 @@ jobs:
           git config user.email "autopost-bot@users.noreply.github.com"
           python reels.py ${{ inputs.test && '--test' || '' }}
         env:
+          VOICE_ENGINE: ${{ inputs.voice || 'piper' }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}

@@ -15,6 +15,8 @@ from pathlib import Path
 import requests
 
 HERE = Path(__file__).parent
+VOICE_ENGINE = os.environ.get("VOICE_ENGINE", "piper")  # piper или chatterbox
+VOICE_REF = Path(os.environ.get("VOICE_REF", HERE / "assets" / "voice" / "ref.flac"))  # образец голоса для chatterbox
 VOICE_MODEL = Path(os.environ.get("PIPER_MODEL", HERE / "assets" / "voice" / "ru_RU-dmitri-medium.onnx"))
 W, H, FPS = 1080, 1920, 30
 
@@ -38,7 +40,7 @@ def duration(path):
 
 def speakable(text):
     """Готовит текст к озвучке: цифры словами, латиница и сокращения так, как их произносят."""
-    t = text.replace("Kelechek AI", "Келечек эй-ай").replace("WhatsApp", "ватсап").replace("Reels", "рилс")
+    t = text.replace("Kelechek AI", "Келечек эй-ай").replace("WhatsApp", "вотсап").replace("Reels", "рилс")
     t = re.sub(r"\bИИ\b", "и-и", t)
     t = re.sub(r"(\d{1,2}):(\d{2})", r"\1 \2", t)
     try:
@@ -48,6 +50,27 @@ def speakable(text):
         pass
     t = re.sub(r"[«»\"–—]", " ", t)
     return re.sub(r"\s+", " ", t).strip()
+
+
+_CB = None
+
+
+def _chatterbox():
+    """Нейросетевой голос Chatterbox Multilingual (MIT): звучит живее Piper, но синтез медленнее."""
+    global _CB
+    if _CB is None:
+        from chatterbox.mtl_tts import ChatterboxMultilingualTTS
+        _CB = ChatterboxMultilingualTTS.from_pretrained(device="cpu")
+    return _CB
+
+
+def synthesize_chatterbox(text, wav):
+    import torchaudio
+    model = _chatterbox()
+    audio = model.generate(speakable(text), language_id="ru", exaggeration=0.6, cfg_weight=0.4,
+                           audio_prompt_path=str(VOICE_REF) if VOICE_REF.exists() else None)
+    torchaudio.save(str(wav), audio, model.sr)
+    return duration(wav)
 
 
 def voice_available():
@@ -62,6 +85,11 @@ def voice_available():
 
 def synthesize(text, wav):
     """Озвучивает текст в wav, возвращает длительность в секундах или None."""
+    if VOICE_ENGINE == "chatterbox" and text.strip():
+        try:
+            return synthesize_chatterbox(text, wav)
+        except Exception as e:  # noqa: BLE001
+            print(f"Chatterbox не сработал ({e}), озвучиваю Piper")
     if not voice_available() or not text.strip():
         return None
     r = subprocess.run([sys.executable, "-m", "piper", "--model", str(VOICE_MODEL), "--output_file", str(wav),
