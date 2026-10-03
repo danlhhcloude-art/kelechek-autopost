@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-03T07:14:18+00:00",
+  "updated_at": "2026-10-03T14:02:48+00:00",
   "account": {
-    "views": 28,
+    "views": 51,
     "likes": 0,
-    "replies": 0,
+    "replies": 2,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -47,7 +47,7 @@
       "posted_at": "2026-10-02T12:22:17+00:00",
       "topic": "region",
       "text": "Непопулярное мнение: бизнес в Бишкеке чаще теряет клиентов не из-за цены, а из-за того, чт",
-      "views": 3,
+      "views": 4,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -58,7 +58,7 @@
       "posted_at": "2026-10-03T03:21:14+00:00",
       "topic": "mini-reel",
       "text": "Вам не нужен «пакет на месяц». Нужен один ролик, который не стыдно выложить.",
-      "views": 4,
+      "views": 5,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -69,11 +69,53 @@
       "posted_at": "2026-10-03T07:14:17+00:00",
       "topic": "automation",
       "text": "Ваш менеджер отвечает в WhatsApp одно и то же 40 раз в день. «Сколько стоит?», «Где вы нах",
+      "views": 21,
+      "likes": 0,
+      "replies": 2,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17989402913866499",
+      "posted_at": "2026-10-03T14:02:47+00:00",
+      "topic": "mini-whatsapp",
+      "text": "Клиент написал в WhatsApp в 23:40. Вы ответили утром. Он уже купил у соседей.",
       "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
       "quotes": 0
     }
-  ]
+  ],
+  "instagram": {
+    "updated_at": "2026-10-03T14:02:52+00:00",
+    "reels": [
+      {
+        "ig_media_id": "18091979288669737",
+        "posted_at": "2026-10-01T16:30:08+00:00",
+        "topic": "intro-offer",
+        "text": "Бишкек, вы до сих пор платите за рекламный ролик как за съёмку фильма?\n\nЭто Kelechek AI. Д",
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/Dd9VzKNgAwF/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18075607160742661",
+        "posted_at": "2026-10-02T13:08:43+00:00",
+        "topic": "automation-proof",
+        "text": "Признание: этот пост написал и опубликовал не человек.\n\nВесь аккаунт Kelechek AI ведёт авт",
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/Dd_jk1RDs9Y/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
+      }
+    ]
+  }
 }
