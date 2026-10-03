@@ -169,7 +169,7 @@ class VideoFrames:
         self.size = W * H * 3
         # тёмная вуаль, плотнее книзу, чтобы белый текст всегда читался
         alpha = Image.new("L", (1, H))
-        alpha.putdata([175 + int(45 * y / H) for y in range(H)])
+        alpha.putdata([150 + int(65 * y / H) for y in range(H)])
         self.shade = Image.new("RGBA", (W, H), (10, 13, 28, 0))
         self.shade.putalpha(alpha.resize((W, H)))
         self.last = None
