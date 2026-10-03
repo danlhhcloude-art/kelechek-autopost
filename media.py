@@ -1,7 +1,7 @@
 """Видео со стока и озвучка для Reels.
 
-- Фон: бесплатные вертикальные видео с Pexels (можно в рекламе, без указания автора).
-  Нужен секрет PEXELS_API_KEY; без него остаётся анимированный фирменный фон.
+- Фон: бесплатные видео со стока Pixabay (секрет PIXABAY_API_KEY) или Pexels (PEXELS_API_KEY),
+  оба разрешают коммерческое использование без указания автора. Без ключей остаётся анимированный фирменный фон.
 - Голос: открытый голос Piper ru_RU-dmitri-medium (датасет CC0), работает офлайн.
   Модель скачивается в workflow в assets/voice/; без неё ролик выходит без голоса.
 """
@@ -103,6 +103,44 @@ def pexels_clips(query, n, dest):
         if len(clips) >= n:
             break
     return clips
+
+
+def pixabay_clips(query, n, dest):
+    key = os.environ.get("PIXABAY_API_KEY")
+    if not key:
+        return []
+    r = requests.get("https://pixabay.com/api/videos/", timeout=30,
+                     params={"key": key, "q": query, "per_page": 30, "safesearch": "true"})
+    if not r.ok:
+        print(f"Pixabay не ответил: {r.status_code} {r.text[:200]}")
+        return []
+    dest.mkdir(parents=True, exist_ok=True)
+    # сначала вертикальные ролики, потом остальные (их обрежем по центру)
+    hits = sorted(r.json().get("hits", []), key=lambda v: -(v["videos"]["medium"].get("height", 0) >
+                                                            v["videos"]["medium"].get("width", 1)))
+    clips = []
+    for v in hits:
+        if v.get("duration", 0) < 4:
+            continue
+        files = [f for f in v["videos"].values() if f.get("url") and f.get("height", 0) >= 720]
+        if not files:
+            continue
+        best = min(files, key=lambda f: abs(max(f["width"], f["height"]) - H))
+        path = dest / f"pixabay-{v['id']}.mp4"
+        with requests.get(best["url"], timeout=120, stream=True) as resp:
+            if not resp.ok:
+                continue
+            with path.open("wb") as fh:
+                for chunk in resp.iter_content(1 << 20):
+                    fh.write(chunk)
+        clips.append(path)
+        if len(clips) >= n:
+            break
+    return clips
+
+
+def stock_clips(query, n, dest):
+    return pixabay_clips(query, n, dest) or pexels_clips(query, n, dest)
 
 
 def background_video(clips, lengths, out):

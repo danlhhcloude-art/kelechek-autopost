@@ -33,6 +33,7 @@ jobs:
           python reels.py ${{ inputs.test && '--test' || '' }}
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
       - name: Сохранить отметку о публикации

@@ -294,7 +294,7 @@ def render(slides, music, out, query=None, workdir=None):
         scenes.append(CtaSlide(dur, speech) if kind == "cta" else TextSlide(kind, text, dur, speech))
     total = sum(s.duration for s in scenes)
     # 2. фон: стоковое видео или анимированный фирменный
-    clips = media.pexels_clips(query or media.DEFAULT_QUERY, len(scenes), workdir / "stock") if query is not False else []
+    clips = media.stock_clips(query or media.DEFAULT_QUERY, len(scenes), workdir / "stock") if query is not False else []
     if clips:
         backdrop = media.VideoFrames(media.background_video(clips, [s.duration for s in scenes], workdir / "bg.mp4"))
     else:
