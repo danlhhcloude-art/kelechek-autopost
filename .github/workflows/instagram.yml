@@ -1,7 +1,7 @@
 name: Instagram reels
 on:
   schedule:
-    - cron: "0 13 * * *"   # каждый день в 19:00 по Бишкеку (13:00 UTC)
+    - cron: "7 13 * * *"   # каждый день в 19:07 по Бишкеку
   workflow_dispatch:
     inputs:
       test:

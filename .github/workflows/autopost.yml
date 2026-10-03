@@ -1,10 +1,16 @@
 name: Threads autopost
 on:
   schedule:
-    - cron: "0 3 * * *"   # 9:00 по Бишкеку (UTC+6)
-    - cron: "0 7 * * *"   # 13:00 по Бишкеку
-    - cron: "0 12 * * *"  # 18:00 по Бишкеку
-  workflow_dispatch: {}
+    # минуты не ровные: в начале часа GitHub чаще задерживает и пропускает запуски по расписанию
+    - cron: "7 3 * * *"   # 9:07 по Бишкеку (UTC+6)
+    - cron: "7 7 * * *"   # 13:07 по Бишкеку
+    - cron: "7 12 * * *"  # 18:07 по Бишкеку
+  workflow_dispatch:
+    inputs:
+      stats_only:
+        description: "Только обновить статистику, без публикации"
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency: posts-json
@@ -17,6 +23,7 @@ jobs:
         with: { python-version: "3.12" }
       - run: pip install -r requirements.txt
       - run: python autopost.py
+        if: ${{ !inputs.stats_only }}
         env:
           THREADS_USER_ID: "28058715777164226"
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
@@ -28,6 +35,12 @@ jobs:
         env:
           THREADS_USER_ID: "28058715777164226"
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+      - name: Статистика Instagram
+        if: always()
+        continue-on-error: true
+        run: python reels.py --stats
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
       - name: Сохранить отметки об опубликованных постах и статистику
         if: always()
         run: |

@@ -142,13 +142,45 @@ def API_URL(user_id):
     return f"{IG_API}/{user_id}"
 
 
+def collect_stats():
+    """Статистика Reels в stats.json (раздел instagram): просмотры, охват, лайки, комментарии, сохранения."""
+    token = need("IG_ACCESS_TOKEN")
+    posts = json.loads(POSTS_FILE.read_text(encoding="utf-8"))
+    stats_file = HERE / "stats.json"
+    stats = json.loads(stats_file.read_text(encoding="utf-8")) if stats_file.exists() else {}
+    rows = []
+    for p in posts:
+        if not p.get("ig_media_id"):
+            continue
+        row = {"ig_media_id": p["ig_media_id"], "posted_at": p["ig_posted_at"], "topic": p.get("topic"),
+               "text": p["text"][:90]}
+        r = requests.get(f"{IG_API}/{p['ig_media_id']}", timeout=30,
+                         params={"fields": "like_count,comments_count,permalink", "access_token": token})
+        if r.ok:
+            d = r.json()
+            row.update(likes=d.get("like_count", 0), comments=d.get("comments_count", 0), url=d.get("permalink"))
+        r = requests.get(f"{IG_API}/{p['ig_media_id']}/insights", timeout=30,
+                         params={"metric": "views,reach,saved,shares", "access_token": token})
+        if r.ok:
+            row.update({m["name"]: m["values"][0]["value"] for m in r.json().get("data", [])})
+        else:
+            print(f"Insights недоступны для {p['ig_media_id']}: {r.status_code} {r.text[:200]}")
+        rows.append(row)
+    stats["instagram"] = {"updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "reels": rows}
+    stats_file.write_text(json.dumps(stats, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"Статистика Instagram: {len(rows)} роликов")
+
+
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--stats", action="store_true", help="собрать статистику Reels в stats.json")
     ap.add_argument("--render-only", action="store_true")
     ap.add_argument("--text", help="собрать ролик из этого текста вместо очереди")
     ap.add_argument("--query", help="что искать на стоке для фона (по умолчанию по теме поста)")
     ap.add_argument("--test", action="store_true", help="собрать следующий ролик и выложить в media/ для просмотра, без публикации")
     args = ap.parse_args()
+    if args.stats:
+        return collect_stats()
 
     if not (args.render_only or args.text or args.test) and not os.environ.get("IG_ACCESS_TOKEN"):
         print("Instagram ещё не подключён (нет секрета IG_ACCESS_TOKEN), пропускаю.")
