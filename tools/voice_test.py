@@ -19,7 +19,13 @@ def to_mp3(wav, name):
 
 from vosk_tts import Model, Synth  # noqa: E402
 
-model = Model(lang="ru")
+import requests  # noqa: E402
+from vosk_tts.model import MODEL_LIST_URL  # noqa: E402
+
+names = [m["name"] for m in requests.get(MODEL_LIST_URL, timeout=30).json()
+         if m["name"].startswith("vosk-model-tts-ru") and not m.get("obsolete") == "true"]
+print("Модели TTS:", names)
+model = Model(model_name=sorted(names)[-1])
 synth = Synth(model)
 speakers = model.config.get("num_speakers") or len(model.config.get("speaker_id_map", {})) or 5
 print("Модель:", model.config.get("model_name", "?"), "дикторов:", speakers, model.config.get("speaker_id_map"))
