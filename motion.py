@@ -210,6 +210,174 @@ class TextSlide:
                 paste_alpha(img, marker_sprite(max(1, int(240 * g)), 14), LEFT, int(self.bar_y + dy_out), a_out)
 
 
+# ---------- кинетическая типографика ----------
+
+PHRASE_WORDS, PHRASE_CHARS = 4, 26  # на экране одна короткая фраза, как у монтажёров Reels
+STYLES = ["pop", "words", "slide", "words"]
+CENTER_Y = 880  # центр безопасной зоны
+
+
+def split_phrases(text):
+    """Режет текст на короткие фразы по знакам препинания, длинные куски ещё по 2–4 слова."""
+    parts = re.split(r"(?<=[.!?:;,—])\s+", " ".join(text.split()))
+    out = []
+    for p in parts:
+        words = p.split()
+        while words:
+            n = len(words)
+            if n > PHRASE_WORDS + 1 or len(" ".join(words)) > PHRASE_CHARS + 2:
+                n = min(PHRASE_WORDS, max(2, n // 2 if n <= 6 else 3))
+                while n > 1 and len(" ".join(words[:n])) > PHRASE_CHARS:
+                    n -= 1
+            # не оставляем висеть одно короткое слово в конце
+            if len(words) - n == 1 and len(words[-1]) <= 4 and n < PHRASE_WORDS + 1:
+                n += 1
+            out.append(" ".join(words[:n]))
+            words = words[n:]
+    return out
+
+
+def emphasis_index(words):
+    """Ударное слово фразы: ключевое или цифра, иначе самое длинное (от 5 букв)."""
+    clean = [w.strip("«»\"'.,!?:;—()") for w in words]
+    for i, w in enumerate(words):
+        if is_key(w):
+            return i
+    weak = {"из-за", "просто", "очень", "тоже", "только", "если", "чтобы", "потому", "который", "которые", "когда", "этого"}
+    cand = [i for i in range(len(words)) if clean[i].lower() not in weak and len(clean[i]) >= 5]
+    return max(cand, key=lambda i: len(clean[i])) if cand else None
+
+
+def gradient_text(word, font):
+    probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+    l, t, r, b = probe.textbbox((0, 0), word, font=font)
+    pad = 30
+    w, h = r + pad * 2, b + pad * 2
+    mask = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(mask).text((pad, pad), word, font=font, fill=255)
+    grad = Image.new("RGBA", (w, h))
+    gd = ImageDraw.Draw(grad)
+    for x in range(w):
+        gd.line([(x, 0), (x, h)], fill=lerp(TEAL, VIOLET, x / max(w - 1, 1)) + (255,))
+    grad.putalpha(mask)
+    glow = Image.new("RGBA", (w, h), TEAL + (0,))
+    glow.putalpha(mask.point(lambda v: v * 0.55).filter(ImageFilter.GaussianBlur(14)))
+    glow.alpha_composite(grad)
+    return glow, pad
+
+
+def plain_text(word, font, color=WHITE):
+    probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+    l, t, r, b = probe.textbbox((0, 0), word, font=font)
+    pad = 30
+    img = Image.new("RGBA", (r + pad * 2, b + pad * 2), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    d.text((pad + 3, pad + 4), word, font=font, fill=(0, 0, 0, 120))  # мягкая тень для читаемости
+    d.text((pad, pad), word, font=font, fill=color)
+    return img, pad
+
+
+class Phrase:
+    """Одна фраза: ударное слово крупно и градиентом на отдельной строке, остальные слова вокруг."""
+
+    def __init__(self, text, style, big):
+        words = text.split()
+        ei = emphasis_index(words)
+        probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+        width = RIGHT - LEFT
+        size = 92 if big else 78
+        groups = [(words[:ei], False), ([words[ei]], True), (words[ei + 1:], False)] if ei is not None else [(words, False)]
+        lines = []  # [(слова, ударная ли строка, шрифт)]
+        for ws, emph in groups:
+            if not ws:
+                continue
+            if emph:
+                es = int(size * 1.55)
+                while es > size and probe.textlength(ws[0], font=ImageFont.truetype(F_DISPLAY, es)) > width:
+                    es -= 6
+                lines.append((ws, True, ImageFont.truetype(F_DISPLAY, es)))
+                continue
+            font = ImageFont.truetype(F_DISPLAY, size)
+            line = []
+            for w in ws:
+                if line and probe.textlength(" ".join(line + [w]), font=font) > width:
+                    lines.append((line, False, font))
+                    line = []
+                line.append(w)
+            lines.append((line, False, font))
+        self.items, y = [], 0
+        for ws, emph, font in lines:
+            asc, desc = font.getmetrics()
+            space = probe.textlength(" ", font=font)
+            total = sum(probe.textlength(w, font=font) for w in ws) + space * (len(ws) - 1)
+            x = W / 2 - total / 2
+            for w in ws:
+                spr, pad = gradient_text(w, font) if emph else plain_text(w, font)
+                self.items.append({"spr": spr, "x": x - pad, "y": y - pad, "emph": emph, "w": probe.textlength(w, font=font)})
+                x += probe.textlength(w, font=font) + space
+            y += (asc + desc) * (1.0 if emph else 1.08)
+        self.height = y
+        for it in self.items:
+            it["y"] += CENTER_Y - y / 2
+        self.style = style
+
+    def draw(self, img, t, dur):
+        out = ease_out((t - (dur - 0.14)) / 0.14) if t > dur - 0.14 else 0.0
+        a_out = 1 - out
+        for i, it in enumerate(self.items):
+            delay = i * 0.07 if self.style == "words" else 0.0
+            p = ease_out((t - delay) / 0.28)
+            if p <= 0:
+                continue
+            alpha = min(1.0, p * 1.4) * a_out
+            spr, x, y = it["spr"], it["x"], it["y"] - 18 * out
+            if self.style == "pop" or it["emph"]:
+                # ударное слово «выстреливает»: 0.6 -> 1.06 -> 1.0
+                e = ease_back(min(max((t - delay) / 0.32, 0), 1))
+                sc = 0.6 + 0.4 * e
+                if abs(sc - 1) > 0.01:
+                    nw, nh = max(1, int(spr.width * sc)), max(1, int(spr.height * sc))
+                    x, y = x + (spr.width - nw) / 2, y + (spr.height - nh) / 2
+                    spr = spr.resize((nw, nh), Image.BILINEAR)
+            elif self.style == "slide":
+                x += 140 * (1 - p)
+            else:
+                y += 40 * (1 - p)
+            paste_alpha(img, spr, int(x), int(y), alpha)
+        # подчёркивание под ударным словом растёт слева направо
+        em = [it for it in self.items if it["emph"]]
+        if em:
+            g = ease_out((t - 0.3) / 0.35)
+            if g > 0:
+                it = em[0]
+                bw = max(1, int(it["w"] * g))
+                paste_alpha(img, marker_sprite(bw, 10), int(it["x"] + 30), int(it["y"] + it["spr"].height - 22), a_out)
+
+
+class KineticSlide:
+    """Сцена из коротких фраз, которые сменяют друг друга в такт голосу."""
+
+    def __init__(self, kind, text, duration, speech=None):
+        self.kind, self.duration = kind, duration
+        texts = split_phrases(text)
+        weights = [len(p) + 6 for p in texts]
+        span = (speech if speech else duration - 0.4) or duration
+        start, self.phrases = 0.2, []
+        for i, (p, wgt) in enumerate(zip(texts, weights)):
+            d = span * wgt / sum(weights)
+            if i == len(texts) - 1:
+                d = duration - start  # последняя фраза держится до конца сцены
+            style = "pop" if kind == "hook" and i == 0 else STYLES[i % len(STYLES)]
+            self.phrases.append((start, d, Phrase(p, style, big=kind == "hook")))
+            start += d
+
+    def draw(self, img, t):
+        for start, d, ph in self.phrases:
+            if start <= t < start + d:
+                ph.draw(img, t - start, d)
+                break
+
+
 def paste_alpha(img, spr, x, y, alpha):
     if alpha <= 0:
         return
@@ -273,9 +441,8 @@ def header():
 def slide_duration(kind, text):
     if kind == "cta":
         return 4.5
-    if kind == "hook":
-        return min(5.0, max(3.2, 1.6 + len(text.split()) * STAGGER_HOOK + len(text) / 40))
-    return min(7.0, max(3.5, 2.0 + len(text) / 24))
+    # каждой фразе столько, чтобы успеть прочитать: ~0,5 с + время на буквы
+    return 0.4 + sum(max(0.9, 0.5 + len(p) / 16) for p in split_phrases(text))
 
 
 def render(slides, music, out, query=None, workdir=None):
@@ -292,7 +459,7 @@ def render(slides, music, out, query=None, workdir=None):
         voices.append(wav if speech else None)
         base = slide_duration(kind, text)
         dur = max(base, speech + 0.8) if speech else base
-        scenes.append(CtaSlide(dur, speech) if kind == "cta" else TextSlide(kind, text, dur, speech))
+        scenes.append(CtaSlide(dur, speech) if kind == "cta" else KineticSlide(kind, text, dur, speech))
     total = sum(s.duration for s in scenes)
     # 2. фон: стоковое видео или анимированный фирменный
     # длинную сцену режем на несколько планов: один план на экране не дольше ~3 секунд
