@@ -207,6 +207,7 @@ def main():
     post = next(p for p in posts if p["text"] == post["text"])
     post["ig_posted_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     post["ig_media_id"] = media_id
+    media.mark_clips_used(media.picked_clips)  # эти фоны больше не повторяем
     POSTS_FILE.write_text(json.dumps(posts, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Reels опубликован: {media_id}")
 
