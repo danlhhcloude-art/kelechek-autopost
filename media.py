@@ -192,7 +192,8 @@ def pixabay_clips(query, n, dest, skip=frozenset()):
     return clips
 
 
-BANNED_TAGS = {"christmas", "xmas", "santa", "halloween", "cartoon", "animation", "anime", "3d", "render"}
+BANNED_TAGS = {"christmas", "xmas", "santa", "halloween", "cartoon", "animation", "anime", "3d", "render",
+               "rome", "colosseum", "italy", "landmark", "monument", "ruins", "tourism", "tourist"}  # достопримечательности не про бизнес в Бишкеке
 BANNED_WORDS = ("green screen", "greenscreen", "chroma", "silhouette", "alpha channel", "loop background")
 
 # смысл фразы -> что показать на фоне (по началу слова; первое совпадение во фразе)
