@@ -20,6 +20,7 @@ HERE = Path(__file__).parent
 ASSETS = HERE / "assets"
 W, H, FPS = 1080, 1920, 30
 SHOT_MAX = 3.2  # самый длинный план фона, сек
+SFX_ON = False  # звуки переходов
 CONTACT = "+996 502 091 443"
 
 BG_IN, BG_OUT = (26, 31, 58), (10, 13, 28)
@@ -582,7 +583,8 @@ def render(slides, music, out, query=None, workdir=None):
         for ps, _, ph in getattr(sc, "phrases", []):
             beats.append((acc + ps, any(it["emph"] for it in ph.items)))
         acc += sc.duration
-    sfx = sfx_track(workdir / "sfx.wav", total, cuts, [b for b, e in beats if e])
+    # звуковые эффекты выключены: владелец попросил без «вжухов» и щелчков, остаются голос и музыка
+    sfx = sfx_track(workdir / "sfx.wav", total, cuts if SFX_ON else [], [b for b, e in beats if e] if SFX_ON else [])
     vig, grain = vignette(), grain_frames()
     # 3. звук: голос по своим местам, музыка тише, если есть голос
     inputs, parts, labels, start = ["-stream_loop", "-1", "-i", str(music)], [], [], 0.0
