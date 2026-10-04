@@ -422,7 +422,7 @@ def grain_frames(n=6, seed=3):
         noise = rng.integers(0, 255, (H // 2, W // 2), dtype=np.uint8)
         g = Image.fromarray(noise, "L").resize((W, H), Image.NEAREST)
         layer = Image.new("RGBA", (W, H), (255, 255, 255, 0))
-        layer.putalpha(g.point(lambda v: int(v * 14 / 255)))
+        layer.putalpha(g.point(lambda v: int(v * 9 / 255)))
         out.append(layer)
     return out
 
@@ -610,7 +610,7 @@ def render(slides, music, out, query=None, workdir=None):
         "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", *inputs,
         "-filter_complex", ";".join(parts),
         "-map", "0:v", "-map", "[a]", "-t", f"{total:.2f}",
-        "-c:v", "libx264", "-profile:v", "high", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
+        "-c:v", "libx264", "-profile:v", "high", "-preset", "medium", "-crf", "21", "-maxrate", "9M", "-bufsize", "18M", "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "128k", "-ar", "44100", "-movflags", "+faststart", str(out)], stdin=subprocess.PIPE)
     start = 0.0
     for scene in scenes:
