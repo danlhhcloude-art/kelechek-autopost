@@ -30,10 +30,10 @@ TOPIC_QUERIES = {
 }
 DEFAULT_QUERY = "technology abstract"
 # запасные запросы: добираем ими клипы, когда по теме всё свежее уже использовано
-EXTRA_QUERIES = [
-    "city night lights", "smartphone hand", "typing keyboard", "coffee shop", "mountains clouds",
-    "city aerial", "people street walking", "office work", "neon light", "sunset city",
-    "shop owner", "hands laptop", "car traffic night", "market street", "abstract particles",
+EXTRA_QUERIES = [  # только по смыслу бренда: бизнес, телефоны, переписка, город; без случайных машин и поездов
+    "smartphone typing", "phone message notification", "woman using phone", "office laptop night",
+    "coffee shop owner", "small business shop", "city night lights", "hands laptop", "customer service",
+    "texting message", "working late office", "online shopping phone", "barista coffee", "business people talking",
 ]
 USED_CLIPS_FILE = HERE / "used_clips.json"
 picked_clips = []  # id клипов последнего ролика; reels.py отмечает их использованными после публикации
