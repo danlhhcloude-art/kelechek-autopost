@@ -11,6 +11,7 @@
 import argparse
 import json
 import os
+import random
 import re
 import subprocess
 import sys
@@ -27,6 +28,7 @@ HERE = Path(__file__).parent
 ASSETS = HERE / "assets"
 OUT = HERE / "out"
 POSTS_FILE = HERE / "posts.json"
+SCRIPTS_FILE = HERE / "reels.json"  # отдельные сценарии для Reels, чтобы текст роликов не повторял посты
 IG_VERSION = "v22.0"
 IG_API = f"https://graph.instagram.com/{IG_VERSION}"
 CONTACT = motion.CONTACT
@@ -55,6 +57,10 @@ def split_slides(text):
     if buf:
         slides.append(("body", buf))
     return slides[:5]
+
+
+def load_scripts():
+    return json.loads(SCRIPTS_FILE.read_text(encoding="utf-8")) if SCRIPTS_FILE.exists() else []
 
 
 def pick_music(n):
@@ -186,13 +192,20 @@ def main():
         print("Instagram ещё не подключён (нет секрета IG_ACCESS_TOKEN), пропускаю.")
         return
     posts = json.loads(POSTS_FILE.read_text(encoding="utf-8"))
+    scripts = load_scripts()
+    published = {p["text"] for p in posts if p.get("ig_posted_at")} | {s["text"] for s in scripts if s.get("ig_posted_at")}
+    fresh = [s for s in scripts if not s.get("ig_posted_at") and s["text"] not in published]
     if args.text:
         post = {"text": args.text}
+    elif fresh:
+        # отдельный сценарий для Reels: каждый день новый текст, а тестовые превью берут случайный
+        post = random.choice(fresh) if args.test else fresh[0]
     else:
-        queue = [p for p in posts if not p.get("ig_posted_at")]
+        queue = [p for p in posts if not p.get("ig_posted_at") and p["text"] not in published]
         if not queue:
-            sys.exit("Очередь для Instagram пуста: добавь посты в posts.json")
-        post = queue[0]
+            sys.exit("Нет нового текста для Reels: добавь сценарии в reels.json")
+        post = random.choice(queue) if args.test else queue[0]
+        print("reels.json пуст, беру текст поста из posts.json")
     query = args.query or post.get("query") or media.TOPIC_QUERIES.get(post.get("topic"), media.DEFAULT_QUERY)
     video = build_reel(post["text"], pick_music(sum(1 for p in posts if p.get("ig_posted_at"))), query)
     if args.test:
@@ -200,15 +213,17 @@ def main():
         return
     if args.render_only or args.text:
         return
-    media_id = publish(video, post["text"])
+    media_id = publish(video, post.get("caption") or post["text"])
     # пока собирался ролик, posts.json мог обновиться (git pull при выкладке видео),
     # поэтому перечитываем файл и отмечаем только свой пост, чтобы не затереть чужие отметки
-    posts = json.loads(POSTS_FILE.read_text(encoding="utf-8"))
-    post = next(p for p in posts if p["text"] == post["text"])
-    post["ig_posted_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    post["ig_media_id"] = media_id
+    from_scripts = "caption" in post
+    path = SCRIPTS_FILE if from_scripts else POSTS_FILE
+    items = json.loads(path.read_text(encoding="utf-8"))
+    item = next(p for p in items if p["text"] == post["text"])
+    item["ig_posted_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    item["ig_media_id"] = media_id
     media.mark_clips_used(media.picked_clips)  # эти фоны больше не повторяем
-    POSTS_FILE.write_text(json.dumps(posts, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(items, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Reels опубликован: {media_id}")
 
 

@@ -54,6 +54,7 @@ jobs:
       - name: Сохранить отметку о публикации
         run: |
           git add posts.json
+          if [ -f reels.json ]; then git add reels.json; fi
           if [ -f used_clips.json ]; then git add used_clips.json; fi
           git diff --cached --quiet || git commit -m "reels: отметка публикации"
           git pull --rebase origin main
