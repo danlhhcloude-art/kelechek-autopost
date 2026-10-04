@@ -19,6 +19,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 HERE = Path(__file__).parent
 ASSETS = HERE / "assets"
 W, H, FPS = 1080, 1920, 30
+SHOT_MAX = 3.2  # самый длинный план фона, сек
 CONTACT = "+996 502 091 443"
 
 BG_IN, BG_OUT = (26, 31, 58), (10, 13, 28)
@@ -294,9 +295,11 @@ def render(slides, music, out, query=None, workdir=None):
         scenes.append(CtaSlide(dur, speech) if kind == "cta" else TextSlide(kind, text, dur, speech))
     total = sum(s.duration for s in scenes)
     # 2. фон: стоковое видео или анимированный фирменный
-    clips = media.stock_clips(query or media.DEFAULT_QUERY, len(scenes), workdir / "stock") if query is not False else []
+    # длинную сцену режем на несколько планов: один план на экране не дольше ~3 секунд
+    shots = [s.duration / math.ceil(s.duration / SHOT_MAX) for s in scenes for _ in range(math.ceil(s.duration / SHOT_MAX))]
+    clips = media.stock_clips(query or media.DEFAULT_QUERY, len(shots), workdir / "stock") if query is not False else []
     if clips:
-        backdrop = media.VideoFrames(media.background_video(clips, [s.duration for s in scenes], workdir / "bg.mp4"))
+        backdrop = media.VideoFrames(media.background_video(clips, shots, workdir / "bg.mp4"))
     else:
         backdrop = Backdrop()
     head = header()
