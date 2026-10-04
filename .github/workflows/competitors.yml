@@ -1,0 +1,34 @@
+name: Competitors
+on:
+  schedule:
+    - cron: "17 2 * * 1"   # понедельник 8:17 по Бишкеку, до недельных отчётов
+  workflow_dispatch:
+    inputs:
+      whoami:
+        description: "Только проверить токен"
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency: posts-json
+jobs:
+  competitors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install requests
+      - run: python competitors.py ${{ inputs.whoami && '--whoami' || '' }}
+        env:
+          FB_ACCESS_TOKEN: ${{ secrets.FB_ACCESS_TOKEN }}
+      - name: Сохранить
+        if: ${{ !inputs.whoami }}
+        run: |
+          git config user.name "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          git add competitors_stats.json
+          git diff --cached --quiet || git commit -m "competitors: замер"
+          git pull --rebase origin main
+          git push
