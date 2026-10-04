@@ -24,7 +24,7 @@ W, H, FPS = 1080, 1920, 30
 # что искать на стоке по теме поста (англ. запросы находят на Pexels больше)
 TOPIC_QUERIES = {
     "ai-video": "video editing computer", "automation": "smartphone business chat", "region": "city night traffic",
-    "meeting": "business meeting laptop", "offer": "small business owner", "mini-reel": "content creator phone",
+    "meeting": "business meeting laptop", "offer": "shop owner smiling", "mini-reel": "content creator phone",
     "mini-whatsapp": "phone messages night", "lead-magnet": "coffee shop barista", "honest": "thinking person window",
     "tip": "laptop work desk", "question": "people talking cafe", "automation-proof": "robot technology abstract",
 }
@@ -156,19 +156,21 @@ def pixabay_clips(query, n, dest, skip=frozenset()):
     key = os.environ.get("PIXABAY_API_KEY")
     if not key:
         return []
-    params = {"key": key, "q": query, "per_page": 50, "safesearch": "true", "page": random.randint(1, 3)}
+    # только живые съёмки (без мультиков) и самые подходящие по запросу: первая страница, сортировка по популярности
+    params = {"key": key, "q": query, "per_page": 60, "safesearch": "true", "video_type": "film", "order": "popular"}
     r = requests.get("https://pixabay.com/api/videos/", timeout=30, params=params)
-    if r.status_code == 400 and params["page"] > 1:  # по редкому запросу дальних страниц нет
-        r = requests.get("https://pixabay.com/api/videos/", timeout=30, params={**params, "page": 1})
     if not r.ok:
         print(f"Pixabay не ответил: {r.status_code} {r.text[:200]}")
         return []
     dest.mkdir(parents=True, exist_ok=True)
-    # сначала вертикальные ролики, потом остальные (их обрежем по центру)
-    hits = r.json().get("hits", [])
-    random.shuffle(hits)
-    hits = sorted(hits, key=lambda v: -(v["videos"]["medium"].get("height", 0) >
-                                                            v["videos"]["medium"].get("width", 1)))
+    words = set(query.lower().split())
+    hits = [v for v in r.json().get("hits", []) if not BANNED_TAGS & set(t.strip() for t in v.get("tags", "").lower().split(","))
+            and not any(b in v.get("tags", "").lower() for b in BANNED_WORDS)]
+    # выше те, у кого в тегах больше слов запроса; среди равных небольшая случайность, чтобы ролики отличались
+    hits.sort(key=lambda v: (-len(words & set(v.get("tags", "").lower().replace(",", " ").split())), random.random()))
+    top = hits[:4]
+    random.shuffle(top)
+    hits = top + hits[4:30]
     clips = []
     for v in hits:
         if v.get("duration", 0) < 4 or f"pixabay-{v['id']}" in skip:
@@ -190,31 +192,34 @@ def pixabay_clips(query, n, dest, skip=frozenset()):
     return clips
 
 
+BANNED_TAGS = {"christmas", "xmas", "santa", "halloween", "cartoon", "animation", "anime", "3d", "render"}
+BANNED_WORDS = ("green screen", "greenscreen", "chroma", "silhouette", "alpha channel", "loop background")
+
 # смысл фразы -> что показать на фоне (по началу слова; первое совпадение во фразе)
 SCENE_QUERIES = [
-    (("whatsapp", "вотсап", "сообщен", "написал", "пишут", "переписк", "чат"), "texting smartphone"),
-    (("заявк", "уведомлен"), "phone notification message"),
-    (("клиент", "покупател", "посетител"), "customers shopping store"),
-    (("менеджер", "сотрудник", "продавец"), "office worker phone call"),
+    (("whatsapp", "вотсап", "сообщен", "написал", "пишут", "переписк", "чат"), "woman texting on phone"),
+    (("заявк", "уведомлен"), "hand holding smartphone message"),
+    (("клиент", "покупател", "посетител"), "customer paying in shop"),
+    (("менеджер", "сотрудник", "продавец"), "office worker talking on phone"),
     (("ночь", "ночью", "вечер", "23:", "поздно"), "city night phone"),
     (("утр", "проснул"), "morning coffee window"),
     (("сосед", "конкурент"), "street store front"),
-    (("ии", "нейросет", "робот", "автомат", "алгоритм"), "artificial intelligence technology"),
+    (("ии", "нейросет", "робот", "автомат", "алгоритм"), "robot artificial intelligence"),
     (("секунд", "быстр", "мгновен", "круглосуточ"), "clock time lapse"),
     (("кофе", "кофейн", "бариста"), "coffee shop barista"),
     (("салон", "красот", "маникюр", "барбер"), "beauty salon"),
-    (("реклам", "охват", "подписчик"), "social media phone scrolling"),
+    (("реклам", "охват", "подписчик"), "scrolling social media phone"),
     (("ролик", "видео", "рилс", "монтаж", "контент"), "video editing computer"),
-    (("деньг", "цен", "стоит", "плат", "бюджет", "сом"), "money cash payment"),
+    (("деньг", "цен", "стоит", "плат", "бюджет", "сом"), "paying with card terminal"),
     (("продаж", "продаёт", "продает", "купил", "покуп"), "shop counter sale"),
-    (("бесплатн", "подар"), "gift box"),
+    (("бесплатн", "подар"), "happy shop owner"),
     (("встреч", "лично"), "business meeting handshake"),
-    (("бизнес", "предпринимат", "владел"), "small business owner"),
+    (("бизнес", "предпринимат", "владел"), "shop owner smiling"),
     (("бишкек", "город"), "city aerial mountains"),
     (("выходн", "отдых"), "relax weekend"),
     (("настроен", "устал", "нерв"), "tired office worker"),
-    (("ответ", "поддержк", "вопрос"), "customer support headset"),
-    (("коммент", "спор", "мнени"), "people discussing"),
+    (("ответ", "поддержк", "вопрос"), "call center operator"),
+    (("коммент", "спор", "мнени"), "colleagues talking in office"),
     (("телефон", "смартфон"), "smartphone hand"),
 ]
 
