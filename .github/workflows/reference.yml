@@ -1,0 +1,21 @@
+name: Reference analysis
+on:
+  workflow_dispatch:
+    inputs:
+      url: { description: "Ссылка на видео-референс", required: true }
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null && pip install -q yt-dlp
+      - name: Скачать и разобрать (сам ролик не сохраняем)
+        env: { URL: "${{ inputs.url }}" }
+        run: |
+          mkdir out
+          yt-dlp -f "bv*[height<=720]+ba/b[height<=720]" -o ref.mp4 --merge-output-format mp4 --write-auto-subs --sub-langs "ru.*,en.*" --convert-subs srt -o "subtitle:out/subs" "$URL"
+          yt-dlp --print "%(title)s | %(duration)s s | %(width)sx%(height)s" "$URL" > out/info.txt || true
+          ffmpeg -v error -i ref.mp4 -filter:v "select='gt(scene,0.3)',showinfo" -f null - 2>&1 | grep -o 'pts_time:[0-9.]*' > out/cuts.txt || true
+          ffmpeg -v error -i ref.mp4 -vf "fps=1/2,scale=320:-1,tile=6x5" out/sheet_%02d.png
+          rm ref.mp4
+      - uses: actions/upload-artifact@v4
+        with: { name: reference, path: out, retention-days: 1 }
