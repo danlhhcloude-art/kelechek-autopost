@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-03T14:02:48+00:00",
+  "updated_at": "2026-10-04T04:30:08+00:00",
   "account": {
-    "views": 51,
+    "views": 77,
     "likes": 0,
-    "replies": 2,
+    "replies": 3,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -69,7 +69,7 @@
       "posted_at": "2026-10-03T07:14:17+00:00",
       "topic": "automation",
       "text": "Ваш менеджер отвечает в WhatsApp одно и то же 40 раз в день. «Сколько стоит?», «Где вы нах",
-      "views": 21,
+      "views": 23,
       "likes": 0,
       "replies": 2,
       "reposts": 0,
@@ -80,6 +80,17 @@
       "posted_at": "2026-10-03T14:02:47+00:00",
       "topic": "mini-whatsapp",
       "text": "Клиент написал в WhatsApp в 23:40. Вы ответили утром. Он уже купил у соседей.",
+      "views": 14,
+      "likes": 0,
+      "replies": 2,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18104396696527159",
+      "posted_at": "2026-10-04T04:30:08+00:00",
+      "topic": "automation-proof",
+      "text": "Отчёт робота за первые дни. Без прикрас.",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -88,7 +99,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-03T14:02:52+00:00",
+    "updated_at": "2026-10-04T04:30:12+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -111,6 +122,19 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/Dd_jk1RDs9Y/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "17905830249589772",
+        "posted_at": "2026-10-03T14:05:28+00:00",
+        "topic": "lead-magnet",
+        "text": "Давайте эксперимент.\n\nНапишите в комментариях, чем занимается ваш бизнес в Бишкеке. Одной ",
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DeCO3R_AG-P/",
         "views": 0,
         "reach": 0,
         "saved": 0,
