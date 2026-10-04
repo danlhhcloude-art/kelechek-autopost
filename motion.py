@@ -25,6 +25,7 @@ CONTACT = "+996 502 091 443"
 
 BG_IN, BG_OUT = (26, 31, 58), (10, 13, 28)
 TEAL, VIOLET, WHITE, MUTED = (46, 230, 201), (123, 92, 255), (255, 255, 255), (170, 178, 205)
+ACCENT = (255, 209, 102)  # акцент в мелком тексте: тёплый жёлтый, чтобы не сливался с градиентом
 F_DISPLAY = str(ASSETS / "fonts" / "Unbounded-Bold.ttf")
 F_BODY = str(ASSETS / "fonts" / "GolosText-Medium.ttf")
 LEFT, RIGHT, TOP, BOTTOM = 96, 930, 330, 1450  # безопасная зона: низ и правый край закрывает интерфейс Reels
@@ -244,8 +245,21 @@ def emphasis_index(words):
     for i, w in enumerate(words):
         if is_key(w):
             return i
-    weak = {"из-за", "просто", "очень", "тоже", "только", "если", "чтобы", "потому", "который", "которые", "когда", "этого"}
-    cand = [i for i in range(len(words)) if clean[i].lower() not in weak and len(clean[i]) >= 5]
+    cand = [i for i in range(len(words)) if clean[i].lower() not in WEAK and len(clean[i]) >= 5]
+    return max(cand, key=lambda i: len(clean[i])) if cand else None
+
+
+WEAK = {"из-за", "просто", "очень", "тоже", "только", "если", "чтобы", "потому", "который", "которые", "когда", "этого"}
+
+
+def accent_index(words, skip):
+    """Слово в мелком тексте, которое красим акцентным цветом: ключевое или цифра, иначе самое длинное от 5 букв."""
+    clean = [w.strip("«»\"'.,!?:;—()") for w in words]
+    idx = [i for i in range(len(words)) if i != skip]
+    for i in idx:
+        if is_key(words[i]):
+            return i
+    cand = [i for i in idx if clean[i].lower() not in WEAK and len(clean[i]) >= 5]
     return max(cand, key=lambda i: len(clean[i])) if cand else None
 
 
@@ -284,6 +298,8 @@ class Phrase:
     def __init__(self, text, style, big):
         words = text.split()
         ei = emphasis_index(words)
+        ai = accent_index(words, ei)  # акцент в мелком тексте другим цветом
+        accent = words[ai] if ai is not None else None
         probe = ImageDraw.Draw(Image.new("RGB", (10, 10)))
         width = RIGHT - LEFT
         size = 92 if big else 78
@@ -313,7 +329,12 @@ class Phrase:
             total = sum(probe.textlength(w, font=font) for w in ws) + space * (len(ws) - 1)
             x = W / 2 - total / 2
             for w in ws:
-                spr, pad = gradient_text(w, font) if emph else plain_text(w, font)
+                if emph:
+                    spr, pad = gradient_text(w, font)
+                else:
+                    spr, pad = plain_text(w, font, ACCENT if w == accent else WHITE)
+                    if w == accent:
+                        accent = None  # красим только первое вхождение
                 self.items.append({"spr": spr, "x": x - pad, "y": y - pad, "emph": emph, "w": probe.textlength(w, font=font)})
                 x += probe.textlength(w, font=font) + space
             y += (asc + desc) * (1.0 if emph else 1.08)
