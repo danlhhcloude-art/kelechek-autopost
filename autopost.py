@@ -13,12 +13,13 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
 
 API = "https://graph.threads.net/v1.0"
+GAP_HOURS = 2.5  # ближе этого к прошлому посту запуск по расписанию не публикует
 HERE = Path(__file__).parent
 POSTS_FILE = HERE / "posts.json"
 STATS_FILE = HERE / "stats.json"
@@ -190,6 +191,12 @@ def main():
         return collect_stats()
 
     posts = load_posts()
+    if os.environ.get("GITHUB_EVENT_NAME") == "schedule" and not (args.generate or args.dry_run):
+        # у каждого слота есть запасной запуск: если GitHub не пропустил основной, второй не публикует
+        last = max((datetime.fromisoformat(p["posted_at"]) for p in posts if p.get("posted_at")), default=None)
+        if last and datetime.now(timezone.utc) - last < timedelta(hours=GAP_HOURS):
+            print(f"Последний пост вышел {last:%H:%M} UTC, этот слот уже закрыт.")
+            return
     if args.generate:
         new = generate(args.generate, posts)
         save_posts(posts + new)

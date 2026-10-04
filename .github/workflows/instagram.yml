@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: { ref: main }  # свежий posts.json, а не тот, что был при постановке в очередь
       - uses: actions/setup-python@v5
         with: { python-version: "3.11" }
       - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)

@@ -2,9 +2,10 @@ name: Threads autopost
 on:
   schedule:
     # минуты не ровные: в начале часа GitHub чаще задерживает и пропускает запуски по расписанию
-    - cron: "7 3 * * *"   # 9:07 по Бишкеку (UTC+6)
-    - cron: "7 7 * * *"   # 13:07 по Бишкеку
-    - cron: "7 12 * * *"  # 18:07 по Бишкеку
+    # второй и третий запуск в слоте страхуют от пропуска; autopost.py не публикует повторно
+    - cron: "7,37 3 * * *"     # 9:07 по Бишкеку (UTC+6)
+    - cron: "7,37 7 * * *"     # 13:07 по Бишкеку
+    - cron: "7,37,52 12 * * *" # 18:07 по Бишкеку
   workflow_dispatch:
     inputs:
       stats_only:
@@ -19,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: { ref: main }  # свежий posts.json, а не тот, что был при постановке в очередь
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: pip install -r requirements.txt

@@ -37,14 +37,29 @@ def save_comments(comments):
     COMMENTS_FILE.write_text(json.dumps(comments, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def our_threads(token, since):
+    """Наши посты за LOOKBACK_DAYS: из posts.json и прямо из API, если отметка в posts.json потерялась."""
+    found = {p["threads_id"]: p for p in load_posts()
+             if p.get("threads_id") and datetime.fromisoformat(p["posted_at"]) >= since}
+    r = requests.get(f"{API}/me/threads", timeout=30, params={
+        "fields": "id,timestamp", "limit": 50, "access_token": token})
+    if r.ok:
+        for t in r.json().get("data", []):
+            ts = datetime.strptime(t["timestamp"], "%Y-%m-%dT%H:%M:%S%z")
+            if t["id"] not in found and ts >= since:
+                print(f"Пост {t['id']} нет в posts.json, комментарии всё равно собираю")
+                found[t["id"]] = {"threads_id": t["id"], "topic": None}
+    else:
+        print(f"Не удалось получить список постов: {r.status_code} {r.text[:200]}")
+    return list(found.values())
+
+
 def collect():
     token = need("THREADS_ACCESS_TOKEN")
     comments = load_comments()
     since = datetime.now(timezone.utc) - timedelta(days=LOOKBACK_DAYS)
     new = 0
-    for p in load_posts():
-        if not p.get("threads_id") or datetime.fromisoformat(p["posted_at"]) < since:
-            continue
+    for p in our_threads(token, since):
         r = requests.get(f"{API}/{p['threads_id']}/conversation", timeout=30, params={
             "fields": "id,text,username,timestamp,replied_to", "access_token": token})
         if not r.ok:

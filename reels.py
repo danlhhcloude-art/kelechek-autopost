@@ -201,6 +201,10 @@ def main():
     if args.render_only or args.text:
         return
     media_id = publish(video, post["text"])
+    # пока собирался ролик, posts.json мог обновиться (git pull при выкладке видео),
+    # поэтому перечитываем файл и отмечаем только свой пост, чтобы не затереть чужие отметки
+    posts = json.loads(POSTS_FILE.read_text(encoding="utf-8"))
+    post = next(p for p in posts if p["text"] == post["text"])
     post["ig_posted_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     post["ig_media_id"] = media_id
     POSTS_FILE.write_text(json.dumps(posts, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
