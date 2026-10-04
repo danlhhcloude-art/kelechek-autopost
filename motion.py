@@ -320,6 +320,7 @@ class Phrase:
         for it in self.items:
             it["y"] += CENTER_Y - y / 2
         self.style = style
+        self.text = text
 
     def draw(self, img, t, dur):
         out = ease_out((t - (dur - 0.14)) / 0.14) if t > dur - 0.14 else 0.0
@@ -540,8 +541,27 @@ def render(slides, music, out, query=None, workdir=None):
     total = sum(s.duration for s in scenes)
     # 2. фон: стоковое видео или анимированный фирменный
     # длинную сцену режем на несколько планов: один план на экране не дольше ~3 секунд
-    shots = [s.duration / math.ceil(s.duration / SHOT_MAX) for s in scenes for _ in range(math.ceil(s.duration / SHOT_MAX))]
-    clips = media.stock_clips(query or media.DEFAULT_QUERY, len(shots), workdir / "stock") if query is not False else []
+    # склейка фона совпадает со сменой фразы: новая фраза, новый кадр по её смыслу
+    shots, shot_text = [], []
+    for sc in scenes:
+        phrases = getattr(sc, "phrases", [])
+        if not phrases:
+            k = math.ceil(sc.duration / SHOT_MAX)
+            shots += [sc.duration / k] * k
+            shot_text += [CTA_TITLE] * k
+            continue
+        bounds = [0.0] + [ps for ps, _, _ in phrases[1:]] + [sc.duration]
+        for i, ph in enumerate(phrases):
+            d = bounds[i + 1] - bounds[i]
+            if shots and shot_text and d < 1.0 and i:  # слишком короткую фразу не режем отдельно
+                shots[-1] += d
+                continue
+            shots.append(d)
+            shot_text.append(ph[2].text)
+    clips = []
+    if query is not False:
+        queries = [media.scene_query(t) for t in shot_text]
+        clips = media.clips_for_shots(queries, query or media.DEFAULT_QUERY, workdir / "stock")
     if clips:
         backdrop = media.VideoFrames(media.background_video(clips, shots, workdir / "bg.mp4"))
     else:

@@ -190,6 +190,66 @@ def pixabay_clips(query, n, dest, skip=frozenset()):
     return clips
 
 
+# смысл фразы -> что показать на фоне (по началу слова; первое совпадение во фразе)
+SCENE_QUERIES = [
+    (("whatsapp", "вотсап", "сообщен", "написал", "пишут", "переписк", "чат"), "texting smartphone"),
+    (("заявк", "уведомлен"), "phone notification message"),
+    (("клиент", "покупател", "посетител"), "customers shopping store"),
+    (("менеджер", "сотрудник", "продавец"), "office worker phone call"),
+    (("ночь", "ночью", "вечер", "23:", "поздно"), "city night phone"),
+    (("утр", "проснул"), "morning coffee window"),
+    (("сосед", "конкурент"), "street store front"),
+    (("ии", "нейросет", "робот", "автомат", "алгоритм"), "artificial intelligence technology"),
+    (("секунд", "быстр", "мгновен", "круглосуточ"), "clock time lapse"),
+    (("кофе", "кофейн", "бариста"), "coffee shop barista"),
+    (("салон", "красот", "маникюр", "барбер"), "beauty salon"),
+    (("реклам", "охват", "подписчик"), "social media phone scrolling"),
+    (("ролик", "видео", "рилс", "монтаж", "контент"), "video editing computer"),
+    (("деньг", "цен", "стоит", "плат", "бюджет", "сом"), "money cash payment"),
+    (("продаж", "продаёт", "продает", "купил", "покуп"), "shop counter sale"),
+    (("бесплатн", "подар"), "gift box"),
+    (("встреч", "лично"), "business meeting handshake"),
+    (("бизнес", "предпринимат", "владел"), "small business owner"),
+    (("бишкек", "город"), "city aerial mountains"),
+    (("выходн", "отдых"), "relax weekend"),
+    (("настроен", "устал", "нерв"), "tired office worker"),
+    (("ответ", "поддержк", "вопрос"), "customer support headset"),
+    (("коммент", "спор", "мнени"), "people discussing"),
+    (("телефон", "смартфон"), "smartphone hand"),
+]
+
+
+def scene_query(text):
+    """Что искать на стоке под эту фразу, или None, если в ней нет понятного образа."""
+    for word in re.findall(r"[\w:]+", text.lower()):
+        for stems, q in SCENE_QUERIES:
+            if any(word.startswith(s) for s in stems):
+                return q
+    return None
+
+
+def clips_for_shots(queries, fallback, dest):
+    """По клипу на каждый план: сначала по смыслу фразы, потом по теме ролика, потом запасные.
+    Клипы не повторяются ни внутри ролика, ни с прошлыми роликами."""
+    skip = set(used_clips())
+    out = []
+    for q in queries:
+        clip = None
+        for cand in [q, fallback] + random.sample(EXTRA_QUERIES, len(EXTRA_QUERIES)):
+            if not cand:
+                continue
+            got = pixabay_clips(cand, 1, dest, skip) or pexels_clips(cand, 1, dest, skip)
+            if got:
+                clip = got[0]
+                skip.add(clip.stem)
+                break
+        if clip:
+            out.append(clip)
+    picked_clips[:] = [c.stem for c in out]
+    print("Фон по планам: " + "; ".join(f"{q or fallback} -> {c.stem}" for q, c in zip(queries, out)))
+    return out
+
+
 def stock_clips(query, n, dest):
     """n разных клипов, которых ещё не было в прошлых роликах: сначала по теме, потом запасные запросы."""
     skip = set(used_clips())
