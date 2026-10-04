@@ -1,0 +1,53 @@
+name: WhatsApp bot deploy
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["whatsapp-bot/**", ".github/workflows/whatsapp-bot.yml"]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    defaults:
+      run: { working-directory: whatsapp-bot }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Проверить секреты
+        id: check
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then echo "Нет CLOUDFLARE_API_TOKEN, бот пока не разворачиваю"; echo "skip=1" >> "$GITHUB_OUTPUT"; fi
+      - name: KV для переписок
+        if: steps.check.outputs.skip != '1'
+        run: |
+          id=$(npx --yes wrangler@4 kv namespace list | jq -r '.[] | select(.title|endswith("kelechek-whatsapp-chats")) | .id')
+          if [ -z "$id" ]; then
+            npx wrangler@4 kv namespace create kelechek-whatsapp-chats
+            id=$(npx wrangler@4 kv namespace list | jq -r '.[] | select(.title|endswith("kelechek-whatsapp-chats")) | .id')
+          fi
+          sed -i "s/REPLACE_WITH_KV_ID/$id/" wrangler.toml
+      - name: Развернуть
+        if: steps.check.outputs.skip != '1'
+        run: npx wrangler@4 deploy
+      - name: Секреты бота
+        if: steps.check.outputs.skip != '1'
+        env:
+          WA_TOKEN: ${{ secrets.WA_TOKEN }}
+          WA_PHONE_ID: ${{ secrets.WA_PHONE_ID }}
+          WA_APP_SECRET: ${{ secrets.WA_APP_SECRET }}
+          VERIFY_TOKEN: ${{ secrets.WA_VERIFY_TOKEN }}
+          GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
+          LEADS_KEY: ${{ secrets.WA_LEADS_KEY }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          python3 - > /tmp/s.json <<'PY'
+          import json, os
+          keys = ["WA_TOKEN", "WA_PHONE_ID", "WA_APP_SECRET", "VERIFY_TOKEN", "GEMINI_KEY", "LEADS_KEY", "TG_BOT_TOKEN", "TG_CHAT_ID"]
+          print(json.dumps({k: os.environ[k] for k in keys if os.environ.get(k)}))
+          PY
+          npx wrangler@4 secret bulk /tmp/s.json
+          rm /tmp/s.json
