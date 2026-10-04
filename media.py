@@ -223,7 +223,7 @@ def background_video(clips, lengths, out):
                      f"setpts=1.15*PTS,fps={FPS},trim=duration={length:.2f},setpts=PTS-STARTPTS,"
                      f"crop={W}:{H}:x='{cx}':y='{cy}',"
                      # единый цвет для клипов из разных источников: чуть контраста, приглушённая насыщенность
-                     f"eq=contrast=1.06:saturation=0.88,colorbalance=bs=0.04:bh=0.02,"
+                     f"eq=contrast=1.06:saturation=0.88,colorbalance=bs=0.04:bh=0.02,setsar=1,"
                      f"tpad=stop_mode=clone:stop_duration={length:.2f},trim=duration={length:.2f},format=rgb24[c{i}]")
     parts.append("".join(f"[c{i}]" for i in range(len(lengths))) + f"concat=n={len(lengths)}:v=1:a=0[v]")
     subprocess.run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", *inputs, "-filter_complex", ";".join(parts),
