@@ -14,7 +14,7 @@ import re
 import subprocess
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
 HERE = Path(__file__).parent
 ASSETS = HERE / "assets"
@@ -378,6 +378,83 @@ class KineticSlide:
                 break
 
 
+# ---------- эффекты «как у команды монтажёров» ----------
+
+def zoom(img, s):
+    """Увеличение кадра от центра (удар камеры, зум-переход)."""
+    if s <= 1.002:
+        return img
+    w, h = int(W * s), int(H * s)
+    big = img.resize((w, h), Image.BILINEAR)
+    x, y = (w - W) // 2, (h - H) // 2
+    return big.crop((x, y, x + W, y + H))
+
+
+def fast_blur(img, k):
+    """Быстрое размытие: уменьшить и растянуть обратно."""
+    return img.resize((W // k, H // k), Image.BILINEAR).resize((W, H), Image.BILINEAR)
+
+
+def rgb_split(img, o):
+    """Цветовой сдвиг каналов, как у глитч-перехода."""
+    r, g, b, a = img.split()
+    return Image.merge("RGBA", (ImageChops.offset(r, o, 0), g, ImageChops.offset(b, -o, 0), a))
+
+
+def vignette():
+    """Мягкое затемнение по краям кадра: взгляд держится в центре."""
+    import numpy as np
+    y, x = np.mgrid[0:H // 4, 0:W // 4].astype(np.float32)
+    r = np.sqrt(((x - W / 8) / (W / 8)) ** 2 + ((y - H / 8) / (H / 8)) ** 2)
+    a = (np.clip((r - 0.65) / 0.75, 0, 1) ** 1.6 * 170).astype(np.uint8)
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    layer.putalpha(Image.fromarray(a, "L").resize((W, H), Image.BILINEAR))
+    return layer
+
+
+def grain_frames(n=6, seed=3):
+    """Несколько кадров плёночного зерна, крутятся по кругу."""
+    import numpy as np
+    rng = np.random.default_rng(seed)
+    out = []
+    for _ in range(n):
+        noise = rng.integers(0, 255, (H // 2, W // 2), dtype=np.uint8)
+        g = Image.fromarray(noise, "L").resize((W, H), Image.NEAREST)
+        layer = Image.new("RGBA", (W, H), (255, 255, 255, 0))
+        layer.putalpha(g.point(lambda v: int(v * 14 / 255)))
+        out.append(layer)
+    return out
+
+
+def sfx_track(path, total, whooshes, pops, sr=44100):
+    """Звуковые эффекты: «вжух» на переходах и мягкий щелчок на ударных словах."""
+    import wave
+    import numpy as np
+    rng = np.random.default_rng(5)
+    track = np.zeros(int(total * sr) + sr, dtype=np.float32)
+    n = int(0.42 * sr)
+    t = np.linspace(0, 1, n, dtype=np.float32)
+    noise = rng.standard_normal(n).astype(np.float32)
+    kernel = np.ones(24, dtype=np.float32) / 24
+    whoosh = np.convolve(noise, kernel, mode="same") * np.sin(np.pi * t) ** 3 * 0.9
+    m = int(0.07 * sr)
+    tp = np.arange(m, dtype=np.float32) / sr
+    pop = np.sin(2 * np.pi * (950 - 4500 * tp) * tp) * np.exp(-tp * 55) * 0.5
+    for c in whooshes:
+        i = int(max(c - 0.25, 0) * sr)
+        track[i:i + n] += whoosh[: len(track) - i]
+    for p in pops:
+        i = int(p * sr)
+        track[i:i + m] += pop[: len(track) - i]
+    data = (np.clip(track, -1, 1) * 32767).astype(np.int16)
+    with wave.open(str(path), "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(sr)
+        w.writeframes(data.tobytes())
+    return path
+
+
 def paste_alpha(img, spr, x, y, alpha):
     if alpha <= 0:
         return
@@ -470,6 +547,23 @@ def render(slides, music, out, query=None, workdir=None):
     else:
         backdrop = Backdrop()
     head = header()
+    # точки монтажа: склейки фона, смены сцен, появления фраз
+    cuts, acc = [], 0.0
+    for d in shots[:-1]:
+        acc += d
+        cuts.append(acc)
+    scene_starts, acc = [], 0.0
+    for sc in scenes[:-1]:
+        acc += sc.duration
+        scene_starts.append(acc)
+    beats = []  # (время, есть ли ударное слово)
+    acc = 0.0
+    for sc in scenes:
+        for ps, _, ph in getattr(sc, "phrases", []):
+            beats.append((acc + ps, any(it["emph"] for it in ph.items)))
+        acc += sc.duration
+    sfx = sfx_track(workdir / "sfx.wav", total, cuts, [b for b, e in beats if e])
+    vig, grain = vignette(), grain_frames()
     # 3. звук: голос по своим местам, музыка тише, если есть голос
     inputs, parts, labels, start = ["-stream_loop", "-1", "-i", str(music)], [], [], 0.0
     for scene, wav in zip(scenes, voices):
@@ -480,13 +574,17 @@ def render(slides, music, out, query=None, workdir=None):
             parts.append(f"[{k}:a]aresample=44100,adelay={ms}|{ms},apad[v{k}]")
             labels.append(f"[v{k}]")
         start += scene.duration
+    sfx_k = 2 + len(labels)
+    inputs += ["-i", str(sfx)]
     music_vol = 0.22 if labels else 1.0
     parts.append(f"[1:a]atrim=0:{total:.2f},volume={music_vol},afade=t=in:d=0.4,afade=t=out:st={total - 1.5:.2f}:d=1.5[m]")
     if labels:
         parts.append("".join(labels) + f"amix=inputs={len(labels)}:normalize=0,highpass=f=80,acompressor[vo]")
-        parts.append("[m][vo]amix=inputs=2:normalize=0,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=44100[a]")
+        parts.append(f"[{sfx_k}:a]aresample=44100,volume=0.55[fx]")
+        parts.append("[m][vo][fx]amix=inputs=3:normalize=0,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=44100[a]")
     else:
-        parts.append("[m]anull[a]")
+        parts.append(f"[{sfx_k}:a]aresample=44100,volume=0.55[fx]")
+        parts.append("[m][fx]amix=inputs=2:normalize=0[a]")
     ff = subprocess.Popen([
         "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
         "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", *inputs,
@@ -500,12 +598,33 @@ def render(slides, music, out, query=None, workdir=None):
             t = f / FPS
             g = start + t
             img = backdrop.frame(g)
+            # зум-переход с размытием на склейках фона
+            dc = min((abs(g - c) for c in cuts), default=9)
+            if dc < 0.14:
+                p = 1 - dc / 0.14
+                img = zoom(img, 1 + 0.16 * p)
+                if p > 0.35:
+                    img = fast_blur(img, 2 + int(6 * p))
+            img.alpha_composite(vig)
             img.alpha_composite(head)
             scene.draw(img, t)
             d = ImageDraw.Draw(img)
             # полоса прогресса всего ролика
             d.rounded_rectangle([LEFT, 96, RIGHT, 104], radius=4, fill=(255, 255, 255, 40))
             img.alpha_composite(marker_sprite(max(8, int((RIGHT - LEFT) * g / total)), 8), (LEFT, 96))
+            # удар камеры на появлении фразы, сильнее на ударном слове
+            last = max((b for b in beats if b[0] <= g), default=None)
+            if last and g - last[0] < 0.5:
+                img = zoom(img, 1 + (0.055 if last[1] else 0.025) * math.exp(-(g - last[0]) / 0.11))
+            # глитч: сдвиг цветовых каналов на склейках и сменах фраз
+            dg = min([g - c for c in cuts if c <= g] + [g - b for b, _ in beats if b <= g], default=9)
+            if dg < 0.1:
+                img = rgb_split(img, int(12 * (1 - dg / 0.1)) or 1)
+            # короткая вспышка на смене сцены
+            ds = min((g - c for c in scene_starts if c <= g), default=9)
+            if ds < 0.09:
+                img.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, int(110 * (1 - ds / 0.09)))))
+            img.alpha_composite(grain[f % len(grain)])
             ff.stdin.write(img.convert("RGB").tobytes())
         start += scene.duration
     ff.stdin.close()
