@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-05T03:51:34+00:00",
+  "updated_at": "2026-10-05T07:21:51+00:00",
   "account": {
-    "views": 188,
+    "views": 196,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -80,7 +80,7 @@
       "posted_at": "2026-10-03T14:02:47+00:00",
       "topic": "mini-whatsapp",
       "text": "Клиент написал в WhatsApp в 23:40. Вы ответили утром. Он уже купил у соседей.",
-      "views": 31,
+      "views": 32,
       "likes": 0,
       "replies": 2,
       "reposts": 0,
@@ -146,7 +146,18 @@
       "posted_at": "2026-10-05T03:21:17+00:00",
       "topic": "question",
       "text": "Вопрос к тем, у кого свой бизнес в Бишкеке.",
-      "views": 21,
+      "views": 79,
+      "likes": 1,
+      "replies": 2,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18110117738244268",
+      "posted_at": "2026-10-05T07:21:50+00:00",
+      "topic": "meeting",
+      "text": "Чаще всего меня спрашивают: «это вообще работает или развод?»",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -154,7 +165,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-05T03:51:41+00:00",
+    "updated_at": "2026-10-05T07:21:56+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
