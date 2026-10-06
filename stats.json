@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-06T12:30:28+00:00",
+  "updated_at": "2026-10-06T12:55:40+00:00",
   "account": {
-    "views": 52,
+    "views": 53,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -237,7 +237,7 @@
       "text": "Есть утечка, которую не видно ни в одном отчёте.",
       "media_type": "CAROUSEL_ALBUM",
       "url": "https://www.threads.com/@kelechek_ai/post/DeJxlxyFShk",
-      "views": 0,
+      "views": 1,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -245,7 +245,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-06T12:30:49+00:00",
+    "updated_at": "2026-10-06T12:55:54+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
