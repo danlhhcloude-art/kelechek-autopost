@@ -8,6 +8,14 @@
   "LEADS_KEY": false,
   "TG_BOT_TOKEN": false
  },
+ "last_post": {
+  "at": "2026-10-06T21:46:25.089Z",
+  "signature_ok": false,
+  "has_signature": true,
+  "fields": [
+   "messages"
+  ]
+ },
  "last_message_at": null,
  "last_error": null
 }
