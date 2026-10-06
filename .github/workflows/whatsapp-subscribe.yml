@@ -12,6 +12,7 @@ jobs:
       - name: Подписать WABA
         env:
           WA_TOKEN: ${{ secrets.WA_TOKEN }}
+          WA_PHONE_ID: ${{ secrets.WA_PHONE_ID }}
         run: |
           python3 - <<'PY' > whatsapp-bot/subscribe.json
           import json, os, urllib.request, urllib.parse
@@ -25,7 +26,13 @@ jobs:
               except urllib.error.HTTPError as e:
                   return {"error": json.load(e).get("error", {}).get("message", str(e))[:200]}
           out = {}
-          dbg = call("GET", "debug_token", input_token=T).get("data", {})
+          raw = call("GET", "debug_token", input_token=T)
+          out["debug_error"] = raw.get("error")
+          dbg = raw.get("data", {})
+          me = call("GET", "me", fields="id,name")
+          out["me"] = {"error": me.get("error")} if "error" in me else {"type": "ok"}
+          ph = call("GET", os.environ["WA_PHONE_ID"], fields="display_phone_number,verified_name,quality_rating")
+          out["phone"] = {"error": ph.get("error")} if "error" in ph else {"verified_name": ph.get("verified_name"), "test": "555" in (ph.get("display_phone_number") or "")}
           out["token_valid"] = dbg.get("is_valid"); out["token_expires_at"] = dbg.get("expires_at")
           wabas = sorted({i for s in dbg.get("granular_scopes", []) if s.get("scope") == "whatsapp_business_management" for i in s.get("target_ids", [])})
           out["waba_count"] = len(wabas)
