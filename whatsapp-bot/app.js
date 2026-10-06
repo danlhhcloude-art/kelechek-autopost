@@ -57,6 +57,8 @@ button.ghost{background:transparent;border:1px solid var(--line);color:var(--tex
   <div class="card"><div class="ic">🎯</div><h3>Таргетированная реклама</h3><p class="muted">Instagram и Facebook: аудитория по городу и интересам, креативы на ИИ, заявки сразу в чат, отчёт раз в неделю. Рекламный бюджет вы платите напрямую в Meta.</p><button class="ghost" data-pick="Реклама">Обсудить</button></div>
   <div class="card"><div class="ic">✍️</div><h3>Тексты для соцсетей</h3><p class="muted">Посты живым языком, без шаблонов, под ваш бизнес.</p><button class="ghost" data-pick="Тексты">Обсудить</button></div>
   <p class="muted note">Цену называет Даниэль после пары вопросов о вашем бизнесе.</p>
+  <div style="height:12px"></div>
+  <button class="ghost" style="width:100%" data-wa>💬 Написать Даниэлю в WhatsApp</button>
 </div>
 
 <div id="how" class="hide">
@@ -135,6 +137,7 @@ document.getElementById("order").onsubmit = async e => {
     alert("Не получилось отправить. Откройте приложение из чата с ботом и попробуйте ещё раз.");
   }
 };
+document.querySelectorAll("[data-wa]").forEach(b => b.onclick = () => { const u = "https://wa.me/996502091443?text=Telegram"; try { tg.openLink(u); } catch (_) { location.href = u; } });
 document.getElementById("close").onclick = () => { try { tg.close(); } catch (_) {} };
 </script>
 </body></html>`;

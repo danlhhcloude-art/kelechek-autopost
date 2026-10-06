@@ -296,8 +296,8 @@ const SERVICES_TEXT = `Что мы делаем:
 const BUTTONS = {
   "🎁 Бесплатный пример": "Хочу бесплатный пример ролика для моего бизнеса",
   "📅 Встреча в Бишкеке": "Хочу встретиться лично в Бишкеке и посмотреть, как это работает",
-  "👤 Связаться с Даниэлем": "Хочу поговорить с Даниэлем лично",
 };
+const OWNER_WA = "https://wa.me/996502091443?text=Telegram";
 
 async function onTelegram(update, env) {
   const m = update.message;
@@ -320,6 +320,17 @@ async function onTelegram(update, env) {
     chat.history.push({ role: "user", text: "Покажите услуги", ts: Date.now() }, { role: "model", text: SERVICES_TEXT, ts: Date.now() });
     await saveChat(env, "tg" + chatId, chat);
     return tg(env, "sendMessage", { chat_id: chatId, text: SERVICES_TEXT, reply_markup: { inline_keyboard: [[{ text: "📱 Подробнее в приложении", web_app: { url: env.APP_URL } }]] } });
+  }
+  // «Связаться с Даниэлем»: сразу ссылка на WhatsApp владельца и уведомление ему
+  if (m.text === "👤 Связаться с Даниэлем") {
+    const chat = await loadChat(env, "tg" + chatId);
+    const who = m.from.username ? "@" + m.from.username : `tg://user?id=${m.from.id}`;
+    const answer = "Конечно! Напишите Даниэлю в WhatsApp, он ответит лично. Я тоже передал ему, что вы хотите связаться.";
+    chat.history.push({ role: "user", text: "Хочу связаться с Даниэлем", ts: Date.now() }, { role: "model", text: answer, ts: Date.now() });
+    chat.contact = who;
+    if (chat.tier !== "cold" && !chat.notifiedAt) { chat.notifiedAt = Date.now(); await notifyOwner(env, `👤 Telegram ${who} ${chat.name || ""}: просит связаться с тобой. ${chat.niche || chat.request || ""}`); }
+    await saveChat(env, "tg" + chatId, chat);
+    return tg(env, "sendMessage", { chat_id: chatId, text: answer, reply_markup: { inline_keyboard: [[{ text: "💬 Написать в WhatsApp", url: OWNER_WA }]] } });
   }
   let text = BUTTONS[m.text] || m.text || m.caption;
   let source;
