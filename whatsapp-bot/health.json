@@ -14,13 +14,13 @@
   "raw_has_spaces": false
  },
  "last_post": {
-  "at": "2026-10-06T21:58:22.169Z",
-  "signature_ok": false,
+  "at": "2026-10-06T22:08:44.769Z",
+  "signature_ok": true,
   "has_signature": true,
   "fields": [
    "messages"
   ]
  },
- "last_message_at": null,
+ "last_message_at": "2026-10-06T22:08:44.788Z",
  "last_error": null
 }
