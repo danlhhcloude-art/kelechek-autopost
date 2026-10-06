@@ -90,7 +90,7 @@ export default {
       // Telegram подписывает запрос секретом, который мы задали при setWebhook (производный от токена бота)
       if (!env.TG_CLIENT_TOKEN || req.headers.get("x-telegram-bot-api-secret-token") !== await tgSecret(env)) return new Response("forbidden", { status: 403 });
       const update = await req.json();
-      ctx.waitUntil(onTelegram(update, env).catch(e => console.log("tg error", e.stack || e)));
+      ctx.waitUntil(onTelegram(update, env).catch(e => env.CHATS.put("health:last_crash", JSON.stringify({ at: new Date().toISOString(), where: "telegram", message: String(e.stack || e).slice(0, 400) }))));
       return new Response("ok");
     }
     if (url.pathname === "/leads" && req.method === "GET") return leads(req, env);
@@ -296,6 +296,7 @@ async function health(env) {
     last_message_at: await env.CHATS.get("health:last_message_at"),
     last_status: JSON.parse((await env.CHATS.get("health:last_status")) || "null"),
     last_reply_at: await env.CHATS.get("health:last_reply_at"),
+    last_crash: JSON.parse((await env.CHATS.get("health:last_crash")) || "null"),
     last_gemini_error: JSON.parse((await env.CHATS.get("health:last_gemini_error")) || "null"),
     last_error: JSON.parse((await env.CHATS.get("health:last_error")) || "null") };
   return new Response(JSON.stringify(out, null, 1), { headers: { "content-type": "application/json" } });
