@@ -9,8 +9,8 @@
   "TG_BOT_TOKEN": false
  },
  "app_secret_format": {
-  "length": 15,
-  "hex": false,
+  "length": 32,
+  "hex": true,
   "raw_has_spaces": false
  },
  "last_post": {
