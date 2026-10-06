@@ -64,10 +64,28 @@ def load_scripts():
     return json.loads(SCRIPTS_FILE.read_text(encoding="utf-8")) if SCRIPTS_FILE.exists() else []
 
 
-def pick_music(n):
-    """Треки из assets/music (бесплатные, Pixabay) идут по кругу: каждый следующий ролик со следующим треком."""
-    tracks = sorted((ASSETS / "music").glob("*.mp3"))
-    return tracks[n % len(tracks)]
+USED_MUSIC_FILE = HERE / "used_music.json"
+
+
+def used_music():
+    try:
+        return json.loads(USED_MUSIC_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+
+
+def mark_music_used(track):
+    used = [x for x in used_music() if x != track.name] + [track.name]
+    USED_MUSIC_FILE.write_text(json.dumps(used, ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
+
+
+def pick_music(n=0):
+    """Каждому ролику свой трек: сначала бодрые из assets/music/upbeat, которых ещё не было,
+    когда все прозвучали, берём тот, что звучал давнее всего. Спокойный эмбиент только если бодрых нет."""
+    tracks = sorted((ASSETS / "music" / "upbeat").glob("*.mp3")) or sorted((ASSETS / "music").glob("*.mp3"))
+    age = {x: k for k, x in enumerate(used_music())}
+    random.shuffle(tracks)
+    return min(tracks, key=lambda t: age.get(t.name, -1))
 
 
 def build_reel(text, music=None, query=None):
@@ -250,7 +268,9 @@ def main():
         post = random.choice(queue) if args.test else queue[0]
         print("reels.json пуст, беру текст поста из posts.json")
     query = args.query or post.get("query") or media.TOPIC_QUERIES.get(post.get("topic"), media.DEFAULT_QUERY)
-    video = build_reel(post["text"], pick_music(sum(1 for p in posts if p.get("ig_posted_at"))), query)
+    music = pick_music()
+    print(f"Музыка: {music.name}")
+    video = build_reel(post["text"], music, query)
     if args.test:
         host_on_github(video)
         return
@@ -269,6 +289,7 @@ def main():
     if threads_id:
         item["threads_video_id"] = threads_id
     media.mark_clips_used(media.picked_clips)  # эти фоны больше не повторяем
+    mark_music_used(music)  # и этот трек тоже
     promo.mark_used(promo.picked)  # и эти фразы тоже
     path.write_text(json.dumps(items, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Reels опубликован: {media_id}")

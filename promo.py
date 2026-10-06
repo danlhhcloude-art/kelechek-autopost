@@ -560,7 +560,11 @@ def render(text, music, out, seed=None, workdir=None):
         print((r.stdout + r.stderr)[-3000:])
         raise RuntimeError("HyperFrames не собрал ролик")
     fade = max(0.0, total - 1.5)
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(silent), "-i", str(music), "-map", "0:v", "-map", "1:a",
+    length = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(music)],
+                            capture_output=True, text=True).stdout.strip()
+    spare = float(length or 0) - total - 1
+    start = round(random.uniform(0, min(spare, 20)), 2) if spare > 4 else 0.0  # трек начинается с разных мест
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(silent), "-ss", f"{start}", "-i", str(music), "-map", "0:v", "-map", "1:a",
                     "-c:v", "copy", "-c:a", "aac", "-b:a", "160k",
                     "-af", f"afade=t=in:d=0.5,afade=t=out:st={fade:.2f}:d=1.5,volume=0.8", "-shortest", str(out)], check=True)
     return total
