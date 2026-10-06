@@ -66,8 +66,12 @@ export default {
     if (url.pathname === "/webhook" && req.method === "GET") return verify(url, env);
     if (url.pathname === "/webhook" && req.method === "POST") {
       const raw = await req.text();
-      if (!(await signatureOk(raw, req.headers.get("x-hub-signature-256"), env.WA_APP_SECRET)))
-        return new Response("bad signature", { status: 401 });
+      const sigOk = await signatureOk(raw, req.headers.get("x-hub-signature-256"), env.WA_APP_SECRET);
+      // для /health: дошёл ли вообще запрос от Meta и прошла ли подпись (без содержимого сообщений)
+      let fields = [];
+      try { fields = JSON.parse(raw).entry?.flatMap(e => (e.changes || []).map(c => c.field)) || []; } catch {}
+      await env.CHATS.put("health:last_post", JSON.stringify({ at: new Date().toISOString(), signature_ok: sigOk, has_signature: !!req.headers.get("x-hub-signature-256"), fields }));
+      if (!sigOk) return new Response("bad signature", { status: 401 });
       ctx.waitUntil(handle(JSON.parse(raw), env).catch(e => console.log("handle error", e.stack || e)));
       return new Response("ok");
     }
@@ -84,6 +88,7 @@ function verify(url, env) {
 }
 
 async function signatureOk(raw, header, secret) {
+  secret = (secret || "").trim().replace(/^[`'"]+|[`'"]+$/g, "");
   if (!header || !secret) return false;
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(raw));
@@ -209,6 +214,7 @@ const markRead = (env, id) => graph(env, { status: "read", message_id: id });
 async function health(env) {
   const keys = ["WA_TOKEN", "WA_PHONE_ID", "WA_APP_SECRET", "VERIFY_TOKEN", "GEMINI_KEY", "LEADS_KEY", "TG_BOT_TOKEN"];
   const out = { keys: Object.fromEntries(keys.map(k => [k, !!env[k]])),
+    last_post: JSON.parse((await env.CHATS.get("health:last_post")) || "null"),
     last_message_at: await env.CHATS.get("health:last_message_at"),
     last_error: JSON.parse((await env.CHATS.get("health:last_error")) || "null") };
   return new Response(JSON.stringify(out, null, 1), { headers: { "content-type": "application/json" } });
