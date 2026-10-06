@@ -1,0 +1,13 @@
+{
+ "keys": {
+  "WA_TOKEN": true,
+  "WA_PHONE_ID": true,
+  "WA_APP_SECRET": true,
+  "VERIFY_TOKEN": true,
+  "GEMINI_KEY": false,
+  "LEADS_KEY": false,
+  "TG_BOT_TOKEN": false
+ },
+ "last_message_at": null,
+ "last_error": null
+}
