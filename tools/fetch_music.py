@@ -24,6 +24,7 @@ def category_pages():
     """Ищем разделы на главной FreePD и ставим вперёд бодрые по названию."""
     r = requests.get(HOME, headers=UA, timeout=30)
     LOG.append(f"{HOME} -> {r.status_code}, {len(r.text)} байт")
+    LOG.append(r.text)
     hrefs = re.findall(r"""href\s*=\s*["']([^"'#]+)["']""", r.text, re.I)
     pages = []
     for h in hrefs:
