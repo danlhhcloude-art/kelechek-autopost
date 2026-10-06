@@ -9,6 +9,19 @@
  },
  "token_valid": true,
  "token_expires_at": 1791331200,
- "waba_count": 0,
- "results": []
+ "waba_count": 1,
+ "results": [
+  {
+   "before": [
+    "WA DevX Webhook Events 1P App"
+   ],
+   "subscribe": {
+    "success": true
+   },
+   "after": [
+    "Kelechek_AI",
+    "WA DevX Webhook Events 1P App"
+   ]
+  }
+ ]
 }
