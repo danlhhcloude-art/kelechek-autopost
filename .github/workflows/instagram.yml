@@ -26,6 +26,10 @@ jobs:
         with: { python-version: "3.11" }
       - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: pip install -r requirements.txt
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - name: Браузер для HyperFrames (промо-стиль Reels)
+        run: npx --yes hyperframes@0.8.121 browser ensure
       - name: Голос Chatterbox (MIT)
         if: inputs.voice == 'chatterbox'
         run: |

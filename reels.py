@@ -23,6 +23,7 @@ import requests
 
 import media
 import motion
+import promo
 
 HERE = Path(__file__).parent
 ASSETS = HERE / "assets"
@@ -72,6 +73,14 @@ def pick_music(n):
 def build_reel(text, music=None, query=None):
     OUT.mkdir(exist_ok=True)
     out = OUT / "reel.mp4"
+    if os.environ.get("REEL_STYLE", "promo") == "promo":
+        # промо-стиль с телефонами и стеклянными карточками (одобрен 06.10.2026); при сбое собираем старым способом
+        try:
+            total = promo.render(text, music or pick_music(0), out)
+            print(f"Ролик собран в промо-стиле: {out} ({total:.1f} сек)")
+            return out
+        except Exception as e:
+            print(f"Промо-стиль не собрался ({e}), собираю старым способом")
     total, n = motion.render(split_slides(text) + [("cta", "")], music or pick_music(0), out, query=query)
     print(f"Ролик собран: {out} ({total:.1f} сек, слайдов: {n})")
     return out
