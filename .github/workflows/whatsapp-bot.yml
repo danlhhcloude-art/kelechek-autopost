@@ -31,6 +31,22 @@ jobs:
             id=$(npx wrangler@4 kv namespace list | jq -r '.[] | select(.title|endswith("kelechek-whatsapp-chats")) | .id')
           fi
           sed -i "s/REPLACE_WITH_KV_ID/$id/" wrangler.toml
+      - name: Поддомен workers.dev
+        if: steps.check.outputs.skip != '1'
+        continue-on-error: true
+        run: |
+          api=https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain
+          have=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" $api | jq -r '.result.subdomain // empty')
+          if [ -z "$have" ]; then
+            for name in kelechek-ai kelechekai kelechek-bishkek; do
+              ok=$(curl -s -X PUT -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" \
+                   --data "{\"subdomain\":\"$name\"}" $api | jq -r '.success')
+              echo "$name: $ok"
+              [ "$ok" = "true" ] && break
+            done
+          else
+            echo "поддомен уже есть: $have"
+          fi
       - name: Развернуть
         if: steps.check.outputs.skip != '1'
         run: |
