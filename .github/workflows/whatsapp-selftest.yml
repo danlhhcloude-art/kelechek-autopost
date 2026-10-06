@@ -14,7 +14,7 @@ jobs:
           GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
         run: |
           # прямой вызов Gemini тем же ключом: код ответа и текст ошибки (ключ не печатаем)
-          g=$(curl -s -m 60 -o /tmp/g.json -w '%{http_code}' "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" \
+          g=$(curl -s -m 60 -o /tmp/g.json -w '%{http_code}' "https://generativelanguage.googleapis.com/v1beta/models/$(grep -oE "gemini-[0-9a-z.-]+" whatsapp-bot/wrangler.toml | head -1):generateContent" \
             -H "x-goog-api-key: $GEMINI_KEY" -H 'content-type: application/json' -d '{"contents":[{"role":"user","parts":[{"text":"Скажи привет одним словом"}]}]}')
           python3 -c "import json;d=json.load(open('/tmp/g.json'));print(json.dumps({'gemini_http':'$g','error':(d.get('error') or {}).get('message','')[:300],'ok_text':bool(d.get('candidates'))},ensure_ascii=False))" > whatsapp-bot/gemini-test.json
           cat whatsapp-bot/gemini-test.json
