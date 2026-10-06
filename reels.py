@@ -110,7 +110,8 @@ def publish(video, text):
             sys.exit(f"Токен Instagram не работает: {me.status_code} {me.text}")
         user_id = str(me.json().get("user_id") or me.json()["id"])
         print(f"Аккаунт Instagram: {me.json().get('username')} ({user_id})")
-    video_url = host_on_github(video)
+    global last_video_url
+    video_url = last_video_url = host_on_github(video)
     r = requests.post(f"{API_URL(user_id)}/media", timeout=60, data={
         "media_type": "REELS", "video_url": video_url, "caption": caption(text),
         "share_to_feed": "true", "access_token": token})
@@ -132,6 +133,33 @@ def publish(video, text):
     if not r.ok:
         sys.exit(f"Не удалось опубликовать: {r.status_code} {r.text}")
     return r.json()["id"]
+
+
+last_video_url = None  # ссылка на выложенный ролик, чтобы тот же Reels вышел и в Threads
+
+
+def share_to_threads(text):
+    """Тот же ролик дублируем в Threads как видео-пост (если есть токен Threads)."""
+    import autopost
+    if not (os.environ.get("THREADS_ACCESS_TOKEN") and os.environ.get("THREADS_USER_ID") and last_video_url):
+        return None
+    user_id, token = os.environ["THREADS_USER_ID"], os.environ["THREADS_ACCESS_TOKEN"]
+    body = re.sub(r"\n*#\S+(\s+#\S+)*\s*$", "", text).strip()
+    data = {"media_type": "VIDEO", "video_url": last_video_url, "text": autopost.with_footer(body),
+            "topic_tag": "Reels", "access_token": token}
+    try:
+        r = requests.post(f"{autopost.API}/{user_id}/threads", data=data, timeout=60)
+        r.raise_for_status()
+        container = r.json()["id"]
+        autopost.wait_ready(container, token)
+        r = requests.post(f"{autopost.API}/{user_id}/threads_publish", timeout=60,
+                          data={"creation_id": container, "access_token": token})
+        r.raise_for_status()
+        print(f"Ролик выложен и в Threads: {r.json()['id']}")
+        return r.json()["id"]
+    except Exception as e:  # Instagram уже опубликован, сбой Threads не должен ронять запуск
+        print(f"В Threads ролик не вышел: {e}")
+        return None
 
 
 def host_on_github(video):
@@ -229,6 +257,7 @@ def main():
     if args.render_only or args.text:
         return
     media_id = publish(video, post.get("caption") or post["text"])
+    threads_id = share_to_threads(post["text"])
     # пока собирался ролик, posts.json мог обновиться (git pull при выкладке видео),
     # поэтому перечитываем файл и отмечаем только свой пост, чтобы не затереть чужие отметки
     from_scripts = "caption" in post
@@ -237,6 +266,8 @@ def main():
     item = next(p for p in items if p["text"] == post["text"])
     item["ig_posted_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     item["ig_media_id"] = media_id
+    if threads_id:
+        item["threads_video_id"] = threads_id
     media.mark_clips_used(media.picked_clips)  # эти фоны больше не повторяем
     path.write_text(json.dumps(items, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Reels опубликован: {media_id}")

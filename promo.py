@@ -26,6 +26,8 @@ KEYWORDS = {
     "chat": ["ответ", "вопрос", "пиш", "whatsapp", "директ", "сообщ", "сколько стоит", "клиент"],
     "fan": ["reels", "ролик", "видео", "instagram", "пост", "контент", "сним", "съём", "монтаж", "камер", "реклам"],
     "booking": ["запис", "брон", "свободн", "окн"],
+    "notify": ["заявк", "уведомл", "комментар", "лид", "сразу приходит", "теря"],
+    "split": ["вместо", "раньше", "вручную", "сотрудник", "менеджер", "по кругу"],
     "laptop": ["лично", "встреч", "ноутбук", "показ", "отчёт", "отчет", "excel", "бишкек"],
 }
 TAGS = {
@@ -35,6 +37,8 @@ TAGS = {
     "laptop": ["Бишкек", "Встреча лично", "Отчёт в Excel"],
     "cards": ["Автоматизация", "ИИ-видео", "Для бизнеса", "Бишкек"],
     "big": ["Kelechek AI"],
+    "notify": ["Заявки", "Уведомления", "Ничего не теряется"],
+    "split": ["Было и стало", "С ИИ"],
 }
 QUESTIONS = ["Здравствуйте, сколько стоит?", "А вы сегодня работаете?", "Есть запись на завтра?",
              "Где вы находитесь?", "Можно узнать цену?", "Есть свободное время вечером?",
@@ -113,6 +117,22 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B090
 .bigt { position: absolute; left: 70px; right: 70px; top: 520px; font-family: Unbounded, sans-serif; font-size: 92px; line-height: 1.1; }
 .bigt .w { display: inline-block; margin-right: .22em; }
 .bigt em { font-style: normal; color: #FFC23D; }
+.notes { position: absolute; left: 90px; right: 90px; top: 380px; display: flex; flex-direction: column; gap: 26px; }
+.note { display: flex; align-items: center; gap: 24px; padding: 28px 30px; border-radius: 34px; background: rgba(255,255,255,.14);
+        border: 1.5px solid rgba(255,255,255,.22); box-shadow: 0 24px 50px rgba(0,0,0,.4); }
+.note img { width: 74px; height: 74px; border-radius: 20px; }
+.note b { display: block; font-size: 30px; font-weight: 500; }
+.note span { display: block; font-size: 25px; color: #E0D6C3; margin-top: 4px; }
+.note small { margin-left: auto; align-self: flex-start; font-size: 22px; color: #BDB3A0; }
+.split { position: absolute; left: 70px; right: 70px; top: 400px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.col { border-radius: 40px; padding: 36px 32px; min-height: 640px; }
+.col.was { background: rgba(255,255,255,.07); border: 1.5px solid rgba(255,255,255,.15); color: #B9AF9E; }
+.col.now { background: linear-gradient(160deg, rgba(255,194,61,.32), rgba(255,194,61,.10)); border: 1.5px solid rgba(255,194,61,.6); box-shadow: 0 30px 60px rgba(0,0,0,.45); }
+.col h3 { font-family: Unbounded, sans-serif; font-size: 40px; margin-bottom: 30px; color: #fff; }
+.col li { list-style: none; font-size: 29px; line-height: 1.3; padding: 18px 0 18px 52px; position: relative; border-top: 1px solid rgba(255,255,255,.12); }
+.col li:before { position: absolute; left: 0; top: 16px; width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-size: 22px; }
+.was li:before { content: "✕"; background: rgba(255,255,255,.12); }
+.now li:before { content: "✓"; background: #FFC23D; color: #1A1206; }
 .sub { position: absolute; left: 60px; right: 60px; bottom: 300px; text-align: center; font-family: Unbounded, sans-serif; font-size: 52px; line-height: 1.25; }
 .sub.s { font-size: 44px; }
 .sub u { color: #FFC23D; text-decoration: none; background: linear-gradient(#FFC23D, #FFC23D) left bottom / var(--w, 0%) 5px no-repeat; padding-bottom: 6px; }
@@ -288,9 +308,42 @@ tl.from("#t{i} .w", {{opacity: 0, y: 40, filter: "blur(12px)", stagger: .09, dur
     return h, js
 
 
-SCENES = {"chat": scene_chat, "cards": scene_cards, "fan": scene_fan, "booking": scene_booking,
+NOTES = [("Новая заявка", "из Instagram, уже в таблице"), ("Новый комментарий", "ИИ ответил сразу"),
+         ("Запись на завтра", "клиент выбрал время сам"), ("Сообщение в WhatsApp", "ответ отправлен"),
+         ("Новый Reels готов", "выйдет вечером"), ("Отчёт за неделю", "в Excel, можно открыть"),
+         ("Вопрос «сколько стоит?»", "ИИ прислал цены")]
+WAS = ["Ответ утром", "Заявки в голове", "Одни и те же вопросы", "Старые фото в профиле", "Посты, когда есть время"]
+NOW = ["Ответ сразу, даже ночью", "Каждая заявка в таблице", "ИИ отвечает на частые", "Свежие ролики без съёмки", "Посты каждый день"]
+
+
+def scene_notify(i, text, rng, t, d):
+    picks = rng.sample(NOTES, 4)
+    notes = "".join(f'<div class="note"><img src="./logo.png" /><div><b>{esc(a)}</b><span>{esc(b)}</span></div><small>{stamp(rng)}</small></div>'
+                    for a, b in picks)
+    h = f'<div class="notes" id="n{i}">{notes}</div>'
+    js = f"""
+tl.from("#n{i} .note", {{y: -160, opacity: 0, scale: .9, filter: "blur(10px)", stagger: .35, duration: .55, ease: "back.out(1.6)"}}, {t + .1})
+  .to("#n{i}", {{y: 30, duration: {d - 1.8:.2f}, ease: "sine.inOut"}}, {t + 1.6});"""
+    return h, js
+
+
+def scene_split(i, text, rng, t, d):
+    idx = rng.sample(range(len(WAS)), 3)
+    was = "".join(f"<li>{esc(WAS[k])}</li>" for k in idx)
+    now = "".join(f"<li>{esc(NOW[k])}</li>" for k in idx)
+    h = (f'<div class="split" id="v{i}"><div class="col was"><h3>Было</h3><ul>{was}</ul></div>'
+         f'<div class="col now"><h3>С ИИ</h3><ul>{now}</ul></div></div>')
+    js = f"""
+tl.from("#v{i} .was", {{x: -400, rotationY: 30, opacity: 0, filter: "blur(14px)", duration: .7, ease: "expo.out"}}, {t})
+  .from("#v{i} .now", {{x: 400, rotationY: -30, opacity: 0, filter: "blur(14px)", duration: .7, ease: "expo.out"}}, {t + .35})
+  .from("#v{i} .now li", {{x: 40, opacity: 0, stagger: .2, duration: .4, ease: "power3.out"}}, {t + .9})
+  .to("#v{i} .was", {{opacity: .55, scale: .97, duration: .6}}, {t + 1.6});"""
+    return h, js
+
+
+SCENES = {"notify": scene_notify, "split": scene_split, "chat": scene_chat, "cards": scene_cards, "fan": scene_fan, "booking": scene_booking,
           "laptop": scene_laptop, "big": scene_big}
-SPARE = ["cards", "fan", "chat", "big"]  # если смысл сцены совпал с предыдущей, берём другую
+SPARE = ["cards", "fan", "chat", "big", "notify", "split"]  # если смысл сцены совпал с предыдущей, берём другую
 
 
 def compose(text, seed=None):

@@ -109,10 +109,51 @@ def with_footer(text):
     return text[:MAX_LEN - len(AUTO_FOOTER)].rstrip() + AUTO_FOOTER
 
 
-def publish(text, tag=None):
+def media_url(path):
+    """Картинки и видео лежат в открытом репозитории, Threads забирает их по ссылке raw.githubusercontent."""
+    repo = os.environ.get("GITHUB_REPOSITORY", "danlhhcloude-art/kelechek-autopost")
+    return f"https://raw.githubusercontent.com/{repo}/main/{path}"
+
+
+def wait_ready(container, token):
+    """Видео и карусели Threads обрабатывает не сразу: ждём статус FINISHED."""
+    for _ in range(30):
+        s = requests.get(f"{API}/{container}", timeout=30, params={"fields": "status,error_message", "access_token": token}).json()
+        if s.get("status") == "FINISHED":
+            return
+        if s.get("status") in ("ERROR", "EXPIRED"):
+            raise RuntimeError(f"Threads не принял медиа: {s}")
+        time.sleep(10)
+    raise RuntimeError("Threads слишком долго обрабатывает медиа")
+
+
+def media_fields(post, user_id, token):
+    """Поля контейнера для поста с фото, каруселью или видео."""
+    if post.get("video"):
+        return {"media_type": "VIDEO", "video_url": media_url(post["video"])}
+    images = post.get("images") or []
+    if len(images) == 1:
+        return {"media_type": "IMAGE", "image_url": media_url(images[0])}
+    children = []
+    for img in images[:20]:
+        r = requests.post(f"{API}/{user_id}/threads", timeout=60, data={
+            "media_type": "IMAGE", "image_url": media_url(img), "is_carousel_item": "true", "access_token": token})
+        r.raise_for_status()
+        children.append(r.json()["id"])
+    for c in children:
+        wait_ready(c, token)
+    return {"media_type": "CAROUSEL", "children": ",".join(children)}
+
+
+def publish(text, tag=None, post=None):
     user_id = need("THREADS_USER_ID")
     token = need("THREADS_ACCESS_TOKEN")
     data = {"media_type": "TEXT", "text": text, "access_token": token}
+    if post and (post.get("images") or post.get("video")):
+        try:
+            data.update(media_fields(post, user_id, token))
+        except Exception as e:  # слот не теряем: при сбое медиа выходит обычный текстовый пост
+            print(f"Медиа не прикрепилось ({e}), публикую текстом")
     if tag:
         data["topic_tag"] = tag
     r = requests.post(f"{API}/{user_id}/threads", data=data, timeout=30)
@@ -122,7 +163,10 @@ def publish(text, tag=None):
         r = requests.post(f"{API}/{user_id}/threads", data=data, timeout=30)
     r.raise_for_status()
     creation_id = r.json()["id"]
-    time.sleep(5)  # Meta советует подождать перед публикацией контейнера
+    if data["media_type"] == "TEXT":
+        time.sleep(5)  # Meta советует подождать перед публикацией контейнера
+    else:
+        wait_ready(creation_id, token)
     r = requests.post(f"{API}/{user_id}/threads_publish",
                       data={"creation_id": creation_id, "access_token": token}, timeout=30)
     r.raise_for_status()
@@ -213,9 +257,11 @@ def main():
     text = with_footer(post["text"])
     if args.dry_run:
         print(f"[dry-run] тема: {post.get('tag') or TOPIC_TAGS.get(post.get('topic'), DEFAULT_TAG)}, {len(text)} симв.:\n{text}")
+        for f in post.get("images") or ([post["video"]] if post.get("video") else []):
+            print("медиа:", media_url(f))
         return
     tag = post.get("tag") or TOPIC_TAGS.get(post.get("topic"), DEFAULT_TAG)
-    post_id = publish(text, tag)
+    post_id = publish(text, tag, post)
     post["tag"] = tag
     post["posted_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     post["threads_id"] = post_id

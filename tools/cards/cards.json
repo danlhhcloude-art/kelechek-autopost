@@ -1,0 +1,23 @@
+[
+  {"out": "media/threads/ai-analytics.png", "variant": "dark", "tag": "ИИ-агенты", "title": "За какую рекламу вы *платите зря*?", "lead": "Instagram, TikTok, Google, сайт и WhatsApp в одной картине"},
+  {"out": "media/threads/ai-search.png", "variant": "beige", "title": "Клиенты спрашивают *у ChatGPT*, а не в Google", "lead": "«Где в Бишкеке хорошая стоматология?» Что нейросеть ответит про вас?"},
+  {"out": "media/threads/ai-same.png", "variant": "dark", "tag": "Презентации", "title": "Презентации от ИИ *все на одно лицо*", "lead": "Те же шаблоны, те же картинки, те же фразы"},
+  {"out": "media/threads/night-messages.png", "variant": "chat", "title": "Вечером *почти никто* не отвечает", "bubbles": [["Здравствуйте, вы ещё работаете?", "21:47"], ["А доставка сегодня есть?", "22:10"], ["—", "не прочитано"]]},
+  {"out": "media/threads/delivery.png", "variant": "chat", "title": "Клиенту важно *одно*: когда привезут", "bubbles": [["Здравствуйте, когда привезут?", "13:05"], ["Курьер уже выехал?", "13:24"], ["Ау, когда будет заказ?", "13:41"]]},
+  {"out": "media/threads/fear-ai.png", "variant": "beige", "title": "ИИ ответит клиенту *как робот*?", "lead": "Разбираю частый страх владельцев"},
+  {"out": "media/threads/one-video.png", "variant": "dark", "tag": "Reels", "title": "Одно хорошее видео в месяц *или короткое каждый день*?"},
+  {"out": "media/threads/language.png", "variant": "beige", "title": "Реклама в Бишкеке: *русский или кыргызский*?"},
+  {"out": "media/threads/offer-15.png", "variant": "dark", "tag": "Как мы работаем", "title": "Как устроены *15 дней*", "lead": "Вы платите только за подписку на ИИ-сервис, а работу оцениваете сами"},
+  {"out": "media/threads/ai-video.png", "variant": "beige", "title": "ИИ-видео *как пластик*?", "lead": "Согласен. И вот что с этим делать"},
+  {"out": "media/threads/tip.png", "variant": "dark", "tag": "Совет", "title": "Перед тем как заказывать видео, *ответьте себе*"},
+  {"out": "media/threads/honest.png", "variant": "chat", "title": "*Где подвох?*", "contact": "Kelechek AI", "status": "онлайн", "bubbles": [["Почему 15 дней бесплатно?", "18:20"], ["Где подвох?", "18:21"], ["Честный вопрос, сейчас расскажу", "18:21", true]]},
+  {"out": "media/threads/offer-few.png", "variant": "beige", "title": "Первые проекты *не на бегу*", "lead": "Много проектов сразу брать не буду"},
+  {"out": "media/threads/menu-video.png", "variant": "dark", "tag": "Кафе и рестораны", "title": "Фото меню, снятые *пять лет назад*", "lead": "Еда вкусная, а по фото не скажешь"},
+  {"out": "media/threads/instagram-dead.png", "variant": "beige", "title": "Instagram *умер*?"},
+  {"out": "media/threads/small-business.png", "variant": "dark", "tag": "Малый бизнес", "title": "Почему мне интереснее *небольшой бизнес*", "lead": "Решение принимает один человек, и результат видно сразу"},
+  {"out": "media/threads/routine.png", "variant": "chat", "title": "Больше всего бесит *переписка*", "bubbles": [["Сколько стоит?", "10:12"], ["А где вы находитесь?", "10:13"], ["Есть время на завтра?", "10:15"], ["Сколько стоит??", "10:30"]]},
+  {"out": "media/threads/first-clients.png", "variant": "dark", "tag": "Kelechek AI", "title": "Первых клиентов ищу *прямо здесь*", "lead": "Без рекламы, через этот аккаунт"},
+  {"out": "media/threads/price-question.png", "variant": "chat", "title": "«Сколько стоит?» *А что за бизнес?*", "contact": "Kelechek AI", "status": "онлайн", "bubbles": [["Сколько стоит?", "15:02"], ["Зависит от задачи. Расскажите, что у вас за бизнес?", "15:03", true]]},
+  {"out": "media/threads/reviews.png", "variant": "beige", "title": "Видео от владельца *убеждает сильнее* рекламы"},
+  {"out": "media/threads/start-small.png", "variant": "dark", "tag": "Автоматизация", "title": "Начните с *одной вещи*", "lead": "С той, что раздражает больше всего"}
+]
