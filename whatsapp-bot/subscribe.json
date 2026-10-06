@@ -1,1 +1,14 @@
-{"note": "перезапусти после исправления секретов"}
+{
+ "debug_error": null,
+ "me": {
+  "type": "ok"
+ },
+ "phone": {
+  "verified_name": "Test Number",
+  "test": true
+ },
+ "token_valid": true,
+ "token_expires_at": 1791331200,
+ "waba_count": 0,
+ "results": []
+}
