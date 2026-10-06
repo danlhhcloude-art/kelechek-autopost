@@ -16,7 +16,7 @@ import re
 import subprocess
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
@@ -193,6 +193,12 @@ def main():
         return
     posts = json.loads(POSTS_FILE.read_text(encoding="utf-8"))
     scripts = load_scripts()
+    if os.environ.get("GITHUB_EVENT_NAME") == "schedule" and not (args.render_only or args.text or args.test):
+        # если ролик уже выложили вручную (страховка), плановый запуск второй за день не публикует
+        stamps = [datetime.fromisoformat(x["ig_posted_at"]) for x in posts + scripts if x.get("ig_posted_at")]
+        if stamps and datetime.now(timezone.utc) - max(stamps) < timedelta(hours=12):
+            print(f"Reels уже вышел в {max(stamps):%H:%M} UTC, сегодняшний слот закрыт.")
+            return
     published = {p["text"] for p in posts if p.get("ig_posted_at")} | {s["text"] for s in scripts if s.get("ig_posted_at")}
     fresh = [s for s in scripts if not s.get("ig_posted_at") and s["text"] not in published]
     if args.text:
