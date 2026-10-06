@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-06T03:50:09+00:00",
+  "updated_at": "2026-10-06T07:19:10+00:00",
   "account": {
-    "views": 225,
+    "views": 29,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -184,10 +184,21 @@
       "replies": 0,
       "reposts": 0,
       "quotes": 0
+    },
+    {
+      "threads_id": "18139885378722954",
+      "posted_at": "2026-10-06T07:19:10+00:00",
+      "topic": "tip",
+      "text": "Частая ошибка: хотеть от ИИ «помощника на всё».",
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-06T03:50:18+00:00",
+    "updated_at": "2026-10-06T07:19:15+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
