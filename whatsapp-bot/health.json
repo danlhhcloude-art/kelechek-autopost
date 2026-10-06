@@ -8,6 +8,11 @@
   "LEADS_KEY": false,
   "TG_BOT_TOKEN": false
  },
+ "app_secret_format": {
+  "length": 15,
+  "hex": false,
+  "raw_has_spaces": false
+ },
  "last_post": {
   "at": "2026-10-06T21:58:22.169Z",
   "signature_ok": false,
