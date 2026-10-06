@@ -104,6 +104,8 @@ async function handle(body, env) {
       for (const echo of v.message_echoes || []) await pauseForHuman(env, echo.to);
       const names = Object.fromEntries((v.contacts || []).map(c => [c.wa_id, c.profile?.name]));
       for (const m of v.messages || []) await onMessage(m, names[m.from], env);
+      // статус доставки наших ответов: sent / delivered / read / failed (с кодом ошибки Meta, без номеров)
+      for (const st of v.statuses || []) await env.CHATS.put("health:last_status", JSON.stringify({ at: new Date().toISOString(), status: st.status, errors: (st.errors || []).map(e => ({ code: e.code, title: e.title, details: (e.error_data?.details || "").replace(/\+?\d{7,}/g, "…") })) }));
     }
   }
 }
@@ -142,6 +144,7 @@ async function onMessage(m, profileName, env) {
   chat.next = out.next;
   const reply = out.reply.slice(0, MAX_REPLY);
   await send(env, m.from, reply);
+  await env.CHATS.put("health:last_reply_at", new Date().toISOString());
   chat.history.push({ role: "model", text: reply, ts: Date.now() });
 
   const score = ["n", "a", "t", "b"].reduce((s, k) => s + (chat.bant[k] ?? 0), 0);
@@ -218,6 +221,8 @@ async function health(env) {
     app_secret_format: (() => { const v = (env.WA_APP_SECRET || "").trim().replace(/^[`'"]+|[`'"]+$/g, ""); return { length: v.length, hex: /^[0-9a-f]+$/.test(v), raw_has_spaces: v.length !== (env.WA_APP_SECRET || "").length }; })(),
     last_post: JSON.parse((await env.CHATS.get("health:last_post")) || "null"),
     last_message_at: await env.CHATS.get("health:last_message_at"),
+    last_status: JSON.parse((await env.CHATS.get("health:last_status")) || "null"),
+    last_reply_at: await env.CHATS.get("health:last_reply_at"),
     last_error: JSON.parse((await env.CHATS.get("health:last_error")) || "null") };
   return new Response(JSON.stringify(out, null, 1), { headers: { "content-type": "application/json" } });
 }
