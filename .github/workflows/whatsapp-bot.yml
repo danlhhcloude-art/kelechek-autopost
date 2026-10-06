@@ -34,15 +34,11 @@ jobs:
       - name: Развернуть
         if: steps.check.outputs.skip != '1'
         run: |
-          npx wrangler@4 deploy | tee /tmp/deploy.txt
-          url=$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' /tmp/deploy.txt | head -1)
-          # адрес бота не секрет (подпись Meta проверяется), сохраняем его в репо, чтобы Claude его видел
-          echo "$url" > URL.txt
-          git config user.name "autopost-bot"
-          git config user.email "autopost-bot@users.noreply.github.com"
-          git add URL.txt
-          git diff --cached --quiet || git commit -m "whatsapp-bot: адрес бота [skip ci]"
-          git pull --rebase origin main && git push
+          set +e
+          npx wrangler@4 deploy > /tmp/deploy.txt 2>&1
+          code=$?
+          cat /tmp/deploy.txt
+          exit $code
       - name: Секреты бота
         if: steps.check.outputs.skip != '1'
         env:
@@ -62,3 +58,15 @@ jobs:
           PY
           npx wrangler@4 secret bulk /tmp/s.json
           rm /tmp/s.json
+      - name: Сохранить адрес и журнал деплоя
+        if: always() && steps.check.outputs.skip != '1'
+        run: |
+          # без секретов: только вывод wrangler (адрес бота, ошибки), чтобы Claude видел результат
+          grep -oE 'https://[a-z0-9.-]+\.workers\.dev' /tmp/deploy.txt | head -1 > URL.txt || true
+          tail -40 /tmp/deploy.txt | sed -E 's/[A-Za-z0-9_-]{30,}/…/g' > deploy-log.txt || true
+          git checkout -- wrangler.toml
+          git config user.name "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          git add URL.txt deploy-log.txt
+          git diff --cached --quiet || git commit -m "whatsapp-bot: адрес и журнал деплоя [skip ci]"
+          git pull --rebase origin main && git push
