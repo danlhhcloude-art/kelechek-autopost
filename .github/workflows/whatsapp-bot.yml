@@ -66,14 +66,30 @@ jobs:
           LEADS_KEY: ${{ secrets.WA_LEADS_KEY }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          TG_CLIENT_TOKEN: ${{ secrets.TG_CLIENT_TOKEN }}
         run: |
           python3 - > /tmp/s.json <<'PY'
           import json, os
-          keys = ["WA_TOKEN", "WA_PHONE_ID", "WA_APP_SECRET", "VERIFY_TOKEN", "GEMINI_KEY", "LEADS_KEY", "TG_BOT_TOKEN", "TG_CHAT_ID"]
+          keys = ["WA_TOKEN", "WA_PHONE_ID", "WA_APP_SECRET", "VERIFY_TOKEN", "GEMINI_KEY", "LEADS_KEY", "TG_BOT_TOKEN", "TG_CHAT_ID", "TG_CLIENT_TOKEN"]
           print(json.dumps({k: os.environ[k] for k in keys if os.environ.get(k)}))
           PY
           npx wrangler@4 secret bulk /tmp/s.json
           rm /tmp/s.json
+      - name: Вебхук Telegram-бота
+        if: steps.check.outputs.skip != '1'
+        env:
+          TG_CLIENT_TOKEN: ${{ secrets.TG_CLIENT_TOKEN }}
+        run: |
+          # без токена Telegram просто пропускаем; в файл пишем только ok/описание ошибки, без токена
+          if [ -z "$TG_CLIENT_TOKEN" ]; then echo '{"telegram":"нет TG_CLIENT_TOKEN"}' > tg-webhook.json; exit 0; fi
+          url=$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' /tmp/deploy.txt | head -1)
+          [ -n "$url" ] || url=$(cat URL.txt)
+          secret=$(printf 'kelechek-tg:%s' "$TG_CLIENT_TOKEN" | sha256sum | cut -c1-48)
+          curl -s -m 30 "https://api.telegram.org/bot$TG_CLIENT_TOKEN/setWebhook" \
+            -d "url=$url/tg" -d "secret_token=$secret" -d 'allowed_updates=["message"]' -d drop_pending_updates=true > /tmp/sw.json
+          me=$(curl -s -m 30 "https://api.telegram.org/bot$TG_CLIENT_TOKEN/getMe" | python3 -c "import json,sys;print(json.load(sys.stdin).get('result',{}).get('username',''))")
+          python3 -c "import json;d=json.load(open('/tmp/sw.json'));print(json.dumps({'ok':d.get('ok'),'description':d.get('description'),'bot':'@$me'},ensure_ascii=False))" > tg-webhook.json
+          cat tg-webhook.json
       - name: Сохранить адрес и журнал деплоя
         if: always() && steps.check.outputs.skip != '1'
         run: |
@@ -83,6 +99,6 @@ jobs:
           git checkout -- wrangler.toml
           git config user.name "autopost-bot"
           git config user.email "autopost-bot@users.noreply.github.com"
-          git add URL.txt deploy-log.txt
+          git add URL.txt deploy-log.txt tg-webhook.json 2>/dev/null || git add URL.txt deploy-log.txt
           git diff --cached --quiet || git commit -m "whatsapp-bot: адрес и журнал деплоя [skip ci]"
           git pull --rebase origin main && git push

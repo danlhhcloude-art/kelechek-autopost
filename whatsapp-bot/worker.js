@@ -3,6 +3,7 @@
 //
 // Секреты (wrangler secret put ...): WA_TOKEN, WA_PHONE_ID, WA_APP_SECRET, VERIFY_TOKEN,
 // GEMINI_KEY, LEADS_KEY; по желанию TG_BOT_TOKEN и TG_CHAT_ID для мгновенных уведомлений.
+// Telegram-версия для клиентов: TG_CLIENT_TOKEN (бот от @BotFather), вебхук /tg ставит workflow.
 // KV: CHATS (переписки и баллы).
 
 const GRAPH = "https://graph.facebook.com/v22.0";
@@ -75,6 +76,13 @@ export default {
       ctx.waitUntil(handle(JSON.parse(raw), env).catch(e => console.log("handle error", e.stack || e)));
       return new Response("ok");
     }
+    if (url.pathname === "/tg" && req.method === "POST") {
+      // Telegram подписывает запрос секретом, который мы задали при setWebhook (производный от токена бота)
+      if (!env.TG_CLIENT_TOKEN || req.headers.get("x-telegram-bot-api-secret-token") !== await tgSecret(env)) return new Response("forbidden", { status: 403 });
+      const update = await req.json();
+      ctx.waitUntil(onTelegram(update, env).catch(e => console.log("tg error", e.stack || e)));
+      return new Response("ok");
+    }
     if (url.pathname === "/leads" && req.method === "GET") return leads(req, env);
     if (url.pathname === "/health") return health(env);
     if (url.pathname === "/privacy") return new Response(PRIVACY, { headers: { "content-type": "text/html; charset=utf-8" } });
@@ -121,20 +129,29 @@ async function onMessage(m, profileName, env) {
   await env.CHATS.put("health:last_message_at", new Date().toISOString());
   if (await env.CHATS.get("msg:" + m.id)) return;                 // Meta иногда шлёт дважды
   await env.CHATS.put("msg:" + m.id, "1", { expirationTtl: 86400 });
-  const chat = await loadChat(env, m.from);
+  await markRead(env, m.id);
+  await converse(env, {
+    key: m.from, channel: "WhatsApp", contact: "+" + m.from, profileName,
+    text: messageText(m), reply: text => send(env, m.from, text),
+  });
+}
+
+// Общий разговор для любого канала: история, ответ Gemini, BANT, уведомление владельцу о горячем
+async function converse(env, { key, channel, contact, profileName, text, source, reply: deliver }) {
+  const chat = await loadChat(env, key);
+  chat.channel = channel;
+  chat.contact = contact || chat.contact;
   chat.profileName = profileName || chat.profileName;
-  const text = messageText(m);
   chat.history.push({ role: "user", text, ts: Date.now() });
   if (!chat.firstAt) {
     chat.firstAt = Date.now();
-    chat.source = sourceOf(text);
+    chat.source = source || sourceOf(text, channel);
   }
-  await markRead(env, m.id);
 
-  if (chat.humanUntil && chat.humanUntil > Date.now()) return saveChat(env, m.from, chat);
+  if (chat.humanUntil && chat.humanUntil > Date.now()) return saveChat(env, key, chat);
 
   let out;
-  try { out = await think(env, chat); }
+  try { out = await think(env, chat, channel); }
   catch (e) {
     console.log("gemini error", e.message);
     out = { reply: "Спасибо за сообщение! Сейчас передам его Даниэлю, он ответит лично.", next: "ответить вручную: бот не смог ответить", wants_human: true };
@@ -143,7 +160,7 @@ async function onMessage(m, profileName, env) {
   for (const k of ["name", "niche", "city", "request"]) if (out[k]) chat[k] = out[k];
   chat.next = out.next;
   const reply = out.reply.slice(0, MAX_REPLY);
-  await send(env, m.from, reply);
+  await deliver(reply);
   await env.CHATS.put("health:last_reply_at", new Date().toISOString());
   chat.history.push({ role: "model", text: reply, ts: Date.now() });
 
@@ -151,9 +168,9 @@ async function onMessage(m, profileName, env) {
   const hot = score >= 7 || out.wants_human;
   if (hot && !chat.notifiedAt) {
     chat.notifiedAt = Date.now();
-    await notifyOwner(env, `🔥 WhatsApp +${m.from} ${chat.name || chat.profileName || ""}: ${chat.request || chat.niche || ""}. BANT ${score}/8. ${chat.next}`);
+    await notifyOwner(env, `🔥 ${channel} ${chat.contact || ""} ${chat.name || chat.profileName || ""}: ${chat.request || chat.niche || ""}. BANT ${score}/8. ${chat.next}`);
   }
-  await saveChat(env, m.from, chat);
+  await saveChat(env, key, chat);
 }
 
 function messageText(m) {
@@ -163,21 +180,21 @@ function messageText(m) {
   return `[${m.type}: клиент прислал не текст, ${m.type === "audio" ? "попроси написать текстом, голосовые бот пока не слушает" : "поблагодари и спроси, что он хотел показать"}]`;
 }
 
-function sourceOf(text) {
+function sourceOf(text, channel = "WhatsApp") {
   const w = (text || "").trim().split(/\s+/)[0].toLowerCase();
   if (w.startsWith("threads")) return "Threads";
   if (w.startsWith("instagram")) return "Instagram";
   if (w.startsWith("пример")) return "Threads";
-  return "WhatsApp";
+  return channel;
 }
 
-async function think(env, chat) {
+async function think(env, chat, channel = "WhatsApp") {
   const known = Object.entries(chat.bant).filter(([, v]) => v !== null).map(([k, v]) => `${k.toUpperCase()}=${v}`).join(", ") || "ничего";
   const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${env.GEMINI_MODEL || "gemini-2.5-flash"}:generateContent`, {
     method: "POST",
     headers: { "content-type": "application/json", "x-goog-api-key": env.GEMINI_KEY },
     body: JSON.stringify({
-      systemInstruction: { parts: [{ text: SYSTEM + `\n\nУже известно по BANT: ${known}.` }] },
+      systemInstruction: { parts: [{ text: SYSTEM.replace("в WhatsApp.", `в ${channel}.`) + `\n\nУже известно по BANT: ${known}.` }] },
       contents: fromUser(chat.history.slice(-HISTORY)).map(h => ({ role: h.role, parts: [{ text: h.text }] })),
       generationConfig: { temperature: 0.6, responseMimeType: "application/json", responseSchema: SCHEMA },
     }),
@@ -213,9 +230,49 @@ async function graph(env, body) {
 const send = (env, to, text) => graph(env, { recipient_type: "individual", to, type: "text", text: { body: text } });
 const markRead = (env, id) => graph(env, { status: "read", message_id: id });
 
+// ---------- Telegram: тот же ИИ-менеджер, без требований Meta к документам ----------
+async function tgSecret(env) {
+  const h = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("kelechek-tg:" + env.TG_CLIENT_TOKEN));
+  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, "0")).join("").slice(0, 48);
+}
+
+async function tg(env, method, body) {
+  const r = await fetch(`https://api.telegram.org/bot${env.TG_CLIENT_TOKEN}/${method}`, {
+    method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+  if (!r.ok) await env.CHATS.put("health:last_error", JSON.stringify({ at: new Date().toISOString(), channel: "Telegram", status: r.status, message: ((await r.json().catch(() => ({}))).description || "").slice(0, 200) }));
+  return r;
+}
+
+async function onTelegram(update, env) {
+  const m = update.message;
+  if (!m || m.chat?.type !== "private" || m.from?.is_bot) return;
+  await env.CHATS.put("health:last_message_at", new Date().toISOString());
+  if (await env.CHATS.get("tgmsg:" + update.update_id)) return;
+  await env.CHATS.put("tgmsg:" + update.update_id, "1", { expirationTtl: 86400 });
+  const chatId = m.chat.id;
+  // владелец узнаёт свой chat id командой /id, чтобы получать уведомления о горячих заявках
+  if (m.text === "/id") return tg(env, "sendMessage", { chat_id: chatId, text: `Ваш chat id: ${chatId}` });
+  let text = m.text || m.caption;
+  let source;
+  if (text && text.startsWith("/start")) {
+    const payload = text.slice(6).trim().toLowerCase();   // ссылка вида t.me/бот?start=threads
+    source = payload.startsWith("threads") ? "Threads" : payload.startsWith("insta") ? "Instagram" : "Telegram";
+    text = "Здравствуйте! (клиент нажал «Старт» в Telegram-боте)";
+  }
+  if (!text) text = m.voice ? "[голосовое: попроси написать текстом, голосовые бот пока не слушает]" : "[клиент прислал не текст: поблагодари и спроси, что он хотел показать]";
+  await tg(env, "sendChatAction", { chat_id: chatId, action: "typing" });
+  const who = m.from.username ? "@" + m.from.username : `tg://user?id=${m.from.id}`;
+  await converse(env, {
+    key: "tg" + chatId, channel: "Telegram", contact: who,
+    profileName: [m.from.first_name, m.from.last_name].filter(Boolean).join(" "),
+    text, source, reply: t => tg(env, "sendMessage", { chat_id: chatId, text: t }),
+  });
+}
+
+
 // Открытая проверка без секретов: какие ключи заданы, когда было последнее сообщение и последняя ошибка Meta
 async function health(env) {
-  const keys = ["WA_TOKEN", "WA_PHONE_ID", "WA_APP_SECRET", "VERIFY_TOKEN", "GEMINI_KEY", "LEADS_KEY", "TG_BOT_TOKEN"];
+  const keys = ["WA_TOKEN", "WA_PHONE_ID", "WA_APP_SECRET", "VERIFY_TOKEN", "GEMINI_KEY", "LEADS_KEY", "TG_BOT_TOKEN", "TG_CLIENT_TOKEN", "TG_CHAT_ID"];
   const out = { keys: Object.fromEntries(keys.map(k => [k, !!env[k]])),
     // формат секрета без самого секрета: у Meta это 32 символа 0-9a-f
     app_secret_format: (() => { const v = (env.WA_APP_SECRET || "").trim().replace(/^[`'"]+|[`'"]+$/g, ""); return { length: v.length, hex: /^[0-9a-f]+$/.test(v), raw_has_spaces: v.length !== (env.WA_APP_SECRET || "").length }; })(),
@@ -228,8 +285,9 @@ async function health(env) {
 }
 
 async function notifyOwner(env, text) {
-  if (!env.TG_BOT_TOKEN || !env.TG_CHAT_ID) return;   // без Telegram горячих подхватит Claude при синхронизации
-  await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
+  const token = env.TG_BOT_TOKEN || env.TG_CLIENT_TOKEN;
+  if (!token || !env.TG_CHAT_ID) return;   // без Telegram горячих подхватит Claude при синхронизации
+  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: "POST", headers: { "content-type": "application/json" },
     body: JSON.stringify({ chat_id: env.TG_CHAT_ID, text }),
   });
