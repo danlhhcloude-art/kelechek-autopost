@@ -1,0 +1,46 @@
+name: whatsapp-subscribe
+# Подписывает бизнес-аккаунт WhatsApp (WABA) на наше приложение, чтобы Meta слала боту настоящие сообщения.
+# В файл пишутся только статусы и названия приложений, без токенов и номеров.
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  subscribe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Подписать WABA
+        env:
+          WA_TOKEN: ${{ secrets.WA_TOKEN }}
+        run: |
+          python3 - <<'PY' > whatsapp-bot/subscribe.json
+          import json, os, urllib.request, urllib.parse
+          T = os.environ["WA_TOKEN"]; G = "https://graph.facebook.com/v22.0"
+          def call(method, path, **q):
+              q["access_token"] = T
+              url = f"{G}/{path}?" + urllib.parse.urlencode(q)
+              req = urllib.request.Request(url, method=method, data=b"" if method == "POST" else None)
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as r: return json.load(r)
+              except urllib.error.HTTPError as e:
+                  return {"error": json.load(e).get("error", {}).get("message", str(e))[:200]}
+          out = {}
+          dbg = call("GET", "debug_token", input_token=T).get("data", {})
+          out["token_valid"] = dbg.get("is_valid"); out["token_expires_at"] = dbg.get("expires_at")
+          wabas = sorted({i for s in dbg.get("granular_scopes", []) if s.get("scope") == "whatsapp_business_management" for i in s.get("target_ids", [])})
+          out["waba_count"] = len(wabas)
+          out["results"] = []
+          for w in wabas:
+              before = call("GET", f"{w}/subscribed_apps")
+              sub = call("POST", f"{w}/subscribed_apps")
+              after = call("GET", f"{w}/subscribed_apps")
+              names = lambda x: [a.get("whatsapp_business_api_data", {}).get("name") for a in x.get("data", [])] if "data" in x else x
+              out["results"].append({"before": names(before), "subscribe": sub, "after": names(after)})
+          print(json.dumps(out, ensure_ascii=False, indent=1))
+          PY
+          cat whatsapp-bot/subscribe.json
+          git config user.name "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          git add whatsapp-bot/subscribe.json
+          git diff --cached --quiet || git commit -m "whatsapp-bot: подписка WABA [skip ci]"
+          git pull --rebase origin main && git push
