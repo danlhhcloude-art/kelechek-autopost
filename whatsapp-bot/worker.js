@@ -1,3 +1,5 @@
+import { APP_HTML } from "./app.js";
+
 // ИИ-менеджер Kelechek AI в WhatsApp: отвечает клиентам, квалифицирует по BANT,
 // зовёт владельца к горячим. Cloudflare Worker + WhatsApp Cloud API + Gemini.
 //
@@ -95,6 +97,8 @@ export default {
     }
     if (url.pathname === "/leads" && req.method === "GET") return leads(req, env);
     if (url.pathname === "/health") return health(env);
+    if (url.pathname === "/app") return new Response(APP_HTML, { headers: { "content-type": "text/html; charset=utf-8" } });
+    if (url.pathname === "/app/lead" && req.method === "POST") return appLead(req, env, ctx);
     if (url.pathname === "/privacy") return new Response(PRIVACY, { headers: { "content-type": "text/html; charset=utf-8" } });
     return new Response("Kelechek AI WhatsApp bot", { status: 200 });
   },
@@ -268,6 +272,33 @@ async function tg(env, method, body) {
   return r;
 }
 
+// Кнопки под полем ввода: всегда под рукой, последняя открывает мини-приложение
+function menu(env) {
+  return { keyboard: [
+    [{ text: "🎬 Услуги" }, { text: "🎁 Бесплатный пример" }],
+    [{ text: "📅 Встреча в Бишкеке" }, { text: "👤 Связаться с Даниэлем" }],
+    [{ text: "📱 Открыть приложение", web_app: { url: env.APP_URL } }],
+  ], resize_keyboard: true, is_persistent: true, input_field_placeholder: "Напишите вопрос или выберите кнопку" };
+}
+
+const SERVICES_TEXT = `Что мы делаем:
+
+🎬 Reels и видео на ИИ: ролик про ваш бизнес в вашем стиле.
+💬 Автоответы в WhatsApp и Telegram: ИИ отвечает клиентам сам, вам приходят готовые к покупке.
+🎯 Таргетированная реклама в Instagram и Facebook: аудитория, креативы, заявки в чат, отчёт раз в неделю.
+✍️ Тексты для соцсетей живым языком.
+
+Первым клиентам 15 дней работы бесплатно, вы платите только подписку на ИИ-сервис. Цену называет Даниэль после пары вопросов.
+
+Расскажите, чем занимается ваш бизнес, и я подскажу, с чего начать.`;
+
+// Кнопка-подсказка превращается в понятную фразу для ИИ
+const BUTTONS = {
+  "🎁 Бесплатный пример": "Хочу бесплатный пример ролика для моего бизнеса",
+  "📅 Встреча в Бишкеке": "Хочу встретиться лично в Бишкеке и посмотреть, как это работает",
+  "👤 Связаться с Даниэлем": "Хочу поговорить с Даниэлем лично",
+};
+
 async function onTelegram(update, env) {
   const m = update.message;
   if (!m || m.chat?.type !== "private" || m.from?.is_bot) return;
@@ -283,8 +314,14 @@ async function onTelegram(update, env) {
     return tg(env, "sendMessage", { chat_id: chatId, text: await leadsText(env) });
   }
   // /reset: начать разговор с нуля (удобно для проверки бота владельцем)
-  if (m.text === "/reset") { await env.CHATS.delete("chat:tg" + chatId); return tg(env, "sendMessage", { chat_id: chatId, text: "Начинаем заново. Напишите, чем занимается ваш бизнес 🙂" }); }
-  let text = m.text || m.caption;
+  if (m.text === "/reset") { await env.CHATS.delete("chat:tg" + chatId); return tg(env, "sendMessage", { chat_id: chatId, text: "Начинаем заново. Напишите, чем занимается ваш бизнес 🙂", reply_markup: menu(env) }); }
+  if (m.text === "🎬 Услуги") {
+    const chat = await loadChat(env, "tg" + chatId);
+    chat.history.push({ role: "user", text: "Покажите услуги", ts: Date.now() }, { role: "model", text: SERVICES_TEXT, ts: Date.now() });
+    await saveChat(env, "tg" + chatId, chat);
+    return tg(env, "sendMessage", { chat_id: chatId, text: SERVICES_TEXT, reply_markup: { inline_keyboard: [[{ text: "📱 Подробнее в приложении", web_app: { url: env.APP_URL } }]] } });
+  }
+  let text = BUTTONS[m.text] || m.text || m.caption;
   let source;
   if (text && text.startsWith("/start")) {
     const payload = text.slice(6).trim().toLowerCase();   // ссылка вида t.me/бот?start=threads
@@ -297,8 +334,49 @@ async function onTelegram(update, env) {
   await converse(env, {
     key: "tg" + chatId, channel: "Telegram", contact: who,
     profileName: [m.from.first_name, m.from.last_name].filter(Boolean).join(" "),
-    text, source, reply: t => tg(env, "sendMessage", { chat_id: chatId, text: t }),
+    text, source, reply: t => tg(env, "sendMessage", { chat_id: chatId, text: t, reply_markup: menu(env) }),
   });
+}
+
+// Telegram подписывает данные мини-приложения токеном бота: так знаем, что заявку прислал именно этот человек
+async function checkInitData(initData, botToken) {
+  const params = new URLSearchParams(initData || "");
+  const hash = params.get("hash");
+  if (!hash) return null;
+  params.delete("hash");
+  const dcs = [...params.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => `${k}=${v}`).join("\n");
+  const enc = new TextEncoder();
+  const k1 = await crypto.subtle.importKey("raw", enc.encode("WebAppData"), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const secret = await crypto.subtle.sign("HMAC", k1, enc.encode(botToken));
+  const k2 = await crypto.subtle.importKey("raw", secret, { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const sig = [...new Uint8Array(await crypto.subtle.sign("HMAC", k2, enc.encode(dcs)))].map(b => b.toString(16).padStart(2, "0")).join("");
+  if (sig !== hash) return null;
+  if (Date.now() / 1000 - Number(params.get("auth_date") || 0) > 86400) return null;
+  try { return JSON.parse(params.get("user") || "null"); } catch { return null; }
+}
+
+async function appLead(req, env, ctx) {
+  const { initData, form = {} } = await req.json().catch(() => ({}));
+  const user = env.TG_CLIENT_TOKEN && await checkInitData(initData, env.TG_CLIENT_TOKEN);
+  if (!user?.id) return new Response("откройте приложение из чата с ботом", { status: 403 });
+  const clip = (v, n) => String(v || "").slice(0, n);
+  const f = { biz: clip(form.biz, 80), niche: clip(form.niche, 120), city: clip(form.city, 30), pain: clip(form.pain, 60),
+    when: clip(form.when, 40), note: clip(form.note, 500), needs: (Array.isArray(form.needs) ? form.needs : []).slice(0, 4).map(x => clip(x, 20)) };
+  const key = "tg" + user.id;
+  const chat = await loadChat(env, key);
+  chat.name = chat.name || f.biz;
+  chat.niche = f.niche || chat.niche;
+  chat.city = f.city || chat.city;
+  chat.request = `Бесплатный пример: ${f.needs.join(", ") || "ролик"}`;
+  chat.appForm = { ...f, at: Date.now() };
+  await saveChat(env, key, chat);
+  const text = `[Заявка из мини-приложения на бесплатный пример] Бизнес: ${f.biz}. Чем занимается: ${f.niche}. Город: ${f.city}. Нужно: ${f.needs.join(", ") || "не выбрано"}. Что мешает: ${f.pain || "не указал"}. Когда начать: ${f.when || "не указал"}. Комментарий: ${f.note || "нет"}. Поблагодари за заявку, скажи, что пример сделаем, попроси прислать 2–3 фото или ссылку на Instagram и задай один вопрос про недостающую букву BANT.`;
+  const who = user.username ? "@" + user.username : `tg://user?id=${user.id}`;
+  await notifyOwner(env, `🎁 Заявка на пример из приложения: ${f.biz} (${f.niche}), ${f.city}, ${who}. Нужно: ${f.needs.join(", ") || "—"}. Мешает: ${f.pain || "—"}. Старт: ${f.when || "—"}.`);
+  ctx.waitUntil(converse(env, { key, channel: "Telegram", contact: who, profileName: [user.first_name, user.last_name].filter(Boolean).join(" "),
+    text, source: "Mini App", reply: t => tg(env, "sendMessage", { chat_id: user.id, text: t, reply_markup: menu(env) }) })
+    .catch(e => env.CHATS.put("health:last_crash", JSON.stringify({ at: new Date().toISOString(), where: "app", message: String(e.stack || e).slice(0, 400) }))));
+  return Response.json({ ok: true });
 }
 
 

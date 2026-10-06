@@ -87,8 +87,18 @@ jobs:
           secret=$(printf 'kelechek-tg:%s' "$TG_CLIENT_TOKEN" | sha256sum | cut -c1-48)
           curl -s -m 30 "https://api.telegram.org/bot$TG_CLIENT_TOKEN/setWebhook" \
             -d "url=$url/tg" -d "secret_token=$secret" -d 'allowed_updates=["message"]' -d drop_pending_updates=true > /tmp/sw.json
+          # кнопка «Приложение» слева от поля ввода, команды и описание бота
+          api="https://api.telegram.org/bot$TG_CLIENT_TOKEN"
+          curl -s -m 30 "$api/setChatMenuButton" -H 'content-type: application/json' \
+            -d "{\"menu_button\":{\"type\":\"web_app\",\"text\":\"Приложение\",\"web_app\":{\"url\":\"$url/app\"}}}" > /tmp/mb.json
+          curl -s -m 30 "$api/setMyCommands" -H 'content-type: application/json' \
+            -d '{"commands":[{"command":"start","description":"Начать"},{"command":"reset","description":"Начать разговор заново"}]}' > /dev/null
+          curl -s -m 30 "$api/setMyDescription" -H 'content-type: application/json' \
+            -d '{"description":"ИИ-ассистент Kelechek AI, Бишкек. ИИ-видео, автоответы и реклама для бизнеса. Первым клиентам 15 дней работы бесплатно. Нажмите «Старт»."}' > /dev/null
+          curl -s -m 30 "$api/setMyShortDescription" -H 'content-type: application/json' \
+            -d '{"short_description":"ИИ-видео и автоматизация бизнеса в Бишкеке. Бесплатный пример ролика."}' > /dev/null
           me=$(curl -s -m 30 "https://api.telegram.org/bot$TG_CLIENT_TOKEN/getMe" | python3 -c "import json,sys;print(json.load(sys.stdin).get('result',{}).get('username',''))")
-          python3 -c "import json;d=json.load(open('/tmp/sw.json'));print(json.dumps({'ok':d.get('ok'),'description':d.get('description'),'bot':'@$me'},ensure_ascii=False))" > tg-webhook.json
+          python3 -c "import json;d=json.load(open('/tmp/sw.json'));mb=json.load(open('/tmp/mb.json'));print(json.dumps({'ok':d.get('ok'),'description':d.get('description'),'menu_button':mb.get('ok'),'bot':'@$me'},ensure_ascii=False))" > tg-webhook.json
           cat tg-webhook.json
       - name: Сохранить адрес и журнал деплоя
         if: always() && steps.check.outputs.skip != '1'
