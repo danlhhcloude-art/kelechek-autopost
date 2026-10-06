@@ -44,6 +44,22 @@ const SCHEMA = {
   required: ["reply", "next", "wants_human"],
 };
 
+// Политика конфиденциальности для публикации приложения Meta
+const PRIVACY = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kelechek AI: политика конфиденциальности</title><style>body{font-family:system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 16px;line-height:1.6;color:#222}</style></head><body>
+<h1>Политика конфиденциальности Kelechek AI</h1>
+<p>Kelechek AI (Бишкек, Кыргызстан) использует WhatsApp Business и страницы в соцсетях, чтобы отвечать на вопросы клиентов о наших услугах: ИИ-видео, автоматизация и реклама для бизнеса.</p>
+<h2>Какие данные мы получаем</h2>
+<p>Ваше имя в профиле WhatsApp, номер телефона и текст сообщений, которые вы нам отправляете.</p>
+<h2>Зачем</h2>
+<p>Только чтобы ответить вам, понять вашу задачу и передать заявку владельцу. На сообщения сначала отвечает ИИ-ассистент, он честно говорит, что он ИИ. Для подготовки ответов текст переписки обрабатывается сервисом Google Gemini.</p>
+<h2>Хранение</h2>
+<p>Мы храним последние сообщения переписки, чтобы помнить контекст разговора. Мы не продаём и не передаём ваши данные третьим лицам для рекламы.</p>
+<h2>Удаление данных</h2>
+<p>Напишите нам в WhatsApp +996 502 091 443 «удалите мои данные», и мы удалим переписку и заявку.</p>
+<p>Контакт: +996 502 091 443, Instagram и Threads @kelechek_ai.</p>
+</body></html>`;
+
 export default {
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
@@ -57,6 +73,7 @@ export default {
     }
     if (url.pathname === "/leads" && req.method === "GET") return leads(req, env);
     if (url.pathname === "/health") return health(env);
+    if (url.pathname === "/privacy") return new Response(PRIVACY, { headers: { "content-type": "text/html; charset=utf-8" } });
     return new Response("Kelechek AI WhatsApp bot", { status: 200 });
   },
 };
