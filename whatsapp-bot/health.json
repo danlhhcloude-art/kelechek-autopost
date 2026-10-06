@@ -14,13 +14,25 @@
   "raw_has_spaces": false
  },
  "last_post": {
-  "at": "2026-10-06T22:24:37.616Z",
+  "at": "2026-10-06T22:31:41.678Z",
   "signature_ok": true,
   "has_signature": true,
   "fields": [
    "messages"
   ]
  },
- "last_message_at": "2026-10-06T22:24:34.150Z",
+ "last_message_at": "2026-10-06T22:31:39.428Z",
+ "last_status": {
+  "at": "2026-10-06T22:31:41.898Z",
+  "status": "failed",
+  "errors": [
+   {
+    "code": 131031,
+    "title": "Business Account locked",
+    "details": "Business account has been locked."
+   }
+  ]
+ },
+ "last_reply_at": "2026-10-06T22:31:40.914Z",
  "last_error": null
 }
