@@ -16,12 +16,26 @@ import requests
 
 HERE = Path(__file__).resolve().parent.parent
 DEST = HERE / "assets" / "music" / "upbeat"
-PAGES = ["https://freepd.com/upbeat.php", "https://freepd.com/electronic.php", "https://freepd.com/comedy.php",
-         "https://freepd.com/world.php"]
-UA = {"User-Agent": "Mozilla/5.0 (kelechek-autopost music fetch)"}
+HOME = "https://freepd.com/"
+MOODS = ["upbeat", "happy", "electronic", "comedy", "funk", "pop", "world", "fun", "dance", "positive"]
 
 
+def category_pages():
+    """Ищем разделы на главной FreePD и ставим вперёд бодрые по названию."""
+    r = requests.get(HOME, headers=UA, timeout=30)
+    LOG.append(f"{HOME} -> {r.status_code}, {len(r.text)} байт")
+    hrefs = re.findall(r"""href\s*=\s*["']([^"'#]+)["']""", r.text, re.I)
+    pages = []
+    for h in hrefs:
+        u = urljoin(HOME, h)
+        if "freepd.com" in u and not u.lower().endswith((".mp3", ".css", ".js", ".png", ".jpg", ".ico")) and u.rstrip("/") != HOME.rstrip("/"):
+            pages.append(u)
+    pages = list(dict.fromkeys(pages))
+    LOG.append("разделы: " + ", ".join(pages[:60]))
+    happy = [u for u in pages if any(m in u.lower() for m in MOODS)]
+    return happy or pages[:12]
 LOG = []
+UA = {"User-Agent": "Mozilla/5.0 (kelechek-autopost music fetch)"}
 
 
 def links(page):
@@ -43,7 +57,7 @@ def main():
     DEST.mkdir(parents=True, exist_ok=True)
     have = {p.stem for p in DEST.glob("*.mp3")}
     added = []
-    for page in PAGES:
+    for page in category_pages():
         try:
             urls = links(page)
         except requests.RequestException as e:
