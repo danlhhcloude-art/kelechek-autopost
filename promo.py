@@ -3,8 +3,10 @@
 Тёмный тёплый фон, 3D-телефоны, стеклянные карточки, жёлтые теги с точкой,
 субтитр со второй половиной жёлтым и подчёркиванием, финал с логотипом.
 Каждая фраза сценария получает свою сцену по смыслу (переписка, ролики,
-запись, встреча, услуги, крупный текст), соседние сцены не повторяются,
-содержимое сцен каждый раз случайное. Только музыка, без звуковых эффектов.
+запись, встреча, таргет, услуги, крупный текст), соседние сцены не повторяются.
+Фразы на экране не повторяются: внутри ролика каждая фраза один раз и не дублирует
+субтитр, а между роликами used_texts.json помнит показанное, и сначала берутся
+свежие фразы. Только музыка, без звуковых эффектов.
 
   python promo.py "текст сценария" out/promo.mp4
 """
@@ -21,37 +23,81 @@ HERE = Path(__file__).parent
 HF_ASSETS = HERE / "assets" / "hf"
 HF_VERSION = "0.8.121"
 END = 3.0  # финальная карточка с логотипом
+USED_FILE = HERE / "used_texts.json"
+USED_KEEP = 600
+picked = []  # фразы последнего ролика; reels.py отмечает их показанными после публикации
 
 KEYWORDS = {
+    "ads": ["таргет", "реклам", "аудитор", "бюджет", "продвиг", "креатив"],
     "chat": ["ответ", "вопрос", "пиш", "whatsapp", "директ", "сообщ", "сколько стоит", "клиент"],
-    "fan": ["reels", "ролик", "видео", "instagram", "пост", "контент", "сним", "съём", "монтаж", "камер", "реклам"],
+    "fan": ["reels", "ролик", "видео", "instagram", "пост", "контент", "сним", "съём", "монтаж", "камер"],
     "booking": ["запис", "брон", "свободн", "окн"],
     "notify": ["заявк", "уведомл", "комментар", "лид", "сразу приходит", "теря"],
     "split": ["вместо", "раньше", "вручную", "сотрудник", "менеджер", "по кругу"],
     "laptop": ["лично", "встреч", "ноутбук", "показ", "отчёт", "отчет", "excel", "бишкек"],
 }
 TAGS = {
-    "chat": ["Клиент пишет ночью", "ИИ отвечает сразу", "WhatsApp", "Direct", "Без ожидания"],
-    "fan": ["Reels", "Instagram", "Threads", "Без съёмки", "Каждый день"],
-    "booking": ["Сайт для записи", "24/7", "Без звонков"],
-    "laptop": ["Бишкек", "Встреча лично", "Отчёт в Excel"],
-    "cards": ["Автоматизация", "ИИ-видео", "Для бизнеса", "Бишкек"],
+    "ads": ["Таргет", "Реклама в Instagram", "Нужная аудитория", "Под ваш бюджет", "Креативы на ИИ"],
+    "chat": ["Клиент пишет ночью", "ИИ отвечает сразу", "WhatsApp", "Direct", "Без ожидания", "Ответ за минуту"],
+    "fan": ["Reels", "Instagram", "Threads", "Без съёмки", "Каждый день", "Контент"],
+    "booking": ["Сайт для записи", "24/7", "Без звонков", "Онлайн-бронь"],
+    "laptop": ["Бишкек", "Встреча лично", "Отчёт в Excel", "Всё в одном месте"],
+    "cards": ["Автоматизация", "ИИ-видео", "Для бизнеса", "Бишкек", "Таргет", "Под ключ"],
     "big": ["Kelechek AI"],
-    "notify": ["Заявки", "Уведомления", "Ничего не теряется"],
-    "split": ["Было и стало", "С ИИ"],
+    "notify": ["Заявки", "Уведомления", "Ничего не теряется", "Всё под контролем"],
+    "split": ["Было и стало", "Разница"],
 }
 QUESTIONS = ["Здравствуйте, сколько стоит?", "А вы сегодня работаете?", "Есть запись на завтра?",
              "Где вы находитесь?", "Можно узнать цену?", "Есть свободное время вечером?",
-             "Доставка есть?", "Вы ещё открыты?"]
+             "Доставка есть?", "Вы ещё открыты?", "А в субботу можно прийти?", "Есть парковка рядом?",
+             "Можно оплатить переводом?", "Какие есть размеры?", "Сколько ждать заказ?",
+             "Можно столик на четверых?", "А детское меню есть?", "Вы без выходных?",
+             "Можно прийти без записи?", "Это есть в наличии?", "Как к вам доехать?", "Пришлите меню, пожалуйста",
+             "Увидел вашу рекламу, это актуально?", "Можно подробнее про акцию?"]
 ANSWERS = ["Здравствуйте! Я ИИ-помощник, отвечу сразу. Что вас интересует?",
            "Добрый вечер! Подскажите, на какой день вам удобно?",
            "Здравствуйте! Сейчас всё подскажу. Как вас зовут?",
            "Да, отвечаю сразу. Передам владельцу вашу заявку, он напишет лично.",
-           "Добрый вечер! Пришлю варианты прямо сюда."]
-FOLLOW = ["Отлично, спасибо!", "Супер, жду", "Да, давайте", "Хорошо 👍".replace(" 👍", "")]
+           "Добрый вечер! Пришлю варианты прямо сюда.",
+           "Здравствуйте! Сейчас пришлю адрес и схему проезда.",
+           "Добрый вечер! Уточню наличие и сразу вернусь с ответом.",
+           "Здравствуйте! Меню и цены отправляю прямо в чат.",
+           "Да, можно. На какое время вас записать?",
+           "Здравствуйте! Есть несколько вариантов, пришлю фото.",
+           "Добрый вечер! Оставьте номер, менеджер позвонит утром.",
+           "Здравствуйте! Простое отвечу сам, сложное передам владельцу."]
+FOLLOW = ["Отлично, спасибо!", "Супер, жду", "Да, давайте", "Хорошо", "Удобно, спасибо", "Понял, записываюсь",
+          "Быстро вы", "Ого, уже ответили", "Договорились", "Спасибо, приду"]
 CARDS = [("Ответы 24/7", "в WhatsApp и Direct"), ("Reels", "без съёмки"), ("Заявки", "сразу в таблицу"),
          ("Отчёт", "каждую неделю в Excel"), ("Посты", "каждый день"), ("Запись", "клиент сам выбирает время"),
-         ("Встреча", "лично в Бишкеке"), ("15 дней", "бесплатно"), ("Монтаж", "в вашем стиле")]
+         ("Встреча", "лично в Бишкеке"), ("15 дней", "бесплатно"), ("Монтаж", "в вашем стиле"),
+         ("Таргет", "реклама нужным людям"), ("Аудитория", "по городу и интересам"), ("Креативы", "ролики для рекламы"),
+         ("Сайт", "для онлайн-записи"), ("Чат-бот", "знает ваши цены"), ("Контент-план", "на месяц вперёд"),
+         ("Комментарии", "ответ без задержки"), ("Тексты", "живым языком"), ("Обложки", "в одном стиле"),
+         ("Напоминания", "клиентам о визите"), ("ИИ-аватар", "говорит за вас"), ("Озвучка", "без студии"),
+         ("Аналитика", "что приносит заявки")]
+TILES = ["Клиент написал в 23:40. ИИ ответил сразу.", "Новый Reels для меню готов к публикации.",
+         "Пост на сегодня уже в очереди.", "Заявка из Direct попала в таблицу.",
+         "Монтаж в стиле вашего бренда.", "Ответ на комментарий отправлен.",
+         "Креатив для рекламы собран.", "Обложки для недели готовы.", "Сторис с новинкой выйдет в обед.",
+         "Карусель про услуги в черновиках.", "Текст поста проверен владельцем.", "Видео с ИИ-аватаром смонтировано.",
+         "Подписи к роликам на двух языках.", "Реклама показывается в Бишкеке."]
+REEL_TITLES = [("Новинка", "этой недели"), ("За кадром", "нашей кухни"), ("Запись", "открыта"), ("Как это", "делается"),
+               ("Утро", "в нашей кофейне"), ("Ваш стиль", "в каждом кадре"), ("Секрет", "нашего меню"),
+               ("Мастер", "за работой"), ("Новая", "коллекция"), ("Один день", "из жизни салона"),
+               ("Вопрос", "от клиента"), ("Почему", "выбирают нас")]
+AD_POSTS = [("Кофейня у дома", "Новый сезонный напиток"), ("Салон красоты", "Свободные окна на этой неделе"),
+            ("Стоматология", "Консультация и запись онлайн"), ("Доставка еды", "Горячие обеды в офис"),
+            ("Фитнес-студия", "Пробное занятие"), ("Магазин одежды", "Новая коллекция"),
+            ("Автомойка", "Запись без очереди"), ("Цветочный магазин", "Букеты с доставкой"),
+            ("Детский центр", "Набор в новые группы"), ("Пекарня", "Свежая выпечка с утра")]
+AUDIENCE = ["Бишкек", "рядом с вами", "25–45 лет", "молодые мамы", "любят кофе", "работают в офисах",
+            "интерес: красота", "интерес: спорт", "были на сайте", "писали в Direct", "похожи на клиентов",
+            "смотрели ваши Reels", "ищут доставку", "планируют праздник"]
+PINS = ["Бишкек", "Встреча у вас", "Демо вживую", "Ваш офис", "Кофе и показ"]
+SLOGANS = ["ИИ-видео и автоматизация для бизнеса", "Видео, таргет и автоответы на ИИ",
+           "Reels, реклама и заявки без хаоса", "ИИ берёт рутину, вы берёте клиентов",
+           "Контент и реклама для бизнеса в Бишкеке"]
 DECOR = ["ring", "wave", "bars", "dots", ""]
 
 CSS = """
@@ -133,6 +179,20 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B090
 .col li:before { position: absolute; left: 0; top: 16px; width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-size: 22px; }
 .was li:before { content: "✕"; background: rgba(255,255,255,.12); }
 .now li:before { content: "✓"; background: #FFC23D; color: #1A1206; }
+.adhead { display: flex; align-items: center; gap: 16px; padding: 10px 26px 18px; }
+.adhead img { width: 58px; height: 58px; border-radius: 50%; background: #111; }
+.adhead b { font-size: 25px; display: block; }
+.adhead span { font-size: 19px; color: #8A8172; }
+.adimg { margin: 0 18px; height: 520px; border-radius: 26px; background: linear-gradient(165deg, #3A2A12, #0B0907); display: flex; align-items: flex-end;
+         padding: 34px; font-family: Unbounded, sans-serif; font-size: 40px; line-height: 1.15; color: #fff; }
+.adbtn { margin: 22px 18px; padding: 22px; border-radius: 20px; background: #FFC23D; text-align: center; font-size: 26px; font-weight: 500; color: #1A1206; }
+.aud { position: absolute; left: 580px; right: 60px; top: 470px; }
+.aud h3 { font-family: Unbounded, sans-serif; font-size: 40px; margin: 30px 0 26px; }
+.chip { display: inline-block; margin: 0 12px 18px 0; padding: 16px 26px; border-radius: 999px; font-size: 28px;
+        background: rgba(255,255,255,.12); border: 1.5px solid rgba(255,194,61,.55); }
+.aim { width: 150px; height: 150px; }
+.aim circle, .aim line { fill: none; stroke: #FFC23D; stroke-width: 4; }
+.aim .core { fill: #FFC23D; }
 .sub { position: absolute; left: 60px; right: 60px; bottom: 300px; text-align: center; font-family: Unbounded, sans-serif; font-size: 52px; line-height: 1.25; }
 .sub.s { font-size: 44px; }
 .sub u { color: #FFC23D; text-decoration: none; background: linear-gradient(#FFC23D, #FFC23D) left bottom / var(--w, 0%) 5px no-repeat; padding-bottom: 6px; }
@@ -183,19 +243,67 @@ def stamp(rng):
     return f"{rng.randint(21, 23)}:{rng.randint(0, 59):02d}"
 
 
+def stems(text):
+    return {w[:4] for w in re.findall(r"[а-яёa-z0-9]+", text.lower()) if len(w) >= 4}
+
+
+def key(item):
+    return " / ".join(item) if isinstance(item, tuple) else item
+
+
+def load_used():
+    try:
+        return json.loads(USED_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+
+
+def mark_used(phrases):
+    """После публикации: эти фразы уходят в конец очереди и не появятся, пока есть непоказанные."""
+    fresh = list(dict.fromkeys(phrases))
+    used = [x for x in load_used() if x not in fresh] + fresh
+    USED_FILE.write_text(json.dumps(used[-USED_KEEP:], ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
+
+
+class Picker(random.Random):
+    """random.Random, который не повторяет фразы: ни внутри ролика, ни с субтитром, ни с прошлыми роликами."""
+
+    def __init__(self, seed=None):
+        super().__init__(seed)
+        self.age = {x: n for n, x in enumerate(load_used())}  # чем меньше, тем давнее показывали
+        self.shown = set()
+
+    def fresh(self, pool, k, text="", keep=True):
+        sub = stems(text)
+        free = [x for x in pool if key(x) not in self.shown]
+        clean = [x for x in free if not stems(key(x)) & sub] or free  # не дублировать слова субтитра
+        self.shuffle(clean)
+        clean.sort(key=lambda x: self.age.get(key(x), -1))  # сначала непоказанные, потом самые давние
+        out = clean[:k]
+        if len(out) < k:
+            out += [x for x in free if x not in out][:k - len(out)]
+        for x in out:
+            self.shown.add(key(x))
+            if keep:
+                picked.append(key(x))
+        return out
+
+    def one(self, pool, text="", keep=True):
+        return self.fresh(pool, 1, text, keep)[0]
+
+
 # ---------- сцены: html и анимация ----------
 
 def scene_chat(i, text, rng, t, d):
-    quoted = re.findall(r"«([^»]{3,60}\?)»", text)
-    q = quoted[0].capitalize() if quoted else text if text.endswith("?") and len(text) < 80 else rng.choice(QUESTIONS)
+    q = rng.one(QUESTIONS, text)  # не цитата из текста: субтитр и так её покажет
     ts = stamp(rng)
     h = f"""<div class="phone" id="p{i}"><div class="screen"><div class="island"></div>
       <div class="sbar"><span>{ts}</span><span>●●● 5G</span></div>
       <div class="chead"><img src="./logo.png" /><div><b>ИИ-помощник</b><span>онлайн</span></div></div>
       <div class="chat"><div class="msg in" id="a{i}">{esc(q)}<small>{ts}</small></div>
         <div class="typing" id="y{i}"><i></i><i></i><i></i></div>
-        <div class="msg out" id="b{i}">{esc(rng.choice(ANSWERS))}<small>{ts}</small></div>
-        <div class="msg in" id="c{i}">{esc(rng.choice(FOLLOW))}<small>{ts}</small></div></div></div></div>
+        <div class="msg out" id="b{i}">{esc(rng.one(ANSWERS, text))}<small>{ts}</small></div>
+        <div class="msg in" id="c{i}">{esc(rng.one(FOLLOW, text))}<small>{ts}</small></div></div></div></div>
       <div class="demo">пример переписки</div>"""
     ry = rng.choice([-38, 38])
     js = f"""
@@ -225,7 +333,7 @@ def decor(kind, i, k):
 
 
 def scene_cards(i, text, rng, t, d):
-    picks = rng.sample(CARDS, 4)
+    picks = rng.fresh(CARDS, 4, text)
     decs = rng.sample(DECOR, 4)
     cards = "".join(f'<div class="card"><h3>{esc(a)}</h3><p>{esc(b)}</p>{decor(decs[k], i, k)}</div>' for k, (a, b) in enumerate(picks))
     h = f'<div class="cards" id="g{i}">{cards}</div>'
@@ -244,12 +352,8 @@ tl.from("#g{i} .card", {{x: {dx}, rotationY: {-30 if dx > 0 else 30}, opacity: 0
 
 
 def scene_fan(i, text, rng, t, d):
-    words = text.split()
-    head = esc(" ".join(words[:3]))
-    tail = esc(" ".join(words[3:7]))
-    tiles = rng.sample(["Клиент написал в 23:40. ИИ ответил сразу.", "Новый Reels для меню готов к публикации.",
-                        "Пост на сегодня уже в очереди.", "Заявка из Direct попала в таблицу.",
-                        "Монтаж в стиле вашего бренда.", "Ответ на комментарий отправлен."], 3)
+    head, tail = map(esc, rng.one(REEL_TITLES, text))  # не первые слова абзаца: их уже показывает субтитр
+    tiles = [esc(x) for x in rng.fresh(TILES, 3, text)]
     h = f"""<div class="mini" id="f{i}a" style="left:40px"><div class="screen"><div class="sbar"><span>9:07</span><span>●●●</span></div>
         <div class="tile"><b>kelechek_ai</b>{tiles[0]}</div><div class="tile"><b>kelechek_ai</b>{tiles[1]}</div></div></div>
       <div class="mini" id="f{i}b" style="left:375px; top:470px"><div class="screen"><div class="sbar"><span>19:07</span><span>●●●</span></div>
@@ -285,7 +389,7 @@ def scene_laptop(i, text, rng, t, d):
         <div class="lcell"><b>Reels</b><span>план на неделю</span></div>
         <div class="lcell"><b>Ответы</b><span>WhatsApp и Direct</span></div>
       </div></div><div class="lbase"></div></div>
-      <div class="pin" id="n{i}">● Бишкек</div>"""
+      <div class="pin" id="n{i}">● {esc(rng.one(PINS, text, keep=False))}</div>"""
     js = f"""
 tl.from("#l{i}", {{rotationX: 50, y: 200, scale: .8, opacity: 0, filter: "blur(16px)", transformOrigin: "50% 100%", duration: .9, ease: "expo.out"}}, {t})
   .from("#l{i} .lcell", {{y: 40, opacity: 0, stagger: .12, duration: .45, ease: "power3.out"}}, {t + .6})
@@ -308,16 +412,25 @@ tl.from("#t{i} .w", {{opacity: 0, y: 40, filter: "blur(12px)", stagger: .09, dur
     return h, js
 
 
-NOTES = [("Новая заявка", "из Instagram, уже в таблице"), ("Новый комментарий", "ИИ ответил сразу"),
+NOTES = [("Новая заявка", "из Instagram, уже в таблице"), ("Новый комментарий", "ИИ ответил под постом"),
          ("Запись на завтра", "клиент выбрал время сам"), ("Сообщение в WhatsApp", "ответ отправлен"),
          ("Новый Reels готов", "выйдет вечером"), ("Отчёт за неделю", "в Excel, можно открыть"),
-         ("Вопрос «сколько стоит?»", "ИИ прислал цены")]
-WAS = ["Ответ утром", "Заявки в голове", "Одни и те же вопросы", "Старые фото в профиле", "Посты, когда есть время"]
-NOW = ["Ответ сразу, даже ночью", "Каждая заявка в таблице", "ИИ отвечает на частые", "Свежие ролики без съёмки", "Посты каждый день"]
+         ("Вопрос о цене", "ИИ прислал прайс"), ("Реклама запущена", "показы идут в Бишкеке"),
+         ("Новый креатив", "для рекламы в Instagram"), ("Заявка с рекламы", "уже в WhatsApp"),
+         ("Напоминание ушло", "клиенту о визите завтра"), ("Пост вышел", "в Threads"),
+         ("Контент-план", "обновлён на неделю"), ("Бронь столика", "на вечер, подтверждена"),
+         ("Отзыв", "клиента попросили после визита"), ("Вопрос в Direct", "ответ уже у клиента")]
+SPLITS = [("Ответ утром", "Ответ сразу, даже ночью"), ("Заявки в голове", "Каждая заявка в таблице"),
+          ("Одни и те же вопросы", "ИИ отвечает на частые"), ("Старые фото в профиле", "Свежие ролики без съёмки"),
+          ("Посты, когда есть время", "Посты каждый день"), ("Реклама «на всех»", "Реклама на тех, кому нужно"),
+          ("Кнопка «Продвигать» наугад", "Настроенная аудитория"), ("Один креатив месяцами", "Новые креативы регулярно"),
+          ("Запись по телефону", "Запись на сайте"), ("Забытые визиты", "Напоминания уходят сами"),
+          ("Итоги на глаз", "Отчёт в Excel"), ("Комментарии без ответа", "Ответ под каждым"),
+          ("Съёмка целый день", "Ролик из пары фото")]
 
 
 def scene_notify(i, text, rng, t, d):
-    picks = rng.sample(NOTES, 4)
+    picks = rng.fresh(NOTES, 4, text)
     notes = "".join(f'<div class="note"><img src="./logo.png" /><div><b>{esc(a)}</b><span>{esc(b)}</span></div><small>{stamp(rng)}</small></div>'
                     for a, b in picks)
     h = f'<div class="notes" id="n{i}">{notes}</div>'
@@ -328,9 +441,9 @@ tl.from("#n{i} .note", {{y: -160, opacity: 0, scale: .9, filter: "blur(10px)", s
 
 
 def scene_split(i, text, rng, t, d):
-    idx = rng.sample(range(len(WAS)), 3)
-    was = "".join(f"<li>{esc(WAS[k])}</li>" for k in idx)
-    now = "".join(f"<li>{esc(NOW[k])}</li>" for k in idx)
+    pairs = rng.fresh(SPLITS, 3, text)
+    was = "".join(f"<li>{esc(a)}</li>" for a, _ in pairs)
+    now = "".join(f"<li>{esc(b)}</li>" for _, b in pairs)
     h = (f'<div class="split" id="v{i}"><div class="col was"><h3>Было</h3><ul>{was}</ul></div>'
          f'<div class="col now"><h3>С ИИ</h3><ul>{now}</ul></div></div>')
     js = f"""
@@ -341,13 +454,38 @@ tl.from("#v{i} .was", {{x: -400, rotationY: 30, opacity: 0, filter: "blur(14px)"
     return h, js
 
 
-SCENES = {"notify": scene_notify, "split": scene_split, "chat": scene_chat, "cards": scene_cards, "fan": scene_fan, "booking": scene_booking,
+def scene_ads(i, text, rng, t, d):
+    biz, head = rng.one(AD_POSTS, text)
+    chips = "".join(f'<div class="chip">{esc(x)}</div>' for x in rng.fresh(AUDIENCE, 4, text, keep=False))
+    h = f"""<div class="phone" id="ad{i}" style="left:70px;top:360px;width:470px;height:930px"><div class="screen"><div class="island"></div>
+        <div class="sbar"><span>{stamp(rng)}</span><span>●●● 5G</span></div>
+        <div class="adhead"><img src="./logo.png" /><div><b>{esc(biz)}</b><span>Реклама</span></div></div>
+        <div class="adimg"><div>{esc(head)}</div></div>
+        <div class="adbtn" id="ab{i}">Написать в WhatsApp</div></div></div>
+      <div class="aud" id="au{i}"><svg class="aim" id="am{i}" viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"/><circle cx="60" cy="60" r="34"/>
+        <circle cx="60" cy="60" r="12" class="core"/><line x1="60" y1="0" x2="60" y2="30"/><line x1="60" y1="90" x2="60" y2="120"/>
+        <line x1="0" y1="60" x2="30" y2="60"/><line x1="90" y1="60" x2="120" y2="60"/></svg>
+        <h3>Аудитория</h3>{chips}</div>
+      <div class="demo">пример настройки рекламы</div>"""
+    js = f"""
+tl.fromTo("#ad{i}", {{rotationY: 35, x: -300, opacity: 0, filter: "blur(16px)"}}, {{rotationY: 8, x: 0, opacity: 1, filter: "blur(0px)", duration: .9, ease: "expo.out"}}, {t})
+  .from("#am{i}", {{scale: 3, rotation: -90, opacity: 0, duration: .8, ease: "expo.out"}}, {t + .3})
+  .from("#au{i} h3", {{opacity: 0, x: 40, duration: .4, ease: "power3.out"}}, {t + .6})
+  .from("#au{i} .chip", {{opacity: 0, x: 80, scale: .8, stagger: .18, duration: .45, ease: "back.out(2)"}}, {t + .8})
+  .to("#am{i}", {{rotation: 45, duration: {d - 1.2:.2f}, ease: "sine.inOut"}}, {t + 1.1})
+  .to("#ab{i}", {{scale: 1.06, duration: .3, yoyo: true, repeat: 3, ease: "sine.inOut"}}, {t + 1.6})
+  .to("#ad{i}", {{rotationY: -6, y: 20, duration: {d - 1:.2f}, ease: "sine.inOut"}}, {t + .9});"""
+    return h, js
+
+
+SCENES = {"ads": scene_ads, "notify": scene_notify, "split": scene_split, "chat": scene_chat, "cards": scene_cards, "fan": scene_fan, "booking": scene_booking,
           "laptop": scene_laptop, "big": scene_big}
-SPARE = ["cards", "fan", "chat", "big", "notify", "split"]  # если смысл сцены совпал с предыдущей, берём другую
+SPARE = ["cards", "fan", "chat", "big", "notify", "split", "ads"]  # если смысл сцены совпал с предыдущей, берём другую
 
 
 def compose(text, seed=None):
-    rng = random.Random(seed)
+    rng = Picker(seed)
+    picked.clear()
     paras = paragraphs(text)
     clips, js, t, prev = [], [], 0.0, None
     for i, p in enumerate(paras):
@@ -359,7 +497,7 @@ def compose(text, seed=None):
             kind = rng.choice([k for k in SPARE if k != prev])
         prev = kind
         h, s = SCENES[kind](i, p, rng, round(t, 2), d)
-        tags = "".join(f'<div class="tag"><i></i>{esc(x)}</div>' for x in rng.sample(TAGS[kind], min(2, len(TAGS[kind]))))
+        tags = "".join(f'<div class="tag"><i></i>{esc(x)}</div>' for x in rng.fresh(TAGS[kind], min(2, len(TAGS[kind])), p, keep=False))
         clips.append(f'<div class="tags clip" id="tg{i}" data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="2">{tags}</div>')
         clips.append(f'<div class="stage clip" id="sc{i}" data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="1">{h}</div>')
         js.append(s)
@@ -376,7 +514,7 @@ def compose(text, seed=None):
     total = round(t + END, 2)
     clips.append(f"""<div class="end clip" id="fin" data-start="{t:.2f}" data-duration="{END}" data-track-index="1">
         <div class="brand" id="brand"><img src="./logo.png" />Kelechek AI</div>
-        <div class="slogan" id="slogan">ИИ-видео и автоматизация для бизнеса</div>
+        <div class="slogan" id="slogan">{esc(rng.one(SLOGANS))}</div>
         <div class="pills"><div class="pill">Бишкек</div><div class="pill y">Написать в WhatsApp</div></div>
         <div class="disc">Ролик сделан с помощью ИИ</div></div>""")
     js.append(f"""tl.from("#brand", {{scale: .6, opacity: 0, filter: "blur(16px)", duration: .7, ease: "expo.out"}}, {t + .05:.2f})

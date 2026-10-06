@@ -62,6 +62,7 @@ jobs:
           git add posts.json
           if [ -f reels.json ]; then git add reels.json; fi
           if [ -f used_clips.json ]; then git add used_clips.json; fi
+          if [ -f used_texts.json ]; then git add used_texts.json; fi
           git diff --cached --quiet || git commit -m "reels: отметка публикации"
           git pull --rebase origin main
           git push

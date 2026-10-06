@@ -269,6 +269,7 @@ def main():
     if threads_id:
         item["threads_video_id"] = threads_id
     media.mark_clips_used(media.picked_clips)  # эти фоны больше не повторяем
+    promo.mark_used(promo.picked)  # и эти фразы тоже
     path.write_text(json.dumps(items, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Reels опубликован: {media_id}")
 
