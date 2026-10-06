@@ -110,6 +110,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B090
 .bg { position: absolute; inset: 0; background: radial-gradient(90% 60% at 50% 42%, #2B1F10 0%, #15100A 45%, #0B0907 80%); }
 .glow { position: absolute; width: 900px; height: 900px; left: 90px; top: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(255,190,80,.16), rgba(255,190,80,0) 65%); }
 .streak { position: absolute; width: 1400px; height: 2px; left: -160px; background: linear-gradient(90deg, transparent, rgba(255,214,140,.22), transparent); transform: rotate(-24deg); }
+#flash { position: absolute; inset: 0; background: #FFF4DC; opacity: 0; z-index: 50; pointer-events: none; }
 .vig { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(0,0,0,.75)); }
 .tags { position: absolute; top: 170px; left: 0; right: 0; display: flex; justify-content: center; gap: 44px; font-weight: 500; font-size: 34px; }
 .tag { display: flex; align-items: center; gap: 14px; }
@@ -124,7 +125,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B090
 .chead { display: flex; align-items: center; gap: 16px; padding: 14px 26px 18px; border-bottom: 1px solid #E3DED3; }
 .chead img { width: 58px; height: 58px; border-radius: 50%; background: #111; }
 .chead b { font-size: 25px; display: block; }
-.chead span { font-size: 19px; color: #2B7D44; }
+.chead span { font-size: 19px; color: #1F6B37; }
 .chat { padding: 26px 22px; display: flex; flex-direction: column; gap: 18px; }
 .msg { max-width: 82%; padding: 18px 22px; border-radius: 26px; font-size: 25px; line-height: 1.32; }
 .msg small { display: block; text-align: right; font-size: 16px; opacity: .55; margin-top: 6px; }
@@ -182,7 +183,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B090
 .adhead { display: flex; align-items: center; gap: 16px; padding: 10px 26px 18px; }
 .adhead img { width: 58px; height: 58px; border-radius: 50%; background: #111; }
 .adhead b { font-size: 25px; display: block; }
-.adhead span { font-size: 19px; color: #8A8172; }
+.adhead span { font-size: 19px; color: #5E574D; }
 .adimg { margin: 0 18px; height: 520px; border-radius: 26px; background: linear-gradient(165deg, #3A2A12, #0B0907); display: flex; align-items: flex-end;
          padding: 34px; font-family: Unbounded, sans-serif; font-size: 40px; line-height: 1.15; color: #fff; }
 .adbtn { margin: 22px 18px; padding: 22px; border-radius: 20px; background: #FFC23D; text-align: center; font-size: 26px; font-weight: 500; color: #1A1206; }
@@ -487,21 +488,29 @@ def compose(text, seed=None):
     rng = Picker(seed)
     picked.clear()
     paras = paragraphs(text)
-    clips, js, t, prev = [], [], 0.0, None
+    clips, js, t, prev, seen = [], [], 0.0, None, set()
     for i, p in enumerate(paras):
         d = duration(p)
         kind = kind_for(p)
         if i == 0 and kind == "cards":
             kind = "big"  # хук крупным текстом, если в нём нет предмета для сцены
-        if kind == prev:
-            kind = rng.choice([k for k in SPARE if k != prev])
+        if kind == prev or kind in seen:  # каждая сцена один раз за ролик, пока есть другие
+            kind = rng.choice([k for k in SPARE if k not in seen and k != prev] or [k for k in SPARE if k != prev])
         prev = kind
+        seen.add(kind)
         h, s = SCENES[kind](i, p, rng, round(t, 2), d)
         tags = "".join(f'<div class="tag"><i></i>{esc(x)}</div>' for x in rng.fresh(TAGS[kind], min(2, len(TAGS[kind])), p, keep=False))
         clips.append(f'<div class="tags clip" id="tg{i}" data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="2">{tags}</div>')
         clips.append(f'<div class="stage clip" id="sc{i}" data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="1">{h}</div>')
         js.append(s)
         js.append(f'tl.from("#tg{i} .tag", {{opacity: 0, y: -20, stagger: .1, duration: .4, ease: "power3.out"}}, {t + .15:.2f});')
+        # «биты» внутри сцены: ступенчатый наезд камеры и мягкая вспышка, чтобы не было мёртвых секунд
+        # (разбор Reels 06.10: картинка должна меняться каждую 1–2 секунды)
+        b, k = t + 1.7, 0
+        while b < t + d - .6:
+            js.append(f'tl.to("#sc{i}", {{scale: {1 + .03 * (k + 1):.3f}, transformOrigin: "50% 250px", duration: .22, ease: "power3.out"}}, {b:.2f})'
+                      f'.to("#flash", {{opacity: .10, duration: .08}}, {b:.2f}).to("#flash", {{opacity: 0, duration: .12}}, {b + .08:.2f});')
+            b, k = b + 1.6, k + 1
         js.append(f'tl.to("#sc{i}", {{x: {rng.choice([-500, 500])}, opacity: 0, filter: "blur(18px)", duration: .3, ease: "power3.in"}}, {t + d - .3:.2f});')
         if kind != "big":
             a, b = split_sub(p)
@@ -528,7 +537,7 @@ def compose(text, seed=None):
 <style>{CSS}</style></head><body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{total}" data-width="1080" data-height="1920">
 <div class="bg"></div><div class="glow" id="glow"></div>
-<div class="streak" id="st1" style="top:520px"></div><div class="streak" id="st2" style="top:1380px"></div><div class="vig"></div>
+<div class="streak" id="st1" style="top:520px"></div><div class="streak" id="st2" style="top:1380px"></div><div class="vig"></div><div id="flash"></div>
 {chr(10).join(clips)}
 </div>
 <script>
