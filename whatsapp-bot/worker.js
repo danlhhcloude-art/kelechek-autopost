@@ -277,6 +277,11 @@ async function onTelegram(update, env) {
   const chatId = m.chat.id;
   // владелец узнаёт свой chat id командой /id, чтобы получать уведомления о горячих заявках
   if (m.text === "/id") return tg(env, "sendMessage", { chat_id: chatId, text: `Ваш chat id: ${chatId}` });
+  // /leads: список клиентов по группам, только владельцу (chat id из секрета TG_CHAT_ID)
+  if (m.text === "/leads" || m.text === "/clients") {
+    if (String(chatId) !== String(env.TG_CHAT_ID || "")) return tg(env, "sendMessage", { chat_id: chatId, text: "Эта команда только для владельца." });
+    return tg(env, "sendMessage", { chat_id: chatId, text: await leadsText(env) });
+  }
   // /reset: начать разговор с нуля (удобно для проверки бота владельцем)
   if (m.text === "/reset") { await env.CHATS.delete("chat:tg" + chatId); return tg(env, "sendMessage", { chat_id: chatId, text: "Начинаем заново. Напишите, чем занимается ваш бизнес 🙂" }); }
   let text = m.text || m.caption;
@@ -296,6 +301,28 @@ async function onTelegram(update, env) {
   });
 }
 
+
+async function leadsText(env) {
+  const all = [];
+  let cursor;
+  do {
+    const page = await env.CHATS.list({ prefix: "chat:", cursor });
+    for (const k of page.keys) { const c = await env.CHATS.get(k.name, "json"); if (c) all.push(c); }
+    cursor = page.list_complete ? null : page.cursor;
+  } while (cursor);
+  if (!all.length) return "Клиентов пока нет.";
+  const score = c => ["n", "a", "t", "b"].reduce((s, k) => s + (c.bant?.[k] ?? 0), 0);
+  const groups = [["hot", "🔥 Горячие"], ["warm", "🙂 Тёплые"], ["unknown", "❔ Пока неясно"], ["cold", "🧊 Холодные"]];
+  const lines = [];
+  for (const [tier, title] of groups) {
+    const list = all.filter(c => (c.tier || "unknown") === tier).sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0)).slice(0, 15);
+    if (!list.length) continue;
+    lines.push(`${title} (${list.length})`);
+    for (const c of list) lines.push(`• ${c.name || c.profileName || "без имени"} ${c.contact || ""} (${c.channel || "WhatsApp"}), ${c.niche || c.request || "ниша не ясна"}, BANT ${score(c)}/8. ${c.next || ""}`);
+    lines.push("");
+  }
+  return lines.join("\n").slice(0, 4000);
+}
 
 // Открытая проверка без секретов: какие ключи заданы, когда было последнее сообщение и последняя ошибка Meta
 async function health(env) {
