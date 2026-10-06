@@ -65,6 +65,14 @@ def load_scripts():
 
 
 USED_MUSIC_FILE = HERE / "used_music.json"
+music_credit = ""  # автор трека текущего ролика (CC BY требует подписи), попадает в подписи Instagram и Threads
+
+
+def credit_for(track):
+    try:
+        return json.loads((track.parent / "credits.json").read_text(encoding="utf-8")).get(track.name, "")
+    except (OSError, ValueError):
+        return ""
 
 
 def used_music():
@@ -109,7 +117,8 @@ def caption(text):
     footer = ("\n\n👉 Пиши в WhatsApp, ссылка в профиле, или на номер " + CONTACT +
               "\n📍 В Бишкеке встречаемся лично и показываем всё вживую" +
               "\n\n🤖 Ролик смонтирован и опубликован автоматически. Так же можем и для вашего бизнеса.")
-    return f"{body}{footer}\n\n{HASHTAGS}"[:2200]
+    music = f"\n🎵 Музыка: {music_credit}" if music_credit else ""
+    return f"{body}{footer}{music}\n\n{HASHTAGS}"[:2200]
 
 
 def need(name):
@@ -163,6 +172,8 @@ def share_to_threads(text):
         return None
     user_id, token = os.environ["THREADS_USER_ID"], os.environ["THREADS_ACCESS_TOKEN"]
     body = re.sub(r"\n*#\S+(\s+#\S+)*\s*$", "", text).strip()
+    if music_credit:
+        body += f"\n\n🎵 Музыка: {music_credit}"
     data = {"media_type": "VIDEO", "video_url": last_video_url, "text": autopost.with_footer(body),
             "topic_tag": "Reels", "access_token": token}
     try:
@@ -268,8 +279,10 @@ def main():
         post = random.choice(queue) if args.test else queue[0]
         print("reels.json пуст, беру текст поста из posts.json")
     query = args.query or post.get("query") or media.TOPIC_QUERIES.get(post.get("topic"), media.DEFAULT_QUERY)
+    global music_credit
     music = pick_music()
-    print(f"Музыка: {music.name}")
+    music_credit = credit_for(music)
+    print(f"Музыка: {music.name} {music_credit}")
     video = build_reel(post["text"], music, query)
     if args.test:
         host_on_github(video)
