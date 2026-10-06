@@ -6,7 +6,9 @@
   "VERIFY_TOKEN": true,
   "GEMINI_KEY": true,
   "LEADS_KEY": false,
-  "TG_BOT_TOKEN": false
+  "TG_BOT_TOKEN": false,
+  "TG_CLIENT_TOKEN": true,
+  "TG_CHAT_ID": false
  },
  "app_secret_format": {
   "length": 32,
@@ -21,7 +23,7 @@
    "messages"
   ]
  },
- "last_message_at": "2026-10-06T22:31:39.428Z",
+ "last_message_at": "2026-10-06T22:45:07.217Z",
  "last_status": {
   "at": "2026-10-06T22:31:41.898Z",
   "status": "failed",
@@ -33,6 +35,6 @@
    }
   ]
  },
- "last_reply_at": "2026-10-06T22:31:40.914Z",
+ "last_reply_at": "2026-10-06T22:44:46.920Z",
  "last_error": null
 }
