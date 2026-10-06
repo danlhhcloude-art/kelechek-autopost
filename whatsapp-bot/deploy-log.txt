@@ -4,13 +4,13 @@
 
 Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
 Total Upload: 29.54 KiB / gzip: 7.48 KiB
-Worker Startup Time: 2 ms
+Worker Startup Time: 1 ms
 Your Worker has access to the following bindings:
 Binding                                                  Resource                  
 env.CHATS (…)             KV Namespace              
 env.GEMINI_MODEL ("gemini-2.5-flash")                    Environment Variable      
 
-Uploaded kelechek-whatsapp (1.46 sec)
-Deployed kelechek-whatsapp triggers (0.67 sec)
+Uploaded kelechek-whatsapp (1.51 sec)
+Deployed kelechek-whatsapp triggers (0.42 sec)
   https://kelechek-whatsapp.kelechek-ai.workers.dev
 Current Version ID: …
