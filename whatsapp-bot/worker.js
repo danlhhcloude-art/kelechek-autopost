@@ -164,6 +164,7 @@ async function converse(env, { key, channel, contact, profileName, text, source,
   try { out = await think(env, chat, channel); }
   catch (e) {
     console.log("gemini error", e.message);
+    await env.CHATS.put("health:last_gemini_error", JSON.stringify({ at: new Date().toISOString(), message: String(e.message || e).replace(/\+?\d{7,}/g, "…").slice(0, 400) }));
     out = { reply: "Спасибо за сообщение! Сейчас передам его Даниэлю, он ответит лично.", next: "ответить вручную: бот не смог ответить", wants_human: true };
   }
   for (const k of ["n", "a", "t", "b"]) if (out[k] === 0 || out[k] === 1 || out[k] === 2) chat.bant[k] = out[k];
@@ -295,6 +296,7 @@ async function health(env) {
     last_message_at: await env.CHATS.get("health:last_message_at"),
     last_status: JSON.parse((await env.CHATS.get("health:last_status")) || "null"),
     last_reply_at: await env.CHATS.get("health:last_reply_at"),
+    last_gemini_error: JSON.parse((await env.CHATS.get("health:last_gemini_error")) || "null"),
     last_error: JSON.parse((await env.CHATS.get("health:last_error")) || "null") };
   return new Response(JSON.stringify(out, null, 1), { headers: { "content-type": "application/json" } });
 }

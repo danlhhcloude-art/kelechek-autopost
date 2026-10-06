@@ -1,0 +1,28 @@
+name: bot-selftest
+# Шлёт боту тестовое сообщение как будто из Telegram (выдуманный чат), ждёт и сохраняет /health.
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Тест
+        env:
+          TG_CLIENT_TOKEN: ${{ secrets.TG_CLIENT_TOKEN }}
+        run: |
+          url=$(cat whatsapp-bot/URL.txt)
+          secret=$(printf 'kelechek-tg:%s' "$TG_CLIENT_TOKEN" | sha256sum | cut -c1-48)
+          uid=$(date +%s)
+          code=$(curl -s -o /dev/null -w '%{http_code}' -m 30 "$url/tg" -H "x-telegram-bot-api-secret-token: $secret" -H 'content-type: application/json' \
+            -d "{\"update_id\": $uid, \"message\": {\"message_id\": 1, \"chat\": {\"id\": 1, \"type\": \"private\"}, \"from\": {\"id\": 1, \"is_bot\": false, \"first_name\": \"Test\"}, \"text\": \"Здравствуйте, у меня кофейня в Бишкеке, мало клиентов\"}}")
+          sleep 25
+          curl -s -m 30 "$url/health" > whatsapp-bot/health.json
+          echo "{\"post_http\": \"$code\"}" > whatsapp-bot/selftest.json
+          cat whatsapp-bot/health.json
+          git config user.name "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          git add whatsapp-bot/health.json whatsapp-bot/selftest.json
+          git diff --cached --quiet || git commit -m "bot: самопроверка [skip ci]"
+          git pull --rebase origin main && git push
