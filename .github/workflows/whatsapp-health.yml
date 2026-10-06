@@ -12,6 +12,10 @@ jobs:
           # /health отдаёт только «есть ли ключ» и последнюю ошибку Meta без номеров
           url=$(cat whatsapp-bot/URL.txt)
           curl -s -m 30 "$url/health" > whatsapp-bot/health.json || echo '{"error":"нет ответа"}' > whatsapp-bot/health.json
+          # проверка webhook так же, как это делает Meta: со словом kelechek2026 бот должен вернуть challenge
+          code=$(curl -s -o /tmp/v.txt -w '%{http_code}' -m 30 "$url/webhook?hub.mode=subscribe&hub.verify_token=kelechek2026&hub.challenge=777")
+          echo "{\"verify_http\": \"$code\", \"verify_body\": \"$(head -c 40 /tmp/v.txt)\"}" > whatsapp-bot/verify.json
+          git add whatsapp-bot/verify.json
           git config user.name "autopost-bot"
           git config user.email "autopost-bot@users.noreply.github.com"
           git add whatsapp-bot/health.json
