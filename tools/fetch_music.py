@@ -21,8 +21,13 @@ PAGES = ["https://freepd.com/upbeat.php", "https://freepd.com/electronic.php", "
 UA = {"User-Agent": "Mozilla/5.0 (kelechek-autopost music fetch)"}
 
 
+LOG = []
+
+
 def links(page):
-    html = requests.get(page, headers=UA, timeout=30).text
+    r = requests.get(page, headers=UA, timeout=30)
+    html = r.text
+    LOG.append(f"{page} -> {r.status_code}, {len(html)} байт, начало: {html[:400]!r}")
     found = re.findall(r"""(?:href|src|data-src)\s*=\s*["']([^"']+\.mp3)["']""", html, re.I)
     found += re.findall(r"""["']((?:https?://freepd\.com)?/?music/[^"']+\.mp3)["']""", html, re.I)
     return list(dict.fromkeys(urljoin(page, u) for u in found))
@@ -42,9 +47,11 @@ def main():
         try:
             urls = links(page)
         except requests.RequestException as e:
+            LOG.append(f"{page}: не открылась ({e})")
             print(f"{page}: не открылась ({e})")
             continue
         print(f"{page}: нашёл {len(urls)} треков")
+        LOG.append(f"  ссылок на mp3: {len(urls)} {urls[:3]}")
         n = 0
         for url in urls:
             if n >= per_page:
@@ -62,6 +69,7 @@ def main():
                 added.append(f"{name}.mp3  <-  {url}")
                 n += 1
             except Exception as e:
+                LOG.append(f"  пропускаю {url}: {e}")
                 print(f"пропускаю {url}: {e}")
             finally:
                 raw.unlink(missing_ok=True)
@@ -69,6 +77,7 @@ def main():
     old = credits.read_text(encoding="utf-8") if credits.exists() else "# Музыка для Reels\n\nFreePD.com, общественное достояние (CC0).\n\n"
     credits.write_text(old + "".join(f"- {a}\n" for a in added), encoding="utf-8")
     print(f"Добавлено треков: {len(added)}")
+    (DEST / "fetch-log.txt").write_text("\n".join(LOG + [f"добавлено: {len(added)}"]) + "\n", encoding="utf-8")
     if not added and not have:
         sys.exit("Не удалось скачать ни одного трека")
 

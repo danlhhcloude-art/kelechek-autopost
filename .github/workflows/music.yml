@@ -13,6 +13,7 @@ jobs:
       - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: pip install requests
       - run: python tools/fetch_music.py 10
+        continue-on-error: true
       - name: Сохранить треки
         run: |
           git config user.name "autopost-bot"
