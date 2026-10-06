@@ -1,13 +1,1 @@
-{
- "debug_error": "400 Invalid OAuth access token - Cannot parse access token",
- "me": {
-  "error": "400 Invalid OAuth access token - Cannot parse access token"
- },
- "phone": {
-  "error": "InvalidURL URL can't contain control characters. '/v22.0/Phone number ID из Meta?fields=display_phone_number%2Cverified_name%2Cquality_rating&access_token=%D1%82%D0%BE%D0%BA%D0%B5%D0%BD+%D1%81+%D1%82%"
- },
- "token_valid": null,
- "token_expires_at": null,
- "waba_count": 0,
- "results": []
-}
+{"note": "перезапусти после исправления секретов"}

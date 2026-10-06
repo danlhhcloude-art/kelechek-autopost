@@ -29,7 +29,8 @@ jobs:
                   except Exception: msg = body
                   return {"error": f"{e.code} {msg}"[:200]}
               except Exception as e:
-                  return {"error": f"{type(e).__name__} {e}"[:200]}
+                  # без текста исключения: в нём может оказаться адрес с токеном
+                  return {"error": type(e).__name__}
           out = {}
           raw = call("GET", "debug_token", input_token=T)
           out["debug_error"] = raw.get("error")
