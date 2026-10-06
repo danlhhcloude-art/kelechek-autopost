@@ -214,6 +214,8 @@ const markRead = (env, id) => graph(env, { status: "read", message_id: id });
 async function health(env) {
   const keys = ["WA_TOKEN", "WA_PHONE_ID", "WA_APP_SECRET", "VERIFY_TOKEN", "GEMINI_KEY", "LEADS_KEY", "TG_BOT_TOKEN"];
   const out = { keys: Object.fromEntries(keys.map(k => [k, !!env[k]])),
+    // формат секрета без самого секрета: у Meta это 32 символа 0-9a-f
+    app_secret_format: (() => { const v = (env.WA_APP_SECRET || "").trim().replace(/^[`'"]+|[`'"]+$/g, ""); return { length: v.length, hex: /^[0-9a-f]+$/.test(v), raw_has_spaces: v.length !== (env.WA_APP_SECRET || "").length }; })(),
     last_post: JSON.parse((await env.CHATS.get("health:last_post")) || "null"),
     last_message_at: await env.CHATS.get("health:last_message_at"),
     last_error: JSON.parse((await env.CHATS.get("health:last_error")) || "null") };
