@@ -14,7 +14,7 @@ jobs:
           WA_TOKEN: ${{ secrets.WA_TOKEN }}
           WA_PHONE_ID: ${{ secrets.WA_PHONE_ID }}
         run: |
-          python3 - <<'PY' > whatsapp-bot/subscribe.json
+          python3 - <<'PY' > whatsapp-bot/subscribe.json || echo '{"script_failed": true}' > whatsapp-bot/subscribe.json
           import json, os, urllib.request, urllib.parse
           T = os.environ["WA_TOKEN"]; G = "https://graph.facebook.com/v22.0"
           def call(method, path, **q):
@@ -24,7 +24,12 @@ jobs:
               try:
                   with urllib.request.urlopen(req, timeout=30) as r: return json.load(r)
               except urllib.error.HTTPError as e:
-                  return {"error": json.load(e).get("error", {}).get("message", str(e))[:200]}
+                  body = e.read().decode("utf-8", "replace")
+                  try: msg = json.loads(body).get("error", {}).get("message", body)
+                  except Exception: msg = body
+                  return {"error": f"{e.code} {msg}"[:200]}
+              except Exception as e:
+                  return {"error": f"{type(e).__name__} {e}"[:200]}
           out = {}
           raw = call("GET", "debug_token", input_token=T)
           out["debug_error"] = raw.get("error")
