@@ -29,7 +29,16 @@ const SYSTEM = `Ты ИИ-ассистент Kelechek AI в WhatsApp. Kelechek A
 N: 0 просто интересно, 1 хочет больше клиентов без конкретики, 2 чёткая боль.
 A: 0 сотрудник без полномочий, 1 решает не один, 2 владелец и решает сам.
 T: 0 «когда-нибудь», 1 через 1–3 месяца, 2 в этом месяце.
-B: 0 только бесплатно, 1 готов, но «если будет результат», 2 готов платить подписки и ставку.`;
+B: 0 только бесплатно, 1 готов, но «если будет результат», 2 готов платить подписки и ставку.
+
+Отсев (время владельца только на тех, кто реально купит):
+- Когда N, A, T известны, спроси про B мягко: «Работаем так: 15 дней бесплатно, вы оплачиваете только подписку на ИИ-сервис, потом фиксированная ставка. Вам такой формат подходит?»
+- Горячий (сумма 7–8, или просит встречу, или готов начать): скажи, что Даниэль напишет лично; если клиент из Бишкека, предложи личную встречу с показом на ноутбуке. wants_human = true, tier = "hot".
+- Тёплый (сумма 4–6): предложи бесплатный пример ролика под его бизнес (нужны название, чем занимается, 2–3 фото), узнай недостающую букву. tier = "warm".
+- Холодный (все четыре буквы известны и сумма 0–3, или прямо говорит «только бесплатно», «просто посмотреть», «я не решаю и решать не буду»): вежливо поблагодари, оставь контакт на будущее и больше ничего не продавай и не спрашивай. Не зови владельца. tier = "cold".
+- Если в чате уже стоит холодный и человек пишет снова без нового интереса, ответь коротко и дружелюбно, без новых вопросов. Если появился реальный интерес (боль, сроки, готов платить), оценивай заново.
+- Спам, реклама, поиск работы, просьбы не по теме: один вежливый короткий ответ, tier = "cold".
+Пока данных мало, tier = "unknown".`;
 
 const SCHEMA = {
   type: "OBJECT",
@@ -41,6 +50,7 @@ const SCHEMA = {
     city: { type: "STRING", nullable: true }, request: { type: "STRING", nullable: true },
     next: { type: "STRING", description: "следующий шаг для владельца одной фразой" },
     wants_human: { type: "BOOLEAN" },
+    tier: { type: "STRING", enum: ["hot", "warm", "cold", "unknown"] },
   },
   required: ["reply", "next", "wants_human"],
 };
@@ -159,13 +169,15 @@ async function converse(env, { key, channel, contact, profileName, text, source,
   for (const k of ["n", "a", "t", "b"]) if (out[k] === 0 || out[k] === 1 || out[k] === 2) chat.bant[k] = out[k];
   for (const k of ["name", "niche", "city", "request"]) if (out[k]) chat[k] = out[k];
   chat.next = out.next;
+  if (out.tier && out.tier !== "unknown") chat.tier = out.tier;
   const reply = out.reply.slice(0, MAX_REPLY);
   await deliver(reply);
   await env.CHATS.put("health:last_reply_at", new Date().toISOString());
   chat.history.push({ role: "model", text: reply, ts: Date.now() });
 
   const score = ["n", "a", "t", "b"].reduce((s, k) => s + (chat.bant[k] ?? 0), 0);
-  const hot = score >= 7 || out.wants_human;
+  // холодных владельцу не шлём, даже если бот вежливо сказал «Даниэль посмотрит»
+  const hot = chat.tier !== "cold" && (score >= 7 || out.wants_human || chat.tier === "hot");
   if (hot && !chat.notifiedAt) {
     chat.notifiedAt = Date.now();
     await notifyOwner(env, `🔥 ${channel} ${chat.contact || ""} ${chat.name || chat.profileName || ""}: ${chat.request || chat.niche || ""}. BANT ${score}/8. ${chat.next}`);
@@ -189,12 +201,13 @@ function sourceOf(text, channel = "WhatsApp") {
 }
 
 async function think(env, chat, channel = "WhatsApp") {
+  const tierNote = chat.tier ? ` Текущая оценка клиента: ${chat.tier}.` : "";
   const known = Object.entries(chat.bant).filter(([, v]) => v !== null).map(([k, v]) => `${k.toUpperCase()}=${v}`).join(", ") || "ничего";
   const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${env.GEMINI_MODEL || "gemini-2.5-flash"}:generateContent`, {
     method: "POST",
     headers: { "content-type": "application/json", "x-goog-api-key": env.GEMINI_KEY },
     body: JSON.stringify({
-      systemInstruction: { parts: [{ text: SYSTEM.replace("в WhatsApp.", `в ${channel}.`) + `\n\nУже известно по BANT: ${known}.` }] },
+      systemInstruction: { parts: [{ text: SYSTEM.replace("в WhatsApp.", `в ${channel}.`) + `\n\nУже известно по BANT: ${known}.${tierNote}` }] },
       contents: fromUser(chat.history.slice(-HISTORY)).map(h => ({ role: h.role, parts: [{ text: h.text }] })),
       generationConfig: { temperature: 0.6, responseMimeType: "application/json", responseSchema: SCHEMA },
     }),
@@ -252,6 +265,8 @@ async function onTelegram(update, env) {
   const chatId = m.chat.id;
   // владелец узнаёт свой chat id командой /id, чтобы получать уведомления о горячих заявках
   if (m.text === "/id") return tg(env, "sendMessage", { chat_id: chatId, text: `Ваш chat id: ${chatId}` });
+  // /reset: начать разговор с нуля (удобно для проверки бота владельцем)
+  if (m.text === "/reset") { await env.CHATS.delete("chat:tg" + chatId); return tg(env, "sendMessage", { chat_id: chatId, text: "Начинаем заново. Напишите, чем занимается ваш бизнес 🙂" }); }
   let text = m.text || m.caption;
   let source;
   if (text && text.startsWith("/start")) {
