@@ -187,6 +187,9 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B090
 .adimg { margin: 0 18px; height: 520px; border-radius: 26px; background: linear-gradient(165deg, #3A2A12, #0B0907); display: flex; align-items: flex-end;
          padding: 34px; font-family: Unbounded, sans-serif; font-size: 40px; line-height: 1.15; color: #fff; }
 .adbtn { margin: 22px 18px; padding: 22px; border-radius: 20px; background: #FFC23D; text-align: center; font-size: 26px; font-weight: 500; color: #1A1206; }
+.tap { position: absolute; left: 272px; top: 1080px; width: 66px; height: 66px; border-radius: 50%; background: rgba(255,255,255,.55);
+       border: 3px solid #fff; box-shadow: 0 8px 24px rgba(0,0,0,.45); z-index: 5; }
+.tap i { position: absolute; inset: -3px; border-radius: 50%; border: 3px solid #FFC23D; opacity: 0; }
 .aud { position: absolute; left: 580px; right: 60px; top: 470px; }
 .aud h3 { font-family: Unbounded, sans-serif; font-size: 40px; margin: 30px 0 26px; }
 .chip { display: inline-block; margin: 0 12px 18px 0; padding: 16px 26px; border-radius: 999px; font-size: 28px;
@@ -403,13 +406,17 @@ tl.from("#l{i}", {{rotationX: 50, y: 200, scale: .8, opacity: 0, filter: "blur(1
 def scene_big(i, text, rng, t, d):
     words = text.split()
     cut = max(1, len(words) - max(1, len(words) // 3))
-    spans = " ".join(f'<span class="w">{esc(w)}</span>' for w in words[:cut])
-    spans += " " + " ".join(f'<span class="w"><em>{esc(w)}</em></span>' for w in words[cut:])
+    spans = " ".join(f'<span class="w p">{esc(w)}</span>' for w in words[:cut])
+    spans += " " + " ".join(f'<span class="w a"><em>{esc(w)}</em></span>' for w in words[cut:])
     size = 92 if len(text) < 45 else 72 if len(text) < 80 else 58
     h = f'<div class="bigt" id="t{i}" style="font-size:{size}px">{spans}</div>'
     js = f"""
 tl.from("#t{i} .w", {{opacity: 0, y: 40, filter: "blur(12px)", stagger: .09, duration: .45, ease: "power3.out"}}, {t + .1})
   .to("#t{i}", {{scale: 1.05, duration: {d - .6:.2f}, ease: "sine.inOut", transformOrigin: "0% 50%"}}, {t + .5});"""
+    if d >= 2.9:  # в конце остаётся главное: остальные слова гаснут, акцент крупнее (приём «Feel every click → Click.»)
+        js += f"""
+tl.to("#t{i} .p", {{opacity: .16, filter: "blur(3px)", duration: .4, ease: "power2.out"}}, {t + d - 1.1:.2f})
+  .to("#t{i} .a", {{scale: 1.14, duration: .45, ease: "back.out(2)", transformOrigin: "0% 60%"}}, {t + d - 1.1:.2f});"""
     return h, js
 
 
@@ -467,6 +474,7 @@ def scene_ads(i, text, rng, t, d):
         <circle cx="60" cy="60" r="12" class="core"/><line x1="60" y1="0" x2="60" y2="30"/><line x1="60" y1="90" x2="60" y2="120"/>
         <line x1="0" y1="60" x2="30" y2="60"/><line x1="90" y1="60" x2="120" y2="60"/></svg>
         <h3>Аудитория</h3>{chips}</div>
+      <div class="tap" id="tp{i}"><i id="tr{i}"></i></div>
       <div class="demo">пример настройки рекламы</div>"""
     js = f"""
 tl.fromTo("#ad{i}", {{rotationY: 35, x: -300, opacity: 0, filter: "blur(16px)"}}, {{rotationY: 8, x: 0, opacity: 1, filter: "blur(0px)", duration: .9, ease: "expo.out"}}, {t})
@@ -474,7 +482,11 @@ tl.fromTo("#ad{i}", {{rotationY: 35, x: -300, opacity: 0, filter: "blur(16px)"}}
   .from("#au{i} h3", {{opacity: 0, x: 40, duration: .4, ease: "power3.out"}}, {t + .6})
   .from("#au{i} .chip", {{opacity: 0, x: 80, scale: .8, stagger: .18, duration: .45, ease: "back.out(2)"}}, {t + .8})
   .to("#am{i}", {{rotation: 45, duration: {d - 1.2:.2f}, ease: "sine.inOut"}}, {t + 1.1})
-  .to("#ab{i}", {{scale: 1.06, duration: .3, yoyo: true, repeat: 3, ease: "sine.inOut"}}, {t + 1.6})
+  .fromTo("#tp{i}", {{x: 260, y: 260, opacity: 0}}, {{x: 0, y: 0, opacity: 1, duration: .45, ease: "power3.out"}}, {t + 1.3})
+  .to("#tp{i}", {{scale: .78, duration: .12, yoyo: true, repeat: 1, ease: "power2.inOut"}}, {t + 1.8})
+  .to("#ab{i}", {{scale: .94, duration: .12, yoyo: true, repeat: 1, ease: "power2.inOut"}}, {t + 1.8})
+  .fromTo("#tr{i}", {{scale: .4, opacity: .9}}, {{scale: 2.6, opacity: 0, duration: .6, ease: "power2.out"}}, {t + 1.85})
+  .to("#tp{i}", {{x: 120, y: 160, opacity: 0, duration: .4, ease: "power2.in"}}, {t + 2.6})
   .to("#ad{i}", {{rotationY: -6, y: 20, duration: {d - 1:.2f}, ease: "sine.inOut"}}, {t + .9});"""
     return h, js
 
