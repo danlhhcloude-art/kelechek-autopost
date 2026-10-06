@@ -1,0 +1,19 @@
+name: WhatsApp bot health
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Проверить бота
+        run: |
+          # /health отдаёт только «есть ли ключ» и последнюю ошибку Meta без номеров
+          url=$(cat whatsapp-bot/URL.txt)
+          curl -s -m 30 "$url/health" > whatsapp-bot/health.json || echo '{"error":"нет ответа"}' > whatsapp-bot/health.json
+          git config user.name "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          git add whatsapp-bot/health.json
+          git diff --cached --quiet || git commit -m "whatsapp-bot: проверка [skip ci]"
+          git pull --rebase origin main && git push
