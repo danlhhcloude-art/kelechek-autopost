@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
     paths: ["whatsapp-bot/**", ".github/workflows/whatsapp-bot.yml"]
+permissions:
+  contents: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -31,7 +33,16 @@ jobs:
           sed -i "s/REPLACE_WITH_KV_ID/$id/" wrangler.toml
       - name: Развернуть
         if: steps.check.outputs.skip != '1'
-        run: npx wrangler@4 deploy
+        run: |
+          npx wrangler@4 deploy | tee /tmp/deploy.txt
+          url=$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' /tmp/deploy.txt | head -1)
+          # адрес бота не секрет (подпись Meta проверяется), сохраняем его в репо, чтобы Claude его видел
+          echo "$url" > URL.txt
+          git config user.name "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          git add URL.txt
+          git diff --cached --quiet || git commit -m "whatsapp-bot: адрес бота [skip ci]"
+          git pull --rebase origin main && git push
       - name: Секреты бота
         if: steps.check.outputs.skip != '1'
         env:

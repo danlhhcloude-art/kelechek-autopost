@@ -56,6 +56,7 @@ export default {
       return new Response("ok");
     }
     if (url.pathname === "/leads" && req.method === "GET") return leads(req, env);
+    if (url.pathname === "/health") return health(env);
     return new Response("Kelechek AI WhatsApp bot", { status: 200 });
   },
 };
@@ -93,6 +94,7 @@ async function pauseForHuman(env, waId) {
 }
 
 async function onMessage(m, profileName, env) {
+  await env.CHATS.put("health:last_message_at", new Date().toISOString());
   if (await env.CHATS.get("msg:" + m.id)) return;                 // Meta иногда шлёт дважды
   await env.CHATS.put("msg:" + m.id, "1", { expirationTtl: 86400 });
   const chat = await loadChat(env, m.from);
@@ -174,11 +176,26 @@ async function graph(env, body) {
     headers: { authorization: `Bearer ${env.WA_TOKEN}`, "content-type": "application/json" },
     body: JSON.stringify({ messaging_product: "whatsapp", ...body }),
   });
-  if (!r.ok) console.log("graph error", r.status, (await r.text()).slice(0, 300));
+  if (!r.ok) {
+    const err = await r.json().catch(() => ({}));
+    const e = err.error || {};
+    console.log("graph error", r.status, JSON.stringify(e).slice(0, 300));
+    // для /health: только код и текст ошибки Meta, без номеров и переписки
+    await env.CHATS.put("health:last_error", JSON.stringify({ at: new Date().toISOString(), status: r.status, code: e.code, message: (e.message || "").replace(/\+?\d{7,}/g, "…") }));
+  }
 }
 
 const send = (env, to, text) => graph(env, { recipient_type: "individual", to, type: "text", text: { body: text } });
 const markRead = (env, id) => graph(env, { status: "read", message_id: id });
+
+// Открытая проверка без секретов: какие ключи заданы, когда было последнее сообщение и последняя ошибка Meta
+async function health(env) {
+  const keys = ["WA_TOKEN", "WA_PHONE_ID", "WA_APP_SECRET", "VERIFY_TOKEN", "GEMINI_KEY", "LEADS_KEY", "TG_BOT_TOKEN"];
+  const out = { keys: Object.fromEntries(keys.map(k => [k, !!env[k]])),
+    last_message_at: await env.CHATS.get("health:last_message_at"),
+    last_error: JSON.parse((await env.CHATS.get("health:last_error")) || "null") };
+  return new Response(JSON.stringify(out, null, 1), { headers: { "content-type": "application/json" } });
+}
 
 async function notifyOwner(env, text) {
   if (!env.TG_BOT_TOKEN || !env.TG_CHAT_ID) return;   // без Telegram горячих подхватит Claude при синхронизации
