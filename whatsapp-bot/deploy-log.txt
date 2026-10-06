@@ -10,7 +10,7 @@ Binding                                                  Resource
 env.CHATS (…)             KV Namespace              
 env.GEMINI_MODEL ("gemini-2.5-flash")                    Environment Variable      
 
-Uploaded kelechek-whatsapp (1.38 sec)
-Deployed kelechek-whatsapp triggers (0.56 sec)
+Uploaded kelechek-whatsapp (1.67 sec)
+Deployed kelechek-whatsapp triggers (1.49 sec)
   https://kelechek-whatsapp.kelechek-ai.workers.dev
 Current Version ID: …
