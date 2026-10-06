@@ -291,6 +291,8 @@ def main():
         return
     media_id = publish(video, post.get("caption") or post["text"])
     threads_id = share_to_threads(post["text"])
+    import fb  # и на страницу Facebook как Reels
+    fb_id = fb.safe(fb.reel, last_video_url, caption(post.get("caption") or post["text"]))
     # пока собирался ролик, posts.json мог обновиться (git pull при выкладке видео),
     # поэтому перечитываем файл и отмечаем только свой пост, чтобы не затереть чужие отметки
     from_scripts = "caption" in post
@@ -301,6 +303,8 @@ def main():
     item["ig_media_id"] = media_id
     if threads_id:
         item["threads_video_id"] = threads_id
+    if fb_id:
+        item["fb_video_id"] = fb_id
     media.mark_clips_used(media.picked_clips)  # эти фоны больше не повторяем
     mark_music_used(music)  # и этот трек тоже
     promo.mark_used(promo.picked)  # и эти фразы тоже

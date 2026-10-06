@@ -269,6 +269,10 @@ def main():
     post["tag"] = tag
     post["posted_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     post["threads_id"] = post_id
+    import fb  # тот же пост дублируем на страницу Facebook, если есть токен
+    fb_id = fb.safe(fb.post, text, [media_url(f) for f in post.get("images") or []])
+    if fb_id:
+        post["fb_id"] = fb_id
     save_posts(posts)
     print(f"Опубликовано: {post_id}. В очереди осталось: {len(queue) - 1}")
 
