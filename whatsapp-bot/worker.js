@@ -161,7 +161,7 @@ async function converse(env, { key, channel, contact, profileName, text, source,
   if (chat.humanUntil && chat.humanUntil > Date.now()) return saveChat(env, key, chat);
 
   let out;
-  try { out = await think(env, chat, channel); }
+  try { out = await withRetry(() => think(env, chat, channel)); }
   catch (e) {
     console.log("gemini error", e.message);
     await env.CHATS.put("health:last_gemini_error", JSON.stringify({ at: new Date().toISOString(), message: String(e.message || e).replace(/\+?\d{7,}/g, "…").slice(0, 400) }));
@@ -218,6 +218,17 @@ async function think(env, chat, channel = "WhatsApp") {
   const out = JSON.parse(data.candidates[0].content.parts[0].text);
   if (!out.reply) throw new Error("empty reply");
   return out;
+}
+
+// Gemini бывает перегружен (503/429): пробуем ещё два раза с паузой, укладываемся в лимит времени Worker
+async function withRetry(fn) {
+  let last;
+  for (const wait of [0, 1500, 4000]) {
+    if (wait) await new Promise(r => setTimeout(r, wait));
+    try { return await fn(); }
+    catch (e) { last = e; if (!/^(503|429|500)/.test(String(e.message))) throw e; }
+  }
+  throw last;
 }
 
 // Gemini требует, чтобы разговор начинался с сообщения клиента
