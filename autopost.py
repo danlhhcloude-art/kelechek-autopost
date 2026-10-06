@@ -209,6 +209,10 @@ def collect_stats():
             continue
         row = {"threads_id": p["threads_id"], "posted_at": p["posted_at"], "topic": p.get("topic"),
                "text": p["text"].split("\n")[0][:90]}
+        r = requests.get(f"{API}/{p['threads_id']}", timeout=30, params={
+            "fields": "media_type,permalink", "access_token": token})
+        if r.ok:
+            row.update(media_type=r.json().get("media_type"), url=r.json().get("permalink"))
         r = requests.get(f"{API}/{p['threads_id']}/insights", timeout=30, params={
             "metric": ",".join(POST_METRICS), "access_token": token})
         if r.ok:
