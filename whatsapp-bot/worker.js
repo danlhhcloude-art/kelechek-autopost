@@ -79,7 +79,7 @@ export default {
 };
 
 function verify(url, env) {
-  const ok = url.searchParams.get("hub.mode") === "subscribe" && url.searchParams.get("hub.verify_token") === env.VERIFY_TOKEN;
+  const ok = url.searchParams.get("hub.mode") === "subscribe" && (url.searchParams.get("hub.verify_token") || "").trim() === (env.VERIFY_TOKEN || "").trim().replace(/^[`'"]+|[`'"]+$/g, "");
   return ok ? new Response(url.searchParams.get("hub.challenge")) : new Response("forbidden", { status: 403 });
 }
 
