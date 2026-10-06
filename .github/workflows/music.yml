@@ -12,13 +12,13 @@ jobs:
         with: { python-version: "3.12" }
       - run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: pip install requests
-      - run: python tools/fetch_music.py 10
+      - run: python tools/fetch_music.py
         continue-on-error: true
       - name: Сохранить треки
         run: |
           git config user.name "autopost-bot"
           git config user.email "autopost-bot@users.noreply.github.com"
           git add assets/music/upbeat
-          git diff --cached --quiet || git commit -m "music: бодрые треки FreePD (CC0)"
+          git diff --cached --quiet || git commit -m "music: бодрые треки Kevin MacLeod (CC BY 4.0)"
           git pull --rebase origin main
           git push
