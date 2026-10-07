@@ -11,7 +11,7 @@ env.CHATS (…)                       KV Namespace
 env.GEMINI_MODEL ("gemini-3.8-flash")                              Environment Variable      
 env.APP_URL ("https://kelechek-whatsapp.kelechek-ai...")           Environment Variable      
 
-Uploaded kelechek-whatsapp (1.45 sec)
-Deployed kelechek-whatsapp triggers (0.55 sec)
+Uploaded kelechek-whatsapp (1.70 sec)
+Deployed kelechek-whatsapp triggers (0.54 sec)
   https://kelechek-whatsapp.kelechek-ai.workers.dev
 Current Version ID: …
