@@ -55,7 +55,7 @@ h3.grp{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--
 <div id="services">
   <h2>Что мы делаем</h2>
   <h3 class="grp">Видео и контент</h3>
-  <div class="card"><div class="ic">🎬</div><h3>Reels и видео на ИИ</h3><p class="muted">Ролик про ваш бизнес в вашем стиле: монтаж, текст на экране, музыка, озвучка.</p><p class="price">от 6 500 сом · 6 роликов от 22 000</p><button class="ghost" data-pick="Reels">Хочу пример</button></div>
+  <div class="card"><div class="ic">🎬</div><h3>Reels и видео на ИИ</h3><p class="muted">Ролик про ваш бизнес в вашем стиле: монтаж, текст на экране, музыка, озвучка.</p><p class="price">от 4 500 сом · 6 роликов от 22 000</p><button class="ghost" data-pick="Reels">Хочу пример</button></div>
   <div class="card"><div class="ic">🗣</div><h3>Ролик с ИИ-ведущим</h3><p class="muted">Говорящий аватар рассказывает о вашем товаре или акции. Лицо и голос только с согласия человека.</p><p class="price">от 10 000 сом</p><button class="ghost" data-pick="ИИ-ведущий">Обсудить</button></div>
   <div class="card"><div class="ic">🎙</div><h3>Озвучка и перевод</h3><p class="muted">Переводим и озвучиваем ролик на кыргызский, казахский или узбекский, чтобы охватить всю Центральную Азию.</p><p class="price">от 2 500 сом за ролик</p><button class="ghost" data-pick="Перевод">Обсудить</button></div>
   <div class="card"><div class="ic">📸</div><h3>ИИ-фото товаров и меню</h3><p class="muted">Красивые фото для каталога, меню и рекламы без фотостудии.</p><p class="price">от 4 500 сом за 10 фото</p><button class="ghost" data-pick="ИИ-фото">Обсудить</button></div>
