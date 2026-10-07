@@ -1,1 +1,1 @@
-{"ok": false, "description": "Bad Request: bad webhook: Failed to resolve host: Temporary failure in name resolution", "menu_button": true, "bot": "@kelechek_aibot"}
+{"ok": true, "description": "Webhook was set", "menu_button": true, "bot": "@kelechek_aibot"}
