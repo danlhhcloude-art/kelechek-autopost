@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-07T03:50:18+00:00",
+  "updated_at": "2026-10-07T07:20:10+00:00",
   "account": {
-    "views": 71,
+    "views": 73,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -250,7 +250,20 @@
       "text": "Многие боятся отдать переписку с клиентами ИИ. И правильно, сразу доверять не надо.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeLYY7PlPZH",
-      "views": 9,
+      "views": 40,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18151126939528247",
+      "posted_at": "2026-10-07T07:20:10+00:00",
+      "topic": "target-boost",
+      "text": "Кнопка «Продвигать» в Instagram, наверное, самая дорогая кнопка для малого бизнеса.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeLzsilluZ1",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -258,7 +271,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-07T03:50:34+00:00",
+    "updated_at": "2026-10-07T07:20:22+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
