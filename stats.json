@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-06T12:55:40+00:00",
+  "updated_at": "2026-10-07T03:21:32+00:00",
   "account": {
-    "views": 53,
+    "views": 62,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -185,7 +185,7 @@
       "text": "Чаще всего меня спрашивают: «это вообще работает или развод?»",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeGqT86lk_Y",
-      "views": 2,
+      "views": 3,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -237,7 +237,20 @@
       "text": "Есть утечка, которую не видно ни в одном отчёте.",
       "media_type": "CAROUSEL_ALBUM",
       "url": "https://www.threads.com/@kelechek_ai/post/DeJxlxyFShk",
-      "views": 1,
+      "views": 5,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18145105522600858",
+      "posted_at": "2026-10-07T03:21:32+00:00",
+      "topic": "ai-approve",
+      "text": "Многие боятся отдать переписку с клиентами ИИ. И правильно, сразу доверять не надо.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeLYY7PlPZH",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -245,7 +258,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-06T12:55:54+00:00",
+    "updated_at": "2026-10-07T03:21:43+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
