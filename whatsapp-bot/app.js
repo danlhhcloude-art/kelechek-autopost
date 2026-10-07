@@ -55,7 +55,7 @@ h3.grp{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--
 <div id="services">
   <h2>Что мы делаем</h2>
   <h3 class="grp">Видео и контент</h3>
-  <div class="card"><div class="ic">🎬</div><h3>Reels и видео на ИИ</h3><p class="muted">Ролик про ваш бизнес в вашем стиле: монтаж, текст на экране, музыка, озвучка.</p><p class="price">от 6 500 сом · 4 ролика от 22 000</p><button class="ghost" data-pick="Reels">Хочу пример</button></div>
+  <div class="card"><div class="ic">🎬</div><h3>Reels и видео на ИИ</h3><p class="muted">Ролик про ваш бизнес в вашем стиле: монтаж, текст на экране, музыка, озвучка.</p><p class="price">от 6 500 сом · 6 роликов от 22 000</p><button class="ghost" data-pick="Reels">Хочу пример</button></div>
   <div class="card"><div class="ic">🗣</div><h3>Ролик с ИИ-ведущим</h3><p class="muted">Говорящий аватар рассказывает о вашем товаре или акции. Лицо и голос только с согласия человека.</p><p class="price">от 10 000 сом</p><button class="ghost" data-pick="ИИ-ведущий">Обсудить</button></div>
   <div class="card"><div class="ic">🎙</div><h3>Озвучка и перевод</h3><p class="muted">Переводим и озвучиваем ролик на кыргызский, казахский или узбекский, чтобы охватить всю Центральную Азию.</p><p class="price">от 2 500 сом за ролик</p><button class="ghost" data-pick="Перевод">Обсудить</button></div>
   <div class="card"><div class="ic">📸</div><h3>ИИ-фото товаров и меню</h3><p class="muted">Красивые фото для каталога, меню и рекламы без фотостудии.</p><p class="price">от 4 500 сом за 10 фото</p><button class="ghost" data-pick="ИИ-фото">Обсудить</button></div>
@@ -65,8 +65,8 @@ h3.grp{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--
   <div class="card"><div class="ic">🤖</div><h3>Telegram-бот с приложением</h3><p class="muted">Как этот: каталог, заявки и запись прямо в Telegram.</p><p class="price">от 32 000 сом</p><button class="ghost" data-pick="Telegram-бот">Хочу так же</button></div>
   <div class="card"><div class="ic">📅</div><h3>Страница онлайн-записи</h3><p class="muted">Сайт-визитка, где клиент сам выбирает услугу и время.</p><p class="price">от 19 000 сом</p><button class="ghost" data-pick="Онлайн-запись">Хочу так же</button></div>
   <h3 class="grp">Продвижение</h3>
-  <div class="card"><div class="ic">🎯</div><h3>Таргетированная реклама</h3><p class="muted">Instagram и Facebook: аудитория по городу и интересам, креативы на ИИ, заявки сразу в чат, отчёт раз в неделю. Рекламный бюджет вы платите напрямую в Meta.</p><p class="price">ведение от 19 000 сом/мес</p><button class="ghost" data-pick="Реклама">Обсудить</button></div>
-  <div class="card"><div class="ic">📱</div><h3>Instagram под ключ</h3><p class="muted">Контент-план, 12 постов, 4 Reels и сторис каждый месяц.</p><p class="price">от 38 000 сом/мес</p><button class="ghost" data-pick="Instagram под ключ">Обсудить</button></div>
+  <div class="card"><div class="ic">🎯</div><h3>Таргетированная реклама</h3><p class="muted">Instagram и Facebook: аудитория по городу и интересам, креативы на ИИ, заявки сразу в чат, отчёт раз в неделю. Рекламный бюджет вы платите напрямую в Meta.</p><p class="price">ведение от 25 000 сом/мес</p><button class="ghost" data-pick="Реклама">Обсудить</button></div>
+  <div class="card"><div class="ic">📱</div><h3>Instagram под ключ</h3><p class="muted">Контент-план, 12 постов, 4 Reels и сторис каждый месяц.</p><p class="price">от 50 000 сом/мес</p><button class="ghost" data-pick="Instagram под ключ">Обсудить</button></div>
   <p class="muted note">Цены «от»: точную сумму Даниэль назовёт после пары вопросов. На ведение первым клиентам 15 дней бесплатно, вы платите только подписку на ИИ-сервис.</p>
   <div style="height:12px"></div>
   <button class="ghost" style="width:100%" data-wa>💬 Написать Даниэлю в WhatsApp</button>
