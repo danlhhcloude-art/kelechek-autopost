@@ -1,5 +1,5 @@
 // Мини-приложение Kelechek AI внутри Telegram: услуги, как работаем, заявка на бесплатный пример.
-// Цены не пишем: их называет владелец.
+// Цены «от» утвердил владелец 2026-10-07; держать в синхроне с PRICES в worker.js.
 export const APP_HTML = `<!doctype html><html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Kelechek AI</title>
@@ -36,6 +36,8 @@ button.ghost{background:transparent;border:1px solid var(--line);color:var(--tex
 .done{text-align:center;padding:40px 8px}
 .done .big{font-size:48px}
 .hide{display:none}
+.price{margin-top:8px;font-weight:600;color:var(--accent)}
+h3.grp{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:22px 0 10px}
 .note{font-size:13px;margin-top:10px}
 </style></head><body>
 <section class="hero">
@@ -52,11 +54,20 @@ button.ghost{background:transparent;border:1px solid var(--line);color:var(--tex
 
 <div id="services">
   <h2>Что мы делаем</h2>
-  <div class="card"><div class="ic">🎬</div><h3>Reels и видео на ИИ</h3><p class="muted">Ролик про ваш бизнес в вашем стиле: монтаж, текст на экране, музыка, озвучка.</p><button class="ghost" data-pick="Reels">Хочу пример</button></div>
-  <div class="card"><div class="ic">💬</div><h3>Автоответы в WhatsApp и Telegram</h3><p class="muted">Приветствие, ответы на частые вопросы, каталог. ИИ-ассистент отвечает клиентам сам, а вам приходят только готовые к покупке.</p><button class="ghost" data-pick="Автоответы">Хочу так же</button></div>
-  <div class="card"><div class="ic">🎯</div><h3>Таргетированная реклама</h3><p class="muted">Instagram и Facebook: аудитория по городу и интересам, креативы на ИИ, заявки сразу в чат, отчёт раз в неделю. Рекламный бюджет вы платите напрямую в Meta.</p><button class="ghost" data-pick="Реклама">Обсудить</button></div>
-  <div class="card"><div class="ic">✍️</div><h3>Тексты для соцсетей</h3><p class="muted">Посты живым языком, без шаблонов, под ваш бизнес.</p><button class="ghost" data-pick="Тексты">Обсудить</button></div>
-  <p class="muted note">Цену называет Даниэль после пары вопросов о вашем бизнесе.</p>
+  <h3 class="grp">Видео и контент</h3>
+  <div class="card"><div class="ic">🎬</div><h3>Reels и видео на ИИ</h3><p class="muted">Ролик про ваш бизнес в вашем стиле: монтаж, текст на экране, музыка, озвучка.</p><p class="price">от 4 000 сом · 4 ролика от 14 000</p><button class="ghost" data-pick="Reels">Хочу пример</button></div>
+  <div class="card"><div class="ic">🗣</div><h3>Ролик с ИИ-ведущим</h3><p class="muted">Говорящий аватар рассказывает о вашем товаре или акции. Лицо и голос только с согласия человека.</p><p class="price">от 6 000 сом</p><button class="ghost" data-pick="ИИ-ведущий">Обсудить</button></div>
+  <div class="card"><div class="ic">🎙</div><h3>Озвучка и перевод</h3><p class="muted">Переводим и озвучиваем ролик на кыргызский, казахский или узбекский, чтобы охватить всю Центральную Азию.</p><p class="price">от 1 500 сом за ролик</p><button class="ghost" data-pick="Перевод">Обсудить</button></div>
+  <div class="card"><div class="ic">📸</div><h3>ИИ-фото товаров и меню</h3><p class="muted">Красивые фото для каталога, меню и рекламы без фотостудии.</p><p class="price">от 2 500 сом за 10 фото</p><button class="ghost" data-pick="ИИ-фото">Обсудить</button></div>
+  <div class="card"><div class="ic">✍️</div><h3>Тексты для соцсетей</h3><p class="muted">Посты живым языком, без шаблонов, под ваш бизнес.</p><p class="price">5 текстов от 2 500 сом</p><button class="ghost" data-pick="Тексты">Обсудить</button></div>
+  <h3 class="grp">Автоматизация</h3>
+  <div class="card"><div class="ic">💬</div><h3>Автоответы в WhatsApp и Telegram</h3><p class="muted">ИИ-ассистент отвечает клиентам сам, а вам приходят только готовые к покупке.</p><p class="price">настройка от 12 000 сом · поддержка от 3 000 сом/мес</p><button class="ghost" data-pick="Автоответы">Хочу так же</button></div>
+  <div class="card"><div class="ic">🤖</div><h3>Telegram-бот с приложением</h3><p class="muted">Как этот: каталог, заявки и запись прямо в Telegram.</p><p class="price">от 20 000 сом</p><button class="ghost" data-pick="Telegram-бот">Хочу так же</button></div>
+  <div class="card"><div class="ic">📅</div><h3>Страница онлайн-записи</h3><p class="muted">Сайт-визитка, где клиент сам выбирает услугу и время.</p><p class="price">от 12 000 сом</p><button class="ghost" data-pick="Онлайн-запись">Хочу так же</button></div>
+  <h3 class="grp">Продвижение</h3>
+  <div class="card"><div class="ic">🎯</div><h3>Таргетированная реклама</h3><p class="muted">Instagram и Facebook: аудитория по городу и интересам, креативы на ИИ, заявки сразу в чат, отчёт раз в неделю. Рекламный бюджет вы платите напрямую в Meta.</p><p class="price">ведение от 12 000 сом/мес</p><button class="ghost" data-pick="Реклама">Обсудить</button></div>
+  <div class="card"><div class="ic">📱</div><h3>Instagram под ключ</h3><p class="muted">Контент-план, 12 постов, 4 Reels и сторис каждый месяц.</p><p class="price">от 25 000 сом/мес</p><button class="ghost" data-pick="Instagram под ключ">Обсудить</button></div>
+  <p class="muted note">Цены «от»: точную сумму Даниэль назовёт после пары вопросов. На ведение первым клиентам 15 дней бесплатно, вы платите только подписку на ИИ-сервис.</p>
   <div style="height:12px"></div>
   <button class="ghost" style="width:100%" data-wa>💬 Написать Даниэлю в WhatsApp</button>
 </div>
@@ -67,7 +78,7 @@ button.ghost{background:transparent;border:1px solid var(--line);color:var(--tex
     <div class="step"><div><b>Знакомимся.</b> <span class="muted">Пара вопросов о бизнесе. В Бишкеке встречаемся лично и показываем всё на ноутбуке.</span></div></div>
     <div class="step"><div><b>Бесплатный пример.</b> <span class="muted">Делаем ролик под ваш бизнес, чтобы вы увидели результат до оплаты.</span></div></div>
     <div class="step"><div><b>15 дней работы бесплатно.</b> <span class="muted">Вы оплачиваете только подписку на нужный ИИ-сервис.</span></div></div>
-    <div class="step"><div><b>Дальше фиксированная ставка.</b> <span class="muted">Отчёт каждую неделю и в конце месяца.</span></div></div>
+    <div class="step"><div><b>Дальше цена из прайса.</b> <span class="muted">Отчёт каждую неделю и в конце месяца.</span></div></div>
   </div>
   <button class="main" data-go="order">Получить бесплатный пример</button>
 </div>
@@ -87,6 +98,12 @@ button.ghost{background:transparent;border:1px solid var(--line);color:var(--tex
     <button type="button" class="chip" data-v="Автоответы">💬 Автоответы</button>
     <button type="button" class="chip" data-v="Реклама">🎯 Реклама</button>
     <button type="button" class="chip" data-v="Тексты">✍️ Тексты</button>
+    <button type="button" class="chip" data-v="ИИ-ведущий">🗣 ИИ-ведущий</button>
+    <button type="button" class="chip" data-v="Перевод">🎙 Перевод</button>
+    <button type="button" class="chip" data-v="ИИ-фото">📸 ИИ-фото</button>
+    <button type="button" class="chip" data-v="Telegram-бот">🤖 Telegram-бот</button>
+    <button type="button" class="chip" data-v="Онлайн-запись">📅 Онлайн-запись</button>
+    <button type="button" class="chip" data-v="Instagram под ключ">📱 Instagram</button>
   </div>
   <label for="pain">Что сейчас мешает больше всего</label>
   <select id="pain" name="pain"><option value="">Выберите</option><option>Мало заявок</option><option>Нет видео и контента</option><option>Не успеваем отвечать клиентам</option><option>Реклама не окупается</option><option>Просто интересно</option></select>
