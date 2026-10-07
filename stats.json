@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-07T07:48:17+00:00",
+  "updated_at": "2026-10-07T12:22:40+00:00",
   "account": {
-    "views": 75,
+    "views": 78,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -263,6 +263,19 @@
       "text": "Кнопка «Продвигать» в Instagram, наверное, самая дорогая кнопка для малого бизнеса.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeLzsilluZ1",
+      "views": 5,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17912372229498118",
+      "posted_at": "2026-10-07T12:22:40+00:00",
+      "topic": "ai-analytics",
+      "text": "Реклама идёт сразу в Instagram, TikTok и Google, а заявки потом падают в WhatsApp и в табл",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeMWT5Vm0iF",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -271,7 +284,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-07T07:48:30+00:00",
+    "updated_at": "2026-10-07T12:22:54+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
