@@ -21,6 +21,7 @@ from pathlib import Path
 
 import requests
 
+import freshness
 import media
 import motion
 import promo
@@ -277,14 +278,15 @@ def main():
             print(f"Reels уже вышел в {max(stamps):%H:%M} UTC, сегодняшний слот закрыт.")
             return
     published = {p["text"] for p in posts if p.get("ig_posted_at")} | {s["text"] for s in scripts if s.get("ig_posted_at")}
-    fresh = [s for s in scripts if not s.get("ig_posted_at") and s["text"] not in published]
+    seen = freshness.published(posts, scripts)
+    fresh = freshness.fresh_only([s for s in scripts if not s.get("ig_posted_at") and s["text"] not in published], seen, "Reels: ")
     if args.text:
         post = {"text": args.text}
     elif fresh:
         # отдельный сценарий для Reels: каждый день новый текст, а тестовые превью берут случайный
         post = random.choice(fresh) if args.test else fresh[0]
     else:
-        queue = [p for p in posts if not p.get("ig_posted_at") and p["text"] not in published]
+        queue = freshness.fresh_only([p for p in posts if not p.get("ig_posted_at") and p["text"] not in published], seen, "Reels: ")
         if not queue:
             sys.exit("Нет нового текста для Reels: добавь сценарии в reels.json")
         post = random.choice(queue) if args.test else queue[0]

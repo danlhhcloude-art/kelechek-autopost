@@ -18,6 +18,8 @@ from pathlib import Path
 
 import requests
 
+import freshness
+
 API = "https://graph.threads.net/v1.0"
 GAP_HOURS = 2.5  # ближе этого к прошлому посту запуск по расписанию не публикует
 HERE = Path(__file__).parent
@@ -251,7 +253,10 @@ def main():
         print(f"Добавлено постов: {len(new)}")
         return
 
-    queue = [p for p in posts if not p.get("posted_at")]
+    reels_file = Path(__file__).parent / "reels.json"
+    reels = json.loads(reels_file.read_text(encoding="utf-8")) if reels_file.exists() else []
+    # ни темы, ни смысла не повторяем: ни прошлые посты, ни вышедшие Reels
+    queue = freshness.fresh_only([p for p in posts if not p.get("posted_at") and not p.get("ig_posted_at")], freshness.published(posts, reels))
     if not queue:
         print("Очередь пуста, прошу Claude написать новые посты...")
         posts += generate(7, posts)
