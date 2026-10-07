@@ -25,6 +25,7 @@ HF_VERSION = "0.8.121"
 END = 3.0  # финальная карточка с логотипом
 USED_FILE = HERE / "used_texts.json"
 USED_KEEP = 600
+CTX = {"text": "", "foot": []}  # весь текст ролика и живые кадры со стока для текущей сборки
 picked = []  # фразы последнего ролика; reels.py отмечает их показанными после публикации
 
 KEYWORDS = {
@@ -34,7 +35,7 @@ KEYWORDS = {
     "booking": ["запис", "брон", "свободн", "окн"],
     "notify": ["заявк", "уведомл", "комментар", "лид", "сразу приходит", "теря"],
     "split": ["вместо", "раньше", "вручную", "сотрудник", "менеджер", "по кругу"],
-    "laptop": ["лично", "встреч", "ноутбук", "показ", "отчёт", "отчет", "excel", "бишкек"],
+    "laptop": ["лично", "встреч", "ноутбук", "покаж", "показ на", "отчёт", "отчет", "excel", "бишкек"],
 }
 TAGS = {
     "ads": ["Таргет", "Реклама в Instagram", "Нужная аудитория", "Под ваш бюджет", "Креативы на ИИ"],
@@ -44,6 +45,7 @@ TAGS = {
     "laptop": ["Бишкек", "Встреча лично", "Отчёт в Excel", "Всё в одном месте"],
     "cards": ["Автоматизация", "ИИ-видео", "Для бизнеса", "Бишкек", "Таргет", "Под ключ"],
     "big": ["Kelechek AI"],
+    "photo": ["Живые кадры", "ИИ-монтаж", "Ваш стиль", "Без студии"],
     "notify": ["Заявки", "Уведомления", "Ничего не теряется", "Всё под контролем"],
     "split": ["Было и стало", "Разница"],
 }
@@ -99,6 +101,28 @@ SLOGANS = ["ИИ-видео и автоматизация для бизнеса"
            "Reels, реклама и заявки без хаоса", "ИИ берёт рутину, вы берёте клиентов",
            "Контент и реклама для бизнеса в Бишкеке"]
 DECOR = ["ring", "wave", "bars", "dots", ""]
+PHOTO_CHIPS = [("Ваш бизнес", "в кадре"), ("Живое видео", "ИИ-монтаж"), ("Ваши клиенты", "ваш стиль"),
+               ("Реальная жизнь", "не шаблон"), ("Атмосфера", "которую хочется увидеть")]
+# переписка в телефоне под тему ролика (07.10: в ролике про таргет телефон показывал бронь столика)
+CHAT_TOPICS = [
+    (("таргет", "реклам", "продвиг", "аудитор", "креатив"), [
+        ("Увидела вашу рекламу в Instagram, акция ещё действует?", "Здравствуйте! Да, до воскресенья. Пришлю подробности прямо сюда.", "Отлично, жду"),
+        ("Пришёл по рекламе. Это рядом с Ала-Арчой?", "Да, пять минут пешком. Пришлю точку на карте.", "Спасибо, зайду"),
+        ("Нашёл вас через рекламу. Сколько стоит?", "Здравствуйте! Пришлю цены и фото, а владелец ответит на остальное.", "Супер, жду"),
+        ("Ваша реклама попалась уже третий раз 😄 Можно записаться?", "Значит, это знак! На какой день вам удобно?", "Давайте в субботу")]),
+    (("ролик", "reels", "видео", "контент", "монтаж", "пост"), [
+        ("Видела ваш Reels, это блюдо есть сегодня?", "Да, готовим весь день. Оставить для вас порцию?", "Да, давайте"),
+        ("Классное видео! Где вы находитесь?", "Спасибо! Пришлю адрес и схему проезда.", "Ого, быстро"),
+        ("Посмотрел ролик про новинку. Можно заказать?", "Конечно! Доставка или самовывоз?", "Самовывоз")]),
+    (("запис", "брон", "окн", "салон", "мастер"), [
+        ("Есть запись на завтра?", "Да, есть окна в 12:00 и 16:30. Записать вас?", "Давайте на 16:30"),
+        ("Можно прийти в субботу?", "Да, в субботу свободно с 11:00. Какое время удобно?", "В 11 отлично"),
+        ("А к какому мастеру можно сегодня?", "Сегодня свободна Айгерим в 18:00. Записать?", "Да, записывайте")]),
+    (("кафе", "кофе", "ресторан", "столик", "меню", "доставк"), [
+        ("Можно столик на четверых?", "Да! На какое время и день?", "Сегодня в 19:00"),
+        ("Пришлите меню, пожалуйста", "Отправляю меню и цены прямо в чат.", "Спасибо!"),
+        ("Доставка есть?", "Да, по Бишкеку. Что будете заказывать?", "Сейчас выберу")]),
+]
 
 CSS = """
 @font-face { font-family: Unbounded; src: url(./Unbounded-Bold.ttf); font-weight: 700; }
@@ -116,6 +140,14 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B090
 .tag { display: flex; align-items: center; gap: 14px; }
 .tag i { width: 14px; height: 14px; border-radius: 50%; background: #FFC23D; box-shadow: 0 0 14px #FFC23D; }
 .stage { position: absolute; inset: 0; perspective: 2200px; }
+.foot { position: absolute; object-fit: cover; }
+.full { left: 0; top: 0; width: 1080px; height: 1920px; }
+.dim { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; background: linear-gradient(180deg, rgba(11,9,7,.62), rgba(11,9,7,.38) 38%, rgba(11,9,7,.9) 78%); }
+.framed { left: 110px; top: 270px; width: 860px; height: 960px; border-radius: 56px; box-shadow: 0 0 0 3px rgba(255,214,140,.35), 0 60px 120px rgba(0,0,0,.7); }
+.fchip { position: absolute; display: flex; align-items: center; gap: 14px; padding: 18px 28px; border-radius: 999px; font-size: 32px; font-weight: 500;
+  background: rgba(20,17,12,.55); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+.fchip i { width: 16px; height: 16px; border-radius: 50%; background: #FFC23D; box-shadow: 0 0 14px #FFC23D; }
+.fchip.y { background: #FFC23D; color: #1A1206; border: 0; }
 .phone { position: absolute; width: 470px; height: 960px; left: 305px; top: 300px; border-radius: 74px; background: #121214; padding: 14px;
          box-shadow: 0 0 0 3px #3A3A3E, 0 0 0 5px #0d0d0f, 0 60px 120px rgba(0,0,0,.6), inset 0 0 0 2px rgba(255,255,255,.08); transform-style: preserve-3d; }
 .screen { width: 100%; height: 100%; border-radius: 62px; background: #F4F1EA; overflow: hidden; position: relative; color: #1C1C1E; }
@@ -161,7 +193,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B090
 .lcell .bars { position: static; height: 150px; }
 .lbase { height: 34px; margin: 0 -50px; border-radius: 0 0 30px 30px; background: linear-gradient(#3A3A3E, #1d1d20); }
 .pin { position: absolute; right: 120px; top: 1120px; background: #FFC23D; color: #1A1206; font-weight: 500; font-size: 32px; padding: 16px 30px; border-radius: 999px; }
-.bigt { position: absolute; left: 70px; right: 70px; top: 520px; font-family: Unbounded, sans-serif; font-size: 92px; line-height: 1.1; }
+.bigt { position: absolute; left: 70px; right: 70px; top: 520px; font-family: Unbounded, sans-serif; font-size: 92px; line-height: 1.1; text-shadow: 0 6px 30px rgba(0,0,0,.6); }
 .bigt .w { display: inline-block; margin-right: .22em; }
 .bigt em { font-style: normal; color: #FFC23D; }
 .notes { position: absolute; left: 90px; right: 90px; top: 380px; display: flex; flex-direction: column; gap: 26px; }
@@ -197,7 +229,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B090
 .aim { width: 150px; height: 150px; }
 .aim circle, .aim line { fill: none; stroke: #FFC23D; stroke-width: 4; }
 .aim .core { fill: #FFC23D; }
-.sub { position: absolute; left: 60px; right: 60px; bottom: 300px; text-align: center; font-family: Unbounded, sans-serif; font-size: 52px; line-height: 1.25; }
+.sub { position: absolute; left: 60px; right: 60px; bottom: 300px; text-align: center; font-family: Unbounded, sans-serif; font-size: 52px; line-height: 1.25; text-shadow: 0 4px 24px rgba(0,0,0,.65); }
 .sub.s { font-size: 44px; }
 .sub u { color: #FFC23D; text-decoration: none; background: linear-gradient(#FFC23D, #FFC23D) left bottom / var(--w, 0%) 5px no-repeat; padding-bottom: 6px; }
 .end { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -222,12 +254,14 @@ def paragraphs(text):
     return [p for p in paras if p and "wa.me" not in p and "опубликован автоматически" not in p][:6]
 
 
-def kind_for(text):
+def kinds_for(text):
+    """Все сцены, подходящие фразе по смыслу, в порядке приоритета."""
     low = text.lower()
-    for kind, words in KEYWORDS.items():
-        if any(w in low for w in words):
-            return kind
-    return "cards"
+    return [kind for kind, words in KEYWORDS.items() if any(w in low for w in words)]
+
+
+def kind_for(text):
+    return (kinds_for(text) or ["cards"])[0]
 
 
 def split_sub(text):
@@ -298,16 +332,26 @@ class Picker(random.Random):
 
 # ---------- сцены: html и анимация ----------
 
+def topic_chat(text, rng):
+    """Вопрос, ответ и реплика клиента под тему: сначала по фразе, потом по всему ролику."""
+    for src in (text, CTX["text"]):
+        low = src.lower()
+        for words, triples in CHAT_TOPICS:
+            if any(w in low for w in words):
+                return rng.choice(triples)
+    return rng.one(QUESTIONS, text), rng.one(ANSWERS, text), rng.one(FOLLOW, text)
+
+
 def scene_chat(i, text, rng, t, d):
-    q = rng.one(QUESTIONS, text)  # не цитата из текста: субтитр и так её покажет
+    q, a, f = topic_chat(text, rng)  # не цитата из текста: субтитр и так её покажет
     ts = stamp(rng)
     h = f"""<div class="phone" id="p{i}"><div class="screen"><div class="island"></div>
       <div class="sbar"><span>{ts}</span><span>●●● 5G</span></div>
       <div class="chead"><img src="./logo.png" /><div><b>ИИ-помощник</b><span>онлайн</span></div></div>
       <div class="chat"><div class="msg in" id="a{i}">{esc(q)}<small>{ts}</small></div>
         <div class="typing" id="y{i}"><i></i><i></i><i></i></div>
-        <div class="msg out" id="b{i}">{esc(rng.one(ANSWERS, text))}<small>{ts}</small></div>
-        <div class="msg in" id="c{i}">{esc(rng.one(FOLLOW, text))}<small>{ts}</small></div></div></div></div>
+        <div class="msg out" id="b{i}">{esc(a)}<small>{ts}</small></div>
+        <div class="msg in" id="c{i}">{esc(f)}<small>{ts}</small></div></div></div></div>
       <div class="demo">пример переписки</div>"""
     ry = rng.choice([-38, 38])
     js = f"""
@@ -491,13 +535,25 @@ tl.fromTo("#ad{i}", {{rotationY: 35, x: -300, opacity: 0, filter: "blur(16px)"}}
     return h, js
 
 
-SCENES = {"ads": scene_ads, "notify": scene_notify, "split": scene_split, "chat": scene_chat, "cards": scene_cards, "fan": scene_fan, "booking": scene_booking,
+def scene_photo(i, text, rng, t, d):
+    """Живые кадры со стока в рамке и стеклянные подписи поверх (видео кладёт compose отдельным клипом)."""
+    a, b = rng.choice(PHOTO_CHIPS)
+    h = f"""<div class="fchip" id="fa{i}" style="left:150px;top:320px"><i></i>{esc(a)}</div>
+      <div class="fchip y" id="fb{i}" style="right:140px;top:1140px">{esc(b)}</div>"""
+    js = f"""
+tl.from("#fa{i}", {{opacity: 0, x: -60, filter: "blur(10px)", duration: .5, ease: "power3.out"}}, {t + .5})
+  .from("#fb{i}", {{opacity: 0, x: 60, scale: .8, duration: .5, ease: "back.out(2)"}}, {t + 1.1});"""
+    return h, js
+
+
+SCENES = {"photo": scene_photo, "ads": scene_ads, "notify": scene_notify, "split": scene_split, "chat": scene_chat, "cards": scene_cards, "fan": scene_fan, "booking": scene_booking,
           "laptop": scene_laptop, "big": scene_big}
 SPARE = ["cards", "fan", "chat", "big", "notify", "split", "ads"]  # если смысл сцены совпал с предыдущей, берём другую
 
 
-def compose(text, seed=None):
+def compose(text, seed=None, foot=None):
     rng = Picker(seed)
+    CTX["text"], CTX["foot"] = text, list(foot or [])
     picked.clear()
     paras = paragraphs(text)
     clips, js, t, prev, seen = [], [], 0.0, None, set()
@@ -507,10 +563,29 @@ def compose(text, seed=None):
         if i == 0 and kind == "cards":
             kind = "big"  # хук крупным текстом, если в нём нет предмета для сцены
         if kind == prev or kind in seen:  # каждая сцена один раз за ролик, пока есть другие
-            kind = rng.choice([k for k in SPARE if k not in seen and k != prev] or [k for k in SPARE if k != prev])
+            # сначала другая сцена по смыслу этой же фразы, потом нейтральные; реклама и запись только если про них речь
+            fits = [k for k in kinds_for(p) if k not in seen and k != prev]
+            spare = [k for k in SPARE if k not in ("ads", "booking")]
+            kind = (fits or [k for k in spare if k not in seen and k != prev] or [k for k in spare if k != prev])[0] if fits \
+                else rng.choice([k for k in spare if k not in seen and k != prev] or [k for k in spare if k != prev])
+        foot = CTX["foot"]
+        if i == 1 and foot and kind not in ("chat", "ads", "booking"):
+            kind = "photo"  # одна сцена с живыми кадрами в рамке
         prev = kind
         seen.add(kind)
         h, s = SCENES[kind](i, p, rng, round(t, 2), d)
+        if foot and (kind == "photo" or (i == 0 and kind == "big")):
+            src = foot.pop(0)
+            cls, extra = ("full", f'<div class="dim clip" id="dm{i}" data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="5"></div>') if kind == "big" else ("framed", "")
+            clips.append(f'<video class="foot {cls} clip" id="fv{i}" src="./{src}" muted playsinline data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="4"></video>{extra}')
+            if kind == "big":
+                js.append(f'tl.fromTo("#fv{i}", {{scale: 1.18}}, {{scale: 1.0, duration: {d:.2f}, ease: "none"}}, {t:.2f})'
+                          f'.to(["#fv{i}", "#dm{i}"], {{opacity: 0, duration: .3}}, {t + d - .3:.2f});')
+            else:
+                js.append(f'tl.fromTo("#fv{i}", {{opacity: 0, scale: .86, rotationY: -18, transformPerspective: 1600, filter: "blur(14px)"}}, '
+                          f'{{opacity: 1, scale: 1, rotationY: 0, filter: "blur(0px)", duration: .9, ease: "expo.out"}}, {t:.2f})'
+                          f'.to("#fv{i}", {{scale: 1.05, duration: {d - 1.2:.2f}, ease: "sine.inOut"}}, {t + .9:.2f})'
+                          f'.to("#fv{i}", {{x: {rng.choice([-500, 500])}, opacity: 0, filter: "blur(18px)", duration: .3, ease: "power3.in"}}, {t + d - .3:.2f});')
         tags = "".join(f'<div class="tag"><i></i>{esc(x)}</div>' for x in rng.fresh(TAGS[kind], min(2, len(TAGS[kind])), p, keep=False))
         clips.append(f'<div class="tags clip" id="tg{i}" data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="2">{tags}</div>')
         clips.append(f'<div class="stage clip" id="sc{i}" data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="1">{h}</div>')
@@ -565,13 +640,32 @@ tl.seek(0);
     return page, total
 
 
-def render(text, music, out, seed=None, workdir=None):
+def prep_footage(clips, work):
+    """Стоковые клипы -> короткие вертикальные файлы в папке композиции, с тем же цветом, что и весь ролик."""
+    names = []
+    for k, clip in enumerate(clips or []):
+        name = f"foot{k}.mp4"
+        try:
+            length = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(clip)],
+                                          capture_output=True, text=True).stdout.strip() or 0)
+            start = round(random.uniform(0, max(0, length - 9)), 2)
+            subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", f"{start}", "-i", str(clip), "-t", "9", "-an",
+                            "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setpts=1.15*PTS,fps=30,"
+                                   "eq=contrast=1.06:saturation=0.9,colorbalance=rs=0.03:bs=-0.03,format=yuv420p",
+                            "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", str(work / name)], check=True)
+            names.append(name)
+        except Exception as e:
+            print(f"Клип {clip} не подготовлен: {e}")
+    return names
+
+
+def render(text, music, out, seed=None, workdir=None, footage=None):
     """Собирает ролик: HTML-композиция -> MP4 через HyperFrames, затем музыка через ffmpeg."""
     work = Path(workdir or HERE / "out" / "hf")
     if work.exists():
         shutil.rmtree(work)
     shutil.copytree(HF_ASSETS, work)
-    page, total = compose(text, seed)
+    page, total = compose(text, seed, prep_footage(footage, work))
     (work / "index.html").write_text(page, encoding="utf-8")
     (work / "meta.json").write_text(json.dumps({"id": "reel", "name": "reel"}), encoding="utf-8")
     silent = work / "silent.mp4"

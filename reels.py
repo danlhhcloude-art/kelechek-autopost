@@ -96,13 +96,24 @@ def pick_music(n=0):
     return min(tracks, key=lambda t: age.get(t.name, -1))
 
 
+def live_footage(text, query=None):
+    """Два живых клипа со стока для промо-ролика: под хук и под вторую фразу. Без сети ролик собирается без них."""
+    try:
+        paras = [p for p in text.split("\n\n") if p.strip()]
+        queries = [media.scene_query(p) for p in paras[:2]]
+        return media.clips_for_shots(queries, query or media.scene_query(text) or media.DEFAULT_QUERY, OUT / "stock")
+    except Exception as e:
+        print(f"Живые кадры не найдены ({e}), собираю без них")
+        return []
+
+
 def build_reel(text, music=None, query=None):
     OUT.mkdir(exist_ok=True)
     out = OUT / "reel.mp4"
     if os.environ.get("REEL_STYLE", "promo") == "promo":
         # промо-стиль с телефонами и стеклянными карточками (одобрен 06.10.2026); при сбое собираем старым способом
         try:
-            total = promo.render(text, music or pick_music(0), out)
+            total = promo.render(text, music or pick_music(0), out, footage=live_footage(text, query))
             print(f"Ролик собран в промо-стиле: {out} ({total:.1f} сек)")
             return out
         except Exception as e:
