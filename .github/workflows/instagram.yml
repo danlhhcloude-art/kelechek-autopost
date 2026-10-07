@@ -48,7 +48,8 @@ jobs:
       - run: |
           git config user.name "autopost-bot"
           git config user.email "autopost-bot@users.noreply.github.com"
-          python reels.py ${{ inputs.test && '--test' || '' }}
+          set -o pipefail
+          python reels.py ${{ inputs.test && '--test' || '' }} 2>&1 | tee reel-log.txt
         env:
           VOICE_ENGINE: ${{ inputs.voice || 'piper' }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
@@ -59,6 +60,11 @@ jobs:
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
           FB_ACCESS_TOKEN: ${{ secrets.FB_ACCESS_TOKEN }}
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+      - name: Журнал сборки при ошибке (в репозиторий, логи Actions недоступны)
+        if: failure()
+        run: |
+          tail -n 120 reel-log.txt > logs-reel-last.txt || true
+          git add logs-reel-last.txt && git commit -m "reels: журнал ошибки [skip ci]" && git pull --rebase origin main && git push || true
       - name: Сохранить отметку о публикации
         run: |
           git add posts.json
