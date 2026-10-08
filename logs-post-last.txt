@@ -1,5 +1,5 @@
 Медиа не прикрепилось (400 Client Error: Bad Request for url: https://graph.threads.net/v1.0/28058715777164226/threads), публикую текстом
-Тема «Бизнес Бишкек» не принята (400 {"error":{"message":"API access blocked.","type":"OAuthException","code":200,"fbtrace_id":"ASx7IsV5d9KQg93kPVGiPmX"}}), публикую без темы
+Тема «Бизнес Бишкек» не принята (400 {"error":{"message":"API access blocked.","type":"OAuthException","code":200,"fbtrace_id":"AvbyxcnCtrr9FvdMcYxtNpU"}}), публикую без темы
 Traceback (most recent call last):
   File "/home/runner/work/kelechek-autopost/kelechek-autopost/autopost.py", line 286, in <module>
     main()
@@ -8,6 +8,6 @@ Traceback (most recent call last):
               ^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/runner/work/kelechek-autopost/kelechek-autopost/autopost.py", line 166, in publish
     r.raise_for_status()
-  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/requests/models.py", line 1167, in raise_for_status
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/requests/models.py", line 1167, in raise_for_status
     raise HTTPError(http_error_msg, response=self)
 requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://graph.threads.net/v1.0/28058715777164226/threads
