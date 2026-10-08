@@ -1,5 +1,5 @@
 Медиа не прикрепилось (400 Client Error: Bad Request for url: https://graph.threads.net/v1.0/28058715777164226/threads), публикую текстом
-Тема «Бизнес Бишкек» не принята (400 {"error":{"message":"API access blocked.","type":"OAuthException","code":200,"fbtrace_id":"A-2Jf0P-0oX4n4bn5mvRbP1"}}), публикую без темы
+Тема «Бизнес Бишкек» не принята (400 {"error":{"message":"API access blocked.","type":"OAuthException","code":200,"fbtrace_id":"A8uIWELWMpYIddFRn9vteL4"}}), публикую без темы
 Traceback (most recent call last):
   File "/home/runner/work/kelechek-autopost/kelechek-autopost/autopost.py", line 286, in <module>
     main()
