@@ -59,24 +59,33 @@ def collect():
     comments = load_comments()
     since = datetime.now(timezone.utc) - timedelta(days=LOOKBACK_DAYS)
     new = 0
-    for p in our_threads(token, since):
-        r = requests.get(f"{API}/{p['threads_id']}/conversation", timeout=30, params={
-            "fields": "id,text,username,timestamp,replied_to", "access_token": token})
-        if not r.ok:
-            sys.exit(f"Не удалось получить комментарии: {r.status_code} {r.text[:300]}")
-        for c in r.json().get("data", []):
-            if c.get("username") == OWN_USERNAME or c["id"] in comments:
-                continue
-            comments[c["id"]] = {
-                "post_id": p["threads_id"], "post_topic": p.get("topic"),
-                "replied_to": (c.get("replied_to") or {}).get("id"),
-                "username": c.get("username"), "text": c.get("text", ""),
-                "timestamp": c.get("timestamp"), "answered_at": None, "answer_id": None}
-            new += 1
+    # если Threads недоступен, комментарии Instagram всё равно собираем
+    try:
+        for p in our_threads(token, since):
+            r = requests.get(f"{API}/{p['threads_id']}/conversation", timeout=30, params={
+                "fields": "id,text,username,timestamp,replied_to", "access_token": token})
+            if not r.ok:
+                raise RuntimeError(f"{r.status_code} {r.text[:300]}")
+            for c in r.json().get("data", []):
+                if c.get("username") == OWN_USERNAME or c["id"] in comments:
+                    continue
+                comments[c["id"]] = {
+                    "post_id": p["threads_id"], "post_topic": p.get("topic"),
+                    "replied_to": (c.get("replied_to") or {}).get("id"),
+                    "username": c.get("username"), "text": c.get("text", ""),
+                    "timestamp": c.get("timestamp"), "answered_at": None, "answer_id": None}
+                new += 1
+    except Exception as e:  # noqa: BLE001
+        threads_error = e
+        print(f"Threads: не удалось получить комментарии: {e}")
+    else:
+        threads_error = None
     new += collect_instagram(comments, since)
     save_comments(comments)
     waiting = sum(1 for c in comments.values() if not c["answered_at"])
     print(f"Новых комментариев: {new}, ждут ответа: {waiting}")
+    if threads_error:
+        sys.exit(1)  # запуск красный, чтобы контроль увидел, но комментарии Instagram уже сохранены
 
 
 def collect_instagram(comments, since):
