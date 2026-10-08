@@ -1,160 +1,355 @@
 {
-  "updated_at": "2026-10-08T13:00:33+00:00",
-  "account": {},
+  "updated_at": "2026-10-08T14:38:48+00:00",
+  "account": {
+    "views": 26,
+    "likes": 0,
+    "replies": 0,
+    "reposts": 0,
+    "quotes": 0,
+    "followers_count": 0
+  },
   "posts": [
     {
       "threads_id": "18105325730612871",
       "posted_at": "2026-10-01T12:23:59+00:00",
       "topic": "intro-offer",
-      "text": "Бишкек, вы до сих пор платите за рекламный ролик как за съёмку фильма?"
+      "text": "Бишкек, вы до сих пор платите за рекламный ролик как за съёмку фильма?",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/Dd85taCm5qu",
+      "views": 18,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18117105628955732",
       "posted_at": "2026-10-02T03:15:14+00:00",
       "topic": "automation-proof",
-      "text": "Признание: этот пост написал и опубликовал не человек."
+      "text": "Признание: этот пост написал и опубликовал не человек.",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/Dd-fr6Lm2TS",
+      "views": 24,
+      "likes": 0,
+      "replies": 4,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18037185164652957",
       "posted_at": "2026-10-02T07:10:52+00:00",
       "topic": "lead-magnet",
-      "text": "Давайте эксперимент."
+      "text": "Давайте эксперимент.",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/Dd-6qyzFot7",
+      "views": 9,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "17915895981453327",
       "posted_at": "2026-10-02T12:22:17+00:00",
       "topic": "region",
-      "text": "Непопулярное мнение: бизнес в Бишкеке чаще теряет клиентов не из-за цены, а из-за того, чт"
+      "text": "Непопулярное мнение: бизнес в Бишкеке чаще теряет клиентов не из-за цены, а из-за того, чт",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/Dd_eTrpGz6F",
+      "views": 6,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18104856821457696",
       "posted_at": "2026-10-03T03:21:14+00:00",
       "topic": "mini-reel",
-      "text": "Вам не нужен «пакет на месяц». Нужен один ролик, который не стыдно выложить."
+      "text": "Вам не нужен «пакет на месяц». Нужен один ролик, который не стыдно выложить.",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeBFLyyG8Ee",
+      "views": 7,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18168488614474133",
       "posted_at": "2026-10-03T07:14:17+00:00",
       "topic": "automation",
-      "text": "Ваш менеджер отвечает в WhatsApp одно и то же 40 раз в день. «Сколько стоит?», «Где вы нах"
+      "text": "Ваш менеджер отвечает в WhatsApp одно и то же 40 раз в день. «Сколько стоит?», «Где вы нах",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeBf2xrFXrX",
+      "views": 29,
+      "likes": 0,
+      "replies": 2,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "17989402913866499",
       "posted_at": "2026-10-03T14:02:47+00:00",
       "topic": "mini-whatsapp",
-      "text": "Клиент написал в WhatsApp в 23:40. Вы ответили утром. Он уже купил у соседей."
+      "text": "Клиент написал в WhatsApp в 23:40. Вы ответили утром. Он уже купил у соседей.",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeCOmmukSIM",
+      "views": 41,
+      "likes": 0,
+      "replies": 2,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18104396696527159",
       "posted_at": "2026-10-04T04:30:08+00:00",
       "topic": "automation-proof",
-      "text": "Отчёт робота за первые дни. Без прикрас."
+      "text": "Отчёт робота за первые дни. Без прикрас.",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeDx3RGG_6O",
+      "views": 4,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18077097869472401",
       "posted_at": "2026-10-04T10:59:44+00:00",
       "topic": "meeting",
-      "text": "Не доверяете ИИ и тем, кто «всё сделает онлайн»? Правильно делаете."
+      "text": "Не доверяете ИИ и тем, кто «всё сделает онлайн»? Правильно делаете.",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeEecitFZnp",
+      "views": 19,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18468323050188624",
       "posted_at": "2026-10-04T12:21:58+00:00",
       "topic": "ai-video",
-      "text": "Скажу то, что не нравится видеографам: для рилсов и рекламы в соцсетях дорогая съёмка уже "
+      "text": "Скажу то, что не нравится видеографам: для рилсов и рекламы в соцсетях дорогая съёмка уже ",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeEn2zKoOfA",
+      "views": 7,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "17904714771665452",
       "posted_at": "2026-10-04T15:03:18+00:00",
       "topic": "honest",
-      "text": "Портфолио у нас пока нет, скрывать не буду. Только начали."
+      "text": "Портфолио у нас пока нет, скрывать не буду. Только начали.",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeE6U0-mwv-",
+      "views": 26,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18011734868969008",
       "posted_at": "2026-10-04T18:18:33+00:00",
       "topic": "automation-proof",
-      "text": "Этот пост вышел, пока я пил чай. Сам не нажимал ничего, он стоял в очереди и опубликовался"
+      "text": "Этот пост вышел, пока я пил чай. Сам не нажимал ничего, он стоял в очереди и опубликовался",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeFQq1ams_k",
+      "views": 17,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18143459614501860",
       "posted_at": "2026-10-05T03:21:17+00:00",
       "topic": "question",
-      "text": "Вопрос к тем, у кого свой бизнес в Бишкеке."
+      "text": "Вопрос к тем, у кого свой бизнес в Бишкеке.",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeGOx6vlqmi",
+      "views": 81,
+      "likes": 1,
+      "replies": 2,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18110117738244268",
       "posted_at": "2026-10-05T07:21:50+00:00",
       "topic": "meeting",
-      "text": "Чаще всего меня спрашивают: «это вообще работает или развод?»"
+      "text": "Чаще всего меня спрашивают: «это вообще работает или развод?»",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeGqT86lk_Y",
+      "views": 4,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18079461044374120",
       "posted_at": "2026-10-05T12:22:19+00:00",
       "topic": "ai-video",
-      "text": "Видео про товар без фотосессии. Ведущий, который говорит на кыргызском. Несколько варианто"
+      "text": "Видео про товар без фотосессии. Ведущий, который говорит на кыргызском. Несколько варианто",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeHMslWFuTd",
+      "views": 12,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "17993375394109720",
       "posted_at": "2026-10-06T03:20:36+00:00",
       "topic": "honest",
-      "text": "В комментариях спросили, есть ли тут вообще живой человек."
+      "text": "В комментариях спросили, есть ли тут вообще живой человек.",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeIzfv6G1g3",
+      "views": 5,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18139885378722954",
       "posted_at": "2026-10-06T07:19:10+00:00",
       "topic": "tip",
-      "text": "Частая ошибка: хотеть от ИИ «помощника на всё»."
+      "text": "Частая ошибка: хотеть от ИИ «помощника на всё».",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeJOzF1FWT_",
+      "views": 15,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18171720499457607",
       "posted_at": "2026-10-06T12:23:17+00:00",
       "topic": "lost-leads",
-      "text": "Есть утечка, которую не видно ни в одном отчёте."
+      "text": "Есть утечка, которую не видно ни в одном отчёте.",
+      "media_type": "CAROUSEL_ALBUM",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeJxlxyFShk",
+      "views": 5,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18145105522600858",
       "posted_at": "2026-10-07T03:21:32+00:00",
       "topic": "ai-approve",
-      "text": "Многие боятся отдать переписку с клиентами ИИ. И правильно, сразу доверять не надо."
+      "text": "Многие боятся отдать переписку с клиентами ИИ. И правильно, сразу доверять не надо.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeLYY7PlPZH",
+      "views": 41,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "18151126939528247",
       "posted_at": "2026-10-07T07:20:10+00:00",
       "topic": "target-boost",
-      "text": "Кнопка «Продвигать» в Instagram, наверное, самая дорогая кнопка для малого бизнеса."
+      "text": "Кнопка «Продвигать» в Instagram, наверное, самая дорогая кнопка для малого бизнеса.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeLzsilluZ1",
+      "views": 6,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     },
     {
       "threads_id": "17912372229498118",
       "posted_at": "2026-10-07T12:22:40+00:00",
       "topic": "ai-analytics",
-      "text": "Реклама идёт сразу в Instagram, TikTok и Google, а заявки потом падают в WhatsApp и в табл"
+      "text": "Реклама идёт сразу в Instagram, TikTok и Google, а заявки потом падают в WhatsApp и в табл",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeMWT5Vm0iF",
+      "views": 16,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17993026071020610",
+      "posted_at": "2026-10-08T14:38:48+00:00",
+      "topic": "booking-site",
+      "text": "Барбершоп, салон, стоматология. Запись до сих пор через WhatsApp: «а на завтра есть время?",
+      "media_type": "CAROUSEL_ALBUM",
+      "url": "https://www.threads.com/@kelechek_ai/post/DePKsKDG6VT",
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-08T13:00:41+00:00",
+    "updated_at": "2026-10-08T14:39:05+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
         "posted_at": "2026-10-01T16:30:08+00:00",
         "topic": "intro-offer",
-        "text": "Бишкек, вы до сих пор платите за рекламный ролик как за съёмку фильма?\n\nЭто Kelechek AI. Д"
+        "text": "Бишкек, вы до сих пор платите за рекламный ролик как за съёмку фильма?\n\nЭто Kelechek AI. Д",
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/Dd9VzKNgAwF/",
+        "views": 0,
+        "reach": 1,
+        "saved": 0,
+        "shares": 0
       },
       {
         "ig_media_id": "18075607160742661",
         "posted_at": "2026-10-02T13:08:43+00:00",
         "topic": "automation-proof",
-        "text": "Признание: этот пост написал и опубликовал не человек.\n\nВесь аккаунт Kelechek AI ведёт авт"
+        "text": "Признание: этот пост написал и опубликовал не человек.\n\nВесь аккаунт Kelechek AI ведёт авт",
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/Dd_jk1RDs9Y/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
       },
       {
         "ig_media_id": "17905830249589772",
         "posted_at": "2026-10-03T14:05:28+00:00",
         "topic": "lead-magnet",
-        "text": "Давайте эксперимент.\n\nНапишите в комментариях, чем занимается ваш бизнес в Бишкеке. Одной "
+        "text": "Давайте эксперимент.\n\nНапишите в комментариях, чем занимается ваш бизнес в Бишкеке. Одной ",
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DeCO3R_AG-P/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
       },
       {
         "ig_media_id": "17909927568557965",
         "posted_at": "2026-10-04T13:24:25+00:00",
         "topic": "region",
-        "text": "Непопулярное мнение: бизнес в Бишкеке чаще теряет клиентов не из-за цены, а из-за того, чт"
+        "text": "Непопулярное мнение: бизнес в Бишкеке чаще теряет клиентов не из-за цены, а из-за того, чт",
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DeEu-CyjUpL/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
       }
     ]
   }
