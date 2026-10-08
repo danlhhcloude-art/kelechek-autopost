@@ -321,6 +321,7 @@ def main():
     media.mark_clips_used(media.picked_clips)  # эти фоны больше не повторяем
     mark_music_used(music)  # и этот трек тоже
     promo.mark_used(promo.picked)  # и эти фразы тоже
+    promo.themes.mark_used(promo.themes.picked)  # и этот стиль оформления
     path.write_text(json.dumps(items, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Reels опубликован: {media_id}")
 

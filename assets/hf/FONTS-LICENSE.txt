@@ -1,0 +1,2 @@
+Шрифты Dela Gothic One, Russo One, Playfair Display, Oswald, Montserrat, Manrope, Rubik
+взяты из Google Fonts (github.com/google/fonts) и распространяются по SIL Open Font License 1.1.

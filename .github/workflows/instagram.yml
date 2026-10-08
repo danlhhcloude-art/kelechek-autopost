@@ -72,6 +72,7 @@ jobs:
           if [ -f used_clips.json ]; then git add used_clips.json; fi
           if [ -f used_texts.json ]; then git add used_texts.json; fi
           if [ -f used_music.json ]; then git add used_music.json; fi
+          if [ -f used_styles.json ]; then git add used_styles.json; fi
           git diff --cached --quiet || git commit -m "reels: отметка публикации"
           git pull --rebase origin main
           git push

@@ -19,6 +19,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import themes
+
 HERE = Path(__file__).parent
 HF_ASSETS = HERE / "assets" / "hf"
 HF_VERSION = "0.8.121"
@@ -551,8 +553,9 @@ SCENES = {"photo": scene_photo, "ads": scene_ads, "notify": scene_notify, "split
 SPARE = ["cards", "fan", "chat", "big", "notify", "split", "ads"]  # если смысл сцены совпал с предыдущей, берём другую
 
 
-def compose(text, seed=None, foot=None):
+def compose(text, seed=None, foot=None, style=None):
     rng = Picker(seed)
+    style = style or themes.pick(seed)  # палитра, шрифты, узор фона, субтитр и переход: каждый день другие
     CTX["text"], CTX["foot"] = text, list(foot or [])
     picked.clear()
     paras = paragraphs(text)
@@ -598,7 +601,7 @@ def compose(text, seed=None, foot=None):
             js.append(f'tl.to("#sc{i}", {{scale: {1 + .03 * (k + 1):.3f}, transformOrigin: "50% 250px", duration: .22, ease: "power3.out"}}, {b:.2f})'
                       f'.to("#flash", {{opacity: .10, duration: .08}}, {b:.2f}).to("#flash", {{opacity: 0, duration: .12}}, {b + .08:.2f});')
             b, k = b + 1.6, k + 1
-        js.append(f'tl.to("#sc{i}", {{x: {rng.choice([-500, 500])}, opacity: 0, filter: "blur(18px)", duration: .3, ease: "power3.in"}}, {t + d - .3:.2f});')
+        js.append(themes.exit_js(style, f"#sc{i}", t + d - .3, rng))
         if kind != "big":
             a, b = split_sub(p)
             cls = "sub s" if len(p) > 70 else "sub"
@@ -621,10 +624,11 @@ def compose(text, seed=None, foot=None):
     page = f"""<!doctype html>
 <html lang="ru" data-resolution="portrait"><head><meta charset="UTF-8" />
 <meta name="viewport" content="width=1080, height=1920" /><script src="./gsap.min.js"></script>
-<style>{CSS}</style></head><body>
+<style>{CSS}
+{themes.css(style)}</style></head><body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{total}" data-width="1080" data-height="1920">
-<div class="bg"></div><div class="glow" id="glow"></div>
-<div class="streak" id="st1" style="top:520px"></div><div class="streak" id="st2" style="top:1380px"></div><div class="vig"></div><div id="flash"></div>
+<div class="bg"></div><div class="deco"></div><div class="glow" id="glow"></div>
+<div class="streak" id="st1" style="top:520px"></div><div class="streak" id="st2" style="top:1380px"></div><div class="vig"></div><div id="flash"></div>{'<div class="frame"><b>KELECHEK AI</b></div>' if style.get("layout") == "frame" else ""}
 {chr(10).join(clips)}
 </div>
 <script>
@@ -632,12 +636,13 @@ const tl = gsap.timeline({{ paused: true }});
 tl.to("#glow", {{ x: 120, y: -160, scale: 1.15, duration: {total}, ease: "sine.inOut" }}, 0)
   .fromTo("#st1", {{ x: -500 }}, {{ x: 600, duration: {total}, ease: "none" }}, 0)
   .fromTo("#st2", {{ x: 500 }}, {{ x: -600, duration: {total}, ease: "none" }}, 0);
+{themes.deco_js(style, total)}
 {chr(10).join(js)}
 window.__timelines = window.__timelines || {{}};
 window.__timelines["main"] = tl;
 tl.seek(0);
 </script></body></html>"""
-    return page, total
+    return themes.apply(page, style), total
 
 
 def prep_footage(clips, work):
@@ -659,13 +664,13 @@ def prep_footage(clips, work):
     return names
 
 
-def render(text, music, out, seed=None, workdir=None, footage=None):
+def render(text, music, out, seed=None, workdir=None, footage=None, style=None):
     """Собирает ролик: HTML-композиция -> MP4 через HyperFrames, затем музыка через ffmpeg."""
     work = Path(workdir or HERE / "out" / "hf")
     if work.exists():
         shutil.rmtree(work)
     shutil.copytree(HF_ASSETS, work)
-    page, total = compose(text, seed, prep_footage(footage, work))
+    page, total = compose(text, seed, prep_footage(footage, work), style)
     (work / "index.html").write_text(page, encoding="utf-8")
     (work / "meta.json").write_text(json.dumps({"id": "reel", "name": "reel"}), encoding="utf-8")
     silent = work / "silent.mp4"
