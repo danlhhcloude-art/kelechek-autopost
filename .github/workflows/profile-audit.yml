@@ -1,0 +1,29 @@
+name: Profile audit
+on:
+  schedule:
+    - cron: "37 2 * * 1"   # понедельник 8:37 по Бишкеку, до недельного разбора аккаунта
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: posts-json
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install requests
+      - run: python profile_audit.py
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+      - name: Сохранить
+        run: |
+          git config user.name "autopost-bot"
+          git config user.email "autopost-bot@users.noreply.github.com"
+          git add profile.json
+          git diff --cached --quiet || git commit -m "profile: снимок профилей"
+          git pull --rebase origin main
+          git push
