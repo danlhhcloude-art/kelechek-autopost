@@ -1,0 +1,4 @@
+Музыка: kmacleod-life-of-riley.mp3 «Life of Riley» Kevin MacLeod (incompetech.com), CC BY 4.0
+Фон по планам: customer paying in shop -> pixabay-20910; technology abstract -> pixabay-4935
+Ролик собран в промо-стиле: /home/runner/work/kelechek-autopost/kelechek-autopost/out/reel.mp4 (22.7 сек)
+Токен Instagram не работает: 400 {"error":{"message":"API access blocked.","type":"OAuthException","code":200,"fbtrace_id":"AvOhCrdFsrc9TNgWBoM8cuW"}}
