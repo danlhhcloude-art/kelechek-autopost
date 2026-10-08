@@ -120,6 +120,18 @@ EXITS = {
     "shrink": lambda sel, at, rng: f'tl.to("{sel}", {{scale: .7, rotation: {rng.choice([-6, 6])}, opacity: 0, duration: .3, ease: "back.in(1.6)"}}, {at:.2f});',
 }
 
+# монтажная формула: ритм, склейки и связки между сценами (не цвет, а сам монтаж)
+CUTS = {
+    "classic": {"pace": 1.0, "beat": 1.6, "punch": .03},   # ровный ритм, наезд камеры каждые 1,6 с
+    "punchy": {"pace": .82, "beat": 1.05, "punch": .05},  # быстрые сцены, частые удары с качкой
+    "slam": {"pace": .95, "beat": 1.8, "punch": .03},     # между сценами вспышка-номер «02» на цвете акцента
+    "story": {"pace": 1.0, "beat": 2.0, "punch": .02},    # полоса прогресса сверху и счётчик главы
+    "zoomcut": {"pace": .9, "beat": 1.4, "punch": .04},   # каждая сцена влетает наездом из глубины
+}
+
+# как появляется хук (первая фраза крупным текстом)
+HOOKS = ["words", "type", "drop", "rise"]
+
 picked = {}  # стиль последнего собранного ролика; reels.py отмечает его после публикации
 
 
@@ -157,6 +169,8 @@ def pick(seed=None, theme=None):
         "sub": _fresh(list(SUBS), "sub", used, rng),
         "exit": _fresh(list(EXITS), "exit", used, rng),
         "layout": _fresh(list(LAYOUTS), "layout", used, rng),
+        "cut": _fresh(list(CUTS), "cut", used, rng),
+        "hook": _fresh(HOOKS, "hook", used, rng),
     }
     picked.clear()
     picked.update(style)

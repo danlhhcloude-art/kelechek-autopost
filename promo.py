@@ -198,6 +198,12 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B090
 .bigt { position: absolute; left: 70px; right: 70px; top: 520px; font-family: Unbounded, sans-serif; font-size: 92px; line-height: 1.1; text-shadow: 0 6px 30px rgba(0,0,0,.6); }
 .bigt .w { display: inline-block; margin-right: .22em; }
 .bigt em { font-style: normal; color: #FFC23D; }
+.bigt .c { display: inline-block; }
+.slamc { position: absolute; inset: 0; background: #FFC23D; display: flex; align-items: center; justify-content: center; z-index: 30; }
+.slamc b { font-family: Unbounded, sans-serif; font-size: 300px; color: #1A1206; letter-spacing: -.04em; }
+.prog { position: absolute; left: 70px; right: 70px; top: 120px; height: 8px; border-radius: 8px; background: rgba(255,214,140,.18); z-index: 30; }
+.prog i { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; border-radius: 8px; background: #FFC23D; transform-origin: 0 50%; }
+.chap { position: absolute; right: 70px; top: 150px; font-family: Unbounded, sans-serif; font-size: 34px; color: #FFC23D; z-index: 30; }
 .notes { position: absolute; left: 90px; right: 90px; top: 380px; display: flex; flex-direction: column; gap: 26px; }
 .note { display: flex; align-items: center; gap: 24px; padding: 28px 30px; border-radius: 34px; background: rgba(255,255,255,.14);
         border: 1.5px solid rgba(255,255,255,.22); box-shadow: 0 24px 50px rgba(0,0,0,.4); }
@@ -452,12 +458,20 @@ tl.from("#l{i}", {{rotationX: 50, y: 200, scale: .8, opacity: 0, filter: "blur(1
 def scene_big(i, text, rng, t, d):
     words = text.split()
     cut = max(1, len(words) - max(1, len(words) // 3))
-    spans = " ".join(f'<span class="w p">{esc(w)}</span>' for w in words[:cut])
-    spans += " " + " ".join(f'<span class="w a"><em>{esc(w)}</em></span>' for w in words[cut:])
+    hook = CTX.get("hook", "words") if i == 0 else "words"
+    word = (lambda w: "".join(f'<span class="c">{esc(ch)}</span>' for ch in w)) if hook == "type" else esc
+    spans = " ".join(f'<span class="w p">{word(w)}</span>' for w in words[:cut])
+    spans += " " + " ".join(f'<span class="w a"><em>{word(w)}</em></span>' for w in words[cut:])
     size = 92 if len(text) < 45 else 72 if len(text) < 80 else 58
     h = f'<div class="bigt" id="t{i}" style="font-size:{size}px">{spans}</div>'
+    enter = {
+        "words": f'tl.from("#t{i} .w", {{opacity: 0, y: 40, filter: "blur(12px)", stagger: .09, duration: .45, ease: "power3.out"}}, {t + .1})',
+        "type": f'tl.from("#t{i} .c", {{opacity: 0, duration: .01, stagger: .03}}, {t + .05})',
+        "drop": f'tl.from("#t{i} .w", {{opacity: 0, y: -300, rotation: () => gsap.utils.random(-14, 14), stagger: .08, duration: .7, ease: "bounce.out"}}, {t + .05})',
+        "rise": f'tl.from("#t{i} .w", {{opacity: 0, scale: 2.6, filter: "blur(20px)", stagger: .07, duration: .4, ease: "expo.out"}}, {t + .05})',
+    }[hook]
     js = f"""
-tl.from("#t{i} .w", {{opacity: 0, y: 40, filter: "blur(12px)", stagger: .09, duration: .45, ease: "power3.out"}}, {t + .1})
+{enter}
   .to("#t{i}", {{scale: 1.05, duration: {d - .6:.2f}, ease: "sine.inOut", transformOrigin: "0% 50%"}}, {t + .5});"""
     if d >= 2.9:  # в конце остаётся главное: остальные слова гаснут, акцент крупнее (приём «Feel every click → Click.»)
         js += f"""
@@ -556,12 +570,19 @@ SPARE = ["cards", "fan", "chat", "big", "notify", "split", "ads"]  # если с
 def compose(text, seed=None, foot=None, style=None):
     rng = Picker(seed)
     style = style or themes.pick(seed)  # палитра, шрифты, узор фона, субтитр и переход: каждый день другие
-    CTX["text"], CTX["foot"] = text, list(foot or [])
+    CTX["text"], CTX["foot"], CTX["hook"] = text, list(foot or []), style.get("hook", "words")
+    cut = themes.CUTS[style.get("cut", "classic")]
     picked.clear()
     paras = paragraphs(text)
     clips, js, t, prev, seen = [], [], 0.0, None, set()
     for i, p in enumerate(paras):
-        d = duration(p)
+        if style.get("cut") == "slam" and i > 0:  # вспышка-номер между сценами
+            clips.append(f'<div class="slamc clip" id="sl{i}" data-start="{t:.2f}" data-duration="0.45" data-track-index="6"><b>{i + 1:02d}</b></div>')
+            js.append(f'tl.from("#sl{i}", {{scale: 1.25, duration: .18, ease: "power3.out"}}, {t:.2f})'
+                      f'.from("#sl{i} b", {{y: 120, opacity: 0, duration: .2, ease: "expo.out"}}, {t + .03:.2f})'
+                      f'.to("#sl{i}", {{yPercent: -100, duration: .14, ease: "power3.in"}}, {t + .31:.2f});')
+            t += .45
+        d = max(2.6, round(duration(p) * cut["pace"], 2))
         kind = kind_for(p)
         if i == 0 and kind == "cards":
             kind = "big"  # хук крупным текстом, если в нём нет предмета для сцены
@@ -593,14 +614,20 @@ def compose(text, seed=None, foot=None, style=None):
         clips.append(f'<div class="tags clip" id="tg{i}" data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="2">{tags}</div>')
         clips.append(f'<div class="stage clip" id="sc{i}" data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="1">{h}</div>')
         js.append(s)
+        if style.get("cut") == "zoomcut":  # сцена влетает из глубины
+            js.append(f'tl.from("#sc{i}", {{scale: 1.6, opacity: 0, filter: "blur(22px)", duration: .38, ease: "expo.out"}}, {t:.2f});')
+        if style.get("cut") == "story":
+            clips.append(f'<div class="chap clip" id="ch{i}" data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="6">{i + 1}/{len(paras)}</div>')
+            js.append(f'tl.from("#ch{i}", {{opacity: 0, x: 30, duration: .3, ease: "power3.out"}}, {t + .1:.2f});')
         js.append(f'tl.from("#tg{i} .tag", {{opacity: 0, y: -20, stagger: .1, duration: .4, ease: "power3.out"}}, {t + .15:.2f});')
         # «биты» внутри сцены: ступенчатый наезд камеры и мягкая вспышка, чтобы не было мёртвых секунд
         # (разбор Reels 06.10: картинка должна меняться каждую 1–2 секунды)
-        b, k = t + 1.7, 0
+        b, k = t + max(1.0, cut["beat"] + .1), 0
         while b < t + d - .6:
-            js.append(f'tl.to("#sc{i}", {{scale: {1 + .03 * (k + 1):.3f}, transformOrigin: "50% 250px", duration: .22, ease: "power3.out"}}, {b:.2f})'
+            sway = f', rotation: {rng.choice([-1.2, 1.2])}' if style.get("cut") == "punchy" else ""
+            js.append(f'tl.to("#sc{i}", {{scale: {1 + cut["punch"] * (k + 1):.3f}{sway}, transformOrigin: "50% 250px", duration: .22, ease: "power3.out"}}, {b:.2f})'
                       f'.to("#flash", {{opacity: .10, duration: .08}}, {b:.2f}).to("#flash", {{opacity: 0, duration: .12}}, {b + .08:.2f});')
-            b, k = b + 1.6, k + 1
+            b, k = b + cut["beat"], k + 1
         js.append(themes.exit_js(style, f"#sc{i}", t + d - .3, rng))
         if kind != "big":
             a, b = split_sub(p)
@@ -611,6 +638,9 @@ def compose(text, seed=None, foot=None, style=None):
                       f'.to("#u{i}", {{opacity: 0, filter: "blur(10px)", duration: .25}}, {t + d - .3:.2f});')
         t += d
     total = round(t + END, 2)
+    if style.get("cut") == "story":  # полоса прогресса до финальной карточки
+        clips.append(f'<div class="prog clip" id="prog" data-start="0" data-duration="{t:.2f}" data-track-index="7"><i id="pgi"></i></div>')
+        js.append(f'tl.fromTo("#pgi", {{scaleX: 0}}, {{scaleX: 1, duration: {t:.2f}, ease: "none"}}, 0);')
     clips.append(f"""<div class="end clip" id="fin" data-start="{t:.2f}" data-duration="{END}" data-track-index="1">
         <div class="brand" id="brand"><img src="./logo.png" />Kelechek AI</div>
         <div class="slogan" id="slogan">{esc(rng.one(SLOGANS))}</div>

@@ -237,7 +237,7 @@ def collect_stats():
         if not p.get("ig_media_id"):
             continue
         row = {"ig_media_id": p["ig_media_id"], "posted_at": p["ig_posted_at"], "topic": p.get("topic"),
-               "text": p["text"][:90]}
+               "text": p["text"][:90], "style": p.get("style")}
         r = requests.get(f"{IG_API}/{p['ig_media_id']}", timeout=30,
                          params={"fields": "like_count,comments_count,permalink", "access_token": token})
         if r.ok:
@@ -318,6 +318,8 @@ def main():
         item["threads_video_id"] = threads_id
     if fb_id:
         item["fb_video_id"] = fb_id
+    if promo.themes.picked:
+        item["style"] = dict(promo.themes.picked)  # чтобы сравнивать охваты разных формул монтажа
     media.mark_clips_used(media.picked_clips)  # эти фоны больше не повторяем
     mark_music_used(music)  # и этот трек тоже
     promo.mark_used(promo.picked)  # и эти фразы тоже
