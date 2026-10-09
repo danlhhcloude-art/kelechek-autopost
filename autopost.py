@@ -21,7 +21,7 @@ import requests
 import freshness
 
 API = "https://graph.threads.net/v1.0"
-GAP_HOURS = 2.5  # ближе этого к прошлому посту запуск по расписанию не публикует
+GAP_HOURS = 2.5  # ближе этого к прошлому посту запуск по расписанию или dispatch не публикует
 HERE = Path(__file__).parent
 POSTS_FILE = HERE / "posts.json"
 STATS_FILE = HERE / "stats.json"
@@ -241,8 +241,9 @@ def main():
         return collect_stats()
 
     posts = load_posts()
-    if os.environ.get("GITHUB_EVENT_NAME") == "schedule" and not (args.generate or args.dry_run):
-        # у каждого слота есть запасной запуск: если GitHub не пропустил основной, второй не публикует
+    if os.environ.get("GITHUB_EVENT_NAME") in ("schedule", "workflow_dispatch") and not (args.generate or args.dry_run):
+        # у каждого слота есть запасной запуск и ручной dispatch-страховка: если пост уже вышел, второй не публикует
+        # (09.10 расписание и страховка запустились одновременно, и вышло два поста подряд)
         last = max((datetime.fromisoformat(p["posted_at"]) for p in posts if p.get("posted_at")), default=None)
         if last and datetime.now(timezone.utc) - last < timedelta(hours=GAP_HOURS):
             print(f"Последний пост вышел {last:%H:%M} UTC, этот слот уже закрыт.")
