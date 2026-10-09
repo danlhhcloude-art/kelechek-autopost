@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-09T03:21:41+00:00",
+  "updated_at": "2026-10-09T03:22:59+00:00",
   "account": {
     "views": 28,
     "likes": 0,
@@ -307,10 +307,23 @@
       "replies": 0,
       "reposts": 0,
       "quotes": 0
+    },
+    {
+      "threads_id": "18190896025408740",
+      "posted_at": "2026-10-09T03:22:59+00:00",
+      "topic": "ai-search",
+      "text": "Всё больше людей не гуглят, а спрашивают у ChatGPT: «где в Бишкеке хорошая стоматология» и",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeQiJLGjb6V",
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-09T03:22:01+00:00",
+    "updated_at": "2026-10-09T03:23:28+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
