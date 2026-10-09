@@ -1,0 +1,11 @@
+[
+  {
+    "theme": "sunset",
+    "deco": "glow",
+    "sub": "marker",
+    "exit": "flip",
+    "layout": "left",
+    "cut": "zoomcut",
+    "hook": "type"
+  }
+]
