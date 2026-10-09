@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-09T07:49:27+00:00",
+  "updated_at": "2026-10-09T12:23:30+00:00",
   "account": {
-    "views": 69,
+    "views": 71,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -315,7 +315,7 @@
       "text": "Всё больше людей не гуглят, а спрашивают у ChatGPT: «где в Бишкеке хорошая стоматология» и",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeQiJLGjb6V",
-      "views": 52,
+      "views": 53,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -328,6 +328,19 @@
       "text": "Все, кто пишет бизнесу, делятся на три типа. Новые люди с вопросами. Ваши клиенты, у котор",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeQ9Si4G01A",
+      "views": 1,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18075907964451066",
+      "posted_at": "2026-10-09T12:23:30+00:00",
+      "topic": "ai-same",
+      "text": "Сейчас все делают презентации через ИИ, и они все на одно лицо. Те же шаблоны, те же карти",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeRf_uXkYzN",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -336,7 +349,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-09T07:49:43+00:00",
+    "updated_at": "2026-10-09T12:23:50+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
