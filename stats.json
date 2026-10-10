@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-09T12:58:55+00:00",
+  "updated_at": "2026-10-10T03:20:02+00:00",
   "account": {
-    "views": 71,
+    "views": 87,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -341,6 +341,19 @@
       "text": "Сейчас все делают презентации через ИИ, и они все на одно лицо. Те же шаблоны, те же карти",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeRf_uXkYzN",
+      "views": 1,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18129628627751709",
+      "posted_at": "2026-10-10T03:20:02+00:00",
+      "topic": "night-messages",
+      "text": "Сам часто пишу в магазины вечером, после работы. И почти никто не отвечает до утра.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeTGmQCGzML",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -349,7 +362,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-09T12:59:18+00:00",
+    "updated_at": "2026-10-10T03:20:23+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
