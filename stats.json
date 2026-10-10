@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-10T03:49:38+00:00",
+  "updated_at": "2026-10-10T07:17:20+00:00",
   "account": {
-    "views": 91,
+    "views": 72,
     "likes": 0,
-    "replies": 1,
+    "replies": 0,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -354,15 +354,28 @@
       "text": "Сам часто пишу в магазины вечером, после работы. И почти никто не отвечает до утра.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeTGmQCGzML",
-      "views": 4,
+      "views": 48,
       "likes": 0,
-      "replies": 1,
+      "replies": 2,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18119371507954932",
+      "posted_at": "2026-10-10T07:17:20+00:00",
+      "topic": "delivery",
+      "text": "Если у вас доставка, клиенту важно одно: когда привезут. И он пишет это каждые 20 минут)",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeThwZoFtBY",
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
       "reposts": 0,
       "quotes": 0
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-10T03:49:57+00:00",
+    "updated_at": "2026-10-10T07:17:33+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
