@@ -7,5 +7,14 @@
     "layout": "left",
     "cut": "zoomcut",
     "hook": "type"
+  },
+  {
+    "theme": "berry",
+    "deco": "dots",
+    "sub": "underline",
+    "exit": "slide",
+    "layout": "frame",
+    "cut": "story",
+    "hook": "words"
   }
 ]
