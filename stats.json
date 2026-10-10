@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-10T07:46:00+00:00",
+  "updated_at": "2026-10-10T12:21:50+00:00",
   "account": {
-    "views": 73,
+    "views": 77,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -354,7 +354,7 @@
       "text": "Сам часто пишу в магазины вечером, после работы. И почти никто не отвечает до утра.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeTGmQCGzML",
-      "views": 49,
+      "views": 50,
       "likes": 0,
       "replies": 2,
       "reposts": 0,
@@ -367,6 +367,19 @@
       "text": "Если у вас доставка, клиенту важно одно: когда привезут. И он пишет это каждые 20 минут)",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeThwZoFtBY",
+      "views": 3,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17933542860147770",
+      "posted_at": "2026-10-10T12:21:49+00:00",
+      "topic": "fear-ai",
+      "text": "Многие боятся, что ИИ будет отвечать клиентам как робот и всё испортит.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeUEmd0m16j",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -375,7 +388,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-10T07:46:20+00:00",
+    "updated_at": "2026-10-10T12:22:08+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
