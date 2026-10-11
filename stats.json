@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-11T03:50:39+00:00",
+  "updated_at": "2026-10-11T07:18:29+00:00",
   "account": {
-    "views": 175,
+    "views": 117,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -380,7 +380,7 @@
       "text": "Многие боятся, что ИИ будет отвечать клиентам как робот и всё испортит.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeUEmd0m16j",
-      "views": 48,
+      "views": 50,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -393,6 +393,19 @@
       "text": "Одно хорошее видео в месяц или короткое каждый день?",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeVrgqyjT_0",
+      "views": 28,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18420726547155650",
+      "posted_at": "2026-10-11T07:18:29+00:00",
+      "topic": "language",
+      "text": "Думаю, на каком языке вести рекламу в Бишкеке. На русском привычнее, на кыргызском ближе м",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeWGrW0kT9F",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -401,7 +414,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-11T03:50:56+00:00",
+    "updated_at": "2026-10-11T07:19:05+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
