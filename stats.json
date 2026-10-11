@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-11T07:46:54+00:00",
+  "updated_at": "2026-10-11T12:22:18+00:00",
   "account": {
-    "views": 135,
+    "views": 154,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -380,7 +380,7 @@
       "text": "Многие боятся, что ИИ будет отвечать клиентам как робот и всё испортит.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeUEmd0m16j",
-      "views": 50,
+      "views": 52,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -393,7 +393,7 @@
       "text": "Одно хорошее видео в месяц или короткое каждый день?",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeVrgqyjT_0",
-      "views": 28,
+      "views": 29,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -406,7 +406,20 @@
       "text": "Думаю, на каком языке вести рекламу в Бишкеке. На русском привычнее, на кыргызском ближе м",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeWGrW0kT9F",
-      "views": 18,
+      "views": 34,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18016496876959268",
+      "posted_at": "2026-10-11T12:22:17+00:00",
+      "topic": "offer",
+      "text": "Как у нас устроены 15 дней, по-простому.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeWpeHDm7e6",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -414,7 +427,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-11T07:47:09+00:00",
+    "updated_at": "2026-10-11T12:22:40+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
