@@ -334,5 +334,19 @@
         true
       ]
     ]
+  },
+  {
+    "out": "media/threads/no-reply-weekend.png",
+    "variant": "beige",
+    "tag": "Выходные",
+    "title": "Клиент выбирает *в субботу*",
+    "lead": "А отвечают ему в понедельник"
+  },
+  {
+    "out": "media/threads/hours-unknown.png",
+    "variant": "dark",
+    "tag": "Профиль",
+    "title": "Приехал, а там *закрыто*",
+    "lead": "Часы работы должны быть видны с первого взгляда"
   }
 ]
