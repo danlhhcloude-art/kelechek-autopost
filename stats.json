@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-11T12:57:08+00:00",
+  "updated_at": "2026-10-12T03:21:55+00:00",
   "account": {
-    "views": 168,
+    "views": 190,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -380,7 +380,7 @@
       "text": "Многие боятся, что ИИ будет отвечать клиентам как робот и всё испортит.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeUEmd0m16j",
-      "views": 52,
+      "views": 54,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -393,7 +393,7 @@
       "text": "Одно хорошее видео в месяц или короткое каждый день?",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeVrgqyjT_0",
-      "views": 29,
+      "views": 30,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -406,7 +406,7 @@
       "text": "Думаю, на каком языке вести рекламу в Бишкеке. На русском привычнее, на кыргызском ближе м",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeWGrW0kT9F",
-      "views": 35,
+      "views": 36,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -419,7 +419,20 @@
       "text": "Как у нас устроены 15 дней, по-простому.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeWpeHDm7e6",
-      "views": 12,
+      "views": 19,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18056574581814125",
+      "posted_at": "2026-10-12T03:21:55+00:00",
+      "topic": "price-in-dm",
+      "text": "Пишу под постом «сколько стоит?», а мне отвечают: «написали вам в директ». Открываю директ",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeYQaFVlhyN",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -427,7 +440,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-11T12:57:28+00:00",
+    "updated_at": "2026-10-12T03:22:17+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
