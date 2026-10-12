@@ -25,5 +25,14 @@
     "layout": "center",
     "cut": "slam",
     "hook": "rise"
+  },
+  {
+    "theme": "cobalt",
+    "deco": "sun",
+    "sub": "box",
+    "exit": "lift",
+    "layout": "tilt",
+    "cut": "classic",
+    "hook": "drop"
   }
 ]
