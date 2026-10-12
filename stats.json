@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-12T07:01:10+00:00",
+  "updated_at": "2026-10-12T12:22:53+00:00",
   "account": {
-    "views": 136,
+    "views": 151,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -432,7 +432,7 @@
       "text": "Пишу под постом «сколько стоит?», а мне отвечают: «написали вам в директ». Открываю директ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeYQaFVlhyN",
-      "views": 56,
+      "views": 60,
       "likes": 0,
       "replies": 1,
       "reposts": 0,
@@ -445,7 +445,20 @@
       "text": "Представьте: администратор уволился, и вместе с его телефоном ушла вся переписка. Кто что ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeYlKcQEUdw",
-      "views": 6,
+      "views": 16,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18097425668388668",
+      "posted_at": "2026-10-12T12:22:52+00:00",
+      "topic": "video-brief",
+      "text": "Перед тем как заказывать видео, ответьте себе на пару вопросов.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeZOUCXFjqt",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -453,7 +466,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-12T07:01:33+00:00",
+    "updated_at": "2026-10-12T12:23:18+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
