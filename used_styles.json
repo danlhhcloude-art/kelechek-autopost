@@ -34,5 +34,14 @@
     "layout": "tilt",
     "cut": "classic",
     "hook": "drop"
+  },
+  {
+    "theme": "emerald",
+    "deco": "grid",
+    "sub": "marker",
+    "exit": "zoom",
+    "layout": "classic",
+    "cut": "punchy",
+    "hook": "type"
   }
 ]
