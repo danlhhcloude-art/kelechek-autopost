@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-13T03:54:23+00:00",
+  "updated_at": "2026-10-13T06:23:06+00:00",
   "account": {
-    "views": 190,
+    "views": 195,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -471,7 +471,20 @@
       "text": "Клиент постригся, остался доволен и пропал на полгода. Не ушёл к другим, просто забыл.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/Dea1M5slgcJ",
-      "views": 8,
+      "views": 32,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18368810797244256",
+      "posted_at": "2026-10-13T06:23:06+00:00",
+      "topic": "2gis-card",
+      "text": "Многие в Бишкеке ищут кафе и салоны через 2ГИС. Открываешь карточку, а там три старых фото",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DebJ8FVFoAR",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -479,7 +492,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-13T03:54:45+00:00",
+    "updated_at": "2026-10-13T06:23:28+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
