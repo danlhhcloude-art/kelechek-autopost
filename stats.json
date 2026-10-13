@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-13T07:01:10+00:00",
+  "updated_at": "2026-10-13T12:22:50+00:00",
   "account": {
-    "views": 75,
+    "views": 104,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -81,7 +81,7 @@
       "text": "Ваш менеджер отвечает в WhatsApp одно и то же 40 раз в день. «Сколько стоит?», «Где вы нах",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeBf2xrFXrX",
-      "views": 29,
+      "views": 30,
       "likes": 0,
       "replies": 2,
       "reposts": 0,
@@ -94,7 +94,7 @@
       "text": "Клиент написал в WhatsApp в 23:40. Вы ответили утром. Он уже купил у соседей.",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeCOmmukSIM",
-      "views": 41,
+      "views": 42,
       "likes": 0,
       "replies": 2,
       "reposts": 0,
@@ -458,7 +458,7 @@
       "text": "Перед тем как заказывать видео, ответьте себе на пару вопросов.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeZOUCXFjqt",
-      "views": 6,
+      "views": 7,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -471,7 +471,7 @@
       "text": "Клиент постригся, остался доволен и пропал на полгода. Не ушёл к другим, просто забыл.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/Dea1M5slgcJ",
-      "views": 34,
+      "views": 41,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -484,7 +484,20 @@
       "text": "Многие в Бишкеке ищут кафе и салоны через 2ГИС. Открываешь карточку, а там три старых фото",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DebJ8FVFoAR",
-      "views": 20,
+      "views": 39,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18133483450663829",
+      "posted_at": "2026-10-13T12:22:50+00:00",
+      "topic": "menu-video",
+      "text": "Зашёл в кафе, меню на стене, фото блюд сняты лет пять назад. Еда вкусная, а по фото не ска",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DebzGkgm5gR",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -492,7 +505,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-13T07:01:29+00:00",
+    "updated_at": "2026-10-13T12:23:10+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
