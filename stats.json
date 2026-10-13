@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-12T13:27:35+00:00",
+  "updated_at": "2026-10-13T03:21:55+00:00",
   "account": {
-    "views": 156,
+    "views": 162,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -445,7 +445,7 @@
       "text": "Представьте: администратор уволился, и вместе с его телефоном ушла вся переписка. Кто что ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeYlKcQEUdw",
-      "views": 17,
+      "views": 20,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -458,7 +458,20 @@
       "text": "Перед тем как заказывать видео, ответьте себе на пару вопросов.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeZOUCXFjqt",
-      "views": 4,
+      "views": 6,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17974626626940584",
+      "posted_at": "2026-10-13T03:21:55+00:00",
+      "topic": "repeat-clients",
+      "text": "Клиент постригся, остался доволен и пропал на полгода. Не ушёл к другим, просто забыл.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/Dea1M5slgcJ",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -466,7 +479,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-12T13:28:09+00:00",
+    "updated_at": "2026-10-13T03:22:34+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
