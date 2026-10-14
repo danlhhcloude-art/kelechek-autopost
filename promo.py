@@ -247,6 +247,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B090
 .pills { display: flex; gap: 22px; margin-top: 50px; }
 .pill { font-size: 32px; padding: 16px 34px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.3); }
 .pill.y { background: #FFC23D; color: #1A1206; border-color: #FFC23D; font-weight: 500; }
+.curt { position: absolute; inset: 0; background: #FFC23D; z-index: 60; }
 .disc { position: absolute; bottom: 140px; left: 0; right: 0; text-align: center; font-size: 24px; color: #8E826D; }
 """
 
@@ -646,7 +647,18 @@ def compose(text, seed=None, foot=None, style=None):
         <div class="slogan" id="slogan">{esc(rng.one(SLOGANS))}</div>
         <div class="pills"><div class="pill">Бишкек</div><div class="pill y">Написать в WhatsApp</div></div>
         <div class="disc">Ролик сделан с помощью ИИ</div></div>""")
-    js.append(f"""tl.from("#brand", {{scale: .6, opacity: 0, filter: "blur(16px)", duration: .7, ease: "expo.out"}}, {t + .05:.2f})
+    if style.get("end") == "curtain":  # шторка цвета акцента снизу вверх, под ней уже финал
+        clips.append(f'<div class="curt clip" id="curt" data-start="{t - .25:.2f}" data-duration="0.85" data-track-index="8"></div>')
+        js.append(f'tl.fromTo("#curt", {{scaleY: 0, transformOrigin: "50% 100%"}}, {{scaleY: 1, duration: .25, ease: "power3.in"}}, {t - .25:.2f})'
+                  f'.set("#curt", {{transformOrigin: "50% 0%"}}, {t:.2f})'
+                  f'.to("#curt", {{scaleY: 0, duration: .45, ease: "expo.inOut"}}, {t + .12:.2f});')
+        js.append(f"""tl.from("#brand", {{yPercent: 120, opacity: 0, duration: .6, ease: "expo.out"}}, {t + .3:.2f})
+  .from("#slogan", {{clipPath: "inset(0 100% 0 0)", duration: .55, ease: "power2.out"}}, {t + .6:.2f})
+  .from(".pill", {{opacity: 0, x: (k) => k ? 120 : -120, duration: .45, ease: "power3.out"}}, {t + .85:.2f})
+  .to(".pill.y", {{scale: 1.06, duration: .35, yoyo: true, repeat: 3, ease: "sine.inOut"}}, {t + 1.4:.2f})
+  .from(".disc", {{opacity: 0, duration: .4}}, {t + 1:.2f});""")
+    else:
+        js.append(f"""tl.from("#brand", {{scale: .6, opacity: 0, filter: "blur(16px)", duration: .7, ease: "expo.out"}}, {t + .05:.2f})
   .from("#slogan", {{opacity: 0, y: 24, duration: .5, ease: "power3.out"}}, {t + .45:.2f})
   .from(".pill", {{opacity: 0, y: 30, stagger: .1, duration: .45, ease: "power3.out"}}, {t + .7:.2f})
   .to(".pill.y", {{scale: 1.06, duration: .35, yoyo: true, repeat: 3, ease: "sine.inOut"}}, {t + 1.3:.2f})

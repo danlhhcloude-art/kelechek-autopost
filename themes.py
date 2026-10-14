@@ -132,6 +132,10 @@ CUTS = {
 # как появляется хук (первая фраза крупным текстом)
 HOOKS = ["words", "type", "drop", "rise"]
 
+# финальная карточка: classic (логотип наплывает из размытия) или curtain (шторка цвета акцента
+# снизу вверх открывает финал, название встаёт из-под маски); добавлено 14.10, финал был одинаковым всегда
+ENDS = ["classic", "curtain"]
+
 picked = {}  # стиль последнего собранного ролика; reels.py отмечает его после публикации
 
 
@@ -171,6 +175,7 @@ def pick(seed=None, theme=None):
         "layout": _fresh(list(LAYOUTS), "layout", used, rng),
         "cut": _fresh(list(CUTS), "cut", used, rng),
         "hook": _fresh(HOOKS, "hook", used, rng),
+        "end": _fresh(ENDS, "end", used, rng),
     }
     picked.clear()
     picked.update(style)
