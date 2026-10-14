@@ -43,5 +43,15 @@
     "layout": "classic",
     "cut": "punchy",
     "hook": "type"
+  },
+  {
+    "theme": "gold",
+    "deco": "rings",
+    "sub": "underline",
+    "exit": "flip",
+    "layout": "left",
+    "cut": "zoomcut",
+    "hook": "words",
+    "end": "curtain"
   }
 ]
