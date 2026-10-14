@@ -346,10 +346,12 @@
   {
     "topic": "instagram-dead",
     "text": "Часто слышу, что Instagram умер и никто ничего не смотрит.\n\nА потом этот же человек вечером час листает рилсы)\n\nМне кажется, умер не Instagram, а скучный контент. Или я не прав?",
-    "posted_at": null,
+    "posted_at": "2026-10-14T03:22:30+00:00",
     "images": [
       "media/threads/instagram-dead.png"
-    ]
+    ],
+    "tag": "Бизнес Бишкек",
+    "threads_id": "17990329920115641"
   },
   {
     "topic": "small-business",
