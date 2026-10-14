@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-14T04:04:32+00:00",
+  "updated_at": "2026-10-14T06:22:17+00:00",
   "account": {
-    "views": 143,
+    "views": 149,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -510,7 +510,20 @@
       "text": "Часто слышу, что Instagram умер и никто ничего не смотрит.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DedaDoAm5ot",
-      "views": 6,
+      "views": 12,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18105346160253938",
+      "posted_at": "2026-10-14T06:22:17+00:00",
+      "topic": "small-business",
+      "text": "Мне интереснее работать с небольшим бизнесом, чем с крупным. Решение принимает один челове",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/Deduolbm4qz",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -518,7 +531,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-14T04:04:54+00:00",
+    "updated_at": "2026-10-14T06:22:54+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
