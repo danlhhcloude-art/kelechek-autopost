@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-15T06:38:02+00:00",
+  "updated_at": "2026-10-15T12:22:51+00:00",
   "account": {
-    "views": 105,
+    "views": 48,
     "likes": 0,
     "replies": 1,
     "reposts": 0,
@@ -497,7 +497,7 @@
       "text": "Зашёл в кафе, меню на стене, фото блюд сняты лет пять назад. Еда вкусная, а по фото не ска",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DebzGkgm5gR",
-      "views": 6,
+      "views": 7,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -549,9 +549,9 @@
       "text": "Первых клиентов ищу сам, без рекламы, вот прямо здесь.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/Def-zzHDNpz",
-      "views": 4,
+      "views": 5,
       "likes": 0,
-      "replies": 1,
+      "replies": 2,
       "reposts": 0,
       "quotes": 0
     },
@@ -562,6 +562,19 @@
       "text": "Меня спрашивают «сколько стоит», ещё не рассказав, что за бизнес.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DegTeLWESqP",
+      "views": 11,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18093338729448362",
+      "posted_at": "2026-10-15T12:22:51+00:00",
+      "topic": "reviews",
+      "text": "Заметил, что люди больше верят коротким видео от владельца, чем красивой рекламе.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/Deg8smalKac",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -570,7 +583,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-15T06:38:27+00:00",
+    "updated_at": "2026-10-15T12:23:13+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
