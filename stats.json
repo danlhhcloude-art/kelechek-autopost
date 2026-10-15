@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-15T04:05:14+00:00",
+  "updated_at": "2026-10-15T06:22:39+00:00",
   "account": {
-    "views": 102,
+    "views": 105,
     "likes": 0,
-    "replies": 0,
+    "replies": 1,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -549,7 +549,20 @@
       "text": "Первых клиентов ищу сам, без рекламы, вот прямо здесь.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/Def-zzHDNpz",
-      "views": 1,
+      "views": 4,
+      "likes": 0,
+      "replies": 1,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18028402658916251",
+      "posted_at": "2026-10-15T06:22:39+00:00",
+      "topic": "price-question",
+      "text": "Меня спрашивают «сколько стоит», ещё не рассказав, что за бизнес.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DegTeLWESqP",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -557,7 +570,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-15T04:05:48+00:00",
+    "updated_at": "2026-10-15T06:23:08+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
