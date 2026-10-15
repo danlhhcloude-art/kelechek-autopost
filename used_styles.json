@@ -53,5 +53,15 @@
     "cut": "zoomcut",
     "hook": "words",
     "end": "curtain"
+  },
+  {
+    "theme": "sunset",
+    "deco": "glow",
+    "sub": "plate",
+    "exit": "slide",
+    "layout": "frame",
+    "cut": "story",
+    "hook": "rise",
+    "end": "classic"
   }
 ]
