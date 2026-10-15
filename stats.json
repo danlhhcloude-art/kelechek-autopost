@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-14T13:27:28+00:00",
+  "updated_at": "2026-10-15T03:22:06+00:00",
   "account": {
-    "views": 85,
+    "views": 101,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -445,7 +445,7 @@
       "text": "Представьте: администратор уволился, и вместе с его телефоном ушла вся переписка. Кто что ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeYlKcQEUdw",
-      "views": 20,
+      "views": 21,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -536,7 +536,20 @@
       "text": "Если спросить владельца салона, что больше всего бесит в работе, часто ответ не про клиент",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeeX8ZNm0mv",
-      "views": 3,
+      "views": 4,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18139314649615750",
+      "posted_at": "2026-10-15T03:22:06+00:00",
+      "topic": "first-clients",
+      "text": "Первых клиентов ищу сам, без рекламы, вот прямо здесь.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/Def-zzHDNpz",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -544,7 +557,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-14T13:27:59+00:00",
+    "updated_at": "2026-10-15T03:22:34+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
