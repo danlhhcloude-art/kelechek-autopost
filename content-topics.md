@@ -39,11 +39,11 @@
 - [x] wholesale-questions: оптовики пишут те же вопросы, что и розница
 - [x] kids-center-parents: родители пишут вечером, когда дети уснули
 - [x] booking-no-show: записались и не пришли
+- [ ] owner-on-vacation: хозяин уехал в отпуск, и продажи встали
+- [ ] gift-certificates: про подарочные сертификаты спрашивают, а их никто не оформил
+- [ ] delivery-status: «где мой заказ?» по пять раз за день
+- [ ] unanswered-comments: под постами вопросы висят без ответа неделями
 
 ## Использованы
 - [x] price-in-dm, staff-left, repeat-clients, 2gis-card, kyrgyz-replies (посты, 2026-10-07)
 - [x] voice-messages, stories-gap, product-photo, new-year-season, too-expensive (Reels, 2026-10-07)
-- [ ] voice-messages: клиенты шлют голосовые, а админу некогда их слушать
-- [ ] no-booking-reminder: клиент записался и забыл прийти, напоминания никто не шлёт
-- [ ] stories-dead: сторис не выкладываются неделями, хотя их смотрят чаще ленты
-- [ ] owner-on-vacation: хозяин уехал в отпуск, и продажи встали
