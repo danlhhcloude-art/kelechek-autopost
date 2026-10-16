@@ -63,5 +63,15 @@
     "cut": "story",
     "hook": "rise",
     "end": "classic"
+  },
+  {
+    "theme": "berry",
+    "deco": "dots",
+    "sub": "box",
+    "exit": "shrink",
+    "layout": "center",
+    "cut": "slam",
+    "hook": "drop",
+    "end": "curtain"
   }
 ]
