@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-16T04:05:14+00:00",
+  "updated_at": "2026-10-16T06:23:50+00:00",
   "account": {
-    "views": 59,
+    "views": 68,
     "likes": 0,
-    "replies": 1,
+    "replies": 4,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -549,9 +549,9 @@
       "text": "Первых клиентов ищу сам, без рекламы, вот прямо здесь.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/Def-zzHDNpz",
-      "views": 5,
+      "views": 6,
       "likes": 0,
-      "replies": 2,
+      "replies": 3,
       "reposts": 0,
       "quotes": 0
     },
@@ -588,15 +588,28 @@
       "text": "Не надо автоматизировать всё сразу. Я бы начал с одной вещи, которая раздражает больше все",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeijlZPm6hm",
-      "views": 5,
+      "views": 13,
       "likes": 0,
       "replies": 1,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17973446673154059",
+      "posted_at": "2026-10-16T06:23:49+00:00",
+      "topic": "kyrgyz-replies",
+      "text": "Клиент пишет на кыргызском, а ему отвечают на русском, потому что так привыкли. Мелочь, но",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/Dei4Z5SHFst",
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
       "reposts": 0,
       "quotes": 0
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-16T04:05:47+00:00",
+    "updated_at": "2026-10-16T06:24:11+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
