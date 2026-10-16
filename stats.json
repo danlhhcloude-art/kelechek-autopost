@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-16T07:16:51+00:00",
+  "updated_at": "2026-10-16T12:24:37+00:00",
   "account": {
-    "views": 41,
+    "views": 64,
     "likes": 0,
-    "replies": 0,
+    "replies": 2,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -551,7 +551,7 @@
       "url": "https://www.threads.com/@kelechek_ai/post/Def-zzHDNpz",
       "views": 6,
       "likes": 0,
-      "replies": 3,
+      "replies": 4,
       "reposts": 0,
       "quotes": 0
     },
@@ -588,7 +588,7 @@
       "text": "Не надо автоматизировать всё сразу. Я бы начал с одной вещи, которая раздражает больше все",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeijlZPm6hm",
-      "views": 13,
+      "views": 14,
       "likes": 0,
       "replies": 2,
       "reposts": 0,
@@ -601,7 +601,20 @@
       "text": "Клиент пишет на кыргызском, а ему отвечают на русском, потому что так привыкли. Мелочь, но",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/Dei4Z5SHFst",
-      "views": 16,
+      "views": 25,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18218673718345721",
+      "posted_at": "2026-10-16T12:24:37+00:00",
+      "topic": "no-reply-weekend",
+      "text": "Суббота, вечер. Человек выбирает, в какой салон записаться на завтра, пишет в три места.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DejhtVRIB-a",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -609,7 +622,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-16T07:17:09+00:00",
+    "updated_at": "2026-10-16T12:25:18+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
