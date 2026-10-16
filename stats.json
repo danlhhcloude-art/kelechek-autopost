@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-15T13:28:47+00:00",
+  "updated_at": "2026-10-16T03:21:46+00:00",
   "account": {
-    "views": 53,
+    "views": 54,
     "likes": 0,
     "replies": 1,
     "reposts": 0,
@@ -575,7 +575,20 @@
       "text": "Заметил, что люди больше верят коротким видео от владельца, чем красивой рекламе.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/Deg8smalKac",
-      "views": 2,
+      "views": 3,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18109653068265560",
+      "posted_at": "2026-10-16T03:21:46+00:00",
+      "topic": "start-small",
+      "text": "Не надо автоматизировать всё сразу. Я бы начал с одной вещи, которая раздражает больше все",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeijlZPm6hm",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -583,7 +596,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-15T13:29:59+00:00",
+    "updated_at": "2026-10-16T03:22:15+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
