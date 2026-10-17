@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-17T12:37:58+00:00",
+  "updated_at": "2026-10-17T13:18:34+00:00",
   "account": {
-    "views": 84,
+    "views": 88,
     "likes": 0,
     "replies": 1,
     "reposts": 0,
@@ -653,7 +653,7 @@
       "text": "Клиент спрашивает цену. Ему отвечают про адрес. Он спрашивает ещё раз, ему пишут «уточню».",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DemGUuGkX97",
-      "views": 0,
+      "views": 4,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -661,7 +661,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-17T12:38:27+00:00",
+    "updated_at": "2026-10-17T13:19:05+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
