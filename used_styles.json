@@ -73,5 +73,15 @@
     "cut": "slam",
     "hook": "drop",
     "end": "curtain"
+  },
+  {
+    "theme": "neon",
+    "deco": "stripes",
+    "sub": "marker",
+    "exit": "lift",
+    "layout": "tilt",
+    "cut": "classic",
+    "hook": "type",
+    "end": "classic"
   }
 ]
