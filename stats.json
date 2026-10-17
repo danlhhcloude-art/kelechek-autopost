@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-17T04:01:47+00:00",
+  "updated_at": "2026-10-17T06:22:19+00:00",
   "account": {
-    "views": 106,
+    "views": 112,
     "likes": 0,
     "replies": 2,
     "reposts": 0,
@@ -614,7 +614,7 @@
       "text": "Суббота, вечер. Человек выбирает, в какой салон записаться на завтра, пишет в три места.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DejhtVRIB-a",
-      "views": 18,
+      "views": 19,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -627,7 +627,20 @@
       "text": "Знакомая рассказала: приехала в мастерскую к семи, а там закрыто. В Instagram часы работы ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DelIeCxFRf_",
-      "views": 6,
+      "views": 14,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17962853586213731",
+      "posted_at": "2026-10-17T06:22:19+00:00",
+      "topic": "link-in-bio",
+      "text": "Зашёл в профиль кондитерской, хотел заказать торт. Фото красивые, а куда писать, непонятно",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeldBqGnAla",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -635,7 +648,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-17T04:02:13+00:00",
+    "updated_at": "2026-10-17T06:22:53+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
