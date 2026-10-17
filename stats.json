@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-17T07:10:48+00:00",
+  "updated_at": "2026-10-17T12:23:04+00:00",
   "account": {
-    "views": 71,
+    "views": 84,
     "likes": 0,
-    "replies": 0,
+    "replies": 1,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -601,7 +601,7 @@
       "text": "Клиент пишет на кыргызском, а ему отвечают на русском, потому что так привыкли. Мелочь, но",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/Dei4Z5SHFst",
-      "views": 28,
+      "views": 29,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -614,7 +614,7 @@
       "text": "Суббота, вечер. Человек выбирает, в какой салон записаться на завтра, пишет в три места.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DejhtVRIB-a",
-      "views": 20,
+      "views": 22,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -627,9 +627,9 @@
       "text": "Знакомая рассказала: приехала в мастерскую к семи, а там закрыто. В Instagram часы работы ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DelIeCxFRf_",
-      "views": 16,
+      "views": 25,
       "likes": 0,
-      "replies": 0,
+      "replies": 1,
       "reposts": 0,
       "quotes": 0
     },
@@ -645,10 +645,23 @@
       "replies": 0,
       "reposts": 0,
       "quotes": 0
+    },
+    {
+      "threads_id": "18111080606182008",
+      "posted_at": "2026-10-17T12:23:03+00:00",
+      "topic": "client-asks-twice",
+      "text": "Клиент спрашивает цену. Ему отвечают про адрес. Он спрашивает ещё раз, ему пишут «уточню».",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DemGUuGkX97",
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-17T07:11:20+00:00",
+    "updated_at": "2026-10-17T12:24:12+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
