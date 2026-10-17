@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-16T13:29:31+00:00",
+  "updated_at": "2026-10-17T03:22:42+00:00",
   "account": {
-    "views": 72,
+    "views": 95,
     "likes": 0,
     "replies": 2,
     "reposts": 0,
@@ -588,7 +588,7 @@
       "text": "Не надо автоматизировать всё сразу. Я бы начал с одной вещи, которая раздражает больше все",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeijlZPm6hm",
-      "views": 14,
+      "views": 15,
       "likes": 0,
       "replies": 2,
       "reposts": 0,
@@ -601,7 +601,7 @@
       "text": "Клиент пишет на кыргызском, а ему отвечают на русском, потому что так привыкли. Мелочь, но",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/Dei4Z5SHFst",
-      "views": 26,
+      "views": 28,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -614,7 +614,20 @@
       "text": "Суббота, вечер. Человек выбирает, в какой салон записаться на завтра, пишет в три места.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DejhtVRIB-a",
-      "views": 6,
+      "views": 16,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18114405754859418",
+      "posted_at": "2026-10-17T03:22:42+00:00",
+      "topic": "hours-unknown",
+      "text": "Знакомая рассказала: приехала в мастерскую к семи, а там закрыто. В Instagram часы работы ",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DelIeCxFRf_",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -622,7 +635,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-16T13:30:08+00:00",
+    "updated_at": "2026-10-17T03:23:13+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
