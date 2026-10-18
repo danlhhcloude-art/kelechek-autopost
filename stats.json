@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-18T04:02:13+00:00",
+  "updated_at": "2026-10-18T06:22:48+00:00",
   "account": {
-    "views": 133,
+    "views": 137,
     "likes": 0,
     "replies": 1,
     "reposts": 0,
@@ -666,7 +666,20 @@
       "text": "Видел у знакомой мастерицы тетрадку с заказами. Половина страниц в кофе, одна вырвана.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DentNgLFH61",
-      "views": 5,
+      "views": 9,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17954831625037504",
+      "posted_at": "2026-10-18T06:22:48+00:00",
+      "topic": "no-time-for-content",
+      "text": "«Сделаем пост, когда будет время». Знакомо?)",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeoB34mnHt8",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -674,7 +687,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-18T04:03:01+00:00",
+    "updated_at": "2026-10-18T06:23:14+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
