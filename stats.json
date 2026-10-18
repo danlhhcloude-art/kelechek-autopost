@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-17T13:18:34+00:00",
+  "updated_at": "2026-10-18T03:22:15+00:00",
   "account": {
-    "views": 88,
+    "views": 128,
     "likes": 0,
     "replies": 1,
     "reposts": 0,
@@ -29,7 +29,7 @@
       "text": "Признание: этот пост написал и опубликовал не человек.",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/Dd-fr6Lm2TS",
-      "views": 24,
+      "views": 25,
       "likes": 0,
       "replies": 4,
       "reposts": 0,
@@ -627,7 +627,7 @@
       "text": "Знакомая рассказала: приехала в мастерскую к семи, а там закрыто. В Instagram часы работы ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DelIeCxFRf_",
-      "views": 25,
+      "views": 27,
       "likes": 0,
       "replies": 1,
       "reposts": 0,
@@ -653,7 +653,20 @@
       "text": "Клиент спрашивает цену. Ему отвечают про адрес. Он спрашивает ещё раз, ему пишут «уточню».",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DemGUuGkX97",
-      "views": 4,
+      "views": 11,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18108095573127635",
+      "posted_at": "2026-10-18T03:22:15+00:00",
+      "topic": "lost-in-notes",
+      "text": "Видел у знакомой мастерицы тетрадку с заказами. Половина страниц в кофе, одна вырвана.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DentNgLFH61",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -661,7 +674,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-17T13:19:05+00:00",
+    "updated_at": "2026-10-18T03:22:37+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
