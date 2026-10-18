@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-18T07:10:50+00:00",
+  "updated_at": "2026-10-18T12:22:51+00:00",
   "account": {
-    "views": 74,
+    "views": 83,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -679,7 +679,20 @@
       "text": "«Сделаем пост, когда будет время». Знакомо?)",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeoB34mnHt8",
-      "views": 5,
+      "views": 14,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18476110780112818",
+      "posted_at": "2026-10-18T12:22:51+00:00",
+      "topic": "dm-spam",
+      "text": "Открыл директ знакомого магазина. Сверху реклама «раскрутки», ниже боты, ещё ниже какой-то",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeorFCKm-xU",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -687,7 +700,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-18T07:11:21+00:00",
+    "updated_at": "2026-10-18T12:23:37+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
