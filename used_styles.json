@@ -83,5 +83,15 @@
     "cut": "classic",
     "hook": "type",
     "end": "classic"
+  },
+  {
+    "theme": "cobalt",
+    "deco": "sun",
+    "sub": "underline",
+    "exit": "zoom",
+    "layout": "classic",
+    "cut": "punchy",
+    "hook": "words",
+    "end": "curtain"
   }
 ]
