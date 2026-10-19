@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-19T06:43:00+00:00",
+  "updated_at": "2026-10-19T12:26:13+00:00",
   "account": {
-    "views": 123,
+    "views": 56,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -640,7 +640,7 @@
       "text": "Зашёл в профиль кондитерской, хотел заказать торт. Фото красивые, а куда писать, непонятно",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeldBqGnAla",
-      "views": 1,
+      "views": 2,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -666,7 +666,7 @@
       "text": "Видел у знакомой мастерицы тетрадку с заказами. Половина страниц в кофе, одна вырвана.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DentNgLFH61",
-      "views": 9,
+      "views": 10,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -705,7 +705,7 @@
       "text": "Перед праздниками у цветочных и кондитерских телефон не замолкает. Отвечать некогда, надо ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeqSCY8jXA4",
-      "views": 8,
+      "views": 12,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -718,6 +718,19 @@
       "text": "«А где вы находитесь?» Спорим, этот вопрос у вас в каждом втором чате)",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeqnHo1FWmH",
+      "views": 1,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18179893906435183",
+      "posted_at": "2026-10-19T12:26:12+00:00",
+      "topic": "price-list-pdf",
+      "text": "Попросил прайс в одной студии. Прислали PDF. На телефоне открылся мелко, листать неудобно,",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DerQRqTkekY",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -726,7 +739,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-19T06:43:39+00:00",
+    "updated_at": "2026-10-19T12:27:28+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
