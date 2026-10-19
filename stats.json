@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-19T04:09:42+00:00",
+  "updated_at": "2026-10-19T06:26:37+00:00",
   "account": {
-    "views": 117,
+    "views": 122,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -640,7 +640,7 @@
       "text": "Зашёл в профиль кондитерской, хотел заказать торт. Фото красивые, а куда писать, непонятно",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeldBqGnAla",
-      "views": 0,
+      "views": 1,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -705,7 +705,20 @@
       "text": "Перед праздниками у цветочных и кондитерских телефон не замолкает. Отвечать некогда, надо ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeqSCY8jXA4",
-      "views": 2,
+      "views": 7,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18497112088103083",
+      "posted_at": "2026-10-19T06:26:37+00:00",
+      "topic": "address-confusion",
+      "text": "«А где вы находитесь?» Спорим, этот вопрос у вас в каждом втором чате)",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeqnHo1FWmH",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -713,7 +726,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-19T04:10:53+00:00",
+    "updated_at": "2026-10-19T06:27:01+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
