@@ -444,5 +444,131 @@
     "tag": "Детские центры",
     "title": "Мама пишет, *когда ребёнок уснул*",
     "lead": "А центр отвечает только утром"
+  },
+  {
+    "out": "media/threads/owner-on-vacation.png",
+    "variant": "dark",
+    "tag": "Отпуск",
+    "title": "Вы на Иссык-Куле, *а бизнес в телефоне*",
+    "lead": "Типовые вопросы закрывает ассистент"
+  },
+  {
+    "out": "media/threads/reviews-fear.png",
+    "variant": "beige",
+    "tag": "Отзывы",
+    "title": "Пустая карточка *пугает сильнее*",
+    "lead": "чем один средний отзыв"
+  },
+  {
+    "out": "media/threads/gift-certificates.png",
+    "variant": "chat",
+    "title": "Сертификат *за минуту*",
+    "contact": "ИИ-помощник",
+    "status": "онлайн",
+    "bubbles": [
+      [
+        "Есть подарочный сертификат?",
+        "19:32"
+      ],
+      [
+        "Да, есть. На какую сумму или услугу оформить?",
+        "19:32",
+        true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/delivery-status.png",
+    "variant": "dark",
+    "tag": "Доставка",
+    "title": "«Где мой заказ?» *в пятый раз*",
+    "lead": "Статус заказа бот отправит сам"
+  },
+  {
+    "out": "media/threads/ai-text-smell.png",
+    "variant": "beige",
+    "tag": "Тексты",
+    "title": "Текст от нейросети *видно сразу*",
+    "lead": "Черновик да, готовый пост нет"
+  },
+  {
+    "out": "media/threads/dry-admin-replies.png",
+    "variant": "chat",
+    "title": "Не «есть», *а запись*",
+    "contact": "ИИ-помощник",
+    "status": "онлайн",
+    "bubbles": [
+      [
+        "Есть запись на субботу?",
+        "10:04"
+      ],
+      [
+        "Есть на 11:00 и 15:30. Записать вас?",
+        "10:04",
+        true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/competitor-copy.png",
+    "variant": "dark",
+    "tag": "Конкуренты",
+    "title": "Картинку скопируют, *сервис нет*"
+  },
+  {
+    "out": "media/threads/instagram-vs-tiktok.png",
+    "variant": "beige",
+    "tag": "Соцсети",
+    "title": "Instagram *или* TikTok?",
+    "lead": "Смотрите, где сидят ваши клиенты"
+  },
+  {
+    "out": "media/threads/prepayment-awkward.png",
+    "variant": "chat",
+    "title": "Условия брони *без неловкости*",
+    "contact": "ИИ-помощник",
+    "status": "онлайн",
+    "bubbles": [
+      [
+        "Запишите на четверг",
+        "16:20"
+      ],
+      [
+        "Записал. Бронь держим после предоплаты, реквизиты ниже",
+        "16:20",
+        true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/instagram-ban-fear.png",
+    "variant": "dark",
+    "tag": "Реклама",
+    "title": "Блокируют *за накрутку*",
+    "lead": "а не за честную рекламу"
+  },
+  {
+    "out": "media/threads/cheap-smm.png",
+    "variant": "beige",
+    "tag": "SMM",
+    "title": "Дешёвый SMM *и пустая лента*"
+  },
+  {
+    "out": "media/threads/unanswered-comments.png",
+    "variant": "chat",
+    "title": "Комментарий *без ответа*",
+    "contact": "ИИ-помощник",
+    "status": "онлайн",
+    "bubbles": [
+      [
+        "Сколько стоит?",
+        "13:47"
+      ],
+      [
+        "Пишу цену в личку, проверьте директ)",
+        "13:47",
+        true
+      ]
+    ]
   }
 ]
