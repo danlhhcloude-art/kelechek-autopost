@@ -93,5 +93,15 @@
     "cut": "punchy",
     "hook": "words",
     "end": "curtain"
+  },
+  {
+    "theme": "emerald",
+    "deco": "grid",
+    "sub": "plate",
+    "exit": "flip",
+    "layout": "left",
+    "cut": "zoomcut",
+    "hook": "rise",
+    "end": "classic"
   }
 ]
