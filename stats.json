@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-18T13:18:45+00:00",
+  "updated_at": "2026-10-19T03:22:30+00:00",
   "account": {
-    "views": 96,
+    "views": 114,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -692,7 +692,20 @@
       "text": "Открыл директ знакомого магазина. Сверху реклама «раскрутки», ниже боты, ещё ниже какой-то",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeorFCKm-xU",
-      "views": 11,
+      "views": 19,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18031930637680923",
+      "posted_at": "2026-10-19T03:22:30+00:00",
+      "topic": "holiday-rush",
+      "text": "Перед праздниками у цветочных и кондитерских телефон не замолкает. Отвечать некогда, надо ",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeqSCY8jXA4",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -700,7 +713,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-18T13:19:19+00:00",
+    "updated_at": "2026-10-19T03:23:00+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
