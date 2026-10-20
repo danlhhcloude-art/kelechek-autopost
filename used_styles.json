@@ -103,5 +103,15 @@
     "cut": "zoomcut",
     "hook": "rise",
     "end": "classic"
+  },
+  {
+    "theme": "gold",
+    "deco": "rings",
+    "sub": "box",
+    "exit": "slide",
+    "layout": "frame",
+    "cut": "story",
+    "hook": "drop",
+    "end": "curtain"
   }
 ]
