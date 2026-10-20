@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-19T13:32:06+00:00",
+  "updated_at": "2026-10-20T03:21:49+00:00",
   "account": {
-    "views": 61,
+    "views": 93,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -588,7 +588,7 @@
       "text": "Не надо автоматизировать всё сразу. Я бы начал с одной вещи, которая раздражает больше все",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeijlZPm6hm",
-      "views": 15,
+      "views": 16,
       "likes": 0,
       "replies": 2,
       "reposts": 0,
@@ -627,7 +627,7 @@
       "text": "Знакомая рассказала: приехала в мастерскую к семи, а там закрыто. В Instagram часы работы ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DelIeCxFRf_",
-      "views": 27,
+      "views": 29,
       "likes": 0,
       "replies": 1,
       "reposts": 0,
@@ -640,7 +640,7 @@
       "text": "Зашёл в профиль кондитерской, хотел заказать торт. Фото красивые, а куда писать, непонятно",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeldBqGnAla",
-      "views": 2,
+      "views": 5,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -705,7 +705,7 @@
       "text": "Перед праздниками у цветочных и кондитерских телефон не замолкает. Отвечать некогда, надо ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeqSCY8jXA4",
-      "views": 12,
+      "views": 18,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -731,7 +731,20 @@
       "text": "Попросил прайс в одной студии. Прислали PDF. На телефоне открылся мелко, листать неудобно,",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DerQRqTkekY",
-      "views": 5,
+      "views": 14,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18118514887980940",
+      "posted_at": "2026-10-20T03:21:49+00:00",
+      "topic": "kids-center-parents",
+      "text": "Родители пишут в детский центр поздно вечером. Ребёнок наконец уснул, можно спокойно выбра",
+      "media_type": "TEXT_POST",
+      "url": "https://www.threads.com/@kelechek_ai/post/Des2w6Jm-_C",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -739,7 +752,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-19T13:32:57+00:00",
+    "updated_at": "2026-10-20T03:22:27+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
