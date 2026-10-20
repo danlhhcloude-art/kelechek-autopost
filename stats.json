@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-20T04:06:47+00:00",
+  "updated_at": "2026-10-20T06:22:46+00:00",
   "account": {
-    "views": 113,
+    "views": 122,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -744,7 +744,20 @@
       "text": "Родители пишут в детский центр поздно вечером. Ребёнок наконец уснул, можно спокойно выбра",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/Des2w6Jm-_C",
-      "views": 11,
+      "views": 29,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18119413136059832",
+      "posted_at": "2026-10-20T06:22:45+00:00",
+      "topic": "owner-on-vacation",
+      "text": "Знаю, как это бывает. Уехал на Иссык-Куль на пару дней, а телефон не отпускает. Каждый час",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DetLdaIkU_6",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -752,7 +765,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-20T04:07:26+00:00",
+    "updated_at": "2026-10-20T06:23:36+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
