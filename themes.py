@@ -154,14 +154,20 @@ def mark_used(style):
 
 
 def _fresh(options, key, used, rng):
-    """Сначала то, что ни разу не выходило или выходило давно; вчерашнее не берём."""
-    last = used[-1].get(key) if used else None
+    """Сначала то, что ни разу не выходило; иначе случайно из давно не показанной половины.
+
+    Раньше брали строго самое старое, и наборы одной длины шли в ногу: gold всегда с rings,
+    left всегда с zoomcut, ролики повторялись связками каждые 6 дней (исправлено 21.10).
+    Вчерашнее и недавнее (свежая половина набора) не берём.
+    """
     age = {}
     for k, s in enumerate(used):
         age[s.get(key)] = k
-    pool = [o for o in options if o != last] or list(options)
-    oldest = min(age.get(o, -1) for o in pool)
-    return rng.choice([o for o in pool if age.get(o, -1) == oldest])
+    never = [o for o in options if o not in age]
+    if never:
+        return rng.choice(never)
+    recent = sorted(options, key=lambda o: age[o], reverse=True)[:max(1, len(options) // 2)]
+    return rng.choice([o for o in options if o not in recent])
 
 
 def pick(seed=None, theme=None):
