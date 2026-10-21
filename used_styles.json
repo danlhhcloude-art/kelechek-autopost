@@ -113,5 +113,15 @@
     "cut": "story",
     "hook": "drop",
     "end": "curtain"
+  },
+  {
+    "theme": "neon",
+    "deco": "glow",
+    "sub": "underline",
+    "exit": "zoom",
+    "layout": "classic",
+    "cut": "classic",
+    "hook": "words",
+    "end": "classic"
   }
 ]
