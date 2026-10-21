@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-21T06:38:10+00:00",
+  "updated_at": "2026-10-21T12:25:58+00:00",
   "account": {
-    "views": 173,
+    "views": 90,
     "likes": 0,
-    "replies": 1,
+    "replies": 4,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -783,9 +783,9 @@
       "text": "Перед праздниками спрашивают: «А у вас есть подарочный сертификат?» И часто в ответ «ну...",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DevbnDslNg0",
-      "views": 7,
+      "views": 12,
       "likes": 0,
-      "replies": 1,
+      "replies": 4,
       "reposts": 0,
       "quotes": 0
     },
@@ -796,6 +796,19 @@
       "text": "«Где мой заказ?» Наверное, самый частый вопрос у всех, кто возит доставку по Бишкеку.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DevwUQWFa-w",
+      "views": 18,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17908735359579330",
+      "posted_at": "2026-10-21T12:25:58+00:00",
+      "topic": "ai-text-smell",
+      "text": "Честно, я сам узнаю текст от нейросети с первой строки. «В современном мире», три прилагат",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DewZ1oRkV3V",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -804,7 +817,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-21T06:38:45+00:00",
+    "updated_at": "2026-10-21T12:26:48+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
