@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-22T06:38:51+00:00",
+  "updated_at": "2026-10-22T12:24:31+00:00",
   "account": {
-    "views": 123,
+    "views": 82,
     "likes": 0,
-    "replies": 4,
+    "replies": 0,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -757,7 +757,7 @@
       "text": "Знаю, как это бывает. Уехал на Иссык-Куль на пару дней, а телефон не отпускает. Каждый час",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DetLdaIkU_6",
-      "views": 65,
+      "views": 67,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -783,7 +783,7 @@
       "text": "Перед праздниками спрашивают: «А у вас есть подарочный сертификат?» И часто в ответ «ну...",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DevbnDslNg0",
-      "views": 13,
+      "views": 14,
       "likes": 0,
       "replies": 4,
       "reposts": 0,
@@ -796,7 +796,7 @@
       "text": "«Где мой заказ?» Наверное, самый частый вопрос у всех, кто возит доставку по Бишкеку.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DevwUQWFa-w",
-      "views": 20,
+      "views": 21,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -809,7 +809,7 @@
       "text": "Честно, я сам узнаю текст от нейросети с первой строки. «В современном мире», три прилагат",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DewZ1oRkV3V",
-      "views": 25,
+      "views": 30,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -822,7 +822,7 @@
       "text": "Клиент спрашивает: «Есть запись на субботу?» Админ отвечает «есть». И всё.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeyAbKaFMhK",
-      "views": 0,
+      "views": 4,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -835,6 +835,19 @@
       "text": "Конкурент скопировал ваше оформление, цвета, даже фразы из постов. Обидно, понимаю.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeyVG-3HFC9",
+      "views": 11,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18136419508730512",
+      "posted_at": "2026-10-22T12:24:31+00:00",
+      "topic": "instagram-vs-tiktok",
+      "text": "Instagram или TikTok? Если сил хватает только на одно, вопрос нормальный.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/Dey-cpOG7IP",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -843,7 +856,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-22T06:39:27+00:00",
+    "updated_at": "2026-10-22T12:25:18+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
