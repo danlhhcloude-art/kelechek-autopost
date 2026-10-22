@@ -570,5 +570,98 @@
         true
       ]
     ]
+  },
+  {
+    "out": "media/threads/birthday-greetings.png",
+    "variant": "dark",
+    "tag": "Клиенты",
+    "title": "Поздравил *банк*",
+    "lead": "а вы промолчали"
+  },
+  {
+    "out": "media/threads/empty-highlights.png",
+    "variant": "beige",
+    "tag": "Профиль",
+    "title": "Хайлайты *пустые*"
+  },
+  {
+    "out": "media/threads/story-replies-lost.png",
+    "variant": "chat",
+    "title": "Ответ на *сторис*",
+    "contact": "ИИ-помощник",
+    "status": "онлайн",
+    "bubbles": [
+      [
+        "А в чёрном есть?",
+        "20:14"
+      ],
+      [
+        "Есть, размеры S–L. Отложить для вас?",
+        "20:14",
+        true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/wrong-audience-ads.png",
+    "variant": "dark",
+    "tag": "Таргет",
+    "title": "Реклама *на всех*",
+    "lead": "значит ни на кого"
+  },
+  {
+    "out": "media/threads/trial-fear.png",
+    "variant": "beige",
+    "tag": "Сомнения",
+    "title": "А вдруг *не сработает?*"
+  },
+  {
+    "out": "media/threads/order-mistakes.png",
+    "variant": "chat",
+    "title": "Заказ *без ошибок*",
+    "contact": "ИИ-помощник",
+    "status": "онлайн",
+    "bubbles": [
+      [
+        "Хочу два торта на субботу",
+        "11:02"
+      ],
+      [
+        "Проверьте: два торта, суббота, 15:00. Всё верно?",
+        "11:02",
+        true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/subscription-renewal.png",
+    "variant": "dark",
+    "tag": "Абонемент",
+    "title": "Забыли *продлить*",
+    "lead": "и не вернулись"
+  },
+  {
+    "out": "media/threads/no-faq-pinned.png",
+    "variant": "beige",
+    "tag": "Вопросы",
+    "title": "Одни и те же *вопросы*"
+  },
+  {
+    "out": "media/threads/lost-leads-silent.png",
+    "variant": "chat",
+    "title": "Заявка *не потерялась*",
+    "contact": "ИИ-помощник",
+    "status": "онлайн",
+    "bubbles": [
+      [
+        "Здравствуйте, можно записаться?",
+        "23:40"
+      ],
+      [
+        "Конечно! На какой день вам удобно?",
+        "23:40",
+        true
+      ]
+    ]
   }
 ]
