@@ -123,5 +123,15 @@
     "cut": "classic",
     "hook": "words",
     "end": "classic"
+  },
+  {
+    "theme": "berry",
+    "deco": "sun",
+    "sub": "marker",
+    "exit": "shrink",
+    "layout": "tilt",
+    "cut": "zoomcut",
+    "hook": "type",
+    "end": "curtain"
   }
 ]
