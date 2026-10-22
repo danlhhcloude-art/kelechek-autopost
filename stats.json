@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-21T13:29:13+00:00",
+  "updated_at": "2026-10-22T03:22:31+00:00",
   "account": {
-    "views": 100,
+    "views": 119,
     "likes": 0,
     "replies": 4,
     "reposts": 0,
@@ -757,7 +757,7 @@
       "text": "Знаю, как это бывает. Уехал на Иссык-Куль на пару дней, а телефон не отпускает. Каждый час",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DetLdaIkU_6",
-      "views": 64,
+      "views": 65,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -796,7 +796,7 @@
       "text": "«Где мой заказ?» Наверное, самый частый вопрос у всех, кто возит доставку по Бишкеку.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DevwUQWFa-w",
-      "views": 18,
+      "views": 19,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -809,7 +809,20 @@
       "text": "Честно, я сам узнаю текст от нейросети с первой строки. «В современном мире», три прилагат",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DewZ1oRkV3V",
-      "views": 9,
+      "views": 23,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18005963810794614",
+      "posted_at": "2026-10-22T03:22:31+00:00",
+      "topic": "dry-admin-replies",
+      "text": "Клиент спрашивает: «Есть запись на субботу?» Админ отвечает «есть». И всё.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeyAbKaFMhK",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -817,7 +830,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-21T13:29:59+00:00",
+    "updated_at": "2026-10-22T03:23:03+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
