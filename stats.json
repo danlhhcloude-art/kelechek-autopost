@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-22T04:08:49+00:00",
+  "updated_at": "2026-10-22T06:23:17+00:00",
   "account": {
-    "views": 120,
+    "views": 123,
     "likes": 0,
     "replies": 4,
     "reposts": 0,
@@ -783,7 +783,7 @@
       "text": "Перед праздниками спрашивают: «А у вас есть подарочный сертификат?» И часто в ответ «ну...",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DevbnDslNg0",
-      "views": 12,
+      "views": 13,
       "likes": 0,
       "replies": 4,
       "reposts": 0,
@@ -796,7 +796,7 @@
       "text": "«Где мой заказ?» Наверное, самый частый вопрос у всех, кто возит доставку по Бишкеку.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DevwUQWFa-w",
-      "views": 19,
+      "views": 20,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -809,7 +809,7 @@
       "text": "Честно, я сам узнаю текст от нейросети с первой строки. «В современном мире», три прилагат",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DewZ1oRkV3V",
-      "views": 24,
+      "views": 25,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -827,10 +827,23 @@
       "replies": 0,
       "reposts": 0,
       "quotes": 0
+    },
+    {
+      "threads_id": "17912034099550438",
+      "posted_at": "2026-10-22T06:23:17+00:00",
+      "topic": "competitor-copy",
+      "text": "Конкурент скопировал ваше оформление, цвета, даже фразы из постов. Обидно, понимаю.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DeyVG-3HFC9",
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-22T04:09:42+00:00",
+    "updated_at": "2026-10-22T06:23:48+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
