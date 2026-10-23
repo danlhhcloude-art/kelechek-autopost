@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-23T06:37:40+00:00",
+  "updated_at": "2026-10-23T07:23:36+00:00",
   "account": {
-    "views": 162,
+    "views": 115,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -822,7 +822,7 @@
       "text": "Клиент спрашивает: «Есть запись на субботу?» Админ отвечает «есть». И всё.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeyAbKaFMhK",
-      "views": 34,
+      "views": 35,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -861,7 +861,7 @@
       "text": "Многим неловко просить предоплату. Вроде как не доверяешь человеку.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De0lL2hDR-k",
-      "views": 4,
+      "views": 5,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -874,7 +874,7 @@
       "text": "Многие боятся, что за рекламу в Instagram аккаунт заблокируют.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De059TLnKgI",
-      "views": 0,
+      "views": 12,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -882,7 +882,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-23T06:38:15+00:00",
+    "updated_at": "2026-10-23T07:24:24+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
