@@ -169,8 +169,13 @@ def publish(text, tag=None, post=None):
         time.sleep(5)  # Meta советует подождать перед публикацией контейнера
     else:
         wait_ready(creation_id, token)
-    r = requests.post(f"{API}/{user_id}/threads_publish",
-                      data={"creation_id": creation_id, "access_token": token}, timeout=30)
+    for attempt in range(3):  # контейнер иногда ещё не готов: Meta отвечает 400, повторяем с паузой
+        r = requests.post(f"{API}/{user_id}/threads_publish",
+                          data={"creation_id": creation_id, "access_token": token}, timeout=30)
+        if r.ok:
+            break
+        print(f"Публикация не прошла ({r.status_code} {r.text[:300]}), попытка {attempt + 1}")
+        time.sleep(30)
     r.raise_for_status()
     return r.json()["id"]
 
