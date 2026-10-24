@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-24T07:14:22+00:00",
+  "updated_at": "2026-10-24T12:22:28+00:00",
   "account": {
-    "views": 85,
+    "views": 98,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -549,7 +549,7 @@
       "text": "Первых клиентов ищу сам, без рекламы, вот прямо здесь.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/Def-zzHDNpz",
-      "views": 6,
+      "views": 7,
       "likes": 0,
       "replies": 4,
       "reposts": 0,
@@ -900,7 +900,7 @@
       "text": "Вопрос «сколько стоит?» под постом, и неделю без ответа. Видели такое?",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De3J7Q7llb_",
-      "views": 12,
+      "views": 17,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -913,7 +913,20 @@
       "text": "Клиент был у вас полгода назад. Сегодня у него день рождения, и ему написали банк, операто",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De3eqMlll-a",
-      "views": 23,
+      "views": 29,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18118141978797515",
+      "posted_at": "2026-10-24T12:22:28+00:00",
+      "topic": "empty-highlights",
+      "text": "Захожу в профиль салона. Красивые фото, а где цены, адрес и как записаться, непонятно. Лис",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/De4HzO3Gxa7",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -921,7 +934,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-24T07:14:47+00:00",
+    "updated_at": "2026-10-24T12:23:22+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
