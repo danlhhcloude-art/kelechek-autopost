@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-23T12:43:13+00:00",
+  "updated_at": "2026-10-24T03:21:46+00:00",
   "account": {
-    "views": 129,
+    "views": 159,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -822,7 +822,7 @@
       "text": "Клиент спрашивает: «Есть запись на субботу?» Админ отвечает «есть». И всё.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeyAbKaFMhK",
-      "views": 35,
+      "views": 36,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -874,7 +874,7 @@
       "text": "Многие боятся, что за рекламу в Instagram аккаунт заблокируют.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De059TLnKgI",
-      "views": 29,
+      "views": 32,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -887,6 +887,19 @@
       "text": "Наняли SMM подешевле. Через месяц пара постов, и все с картинками из интернета.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De1jjVpG7ny",
+      "views": 8,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18108574562460505",
+      "posted_at": "2026-10-24T03:21:45+00:00",
+      "topic": "unanswered-comments",
+      "text": "Вопрос «сколько стоит?» под постом, и неделю без ответа. Видели такое?",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/De3J7Q7llb_",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -895,7 +908,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-23T12:44:21+00:00",
+    "updated_at": "2026-10-24T03:22:17+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
