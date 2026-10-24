@@ -143,5 +143,15 @@
     "cut": "punchy",
     "hook": "rise",
     "end": "classic"
+  },
+  {
+    "theme": "sunset",
+    "deco": "rings",
+    "sub": "underline",
+    "exit": "lift",
+    "layout": "classic",
+    "cut": "slam",
+    "hook": "drop",
+    "end": "curtain"
   }
 ]
