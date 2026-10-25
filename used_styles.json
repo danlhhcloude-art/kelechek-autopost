@@ -153,5 +153,15 @@
     "cut": "slam",
     "hook": "drop",
     "end": "curtain"
+  },
+  {
+    "theme": "gold",
+    "deco": "dots",
+    "sub": "marker",
+    "exit": "slide",
+    "layout": "center",
+    "cut": "zoomcut",
+    "hook": "words",
+    "end": "classic"
   }
 ]
