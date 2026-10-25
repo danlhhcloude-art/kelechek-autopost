@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-25T04:07:47+00:00",
+  "updated_at": "2026-10-25T06:22:29+00:00",
   "account": {
-    "views": 132,
+    "views": 142,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -939,7 +939,20 @@
       "text": "На сторис отвечают: «а сколько?», «а есть мой размер?». Эти ответы падают в директ между д",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De5u1zSDu9J",
-      "views": 3,
+      "views": 12,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18236550064325689",
+      "posted_at": "2026-10-25T06:22:29+00:00",
+      "topic": "wrong-audience-ads",
+      "text": "Запустили рекламу «на весь Бишкек». Сообщений много, а пишут не те: кто-то спрашивает про ",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/De6Da6ymxFS",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -947,7 +960,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-25T04:08:15+00:00",
+    "updated_at": "2026-10-25T06:23:38+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
