@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-25T07:16:34+00:00",
+  "updated_at": "2026-10-25T12:22:51+00:00",
   "account": {
-    "views": 71,
+    "views": 81,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -900,7 +900,7 @@
       "text": "Вопрос «сколько стоит?» под постом, и неделю без ответа. Видели такое?",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De3J7Q7llb_",
-      "views": 19,
+      "views": 20,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -939,7 +939,7 @@
       "text": "На сторис отвечают: «а сколько?», «а есть мой размер?». Эти ответы падают в директ между д",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De5u1zSDu9J",
-      "views": 14,
+      "views": 16,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -952,7 +952,20 @@
       "text": "Запустили рекламу «на весь Бишкек». Сообщений много, а пишут не те: кто-то спрашивает про ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De6Da6ymxFS",
-      "views": 12,
+      "views": 16,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18120055021960113",
+      "posted_at": "2026-10-25T12:22:51+00:00",
+      "topic": "trial-fear",
+      "text": "«Попробовать ИИ? А вдруг клиенты поймут, что это бот, и обидятся».",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/De6spAnFDfY",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -960,7 +973,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-25T07:17:26+00:00",
+    "updated_at": "2026-10-25T12:23:56+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
