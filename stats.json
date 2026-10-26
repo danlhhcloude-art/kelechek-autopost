@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-26T04:12:38+00:00",
+  "updated_at": "2026-10-26T06:26:17+00:00",
   "account": {
-    "views": 132,
+    "views": 144,
     "likes": 0,
-    "replies": 0,
+    "replies": 1,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -965,7 +965,7 @@
       "text": "«Попробовать ИИ? А вдруг клиенты поймут, что это бот, и обидятся».",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De6spAnFDfY",
-      "views": 24,
+      "views": 25,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -978,6 +978,19 @@
       "text": "Клиент написал заказ в WhatsApp, менеджер переписал в тетрадь. Не тот размер, не тот адрес",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De8TkTMAOkB",
+      "views": 10,
+      "likes": 0,
+      "replies": 1,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18032187119886524",
+      "posted_at": "2026-10-26T06:26:17+00:00",
+      "topic": "subscription-renewal",
+      "text": "Абонемент в зал закончился неделю назад. Клиент не продлил. Не потому что не хочет, просто",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/De8oogym-vy",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -986,7 +999,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-26T04:14:03+00:00",
+    "updated_at": "2026-10-26T06:27:05+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
