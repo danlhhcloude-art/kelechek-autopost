@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-25T13:22:32+00:00",
+  "updated_at": "2026-10-26T03:22:01+00:00",
   "account": {
-    "views": 91,
+    "views": 132,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -939,7 +939,7 @@
       "text": "На сторис отвечают: «а сколько?», «а есть мой размер?». Эти ответы падают в директ между д",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De5u1zSDu9J",
-      "views": 16,
+      "views": 19,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -965,7 +965,20 @@
       "text": "«Попробовать ИИ? А вдруг клиенты поймут, что это бот, и обидятся».",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De6spAnFDfY",
-      "views": 10,
+      "views": 24,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18108719111256110",
+      "posted_at": "2026-10-26T03:22:01+00:00",
+      "topic": "order-mistakes",
+      "text": "Клиент написал заказ в WhatsApp, менеджер переписал в тетрадь. Не тот размер, не тот адрес",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/De8TkTMAOkB",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -973,7 +986,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-25T13:23:46+00:00",
+    "updated_at": "2026-10-26T03:23:13+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
