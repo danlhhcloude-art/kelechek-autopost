@@ -389,22 +389,10 @@
     "lead": "Контент, который выходит сам по расписанию"
   },
   {
-    "out": "media/threads/dm-spam.png",
-    "variant": "chat",
-    "title": "Клиент *потерялся среди спама*",
-    "contact": "ИИ-помощник",
-    "status": "онлайн",
-    "bubbles": [
-      [
-        "Есть этот свитер в размере M?",
-        "20:41"
-      ],
-      [
-        "Да, M есть. Отложить для вас?",
-        "20:41",
-        true
-      ]
-    ]
+    "out": "media/threads/slow-quote.png",
+    "variant": "beige",
+    "tag": "Расчёт",
+    "title": "Расчёт пришёл *на следующий день*"
   },
   {
     "out": "media/threads/holiday-rush.png",
@@ -661,6 +649,124 @@
         "Конечно! На какой день вам удобно?",
         "23:40",
         true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/upsell-missing.png",
+    "variant": "dark",
+    "tag": "Допродажа",
+    "title": "Сам клиент *не спросит*"
+  },
+  {
+    "out": "media/threads/payment-question.png",
+    "variant": "beige",
+    "tag": "Оплата",
+    "title": "«Можно *переводом*?»",
+    "lead": "и тишина до вечера"
+  },
+  {
+    "out": "media/threads/abandoned-chats.png",
+    "variant": "chat",
+    "title": "Спросил цену *и пропал*",
+    "contact": "Клиент",
+    "status": "был(а) вчера",
+    "bubbles": [
+      [
+        "Сколько стоит стрижка?",
+        "19:12"
+      ],
+      [
+        "Подскажу цену и свободное время. Записать вас на завтра?",
+        "19:13",
+        true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/double-booking.png",
+    "variant": "dark",
+    "tag": "Запись",
+    "title": "Два клиента *на одно время*"
+  },
+  {
+    "out": "media/threads/out-of-stock-silence.png",
+    "variant": "beige",
+    "tag": "Наличие",
+    "title": "«Нет *в наличии*»",
+    "lead": "и клиент ушёл навсегда"
+  },
+  {
+    "out": "media/threads/corporate-orders.png",
+    "variant": "chat",
+    "title": "Большой заказ *в общей куче*",
+    "contact": "Компания",
+    "status": "онлайн",
+    "bubbles": [
+      [
+        "Нужно на корпоратив, можно обсудить?",
+        "10:02"
+      ],
+      [
+        "Здравствуйте! Сейчас передам менеджеру",
+        "10:02",
+        true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/consultation-free-time.png",
+    "variant": "dark",
+    "tag": "Консультации",
+    "title": "Весь день *консультировал*",
+    "lead": "и ничего не продал"
+  },
+  {
+    "out": "media/threads/referral-ask.png",
+    "variant": "beige",
+    "tag": "Рекомендации",
+    "title": "Порекомендовал бы, *но забыл*"
+  },
+  {
+    "out": "media/threads/group-chat-chaos.png",
+    "variant": "chat",
+    "title": "Задача *утонула в чате*",
+    "contact": "Команда",
+    "status": "12 участников",
+    "bubbles": [
+      [
+        "Кто взял заказ на 15:00?",
+        "09:14"
+      ],
+      [
+        "😂😂😂",
+        "09:15",
+        true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/instructions-after-purchase.png",
+    "variant": "dark",
+    "tag": "После покупки",
+    "title": "А как *этим пользоваться*?"
+  },
+  {
+    "out": "media/threads/slow-quote.png",
+    "variant": "beige",
+    "tag": "Расчёт",
+    "title": "Расчёт пришёл *на следующий день*"
+  },
+  {
+    "out": "media/threads/reviews-unanswered.png",
+    "variant": "chat",
+    "title": "Отзыв *без ответа*",
+    "contact": "Отзыв в 2ГИС",
+    "status": "3 недели назад",
+    "bubbles": [
+      [
+        "Всё понравилось, придём ещё!",
+        "12:40"
       ]
     ]
   }
