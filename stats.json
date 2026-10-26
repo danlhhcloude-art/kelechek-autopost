@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-26T06:43:34+00:00",
+  "updated_at": "2026-10-26T09:22:25+00:00",
   "account": {
-    "views": 146,
+    "views": 134,
     "likes": 0,
-    "replies": 1,
+    "replies": 8,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -965,7 +965,7 @@
       "text": "«Попробовать ИИ? А вдруг клиенты поймут, что это бот, и обидятся».",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De6spAnFDfY",
-      "views": 25,
+      "views": 27,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -978,9 +978,9 @@
       "text": "Клиент написал заказ в WhatsApp, менеджер переписал в тетрадь. Не тот размер, не тот адрес",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De8TkTMAOkB",
-      "views": 12,
+      "views": 19,
       "likes": 0,
-      "replies": 1,
+      "replies": 5,
       "reposts": 0,
       "quotes": 0
     },
@@ -991,6 +991,19 @@
       "text": "Абонемент в зал закончился неделю назад. Клиент не продлил. Не потому что не хочет, просто",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De8oogym-vy",
+      "views": 42,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17888401032688252",
+      "posted_at": "2026-10-26T09:22:24+00:00",
+      "topic": "no-faq-pinned",
+      "text": "«Где вы находитесь?», «До скольки работаете?», «Есть доставка?» Каждый день одно и то же п",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/De88yWnGyq_",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -999,7 +1012,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-26T06:44:20+00:00",
+    "updated_at": "2026-10-26T09:23:05+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
