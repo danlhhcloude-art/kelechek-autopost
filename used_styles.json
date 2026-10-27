@@ -173,5 +173,15 @@
     "cut": "punchy",
     "hook": "type",
     "end": "curtain"
+  },
+  {
+    "theme": "neon",
+    "deco": "stripes",
+    "sub": "underline",
+    "exit": "flip",
+    "layout": "left",
+    "cut": "story",
+    "hook": "rise",
+    "end": "classic"
   }
 ]
