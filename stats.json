@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-26T16:20:40+00:00",
+  "updated_at": "2026-10-27T03:22:46+00:00",
   "account": {
-    "views": 173,
+    "views": 187,
     "likes": 0,
     "replies": 11,
     "reposts": 0,
@@ -978,7 +978,7 @@
       "text": "Клиент написал заказ в WhatsApp, менеджер переписал в тетрадь. Не тот размер, не тот адрес",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De8TkTMAOkB",
-      "views": 22,
+      "views": 24,
       "likes": 0,
       "replies": 6,
       "reposts": 0,
@@ -1004,7 +1004,7 @@
       "text": "«Где вы находитесь?», «До скольки работаете?», «Есть доставка?» Каждый день одно и то же п",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De88yWnGyq_",
-      "views": 5,
+      "views": 6,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1017,6 +1017,19 @@
       "text": "Потерянную заявку не видно ни в одном отчёте. Человек написал, не дождался и ушёл молча. В",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De9spzylJhu",
+      "views": 4,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18121072729967245",
+      "posted_at": "2026-10-27T03:22:45+00:00",
+      "topic": "upsell-missing",
+      "text": "Клиент пришёл на стрижку. Про укладку и уход ему никто не сказал. Сам он не спросит.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/De-4a50De9C",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1025,7 +1038,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-26T16:21:23+00:00",
+    "updated_at": "2026-10-27T03:24:17+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1036,8 +1049,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/Dd9VzKNgAwF/",
-        "views": 0,
-        "reach": 1,
+        "views": 1,
+        "reach": 2,
         "saved": 0,
         "shares": 0
       },
@@ -1051,7 +1064,7 @@
         "comments": 0,
         "url": "https://www.instagram.com/reel/Dd_jk1RDs9Y/",
         "views": 0,
-        "reach": 0,
+        "reach": 1,
         "saved": 0,
         "shares": 0
       },
