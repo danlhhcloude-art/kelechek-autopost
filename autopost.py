@@ -22,6 +22,8 @@ import freshness
 
 API = "https://graph.threads.net/v1.0"
 GAP_HOURS = 2.5  # ближе этого к прошлому посту запуск по расписанию или dispatch не публикует
+DAILY_MAX = 3  # постов в сутки по Бишкеку: GitHub иногда запускает расписание на часы позже (26.10 вышел 4-й пост в 22:20)
+BISHKEK = timezone(timedelta(hours=6))
 HERE = Path(__file__).parent
 POSTS_FILE = HERE / "posts.json"
 STATS_FILE = HERE / "stats.json"
@@ -252,6 +254,11 @@ def main():
         last = max((datetime.fromisoformat(p["posted_at"]) for p in posts if p.get("posted_at")), default=None)
         if last and datetime.now(timezone.utc) - last < timedelta(hours=GAP_HOURS):
             print(f"Последний пост вышел {last:%H:%M} UTC, этот слот уже закрыт.")
+            return
+        today = datetime.now(BISHKEK).date()
+        done = sum(1 for p in posts if p.get("posted_at") and datetime.fromisoformat(p["posted_at"]).astimezone(BISHKEK).date() == today)
+        if done >= DAILY_MAX:
+            print(f"Сегодня уже {done} поста, дневная норма выполнена.")
             return
     if args.generate:
         new = generate(args.generate, posts)
