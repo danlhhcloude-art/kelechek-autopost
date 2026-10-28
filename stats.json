@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-28T03:22:34+00:00",
+  "updated_at": "2026-10-28T06:22:30+00:00",
   "account": {
-    "views": 97,
+    "views": 126,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -1069,6 +1069,19 @@
       "text": "Двое клиентов пришли на одно время. Запись была в блокноте, и кто-то вписал поверх.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfBdMfBlDSD",
+      "views": 29,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17911538589472960",
+      "posted_at": "2026-10-28T06:22:30+00:00",
+      "topic": "out-of-stock-silence",
+      "text": "Спросили товар, его нет. Ответили «нет в наличии» и всё. Через неделю товар пришёл, а чело",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfBxyjiFffb",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1077,7 +1090,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-28T03:23:19+00:00",
+    "updated_at": "2026-10-28T06:23:15+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
