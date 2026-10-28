@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-28T06:22:30+00:00",
+  "updated_at": "2026-10-28T09:22:37+00:00",
   "account": {
-    "views": 126,
+    "views": 47,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -1069,7 +1069,7 @@
       "text": "Двое клиентов пришли на одно время. Запись была в блокноте, и кто-то вписал поверх.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfBdMfBlDSD",
-      "views": 29,
+      "views": 30,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1082,6 +1082,19 @@
       "text": "Спросили товар, его нет. Ответили «нет в наличии» и всё. Через неделю товар пришёл, а чело",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfBxyjiFffb",
+      "views": 4,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18138910333716151",
+      "posted_at": "2026-10-28T09:22:37+00:00",
+      "topic": "corporate-orders",
+      "text": "Компания хочет заказать торт на 40 человек или подарки сотрудникам. Пишет в общий WhatsApp",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfCGZzZlZDc",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1090,7 +1103,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-28T06:23:15+00:00",
+    "updated_at": "2026-10-28T09:23:21+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
