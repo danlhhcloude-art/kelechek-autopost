@@ -617,6 +617,9 @@ def compose(text, seed=None, foot=None, style=None):
         js.append(s)
         if style.get("cut") == "zoomcut":  # сцена влетает из глубины
             js.append(f'tl.from("#sc{i}", {{scale: 1.6, opacity: 0, filter: "blur(22px)", duration: .38, ease: "expo.out"}}, {t:.2f});')
+        if style.get("cut") == "whip" and i > 0:  # боковой рывок, как будто камеру резко повели в сторону
+            side = 1 if i % 2 else -1
+            js.append(f'tl.from("#sc{i}", {{x: {1100 * side}, skewX: {-14 * side}, filter: "blur(26px)", duration: .34, ease: "expo.out"}}, {t:.2f});')
         if style.get("cut") == "story":
             clips.append(f'<div class="chap clip" id="ch{i}" data-start="{t:.2f}" data-duration="{d:.2f}" data-track-index="6">{i + 1}/{len(paras)}</div>')
             js.append(f'tl.from("#ch{i}", {{opacity: 0, x: 30, duration: .3, ease: "power3.out"}}, {t + .1:.2f});')
