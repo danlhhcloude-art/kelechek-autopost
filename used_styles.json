@@ -183,5 +183,15 @@
     "cut": "story",
     "hook": "rise",
     "end": "classic"
+  },
+  {
+    "theme": "sunset",
+    "deco": "rings",
+    "sub": "box",
+    "exit": "slide",
+    "layout": "classic",
+    "cut": "whip",
+    "hook": "drop",
+    "end": "curtain"
   }
 ]
