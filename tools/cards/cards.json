@@ -769,5 +769,99 @@
         "12:40"
       ]
     ]
+  },
+  {
+    "out": "media/threads/discount-only.png",
+    "variant": "dark",
+    "tag": "Скидки",
+    "title": "Без скидки *не покупают*"
+  },
+  {
+    "out": "media/threads/event-registration.png",
+    "variant": "beige",
+    "tag": "Мероприятия",
+    "title": "«+» в комментариях",
+    "lead": "и список *разваливается*"
+  },
+  {
+    "out": "media/threads/inconsistent-answers.png",
+    "variant": "chat",
+    "title": "Два менеджера, *два ответа*",
+    "contact": "Клиент",
+    "status": "онлайн",
+    "bubbles": [
+      [
+        "Мне вчера сказали другую цену",
+        "16:20"
+      ],
+      [
+        "Уточню у коллеги…",
+        "16:41",
+        true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/contract-paperwork.png",
+    "variant": "dark",
+    "tag": "Документы",
+    "title": "Чужие *реквизиты* в договоре"
+  },
+  {
+    "out": "media/threads/payment-screenshots.png",
+    "variant": "beige",
+    "tag": "Оплаты",
+    "title": "Сверка *по скриншотам*",
+    "lead": "до позднего вечера"
+  },
+  {
+    "out": "media/threads/hiring-no-response.png",
+    "variant": "chat",
+    "title": "Вакансия *без откликов*",
+    "contact": "Вакансия",
+    "status": "висит месяц",
+    "bubbles": [
+      [
+        "Ищем администратора, подробности в директ",
+        "10:00",
+        true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/loyalty-paper-cards.png",
+    "variant": "dark",
+    "tag": "Бонусы",
+    "title": "Карточка *в другой куртке*"
+  },
+  {
+    "out": "media/threads/measurements-visit.png",
+    "variant": "beige",
+    "tag": "Замер",
+    "title": "Замерщик *не по адресу*"
+  },
+  {
+    "out": "media/threads/price-negotiation.png",
+    "variant": "chat",
+    "title": "«А *скинете*?»",
+    "contact": "Клиент",
+    "status": "онлайн",
+    "bubbles": [
+      [
+        "А если два возьму, скинете?",
+        "18:05"
+      ],
+      [
+        "Ну ладно, скину немного",
+        "18:05",
+        true
+      ]
+    ]
+  },
+  {
+    "out": "media/threads/client-history-forgotten.png",
+    "variant": "dark",
+    "tag": "Клиенты",
+    "title": "«Напомните, *как вас зовут*?»"
   }
 ]
