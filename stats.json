@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-28T15:55:15+00:00",
+  "updated_at": "2026-10-29T03:23:07+00:00",
   "account": {
-    "views": 59,
+    "views": 72,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -952,7 +952,7 @@
       "text": "Запустили рекламу «на весь Бишкек». Сообщений много, а пишут не те: кто-то спрашивает про ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De6Da6ymxFS",
-      "views": 16,
+      "views": 17,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1100,10 +1100,23 @@
       "replies": 0,
       "reposts": 0,
       "quotes": 0
+    },
+    {
+      "threads_id": "18038256854840546",
+      "posted_at": "2026-10-29T03:23:07+00:00",
+      "topic": "consultation-free-time",
+      "text": "Бесплатная консультация по телефону. Потом ещё одна. К вечеру понимаешь, что весь день отв",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfECDsNFrhV",
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-28T15:56:55+00:00",
+    "updated_at": "2026-10-29T03:24:35+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
