@@ -193,5 +193,15 @@
     "cut": "whip",
     "hook": "drop",
     "end": "curtain"
+  },
+  {
+    "theme": "gold",
+    "deco": "sun",
+    "sub": "marker",
+    "exit": "zoom",
+    "layout": "center",
+    "cut": "zoomcut",
+    "hook": "words",
+    "end": "classic"
   }
 ]
