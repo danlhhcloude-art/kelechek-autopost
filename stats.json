@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-29T06:22:48+00:00",
+  "updated_at": "2026-10-29T09:25:10+00:00",
   "account": {
-    "views": 77,
+    "views": 42,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -952,7 +952,7 @@
       "text": "Запустили рекламу «на весь Бишкек». Сообщений много, а пишут не те: кто-то спрашивает про ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De6Da6ymxFS",
-      "views": 17,
+      "views": 18,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1121,6 +1121,19 @@
       "text": "Довольный клиент готов вас порекомендовать. Но его никто не попросил, и он просто забыл.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfEWnTPlP3k",
+      "views": 6,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17998309422058911",
+      "posted_at": "2026-10-29T09:25:10+00:00",
+      "topic": "group-chat-chaos",
+      "text": "Вся команда в одном WhatsApp-чате. Заказы, мемы, «кто закроет кассу» и голосовые. Задачу н",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfErfPEmysQ",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1129,7 +1142,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-29T06:23:52+00:00",
+    "updated_at": "2026-10-29T09:26:11+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
