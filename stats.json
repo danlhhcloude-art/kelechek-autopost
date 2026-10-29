@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-29T03:23:07+00:00",
+  "updated_at": "2026-10-29T06:22:48+00:00",
   "account": {
-    "views": 72,
+    "views": 77,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -1056,7 +1056,7 @@
       "text": "Спросил цену и пропал. Знакомо?",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De_hRmtlilL",
-      "views": 4,
+      "views": 5,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1108,6 +1108,19 @@
       "text": "Бесплатная консультация по телефону. Потом ещё одна. К вечеру понимаешь, что весь день отв",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfECDsNFrhV",
+      "views": 1,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17903415963672572",
+      "posted_at": "2026-10-29T06:22:48+00:00",
+      "topic": "referral-ask",
+      "text": "Довольный клиент готов вас порекомендовать. Но его никто не попросил, и он просто забыл.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfEWnTPlP3k",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1116,7 +1129,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-29T03:24:35+00:00",
+    "updated_at": "2026-10-29T06:23:52+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
