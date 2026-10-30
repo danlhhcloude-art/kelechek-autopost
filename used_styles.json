@@ -203,5 +203,15 @@
     "cut": "zoomcut",
     "hook": "words",
     "end": "classic"
+  },
+  {
+    "theme": "berry",
+    "deco": "glow",
+    "sub": "underline",
+    "exit": "shrink",
+    "layout": "left",
+    "cut": "classic",
+    "hook": "type",
+    "end": "curtain"
   }
 ]
