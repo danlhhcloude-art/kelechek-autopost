@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-30T06:21:36+00:00",
+  "updated_at": "2026-10-30T09:22:29+00:00",
   "account": {
-    "views": 128,
+    "views": 92,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -1160,6 +1160,19 @@
       "text": "Человек спросил, сколько будет стоить кухня под его размеры. Ответ пришёл на следующий ден",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfG7Rx7FnW6",
+      "views": 2,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18137370379755145",
+      "posted_at": "2026-10-30T09:22:29+00:00",
+      "topic": "reviews-unanswered",
+      "text": "Захожу в 2ГИС, а там отзывы без ответа. Хорошие и плохие, всё висит месяцами.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfHP8GplarU",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1168,7 +1181,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-30T06:22:17+00:00",
+    "updated_at": "2026-10-30T09:23:03+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
