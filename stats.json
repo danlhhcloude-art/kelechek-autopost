@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-30T09:52:54+00:00",
+  "updated_at": "2026-10-30T12:41:00+00:00",
   "account": {
-    "views": 95,
+    "views": 97,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -1147,7 +1147,7 @@
       "text": "Купили у вас технику или косметику, пришли домой и не поняли, как пользоваться. Звонят. По",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfGmuTtnIaD",
-      "views": 11,
+      "views": 12,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1173,7 +1173,7 @@
       "text": "Захожу в 2ГИС, а там отзывы без ответа. Хорошие и плохие, всё висит месяцами.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfHP8GplarU",
-      "views": 2,
+      "views": 3,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1181,7 +1181,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-30T09:53:55+00:00",
+    "updated_at": "2026-10-30T12:41:43+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1192,8 +1192,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/Dd9VzKNgAwF/",
-        "views": 1,
-        "reach": 2,
+        "views": 2,
+        "reach": 3,
         "saved": 0,
         "shares": 0
       },
@@ -1206,8 +1206,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/Dd_jk1RDs9Y/",
-        "views": 0,
-        "reach": 1,
+        "views": 2,
+        "reach": 2,
         "saved": 0,
         "shares": 0
       },
@@ -1220,8 +1220,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DeCO3R_AG-P/",
-        "views": 0,
-        "reach": 0,
+        "views": 1,
+        "reach": 1,
         "saved": 0,
         "shares": 0
       },
@@ -1234,8 +1234,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DeEu-CyjUpL/",
-        "views": 0,
-        "reach": 0,
+        "views": 1,
+        "reach": 1,
         "saved": 0,
         "shares": 0
       }
