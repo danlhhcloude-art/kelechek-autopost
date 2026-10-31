@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-31T03:22:16+00:00",
+  "updated_at": "2026-10-31T06:22:15+00:00",
   "account": {
-    "views": 112,
+    "views": 119,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -952,7 +952,7 @@
       "text": "Запустили рекламу «на весь Бишкек». Сообщений много, а пишут не те: кто-то спрашивает про ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De6Da6ymxFS",
-      "views": 19,
+      "views": 21,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1186,6 +1186,19 @@
       "text": "Знакомый магазин живёт от акции до акции. Без скидки тишина, со скидкой очередь, а в конце",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfJLi6cDfbY",
+      "views": 5,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17969986674197123",
+      "posted_at": "2026-10-31T06:22:15+00:00",
+      "topic": "event-registration",
+      "text": "Объявили мастер-класс. Под постом «+», «я», «запишите маму», а потом в WhatsApp ещё десято",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfJgG9ploME",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1194,7 +1207,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-31T03:23:45+00:00",
+    "updated_at": "2026-10-31T06:23:32+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
