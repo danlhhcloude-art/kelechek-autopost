@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-31T12:10:37+00:00",
+  "updated_at": "2026-10-31T15:15:11+00:00",
   "account": {
-    "views": 40,
+    "views": 55,
     "likes": 0,
-    "replies": 0,
+    "replies": 1,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -1199,9 +1199,9 @@
       "text": "Объявили мастер-класс. Под постом «+», «я», «запишите маму», а потом в WhatsApp ещё десято",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfJgG9ploME",
-      "views": 6,
+      "views": 7,
       "likes": 0,
-      "replies": 1,
+      "replies": 2,
       "reposts": 0,
       "quotes": 0
     },
@@ -1220,7 +1220,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-31T12:12:11+00:00",
+    "updated_at": "2026-10-31T15:16:01+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
