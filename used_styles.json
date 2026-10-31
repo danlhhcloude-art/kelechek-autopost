@@ -213,5 +213,15 @@
     "cut": "classic",
     "hook": "type",
     "end": "curtain"
+  },
+  {
+    "theme": "cobalt",
+    "deco": "stripes",
+    "sub": "plate",
+    "exit": "slide",
+    "layout": "frame",
+    "cut": "story",
+    "hook": "rise",
+    "end": "classic"
   }
 ]
