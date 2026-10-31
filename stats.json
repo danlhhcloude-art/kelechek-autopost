@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-31T06:22:15+00:00",
+  "updated_at": "2026-10-31T09:24:42+00:00",
   "account": {
-    "views": 119,
+    "views": 37,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -1186,7 +1186,7 @@
       "text": "Знакомый магазин живёт от акции до акции. Без скидки тишина, со скидкой очередь, а в конце",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfJLi6cDfbY",
-      "views": 5,
+      "views": 6,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1199,6 +1199,19 @@
       "text": "Объявили мастер-класс. Под постом «+», «я», «запишите маму», а потом в WhatsApp ещё десято",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfJgG9ploME",
+      "views": 6,
+      "likes": 0,
+      "replies": 1,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18117995114107741",
+      "posted_at": "2026-10-31T09:24:42+00:00",
+      "topic": "inconsistent-answers",
+      "text": "Клиент спросил цену у одного менеджера, потом у другого. Ответы разные. Всё, доверия уже н",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfJ1Bg2G6xJ",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1207,7 +1220,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-31T06:23:32+00:00",
+    "updated_at": "2026-10-31T09:26:32+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
