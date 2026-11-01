@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-01T03:21:27+00:00",
+  "updated_at": "2026-11-01T06:22:14+00:00",
   "account": {
-    "views": 61,
+    "views": 97,
     "likes": 0,
-    "replies": 1,
+    "replies": 2,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -1225,6 +1225,19 @@
       "text": "Договор и счёт каждый раз собирают вручную из старого файла. В итоге в реквизитах чужое на",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfLwRFqlbEs",
+      "views": 35,
+      "likes": 0,
+      "replies": 1,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18096181688155262",
+      "posted_at": "2026-11-01T06:22:14+00:00",
+      "topic": "payment-screenshots",
+      "text": "Клиент прислал скрин перевода. Потом ещё один. К вечеру администратор листает чат и сверяе",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfME8PGFqJK",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1233,7 +1246,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-01T03:22:14+00:00",
+    "updated_at": "2026-11-01T06:22:59+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
