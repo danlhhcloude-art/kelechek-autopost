@@ -223,5 +223,15 @@
     "cut": "story",
     "hook": "rise",
     "end": "classic"
+  },
+  {
+    "theme": "neon",
+    "deco": "dots",
+    "sub": "box",
+    "exit": "flip",
+    "layout": "classic",
+    "cut": "whip",
+    "hook": "words",
+    "end": "curtain"
   }
 ]
