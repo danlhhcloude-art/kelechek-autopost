@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-31T15:15:11+00:00",
+  "updated_at": "2026-11-01T03:21:27+00:00",
   "account": {
-    "views": 55,
+    "views": 61,
     "likes": 0,
     "replies": 1,
     "reposts": 0,
@@ -172,7 +172,7 @@
       "text": "Вопрос к тем, у кого свой бизнес в Бишкеке.",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeGOx6vlqmi",
-      "views": 81,
+      "views": 82,
       "likes": 1,
       "replies": 2,
       "reposts": 0,
@@ -380,7 +380,7 @@
       "text": "Многие боятся, что ИИ будет отвечать клиентам как робот и всё испортит.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeUEmd0m16j",
-      "views": 55,
+      "views": 56,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1108,7 +1108,7 @@
       "text": "Бесплатная консультация по телефону. Потом ещё одна. К вечеру понимаешь, что весь день отв",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfECDsNFrhV",
-      "views": 2,
+      "views": 3,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1186,7 +1186,7 @@
       "text": "Знакомый магазин живёт от акции до акции. Без скидки тишина, со скидкой очередь, а в конце",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfJLi6cDfbY",
-      "views": 6,
+      "views": 7,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1212,7 +1212,20 @@
       "text": "Клиент спросил цену у одного менеджера, потом у другого. Ответы разные. Всё, доверия уже н",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfJ1Bg2G6xJ",
-      "views": 2,
+      "views": 3,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18358379800218420",
+      "posted_at": "2026-11-01T03:21:27+00:00",
+      "topic": "contract-paperwork",
+      "text": "Договор и счёт каждый раз собирают вручную из старого файла. В итоге в реквизитах чужое на",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfLwRFqlbEs",
+      "views": 0,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1220,7 +1233,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-10-31T15:16:01+00:00",
+    "updated_at": "2026-11-01T03:22:14+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1231,8 +1244,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/Dd9VzKNgAwF/",
-        "views": 2,
-        "reach": 3,
+        "views": 3,
+        "reach": 4,
         "saved": 0,
         "shares": 0
       },
