@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-02T10:53:25+00:00",
+  "updated_at": "2026-11-02T15:34:05+00:00",
   "account": {
-    "views": 25,
+    "views": 32,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -120,7 +120,7 @@
       "text": "Не доверяете ИИ и тем, кто «всё сделает онлайн»? Правильно делаете.",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeEecitFZnp",
-      "views": 19,
+      "views": 20,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -185,7 +185,7 @@
       "text": "Чаще всего меня спрашивают: «это вообще работает или развод?»",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeGqT86lk_Y",
-      "views": 4,
+      "views": 5,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1264,6 +1264,19 @@
       "text": "Бумажная карточка «десятый кофе в подарок». Девятая отметка уже есть, а карточка осталась ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfPIxKCm6ff",
+      "views": 5,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18134134552732171",
+      "posted_at": "2026-11-02T15:34:05+00:00",
+      "topic": "measurements-visit",
+      "text": "Замерщик приезжает по адресу, а клиент живёт в соседнем доме. Адрес записали на бумажке со",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfPo4owILnF",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1272,7 +1285,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-02T10:54:24+00:00",
+    "updated_at": "2026-11-02T15:35:02+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
