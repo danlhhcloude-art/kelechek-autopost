@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-02T15:34:05+00:00",
+  "updated_at": "2026-11-02T19:25:32+00:00",
   "account": {
-    "views": 32,
+    "views": 34,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -185,7 +185,7 @@
       "text": "Чаще всего меня спрашивают: «это вообще работает или развод?»",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeGqT86lk_Y",
-      "views": 5,
+      "views": 6,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1277,6 +1277,19 @@
       "text": "Замерщик приезжает по адресу, а клиент живёт в соседнем доме. Адрес записали на бумажке со",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfPo4owILnF",
+      "views": 1,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "18097833629151748",
+      "posted_at": "2026-11-02T19:25:32+00:00",
+      "topic": "price-negotiation",
+      "text": "«А если два возьму, скинете?» И менеджер сразу скидывает, лишь бы не потерять.",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfQDXzuIDU9",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1285,7 +1298,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-02T15:35:02+00:00",
+    "updated_at": "2026-11-02T19:26:26+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
