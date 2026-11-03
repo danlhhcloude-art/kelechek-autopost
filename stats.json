@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-02T19:25:32+00:00",
+  "updated_at": "2026-11-03T10:44:24+00:00",
   "account": {
-    "views": 34,
+    "views": 46,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -757,7 +757,7 @@
       "text": "Знаю, как это бывает. Уехал на Иссык-Куль на пару дней, а телефон не отпускает. Каждый час",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DetLdaIkU_6",
-      "views": 69,
+      "views": 70,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1264,7 +1264,7 @@
       "text": "Бумажная карточка «десятый кофе в подарок». Девятая отметка уже есть, а карточка осталась ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfPIxKCm6ff",
-      "views": 5,
+      "views": 7,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1290,6 +1290,19 @@
       "text": "«А если два возьму, скинете?» И менеджер сразу скидывает, лишь бы не потерять.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfQDXzuIDU9",
+      "views": 13,
+      "likes": 0,
+      "replies": 0,
+      "reposts": 0,
+      "quotes": 0
+    },
+    {
+      "threads_id": "17954266170313724",
+      "posted_at": "2026-11-03T10:44:24+00:00",
+      "topic": "client-history-forgotten",
+      "text": "Постоянная клиентка пришла в пятый раз. А её снова спрашивают, как зовут и что делали в пр",
+      "media_type": "IMAGE",
+      "url": "https://www.threads.com/@kelechek_ai/post/DfRsh75kV7A",
       "views": 0,
       "likes": 0,
       "replies": 0,
@@ -1298,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-02T19:26:26+00:00",
+    "updated_at": "2026-11-03T10:46:05+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
