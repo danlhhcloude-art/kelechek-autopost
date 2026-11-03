@@ -243,5 +243,15 @@
     "cut": "zoomcut",
     "hook": "drop",
     "end": "classic"
+  },
+  {
+    "theme": "gold",
+    "deco": "grid",
+    "sub": "plate",
+    "exit": "slide",
+    "layout": "frame",
+    "cut": "slam",
+    "hook": "rise",
+    "end": "curtain"
   }
 ]
