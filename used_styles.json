@@ -253,5 +253,15 @@
     "cut": "slam",
     "hook": "rise",
     "end": "curtain"
+  },
+  {
+    "theme": "berry",
+    "deco": "glow",
+    "sub": "box",
+    "exit": "flip",
+    "layout": "center",
+    "cut": "classic",
+    "hook": "words",
+    "end": "classic"
   }
 ]
