@@ -263,5 +263,15 @@
     "cut": "classic",
     "hook": "words",
     "end": "classic"
+  },
+  {
+    "theme": "cobalt",
+    "deco": "rings",
+    "sub": "marker",
+    "exit": "lift",
+    "layout": "tilt",
+    "cut": "punchy",
+    "hook": "drop",
+    "end": "curtain"
   }
 ]
