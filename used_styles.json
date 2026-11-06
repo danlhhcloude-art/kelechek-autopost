@@ -273,5 +273,15 @@
     "cut": "punchy",
     "hook": "drop",
     "end": "curtain"
+  },
+  {
+    "theme": "sunset",
+    "deco": "dots",
+    "sub": "plate",
+    "exit": "zoom",
+    "layout": "frame",
+    "cut": "whip",
+    "hook": "type",
+    "end": "classic"
   }
 ]
