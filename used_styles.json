@@ -283,5 +283,15 @@
     "cut": "whip",
     "hook": "type",
     "end": "classic"
+  },
+  {
+    "theme": "emerald",
+    "deco": "grid",
+    "sub": "underline",
+    "exit": "shrink",
+    "layout": "left",
+    "cut": "story",
+    "hook": "rise",
+    "end": "curtain"
   }
 ]
