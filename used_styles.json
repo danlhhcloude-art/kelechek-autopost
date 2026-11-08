@@ -293,5 +293,15 @@
     "cut": "story",
     "hook": "rise",
     "end": "curtain"
+  },
+  {
+    "theme": "neon",
+    "deco": "sun",
+    "sub": "box",
+    "exit": "slide",
+    "layout": "center",
+    "cut": "zoomcut",
+    "hook": "drop",
+    "end": "classic"
   }
 ]
