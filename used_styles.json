@@ -303,5 +303,15 @@
     "cut": "zoomcut",
     "hook": "drop",
     "end": "classic"
+  },
+  {
+    "theme": "berry",
+    "deco": "stripes",
+    "sub": "marker",
+    "exit": "lift",
+    "layout": "frame",
+    "cut": "punchy",
+    "hook": "type",
+    "end": "curtain"
   }
 ]
