@@ -313,5 +313,15 @@
     "cut": "punchy",
     "hook": "type",
     "end": "curtain"
+  },
+  {
+    "theme": "sunset",
+    "deco": "glow",
+    "sub": "plate",
+    "exit": "flip",
+    "layout": "classic",
+    "cut": "classic",
+    "hook": "rise",
+    "end": "classic"
   }
 ]
