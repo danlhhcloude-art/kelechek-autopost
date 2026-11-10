@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-09T19:44:26+00:00",
+  "updated_at": "2026-11-10T11:00:03+00:00",
   "account": {
-    "views": 28,
+    "views": 8,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -172,7 +172,7 @@
       "text": "Вопрос к тем, у кого свой бизнес в Бишкеке.",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeGOx6vlqmi",
-      "views": 82,
+      "views": 83,
       "likes": 1,
       "replies": 2,
       "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-09T19:46:13+00:00",
+    "updated_at": "2026-11-10T11:00:55+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1387,6 +1387,29 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DffY3eNjEcp/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18075354815760081",
+        "posted_at": "2026-11-09T23:01:29+00:00",
+        "topic": "question",
+        "text": "Вопрос к тем, у кого свой бизнес в Бишкеке.\n\nСколько заявок за месяц потерялось, потому чт",
+        "style": {
+          "theme": "berry",
+          "deco": "stripes",
+          "sub": "marker",
+          "exit": "lift",
+          "layout": "frame",
+          "cut": "punchy",
+          "hook": "type",
+          "end": "curtain"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DfiditNDF1C/",
         "views": 0,
         "reach": 0,
         "saved": 0,
