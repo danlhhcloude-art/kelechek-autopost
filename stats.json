@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-10T16:59:15+00:00",
+  "updated_at": "2026-11-11T10:42:28+00:00",
   "account": {
-    "views": 8,
+    "views": 7,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -744,7 +744,7 @@
       "text": "Родители пишут в детский центр поздно вечером. Ребёнок наконец уснул, можно спокойно выбра",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/Des2w6Jm-_C",
-      "views": 36,
+      "views": 37,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-10T17:00:44+00:00",
+    "updated_at": "2026-11-11T10:43:25+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1412,6 +1412,29 @@
         "url": "https://www.instagram.com/reel/DfiditNDF1C/",
         "views": 0,
         "reach": 0,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18079518674450953",
+        "posted_at": "2026-11-10T20:30:36+00:00",
+        "topic": "tip",
+        "text": "Частая ошибка: хотеть от ИИ «помощника на всё».\n\nТак обычно не работает. Потратите деньги ",
+        "style": {
+          "theme": "sunset",
+          "deco": "glow",
+          "sub": "plate",
+          "exit": "flip",
+          "layout": "classic",
+          "cut": "classic",
+          "hook": "rise",
+          "end": "classic"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DfkxEpXjNCz/",
+        "views": 1,
+        "reach": 1,
         "saved": 0,
         "shares": 0
       }
