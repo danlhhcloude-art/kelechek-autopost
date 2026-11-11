@@ -174,7 +174,20 @@
     ],
     "tag": "Бизнес Бишкек",
     "posted_at": "2026-10-06T12:23:17+00:00",
-    "threads_id": "18171720499457607"
+    "threads_id": "18171720499457607",
+    "ig_posted_at": "2026-11-11T20:13:42+00:00",
+    "ig_media_id": "18451466077126217",
+    "threads_video_id": "18126584374896354",
+    "style": {
+      "theme": "gold",
+      "deco": "rings",
+      "sub": "underline",
+      "exit": "shrink",
+      "layout": "tilt",
+      "cut": "story",
+      "hook": "drop",
+      "end": "curtain"
+    }
   },
   {
     "topic": "ai-approve",

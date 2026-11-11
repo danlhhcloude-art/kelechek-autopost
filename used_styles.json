@@ -323,5 +323,15 @@
     "cut": "classic",
     "hook": "rise",
     "end": "classic"
+  },
+  {
+    "theme": "gold",
+    "deco": "rings",
+    "sub": "underline",
+    "exit": "shrink",
+    "layout": "tilt",
+    "cut": "story",
+    "hook": "drop",
+    "end": "curtain"
   }
 ]
