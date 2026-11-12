@@ -333,5 +333,15 @@
     "cut": "story",
     "hook": "drop",
     "end": "curtain"
+  },
+  {
+    "theme": "emerald",
+    "deco": "grid",
+    "sub": "box",
+    "exit": "zoom",
+    "layout": "frame",
+    "cut": "slam",
+    "hook": "type",
+    "end": "classic"
   }
 ]

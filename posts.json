@@ -198,7 +198,20 @@
     ],
     "tag": "Бизнес Бишкек",
     "posted_at": "2026-10-07T03:21:32+00:00",
-    "threads_id": "18145105522600858"
+    "threads_id": "18145105522600858",
+    "ig_posted_at": "2026-11-12T20:49:54+00:00",
+    "ig_media_id": "18018287909957631",
+    "threads_video_id": "18196662472396367",
+    "style": {
+      "theme": "emerald",
+      "deco": "grid",
+      "sub": "box",
+      "exit": "zoom",
+      "layout": "frame",
+      "cut": "slam",
+      "hook": "type",
+      "end": "classic"
+    }
   },
   {
     "topic": "target-boost",
