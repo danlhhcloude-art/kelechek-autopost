@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-11T17:02:57+00:00",
+  "updated_at": "2026-11-12T10:54:35+00:00",
   "account": {
-    "views": 7,
+    "views": 33,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-11T17:04:31+00:00",
+    "updated_at": "2026-11-12T10:56:28+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1410,8 +1410,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DfiditNDF1C/",
-        "views": 0,
-        "reach": 0,
+        "views": 1,
+        "reach": 1,
         "saved": 0,
         "shares": 0
       },
@@ -1433,8 +1433,31 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DfkxEpXjNCz/",
-        "views": 1,
-        "reach": 1,
+        "views": 2,
+        "reach": 2,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18451466077126217",
+        "posted_at": "2026-11-11T20:13:42+00:00",
+        "topic": "lost-leads",
+        "text": "Есть утечка, которую не видно ни в одном отчёте.\n\nЧеловек написал вам в WhatsApp вечером. ",
+        "style": {
+          "theme": "gold",
+          "deco": "rings",
+          "sub": "underline",
+          "exit": "shrink",
+          "layout": "tilt",
+          "cut": "story",
+          "hook": "drop",
+          "end": "curtain"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DfnT8c2FGjo/",
+        "views": 0,
+        "reach": 0,
         "saved": 0,
         "shares": 0
       }
