@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-13T10:50:01+00:00",
+  "updated_at": "2026-11-13T14:28:41+00:00",
   "account": {
-    "views": 1298,
-    "likes": 26,
+    "views": 2294,
+    "likes": 50,
     "replies": 0,
     "reposts": 0,
     "quotes": 0,
@@ -81,7 +81,7 @@
       "text": "Ваш менеджер отвечает в WhatsApp одно и то же 40 раз в день. «Сколько стоит?», «Где вы нах",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeBf2xrFXrX",
-      "views": 31,
+      "views": 32,
       "likes": 0,
       "replies": 2,
       "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-13T10:51:19+00:00",
+    "updated_at": "2026-11-13T14:30:01+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1387,7 +1387,7 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DffY3eNjEcp/",
-        "views": 0,
+        "views": 1,
         "reach": 1,
         "saved": 0,
         "shares": 0
