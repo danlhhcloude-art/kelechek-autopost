@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-12T17:32:06+00:00",
+  "updated_at": "2026-11-13T10:50:01+00:00",
   "account": {
-    "views": 36,
-    "likes": 0,
+    "views": 1298,
+    "likes": 26,
     "replies": 0,
     "reposts": 0,
     "quotes": 0,
@@ -432,7 +432,7 @@
       "text": "Пишу под постом «сколько стоит?», а мне отвечают: «написали вам в директ». Открываю директ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeYQaFVlhyN",
-      "views": 61,
+      "views": 62,
       "likes": 0,
       "replies": 1,
       "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-12T17:32:57+00:00",
+    "updated_at": "2026-11-13T10:51:19+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1388,7 +1388,7 @@
         "comments": 0,
         "url": "https://www.instagram.com/reel/DffY3eNjEcp/",
         "views": 0,
-        "reach": 0,
+        "reach": 1,
         "saved": 0,
         "shares": 0
       },
@@ -1410,8 +1410,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DfiditNDF1C/",
-        "views": 1,
-        "reach": 1,
+        "views": 2,
+        "reach": 2,
         "saved": 0,
         "shares": 0
       },
@@ -1433,8 +1433,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DfkxEpXjNCz/",
-        "views": 2,
-        "reach": 2,
+        "views": 3,
+        "reach": 3,
         "saved": 0,
         "shares": 0
       },
@@ -1456,8 +1456,31 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DfnT8c2FGjo/",
-        "views": 0,
-        "reach": 0,
+        "views": 1,
+        "reach": 1,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18018287909957631",
+        "posted_at": "2026-11-12T20:49:54+00:00",
+        "topic": "ai-approve",
+        "text": "Многие боятся отдать переписку с клиентами ИИ. И правильно, сразу доверять не надо.\n\nЯ бы ",
+        "style": {
+          "theme": "emerald",
+          "deco": "grid",
+          "sub": "box",
+          "exit": "zoom",
+          "layout": "frame",
+          "cut": "slam",
+          "hook": "type",
+          "end": "classic"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/Dfp83lWjoa_/",
+        "views": 2,
+        "reach": 2,
         "saved": 0,
         "shares": 0
       }
