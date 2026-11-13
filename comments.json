@@ -188,5 +188,35 @@
     "timestamp": "2026-11-08T08:31:45+0000",
     "answered_at": null,
     "answer_id": null
+  },
+  "17982292548130904": {
+    "post_id": "18359155873172176",
+    "post_topic": null,
+    "replied_to": "18359155873172176",
+    "username": "unknown574252",
+    "text": "Дай свой айди я сейчас в игре не могу",
+    "timestamp": "2026-11-13T18:31:32+0000",
+    "answered_at": null,
+    "answer_id": null
+  },
+  "18140975764726804": {
+    "post_id": "18359155873172176",
+    "post_topic": null,
+    "replied_to": "18359155873172176",
+    "username": "unknown574252",
+    "text": "Да есть",
+    "timestamp": "2026-11-13T18:24:31+0000",
+    "answered_at": null,
+    "answer_id": null
+  },
+  "17883463203630893": {
+    "post_id": "18359155873172176",
+    "post_topic": null,
+    "replied_to": "18359155873172176",
+    "username": "unknown574252",
+    "text": "Я играю мобл если есть время сейчас я играю",
+    "timestamp": "2026-11-13T18:17:39+0000",
+    "answered_at": null,
+    "answer_id": null
   }
 }
