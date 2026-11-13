@@ -343,5 +343,15 @@
     "cut": "slam",
     "hook": "type",
     "end": "classic"
+  },
+  {
+    "theme": "berry",
+    "deco": "sun",
+    "sub": "marker",
+    "exit": "slide",
+    "layout": "center",
+    "cut": "whip",
+    "hook": "words",
+    "end": "curtain"
   }
 ]

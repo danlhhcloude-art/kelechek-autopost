@@ -222,7 +222,20 @@
     ],
     "tag": "Бизнес Бишкек",
     "posted_at": "2026-10-07T07:20:10+00:00",
-    "threads_id": "18151126939528247"
+    "threads_id": "18151126939528247",
+    "ig_posted_at": "2026-11-13T20:32:13+00:00",
+    "ig_media_id": "18119932793101227",
+    "threads_video_id": "18101555345407971",
+    "style": {
+      "theme": "berry",
+      "deco": "sun",
+      "sub": "marker",
+      "exit": "slide",
+      "layout": "center",
+      "cut": "whip",
+      "hook": "words",
+      "end": "curtain"
+    }
   },
   {
     "topic": "ai-analytics",
