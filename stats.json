@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-13T17:08:11+00:00",
+  "updated_at": "2026-11-14T10:06:19+00:00",
   "account": {
-    "views": 3045,
-    "likes": 69,
-    "replies": 1,
+    "views": 3570,
+    "likes": 0,
+    "replies": 0,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 0
@@ -276,7 +276,7 @@
       "text": "Реклама идёт сразу в Instagram, TikTok и Google, а заявки потом падают в WhatsApp и в табл",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeMWT5Vm0iF",
-      "views": 17,
+      "views": 18,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -289,7 +289,7 @@
       "text": "Барбершоп, салон, стоматология. Запись до сих пор через WhatsApp: «а на завтра есть время?",
       "media_type": "CAROUSEL_ALBUM",
       "url": "https://www.threads.com/@kelechek_ai/post/DePKsKDG6VT",
-      "views": 0,
+      "views": 1,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-13T17:09:28+00:00",
+    "updated_at": "2026-11-14T10:07:13+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1481,6 +1481,29 @@
         "url": "https://www.instagram.com/reel/Dfp83lWjoa_/",
         "views": 2,
         "reach": 2,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18119932793101227",
+        "posted_at": "2026-11-13T20:32:13+00:00",
+        "topic": "target-boost",
+        "text": "Кнопка «Продвигать» в Instagram, наверное, самая дорогая кнопка для малого бизнеса.\n\nНажал",
+        "style": {
+          "theme": "berry",
+          "deco": "sun",
+          "sub": "marker",
+          "exit": "slide",
+          "layout": "center",
+          "cut": "whip",
+          "hook": "words",
+          "end": "curtain"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DfsfpemFSTF/",
+        "views": 0,
+        "reach": 0,
         "saved": 0,
         "shares": 0
       }
