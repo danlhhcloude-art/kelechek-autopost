@@ -1,4 +1,17 @@
-Музыка: kmacleod-electro-cabello.mp3 «Electro Cabello» Kevin MacLeod (incompetech.com), CC BY 4.0
-Фон по планам: customer paying in shop -> pixabay-20910; technology abstract -> pixabay-250465
-Ролик собран в промо-стиле: /home/runner/work/kelechek-autopost/kelechek-autopost/out/reel.mp4 (22.7 сек)
-Токен Instagram не работает: 400 {"error":{"message":"API access blocked.","type":"OAuthException","code":200,"fbtrace_id":"AMlarf42t35GyUPALFD9KBQ"}}
+Reels: пропускаю повтор: тема «automation» уже была
+Reels: пропускаю повтор: тема «mini-whatsapp» уже была
+Reels: пропускаю повтор: тема «automation-proof» уже была
+Reels: пропускаю повтор: тема «meeting» уже была
+Reels: пропускаю повтор: тема «ai-video» уже была
+Reels: пропускаю повтор: тема «honest» уже была
+Reels: пропускаю повтор: тема «automation-proof» уже была
+Reels: пропускаю повтор: тема «meeting» уже была
+Reels: пропускаю повтор: тема «ai-video» уже была
+Reels: пропускаю повтор: тема «honest» уже была
+reels.json пуст, беру текст поста из posts.json
+Музыка: kmacleod-wallpaper.mp3 «Wallpaper» Kevin MacLeod (incompetech.com), CC BY 4.0
+Фон по планам: scrolling social media phone -> pixabay-169445; robot artificial intelligence -> pixabay-170305
+Ролик собран в промо-стиле: /home/runner/work/kelechek-autopost/kelechek-autopost/out/reel.mp4 (19.4 сек)
+Аккаунт Instagram: kelechek_ai (17841450597787743)
+Ролик выложен: https://raw.githubusercontent.com/danlhhcloude-art/kelechek-autopost/c0b749408e2fb24a2e8c171f92bb5b307aed003d/media/reel-20261114-184538.mp4
+Instagram не принял видео: {'status_code': 'ERROR', 'status': 'ERROR', 'id': '18090979214686593'}
