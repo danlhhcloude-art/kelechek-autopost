@@ -245,7 +245,20 @@
     ],
     "tag": "Бизнес Бишкек",
     "posted_at": "2026-10-07T12:22:40+00:00",
-    "threads_id": "17912372229498118"
+    "threads_id": "17912372229498118",
+    "ig_posted_at": "2026-11-15T19:24:19+00:00",
+    "ig_media_id": "17916245832489691",
+    "threads_video_id": "18012781286776718",
+    "style": {
+      "theme": "sunset",
+      "deco": "glow",
+      "sub": "underline",
+      "exit": "flip",
+      "layout": "classic",
+      "cut": "punchy",
+      "hook": "drop",
+      "end": "classic"
+    }
   },
   {
     "topic": "booking-site",

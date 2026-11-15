@@ -353,5 +353,15 @@
     "cut": "whip",
     "hook": "words",
     "end": "curtain"
+  },
+  {
+    "theme": "sunset",
+    "deco": "glow",
+    "sub": "underline",
+    "exit": "flip",
+    "layout": "classic",
+    "cut": "punchy",
+    "hook": "drop",
+    "end": "classic"
   }
 ]
