@@ -248,5 +248,25 @@
     "timestamp": "2026-11-16T05:50:40+0000",
     "answered_at": null,
     "answer_id": null
+  },
+  "18120938447008709": {
+    "post_id": "17960226399295222",
+    "post_topic": null,
+    "replied_to": "17960226399295222",
+    "username": "luter_lay_",
+    "text": "Если она учится в главным корпусе то обращайтесь",
+    "timestamp": "2026-11-16T11:50:41+0000",
+    "answered_at": null,
+    "answer_id": null
+  },
+  "18360420046217959": {
+    "post_id": "17960226399295222",
+    "post_topic": null,
+    "replied_to": "17992613025097914",
+    "username": "b.obk_",
+    "text": "В лс",
+    "timestamp": "2026-11-16T09:03:40+0000",
+    "answered_at": null,
+    "answer_id": null
   }
 }
