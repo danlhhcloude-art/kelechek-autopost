@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-16T10:58:16+00:00",
+  "updated_at": "2026-11-16T15:33:57+00:00",
   "account": {
-    "views": 1850,
+    "views": 2223,
     "likes": 1,
-    "replies": 4,
+    "replies": 5,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 1
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-16T10:59:23+00:00",
+    "updated_at": "2026-11-16T15:35:10+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1433,8 +1433,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DfkxEpXjNCz/",
-        "views": 3,
-        "reach": 3,
+        "views": 4,
+        "reach": 4,
         "saved": 0,
         "shares": 0
       },
@@ -1457,7 +1457,7 @@
         "comments": 0,
         "url": "https://www.instagram.com/reel/DfnT8c2FGjo/",
         "views": 1,
-        "reach": 1,
+        "reach": 2,
         "saved": 0,
         "shares": 0
       },
