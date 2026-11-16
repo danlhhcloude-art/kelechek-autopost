@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-15T16:15:35+00:00",
+  "updated_at": "2026-11-16T10:58:16+00:00",
   "account": {
-    "views": 362,
-    "likes": 0,
-    "replies": 0,
+    "views": 1850,
+    "likes": 1,
+    "replies": 4,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 1
@@ -705,7 +705,7 @@
       "text": "Перед праздниками у цветочных и кондитерских телефон не замолкает. Отвечать некогда, надо ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DeqSCY8jXA4",
-      "views": 21,
+      "views": 23,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-15T16:17:03+00:00",
+    "updated_at": "2026-11-16T10:59:23+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1502,6 +1502,29 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DfsfpemFSTF/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "17916245832489691",
+        "posted_at": "2026-11-15T19:24:19+00:00",
+        "topic": "ai-analytics",
+        "text": "Реклама идёт сразу в Instagram, TikTok и Google, а заявки потом падают в WhatsApp и в табл",
+        "style": {
+          "theme": "sunset",
+          "deco": "glow",
+          "sub": "underline",
+          "exit": "flip",
+          "layout": "classic",
+          "cut": "punchy",
+          "hook": "drop",
+          "end": "classic"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DfxhdqCjbP6/",
         "views": 0,
         "reach": 0,
         "saved": 0,
