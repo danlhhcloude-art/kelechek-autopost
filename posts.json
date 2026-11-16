@@ -270,7 +270,20 @@
     ],
     "tag": "Бизнес Бишкек",
     "posted_at": "2026-10-08T14:38:48+00:00",
-    "threads_id": "17993026071020610"
+    "threads_id": "17993026071020610",
+    "ig_posted_at": "2026-11-16T22:55:08+00:00",
+    "ig_media_id": "17917481637552421",
+    "threads_video_id": "18131107231893693",
+    "style": {
+      "theme": "gold",
+      "deco": "dots",
+      "sub": "plate",
+      "exit": "shrink",
+      "layout": "frame",
+      "cut": "classic",
+      "hook": "type",
+      "end": "curtain"
+    }
   },
   {
     "topic": "target-offer",

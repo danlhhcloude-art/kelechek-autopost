@@ -363,5 +363,15 @@
     "cut": "punchy",
     "hook": "drop",
     "end": "classic"
+  },
+  {
+    "theme": "gold",
+    "deco": "dots",
+    "sub": "plate",
+    "exit": "shrink",
+    "layout": "frame",
+    "cut": "classic",
+    "hook": "type",
+    "end": "curtain"
   }
 ]
