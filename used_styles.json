@@ -373,5 +373,15 @@
     "cut": "classic",
     "hook": "type",
     "end": "curtain"
+  },
+  {
+    "theme": "cobalt",
+    "deco": "stripes",
+    "sub": "box",
+    "exit": "zoom",
+    "layout": "left",
+    "cut": "zoomcut",
+    "hook": "words",
+    "end": "classic"
   }
 ]

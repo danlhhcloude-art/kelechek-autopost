@@ -294,7 +294,20 @@
     ],
     "tag": "Бизнес Бишкек",
     "posted_at": "2026-10-09T03:21:40+00:00",
-    "threads_id": "18103939028635075"
+    "threads_id": "18103939028635075",
+    "ig_posted_at": "2026-11-17T21:47:24+00:00",
+    "ig_media_id": "18367499149247710",
+    "threads_video_id": "17918416728550911",
+    "style": {
+      "theme": "cobalt",
+      "deco": "stripes",
+      "sub": "box",
+      "exit": "zoom",
+      "layout": "left",
+      "cut": "zoomcut",
+      "hook": "words",
+      "end": "classic"
+    }
   },
   {
     "topic": "ai-search",
