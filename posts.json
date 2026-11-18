@@ -317,7 +317,20 @@
     ],
     "tag": "Бизнес Бишкек",
     "posted_at": "2026-10-09T03:22:59+00:00",
-    "threads_id": "18190896025408740"
+    "threads_id": "18190896025408740",
+    "ig_posted_at": "2026-11-18T21:25:42+00:00",
+    "ig_media_id": "18360127912221478",
+    "threads_video_id": "18403075210167914",
+    "style": {
+      "theme": "neon",
+      "deco": "rings",
+      "sub": "underline",
+      "exit": "lift",
+      "layout": "center",
+      "cut": "whip",
+      "hook": "drop",
+      "end": "curtain"
+    }
   },
   {
     "topic": "three-types",

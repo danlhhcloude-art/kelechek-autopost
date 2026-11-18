@@ -383,5 +383,15 @@
     "cut": "zoomcut",
     "hook": "words",
     "end": "classic"
+  },
+  {
+    "theme": "neon",
+    "deco": "rings",
+    "sub": "underline",
+    "exit": "lift",
+    "layout": "center",
+    "cut": "whip",
+    "hook": "drop",
+    "end": "curtain"
   }
 ]
