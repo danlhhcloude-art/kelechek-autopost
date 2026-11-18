@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-17T18:25:21+00:00",
+  "updated_at": "2026-11-18T11:29:20+00:00",
   "account": {
-    "views": 1139,
-    "likes": 3,
-    "replies": 6,
+    "views": 571,
+    "likes": 0,
+    "replies": 0,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 1
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-17T18:26:21+00:00",
+    "updated_at": "2026-11-18T11:30:03+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1548,6 +1548,29 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/Df0eWeGjxtu/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18367499149247710",
+        "posted_at": "2026-11-17T21:47:24+00:00",
+        "topic": "target-offer",
+        "text": "Вопрос к бизнесу в Бишкеке: сколько заявок принесла ваша последняя реклама в Instagram? Ес",
+        "style": {
+          "theme": "cobalt",
+          "deco": "stripes",
+          "sub": "box",
+          "exit": "zoom",
+          "layout": "left",
+          "cut": "zoomcut",
+          "hook": "words",
+          "end": "classic"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/Df27bNBDxER/",
         "views": 0,
         "reach": 0,
         "saved": 0,
