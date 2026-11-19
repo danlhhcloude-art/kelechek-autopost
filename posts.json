@@ -341,7 +341,20 @@
     ],
     "tag": "Бизнес Бишкек",
     "posted_at": "2026-10-09T07:20:13+00:00",
-    "threads_id": "18142301704613273"
+    "threads_id": "18142301704613273",
+    "ig_posted_at": "2026-11-19T21:31:52+00:00",
+    "ig_media_id": "18111831119225235",
+    "threads_video_id": "18160522456514140",
+    "style": {
+      "theme": "sunset",
+      "deco": "sun",
+      "sub": "marker",
+      "exit": "shrink",
+      "layout": "classic",
+      "cut": "story",
+      "hook": "rise",
+      "end": "classic"
+    }
   },
   {
     "topic": "ai-same",

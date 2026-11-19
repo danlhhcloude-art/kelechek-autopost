@@ -393,5 +393,15 @@
     "cut": "whip",
     "hook": "drop",
     "end": "curtain"
+  },
+  {
+    "theme": "sunset",
+    "deco": "sun",
+    "sub": "marker",
+    "exit": "shrink",
+    "layout": "classic",
+    "cut": "story",
+    "hook": "rise",
+    "end": "classic"
   }
 ]
