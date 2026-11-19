@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-18T17:58:07+00:00",
+  "updated_at": "2026-11-19T11:28:19+00:00",
   "account": {
-    "views": 604,
+    "views": 114,
     "likes": 0,
-    "replies": 2,
+    "replies": 0,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 1
@@ -1043,7 +1043,7 @@
       "text": "«Можно переводом?» Простой вопрос. А человек ждёт ответа полдня и платит тому, кто ответил",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De_NBOCFQU2",
-      "views": 1,
+      "views": 4,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-18T17:59:25+00:00",
+    "updated_at": "2026-11-19T11:29:14+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1479,8 +1479,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/Dfp83lWjoa_/",
-        "views": 2,
-        "reach": 2,
+        "views": 3,
+        "reach": 3,
         "saved": 0,
         "shares": 0
       },
@@ -1503,7 +1503,7 @@
         "comments": 0,
         "url": "https://www.instagram.com/reel/DfsfpemFSTF/",
         "views": 0,
-        "reach": 0,
+        "reach": 1,
         "saved": 0,
         "shares": 0
       },
@@ -1573,6 +1573,29 @@
         "url": "https://www.instagram.com/reel/Df27bNBDxER/",
         "views": 0,
         "reach": 0,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18360127912221478",
+        "posted_at": "2026-11-18T21:25:42+00:00",
+        "topic": "ai-search",
+        "text": "Всё больше людей не гуглят, а спрашивают у ChatGPT: «где в Бишкеке хорошая стоматология» и",
+        "style": {
+          "theme": "neon",
+          "deco": "rings",
+          "sub": "underline",
+          "exit": "lift",
+          "layout": "center",
+          "cut": "whip",
+          "hook": "drop",
+          "end": "curtain"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/Df5dwTWEn1F/",
+        "views": 1,
+        "reach": 1,
         "saved": 0,
         "shares": 0
       }
