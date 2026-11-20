@@ -364,7 +364,20 @@
     ],
     "tag": "Бизнес Бишкек",
     "posted_at": "2026-10-09T12:23:30+00:00",
-    "threads_id": "18075907964451066"
+    "threads_id": "18075907964451066",
+    "ig_posted_at": "2026-11-20T21:05:04+00:00",
+    "ig_media_id": "18060584078569927",
+    "threads_video_id": "18121447217087742",
+    "style": {
+      "theme": "berry",
+      "deco": "dots",
+      "sub": "plate",
+      "exit": "slide",
+      "layout": "left",
+      "cut": "classic",
+      "hook": "type",
+      "end": "curtain"
+    }
   },
   {
     "topic": "night-messages",

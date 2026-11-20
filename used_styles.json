@@ -403,5 +403,15 @@
     "cut": "story",
     "hook": "rise",
     "end": "classic"
+  },
+  {
+    "theme": "berry",
+    "deco": "dots",
+    "sub": "plate",
+    "exit": "slide",
+    "layout": "left",
+    "cut": "classic",
+    "hook": "type",
+    "end": "curtain"
   }
 ]
