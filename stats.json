@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-19T18:10:44+00:00",
+  "updated_at": "2026-11-20T11:19:53+00:00",
   "account": {
-    "views": 121,
+    "views": 27,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -120,7 +120,7 @@
       "text": "Не доверяете ИИ и тем, кто «всё сделает онлайн»? Правильно делаете.",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeEecitFZnp",
-      "views": 20,
+      "views": 24,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-19T18:11:32+00:00",
+    "updated_at": "2026-11-20T11:21:11+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1596,6 +1596,29 @@
         "url": "https://www.instagram.com/reel/Df5dwTWEn1F/",
         "views": 1,
         "reach": 1,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18111831119225235",
+        "posted_at": "2026-11-19T21:31:52+00:00",
+        "topic": "three-types",
+        "text": "Все, кто пишет бизнесу, делятся на три типа. Новые люди с вопросами. Ваши клиенты, у котор",
+        "style": {
+          "theme": "sunset",
+          "deco": "sun",
+          "sub": "marker",
+          "exit": "shrink",
+          "layout": "classic",
+          "cut": "story",
+          "hook": "rise",
+          "end": "classic"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/Df8DNpaiQTS/",
+        "views": 0,
+        "reach": 0,
         "saved": 0,
         "shares": 0
       }
