@@ -387,7 +387,20 @@
       "media/threads/night-messages.png"
     ],
     "tag": "Бизнес Бишкек",
-    "threads_id": "18129628627751709"
+    "threads_id": "18129628627751709",
+    "ig_posted_at": "2026-11-21T20:05:49+00:00",
+    "ig_media_id": "18478432306137917",
+    "threads_video_id": "18051244121819324",
+    "style": {
+      "theme": "cobalt",
+      "deco": "glow",
+      "sub": "box",
+      "exit": "lift",
+      "layout": "center",
+      "cut": "zoomcut",
+      "hook": "words",
+      "end": "classic"
+    }
   },
   {
     "topic": "delivery",
