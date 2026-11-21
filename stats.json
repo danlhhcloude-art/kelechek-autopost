@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-21T10:53:53+00:00",
+  "updated_at": "2026-11-21T14:32:54+00:00",
   "account": {
-    "views": 3282,
-    "likes": 2,
-    "replies": 0,
+    "views": 4234,
+    "likes": 5,
+    "replies": 4,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 2
@@ -1264,7 +1264,7 @@
       "text": "Бумажная карточка «десятый кофе в подарок». Девятая отметка уже есть, а карточка осталась ",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfPIxKCm6ff",
-      "views": 8,
+      "views": 9,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1277,7 +1277,7 @@
       "text": "Замерщик приезжает по адресу, а клиент живёт в соседнем доме. Адрес записали на бумажке со",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfPo4owILnF",
-      "views": 2,
+      "views": 3,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1290,7 +1290,7 @@
       "text": "«А если два возьму, скинете?» И менеджер сразу скидывает, лишь бы не потерять.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfQDXzuIDU9",
-      "views": 13,
+      "views": 14,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1303,7 +1303,7 @@
       "text": "Постоянная клиентка пришла в пятый раз. А её снова спрашивают, как зовут и что делали в пр",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfRsh75kV7A",
-      "views": 8,
+      "views": 9,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-21T10:55:28+00:00",
+    "updated_at": "2026-11-21T14:33:43+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1640,8 +1640,8 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/Df-k9kkjV23/",
-        "views": 1,
-        "reach": 1,
+        "views": 2,
+        "reach": 2,
         "saved": 0,
         "shares": 0
       }
