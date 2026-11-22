@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-21T16:45:01+00:00",
+  "updated_at": "2026-11-22T11:04:26+00:00",
   "account": {
-    "views": 4683,
-    "likes": 8,
-    "replies": 4,
+    "views": 3247,
+    "likes": 0,
+    "replies": 0,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 2
@@ -120,7 +120,7 @@
       "text": "Не доверяете ИИ и тем, кто «всё сделает онлайн»? Правильно делаете.",
       "media_type": "TEXT_POST",
       "url": "https://www.threads.com/@kelechek_ai/post/DeEecitFZnp",
-      "views": 28,
+      "views": 31,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1004,7 +1004,7 @@
       "text": "«Где вы находитесь?», «До скольки работаете?», «Есть доставка?» Каждый день одно и то же п",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De88yWnGyq_",
-      "views": 8,
+      "views": 9,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1043,7 +1043,7 @@
       "text": "«Можно переводом?» Простой вопрос. А человек ждёт ответа полдня и платит тому, кто ответил",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/De_NBOCFQU2",
-      "views": 4,
+      "views": 5,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1186,7 +1186,7 @@
       "text": "Знакомый магазин живёт от акции до акции. Без скидки тишина, со скидкой очередь, а в конце",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfJLi6cDfbY",
-      "views": 7,
+      "views": 8,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1290,7 +1290,7 @@
       "text": "«А если два возьму, скинете?» И менеджер сразу скидывает, лишь бы не потерять.",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfQDXzuIDU9",
-      "views": 14,
+      "views": 15,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1303,7 +1303,7 @@
       "text": "Постоянная клиентка пришла в пятый раз. А её снова спрашивают, как зовут и что делали в пр",
       "media_type": "IMAGE",
       "url": "https://www.threads.com/@kelechek_ai/post/DfRsh75kV7A",
-      "views": 9,
+      "views": 10,
       "likes": 0,
       "replies": 0,
       "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-21T16:45:45+00:00",
+    "updated_at": "2026-11-22T11:05:26+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1642,6 +1642,29 @@
         "url": "https://www.instagram.com/reel/Df-k9kkjV23/",
         "views": 2,
         "reach": 2,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18478432306137917",
+        "posted_at": "2026-11-21T20:05:49+00:00",
+        "topic": "night-messages",
+        "text": "Сам часто пишу в магазины вечером, после работы. И почти никто не отвечает до утра.\n\nА утр",
+        "style": {
+          "theme": "cobalt",
+          "deco": "glow",
+          "sub": "box",
+          "exit": "lift",
+          "layout": "center",
+          "cut": "zoomcut",
+          "hook": "words",
+          "end": "classic"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DgBC-C5AXnI/",
+        "views": 2,
+        "reach": 1,
         "saved": 0,
         "shares": 0
       }
