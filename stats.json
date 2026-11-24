@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-11-23T21:11:56+00:00",
+  "updated_at": "2026-11-24T13:32:19+00:00",
   "account": {
-    "views": 490,
-    "likes": 1,
-    "replies": 4,
+    "views": 220,
+    "likes": 0,
+    "replies": 0,
     "reposts": 0,
     "quotes": 0,
     "followers_count": 2
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-23T21:13:06+00:00",
+    "updated_at": "2026-11-24T13:33:34+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1686,6 +1686,29 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DgDpl36mTyw/",
+        "views": 1,
+        "reach": 1,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18058746425583625",
+        "posted_at": "2026-11-24T00:49:50+00:00",
+        "topic": "fear-ai",
+        "text": "Многие боятся, что ИИ будет отвечать клиентам как робот и всё испортит.\n\nПонимаю. Поэтому ",
+        "style": {
+          "theme": "emerald",
+          "deco": "stripes",
+          "sub": "underline",
+          "exit": "slide",
+          "layout": "tilt",
+          "cut": "story",
+          "hook": "drop",
+          "end": "classic"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DgGtFDQEhIZ/",
         "views": 1,
         "reach": 1,
         "saved": 0,
