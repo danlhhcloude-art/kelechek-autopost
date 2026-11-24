@@ -433,7 +433,20 @@
       "media/threads/fear-ai.png"
     ],
     "tag": "Бизнес Бишкек",
-    "threads_id": "17933542860147770"
+    "threads_id": "17933542860147770",
+    "ig_posted_at": "2026-11-24T00:49:50+00:00",
+    "ig_media_id": "18058746425583625",
+    "threads_video_id": "18104334836450433",
+    "style": {
+      "theme": "emerald",
+      "deco": "stripes",
+      "sub": "underline",
+      "exit": "slide",
+      "layout": "tilt",
+      "cut": "story",
+      "hook": "drop",
+      "end": "classic"
+    }
   },
   {
     "topic": "one-video",

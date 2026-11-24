@@ -433,5 +433,15 @@
     "cut": "punchy",
     "hook": "rise",
     "end": "curtain"
+  },
+  {
+    "theme": "emerald",
+    "deco": "stripes",
+    "sub": "underline",
+    "exit": "slide",
+    "layout": "tilt",
+    "cut": "story",
+    "hook": "drop",
+    "end": "classic"
   }
 ]
