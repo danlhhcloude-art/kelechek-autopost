@@ -456,7 +456,20 @@
       "media/threads/one-video.png"
     ],
     "tag": "Бизнес Бишкек",
-    "threads_id": "17958076551015610"
+    "threads_id": "17958076551015610",
+    "ig_posted_at": "2026-11-24T23:02:33+00:00",
+    "ig_media_id": "18138597772656998",
+    "threads_video_id": "18081310250563818",
+    "style": {
+      "theme": "sunset",
+      "deco": "dots",
+      "sub": "plate",
+      "exit": "flip",
+      "layout": "classic",
+      "cut": "classic",
+      "hook": "words",
+      "end": "curtain"
+    }
   },
   {
     "topic": "language",

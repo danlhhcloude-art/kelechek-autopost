@@ -443,5 +443,15 @@
     "cut": "story",
     "hook": "drop",
     "end": "classic"
+  },
+  {
+    "theme": "sunset",
+    "deco": "dots",
+    "sub": "plate",
+    "exit": "flip",
+    "layout": "classic",
+    "cut": "classic",
+    "hook": "words",
+    "end": "curtain"
   }
 ]
