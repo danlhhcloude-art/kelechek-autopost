@@ -453,5 +453,15 @@
     "cut": "classic",
     "hook": "words",
     "end": "curtain"
+  },
+  {
+    "theme": "cobalt",
+    "deco": "grid",
+    "sub": "marker",
+    "exit": "shrink",
+    "layout": "frame",
+    "cut": "whip",
+    "hook": "type",
+    "end": "classic"
   }
 ]
