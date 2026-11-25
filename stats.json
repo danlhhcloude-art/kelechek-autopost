@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-24T20:07:14+00:00",
+  "updated_at": "2026-11-25T12:36:37+00:00",
   "account": {
-    "views": 230,
+    "views": 34,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-24T20:08:03+00:00",
+    "updated_at": "2026-11-25T12:37:28+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1711,6 +1711,29 @@
         "url": "https://www.instagram.com/reel/DgGtFDQEhIZ/",
         "views": 1,
         "reach": 1,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18138597772656998",
+        "posted_at": "2026-11-24T23:02:33+00:00",
+        "topic": "one-video",
+        "text": "Одно хорошее видео в месяц или короткое каждый день?\n\nЯ раньше думал, что лучше одно, но к",
+        "style": {
+          "theme": "sunset",
+          "deco": "dots",
+          "sub": "plate",
+          "exit": "flip",
+          "layout": "classic",
+          "cut": "classic",
+          "hook": "words",
+          "end": "curtain"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DgJFllLFWr2/",
+        "views": 0,
+        "reach": 0,
         "saved": 0,
         "shares": 0
       }
