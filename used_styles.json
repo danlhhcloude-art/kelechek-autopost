@@ -463,5 +463,15 @@
     "cut": "whip",
     "hook": "type",
     "end": "classic"
+  },
+  {
+    "theme": "berry",
+    "deco": "sun",
+    "sub": "box",
+    "exit": "lift",
+    "layout": "tilt",
+    "cut": "slam",
+    "hook": "drop",
+    "end": "curtain"
   }
 ]

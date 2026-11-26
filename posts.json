@@ -502,7 +502,20 @@
       "media/threads/offer-15.png"
     ],
     "tag": "Бизнес Бишкек",
-    "threads_id": "18016496876959268"
+    "threads_id": "18016496876959268",
+    "ig_posted_at": "2026-11-26T22:18:21+00:00",
+    "ig_media_id": "18102237716558184",
+    "threads_video_id": "18122665123999190",
+    "style": {
+      "theme": "berry",
+      "deco": "sun",
+      "sub": "box",
+      "exit": "lift",
+      "layout": "tilt",
+      "cut": "slam",
+      "hook": "drop",
+      "end": "curtain"
+    }
   },
   {
     "topic": "price-in-dm",
