@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-25T19:07:47+00:00",
+  "updated_at": "2026-11-26T12:13:58+00:00",
   "account": {
-    "views": 40,
+    "views": 27,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-25T19:09:21+00:00",
+    "updated_at": "2026-11-26T12:16:03+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1732,6 +1732,29 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DgJFllLFWr2/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18122391206000678",
+        "posted_at": "2026-11-25T22:29:30+00:00",
+        "topic": "language",
+        "text": "Думаю, на каком языке вести рекламу в Бишкеке. На русском привычнее, на кыргызском ближе м",
+        "style": {
+          "theme": "cobalt",
+          "deco": "grid",
+          "sub": "marker",
+          "exit": "shrink",
+          "layout": "frame",
+          "cut": "whip",
+          "hook": "type",
+          "end": "classic"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DgLmnEWiYBk/",
         "views": 0,
         "reach": 0,
         "saved": 0,
