@@ -525,7 +525,20 @@
       "media/threads/price-in-dm.png"
     ],
     "tag": "Бизнес Бишкек",
-    "threads_id": "18056574581814125"
+    "threads_id": "18056574581814125",
+    "ig_posted_at": "2026-11-27T21:59:32+00:00",
+    "ig_media_id": "18157699993606458",
+    "threads_video_id": "18376800304212386",
+    "style": {
+      "theme": "neon",
+      "deco": "rings",
+      "sub": "underline",
+      "exit": "flip",
+      "layout": "center",
+      "cut": "story",
+      "hook": "words",
+      "end": "classic"
+    }
   },
   {
     "topic": "staff-left",

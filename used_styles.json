@@ -473,5 +473,15 @@
     "cut": "slam",
     "hook": "drop",
     "end": "curtain"
+  },
+  {
+    "theme": "neon",
+    "deco": "rings",
+    "sub": "underline",
+    "exit": "flip",
+    "layout": "center",
+    "cut": "story",
+    "hook": "words",
+    "end": "classic"
   }
 ]
