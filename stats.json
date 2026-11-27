@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-26T18:57:55+00:00",
+  "updated_at": "2026-11-27T12:01:41+00:00",
   "account": {
-    "views": 31,
+    "views": 16,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-26T18:58:42+00:00",
+    "updated_at": "2026-11-27T12:02:28+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1755,6 +1755,29 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DgLmnEWiYBk/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18102237716558184",
+        "posted_at": "2026-11-26T22:18:21+00:00",
+        "topic": "offer",
+        "text": "Как у нас устроены 15 дней, по-простому.\n\nСначала обсуждаем, что вам нужно: видео, автоотв",
+        "style": {
+          "theme": "berry",
+          "deco": "sun",
+          "sub": "box",
+          "exit": "lift",
+          "layout": "tilt",
+          "cut": "slam",
+          "hook": "drop",
+          "end": "curtain"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DgOKJJfBgIK/",
         "views": 0,
         "reach": 0,
         "saved": 0,
