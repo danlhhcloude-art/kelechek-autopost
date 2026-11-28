@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-27T18:50:41+00:00",
+  "updated_at": "2026-11-28T11:38:50+00:00",
   "account": {
-    "views": 18,
+    "views": 23,
     "likes": 0,
     "replies": 0,
     "reposts": 0,
@@ -1311,7 +1311,7 @@
     }
   ],
   "instagram": {
-    "updated_at": "2026-11-27T18:51:37+00:00",
+    "updated_at": "2026-11-28T11:40:21+00:00",
     "reels": [
       {
         "ig_media_id": "18091979288669737",
@@ -1778,6 +1778,29 @@
         "likes": 0,
         "comments": 0,
         "url": "https://www.instagram.com/reel/DgOKJJfBgIK/",
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0
+      },
+      {
+        "ig_media_id": "18157699993606458",
+        "posted_at": "2026-11-27T21:59:32+00:00",
+        "topic": "price-in-dm",
+        "text": "Пишу под постом «сколько стоит?», а мне отвечают: «написали вам в директ». Открываю директ",
+        "style": {
+          "theme": "neon",
+          "deco": "rings",
+          "sub": "underline",
+          "exit": "flip",
+          "layout": "center",
+          "cut": "story",
+          "hook": "words",
+          "end": "classic"
+        },
+        "likes": 0,
+        "comments": 0,
+        "url": "https://www.instagram.com/reel/DgQswXnhY1U/",
         "views": 0,
         "reach": 0,
         "saved": 0,
